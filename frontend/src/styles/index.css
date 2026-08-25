@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+:root {
+  /* An Đông Brand Color Palette */
+  --primary: #1b4332;       /* Deep Forest Green */
+  --primary-light: #2d6a4f; /* Fresh Rice Green */
+  --primary-dark: #081c15;  /* Deep Evergreen */
+  --primary-accent: #40916c;/* Bright Leaf Green */
+  
+  --golden: #d4a373;        /* Warm Harvest Gold */
+  --golden-light: #e9c46a;  /* Bright Ripe Rice Gold */
+  --golden-pale: #fefae0;   /* Cream Sunlight */
+  
+  --earth-brown: #5c4033;   /* Rich Soil Brown */
+  --earth-light: #8d6e63;   /* Soft Bark Brown */
+  
+  --bg-main: #faf9f5;       /* Rice Paper Cream */
+  --bg-card: #ffffff;
+  --bg-dark: #122820;       /* Footer & Deep Green */
+  
+  --text-main: #1f2421;     /* Charcoal Soil */
+  --text-muted: #526058;    /* Muted Sage */
+  --text-light: #859b8f;
+  
+  --border-color: #e4e0d4;
+  --border-focus: #2d6a4f;
+  
+  --shadow-sm: 0 2px 8px rgba(27, 67, 50, 0.06);
+  --shadow-md: 0 8px 24px rgba(27, 67, 50, 0.08);
+  --shadow-lg: 0 16px 40px rgba(27, 67, 50, 0.12);
+  --shadow-gold: 0 8px 24px rgba(212, 163, 115, 0.25);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fix overscroll elastic bounce so Header & Footer never pull away */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overscroll-behavior-y: none;
+  overscroll-behavior: none;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root, .app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-main);
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1 0 auto;
+  background-color: var(--bg-main);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf9f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #2d6a4f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1b4332;
+}
+
+/* Scroll Reading Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1b4332 0%, #40916c 40%, #e9c46a 80%, #d4a373 100%);
+  transform-origin: 0%;
+  z-index: 10000;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-dark);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 22px rgba(27, 67, 50, 0.3);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #e9c46a 0%, #d4a373 100%);
+  color: var(--primary-dark);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover {
+  filter: brightness(1.06);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 26px rgba(212, 163, 115, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: rgba(27, 67, 50, 0.08);
+  transform: translateY(-3px);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.05rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.badge-gold {
+  background: #fefae0;
+  color: #b07d35;
+  border: 1px solid #e9c46a;
+}
+
+.badge-green {
+  background: #e8f5e9;
+  color: var(--primary);
+  border: 1px solid #c8e6c9;
+}
+
+.badge-dark {
+  background: var(--primary-dark);
+  color: var(--golden-light);
+}
+
+/* Cards & Glassmorphism */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 20px 40px rgba(27, 67, 50, 0.12);
+  transform: translateY(-6px);
+  border-color: rgba(212, 163, 115, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(18, 40, 32, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Horizon Wave Divider (Visual element from Slide 5) */
+.horizon-wave-divider {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.horizon-wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--text-main);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Grid Utilities */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Back To Top Floating Button (Subtle & Elegant) */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 64px;
+  right: 26px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1b4332;
+  color: #fefae0;
+  border: 1px solid rgba(233, 196, 106, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  z-index: 999;
+  transition: all 0.25s ease;
+}
+
+.back-to-top-btn:hover {
+  background: #e9c46a;
+  color: #122820;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 22px rgba(233, 196, 106, 0.3);
+}
+
+@media (max-width: 900px) {
+  .mini-footer-center {
+    display: none !important;
+  }
+}

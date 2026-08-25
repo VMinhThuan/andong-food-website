@@ -1,0 +1,16 @@
+{
+  "name": "andong-food-website",
+  "version": "1.0.0",
+  "description": "Website Doanh Nghiệp & Truy Xuất Mã QR An Đông Food (Fullstack MVC)",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"green,cyan\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "start": "concurrently -n \"BACKEND,FRONTEND\" -c \"green,cyan\" \"npm start --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
