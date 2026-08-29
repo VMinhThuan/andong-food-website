@@ -2,6 +2,12 @@ import { qrService } from '../services/qrService.js';
 import { productModel } from '../models/productModel.js';
 import { CLIENT_URL } from '../config/constants.js';
 
+const getProductQrTarget = (req, slug) => {
+  const requestedSiteUrl = typeof req.query.siteUrl === 'string' ? req.query.siteUrl.trim() : '';
+  const siteUrl = /^https?:\/\//i.test(requestedSiteUrl) ? requestedSiteUrl.replace(/\/$/, '') : CLIENT_URL;
+  return `${siteUrl}/san-pham/${slug}`;
+};
+
 export const qrController = {
   /**
    * Generates live QR preview as JSON dataURL
@@ -37,7 +43,7 @@ export const qrController = {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
 
-      const qrTarget = `${CLIENT_URL}/san-pham/${product.slug}`;
+      const qrTarget = getProductQrTarget(req, product.slug);
       const dataUrl = await qrService.generateDataURL(qrTarget, {
         width: req.query.width ? parseInt(req.query.width, 10) : 500
       });
@@ -69,7 +75,7 @@ export const qrController = {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
 
-      const qrTarget = `${CLIENT_URL}/san-pham/${product.slug}`;
+      const qrTarget = getProductQrTarget(req, product.slug);
       const buffer = await qrService.generateBuffer(qrTarget, {
         width: 1200, // High-res for packaging printing
         margin: 2
@@ -94,7 +100,7 @@ export const qrController = {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
 
-      const qrTarget = `${CLIENT_URL}/san-pham/${product.slug}`;
+      const qrTarget = getProductQrTarget(req, product.slug);
       const svgString = await qrService.generateSVG(qrTarget);
 
       res.setHeader('Content-Type', 'image/svg+xml');

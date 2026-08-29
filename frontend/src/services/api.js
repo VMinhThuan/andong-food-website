@@ -198,10 +198,12 @@ export const api = {
   },
 
   getDownloadQRPNGUrl(slug) {
-    return `${API_BASE}/qr/download/png/${slug}`;
+    const siteUrl = typeof window === 'undefined' ? '' : window.location.origin;
+    return `${API_BASE}/qr/download/png/${slug}?siteUrl=${encodeURIComponent(siteUrl)}`;
   },
 
   getDownloadQRSVGUrl(slug) {
-    return `${API_BASE}/qr/download/svg/${slug}`;
+    const siteUrl = typeof window === 'undefined' ? '' : window.location.origin;
+    return `${API_BASE}/qr/download/svg/${slug}?siteUrl=${encodeURIComponent(siteUrl)}`;
   }
 };
