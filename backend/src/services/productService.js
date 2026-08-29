@@ -46,34 +46,17 @@ class ProductService {
     const productPayload = {
       ...data,
       slug,
-      categoryName: categoryName || 'Gạo An Đông',
-      images: data.images || {
-        main: '/assets/product-gao.png',
-        banner: '/assets/banner-gao-3.png',
-        field: '/assets/banner-gao-2.png',
-        detail: '/assets/banner-gao.png'
-      },
-      packSizes: data.packSizes || ['2kg', '5kg', '10kg'],
-      origin: data.origin || {
-        location: 'Đồng bằng Sông Cửu Long',
-        soil: 'Đất phù sa màu mỡ',
-        farmerCoop: 'Hợp tác xã Nông nghiệp An Đông',
-        harvestSeason: 'Vụ Đông Xuân'
-      },
-      tasteProfile: data.tasteProfile || {
-        aroma: 'Thơm tự nhiên',
-        texture: 'Dẻo mềm tròn vị',
-        taste: 'Ngọt hậu đậm đà'
-      },
-      cookingGuide: data.cookingGuide || {
-        waterRatio: '1 chén gạo : 1 đến 1.1 chén nước',
-        washingTips: 'Vo nhẹ 1 - 2 lần',
-        cookingTips: 'Nấu chín và ủ nóng 10 phút'
-      },
-      storageGuide: data.storageGuide || 'Bảo quản nơi khô ráo thoáng mát, tránh ẩm ướt.',
-      certifications: data.certifications || [
-        { name: 'VietGAP', code: 'VIETGAP-VN-2026', authority: 'Trung tâm Chứng nhận ATTP' }
-      ]
+      categoryName: categoryName || '',
+      images: data.images || {},
+      packSizes: data.packSizes || [],
+      /**
+       * Không gán giá trị mặc định cho vùng trồng, thông số kỹ thuật hay
+       * chứng nhận. Trước đây chỗ này tự điền sẵn "VietGAP / VIETGAP-VN-2026",
+       * hợp tác xã và vùng nguyên liệu tưởng tượng cho mọi sản phẩm mới —
+       * tức là công bố thông tin chất lượng không có thật.
+       * Các trường này chỉ được điền bằng dữ liệu có hồ sơ kèm theo.
+       */
+      certifications: data.certifications || []
     };
 
     return await productModel.create(productPayload);

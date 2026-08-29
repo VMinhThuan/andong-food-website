@@ -87,3 +87,4 @@ productSchema.index({ slug: 1, code: 1, name: 'text', summary: 'text' });
 
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 export default Product;
+
