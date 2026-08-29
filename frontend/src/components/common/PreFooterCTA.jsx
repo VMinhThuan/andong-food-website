@@ -32,10 +32,6 @@ export default function PreFooterCTA() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           style={{ maxWidth: '680px', margin: '0 auto' }}
         >
-          <div className="badge badge-gold" style={{ marginBottom: '16px', backgroundColor: 'rgba(254, 250, 224, 0.92)' }}>
-            GẮN KẾT YÊU THƯƠNG
-          </div>
-
           <h2 style={{
             fontFamily: 'var(--font-serif)',
             fontSize: 'clamp(2.2rem, 3.8vw, 3.1rem)',

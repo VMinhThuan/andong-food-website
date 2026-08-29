@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -121,8 +121,8 @@ export default function AboutPage() {
                 fontWeight: '800',
                 letterSpacing: '0.5px'
               }}>
-                Gìn Giữ Tinh Hoa <br />
-                Trong Từng Hạt Gạo Việt
+                Chăm Lo Cho Người Mình Thương <br />
+                Qua Từng Bữa Cơm
               </h1>
 
               {/* Copywriting đắt giá, kết nối trực tiếp thương hiệu */}
@@ -133,7 +133,7 @@ export default function AboutPage() {
                 marginBottom: '28px',
                 maxWidth: '490px'
               }}>
-                Từ sự trân trọng hạt gạo Việt, An Đông gìn giữ những giá trị nguyên bản để gửi trao vị ngon và sự an lành trong mỗi bữa cơm gia đình.
+                Đôi khi, sự quan tâm dành cho gia đình chỉ đơn giản là chọn một nguồn thực phẩm chất lượng, thơm ngon. An Đông giúp bạn gửi gắm điều đó qua từng bữa cơm.
               </p>
 
               {/* 1 CTA chính duy nhất */}
@@ -203,9 +203,6 @@ export default function AboutPage() {
               variants={staggerContainer}
             >
               <motion.div variants={fadeInUp}>
-                <span className="badge badge-green" style={{ marginBottom: '14px' }}>
-                  TRIẾT LÝ TÊN GỌI
-                </span>
               </motion.div>
 
               <motion.h2 variants={fadeInUp} style={{
@@ -348,9 +345,6 @@ export default function AboutPage() {
             variants={fadeInUp}
             style={{ marginBottom: '50px' }}
           >
-            <div className="badge badge-gold" style={{ marginBottom: '12px' }}>
-              TẦM NHÌN & SỨ MỆNH
-            </div>
             <h2 style={{
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2rem, 3.2vw, 2.6rem)',
@@ -456,34 +450,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. TÍNH CÁCH THƯƠNG HIỆU (BRAND MANIFESTO - BỎ EMOJI & BỎ CARD HỘP) */}
-      <section style={{
-        padding: '95px 0',
-        backgroundColor: '#faf8f2'
-      }}>
+      {/* 4. ĐỊNH VỊ THƯƠNG HIỆU */}
+      <section style={{ padding: '95px 0', backgroundColor: '#faf8f2' }}>
         <div className="container">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.25 }}
             variants={fadeInUp}
-            style={{ maxWidth: '720px', marginBottom: '55px' }}
+            style={{ maxWidth: '640px', marginBottom: '50px' }}
           >
-            <div className="badge badge-gold" style={{ marginBottom: '12px' }}>
-              TÍNH CÁCH THƯƠNG HIỆU
-            </div>
             <h2 style={{
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2rem, 3.2vw, 2.6rem)',
               color: '#1b4332',
               lineHeight: 1.25,
               fontWeight: '800',
-              marginBottom: '12px'
+              marginBottom: '14px'
             }}>
               Những Giá Trị An Đông Theo Đuổi
             </h2>
-            <p style={{ color: '#68776f', fontSize: '1.04rem', margin: 0 }}>
-              Những giá trị định hình cách An Đông tạo nên sản phẩm và đồng hành cùng mỗi gia đình.
+            <p style={{ color: '#68776f', fontSize: '1.04rem', margin: 0, lineHeight: 1.7 }}>
+              An Đông bền bỉ mang đến những hạt gạo thơm ngon, chất lượng đáng tin,
+              để người ăn ngon miệng và người chọn an lòng.
             </p>
           </motion.div>
 
@@ -492,103 +481,37 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
             variants={staggerContainer}
-            className="grid-3"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+              gap: '30px'
+            }}
           >
-            {/* 01 CHÂN THÀNH */}
-            <motion.div
-              variants={fadeInUp}
-              style={{
-                paddingBottom: '24px',
-                borderBottom: '2px solid rgba(176, 125, 53, 0.3)'
-              }}
-            >
-              <div style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '1.8rem',
-                fontWeight: '800',
-                color: '#b07d35',
-                marginBottom: '10px'
-              }}>
-                01
-              </div>
-              <h3 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.35rem',
-                color: '#1b4332',
-                fontWeight: '800',
-                marginBottom: '10px',
-                letterSpacing: '1px'
-              }}>
-                CHÂN THÀNH
-              </h3>
-              <p style={{ color: '#526058', fontSize: '0.96rem', lineHeight: 1.75, margin: 0 }}>
-                Trung thực tuyệt đối trong nguồn nguyên liệu và thông tin sản phẩm gửi đến người tiêu dùng.
-              </p>
-            </motion.div>
-
-            {/* 02 TINH TẾ */}
-            <motion.div
-              variants={fadeInUp}
-              style={{
-                paddingBottom: '24px',
-                borderBottom: '2px solid rgba(176, 125, 53, 0.3)'
-              }}
-            >
-              <div style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '1.8rem',
-                fontWeight: '800',
-                color: '#b07d35',
-                marginBottom: '10px'
-              }}>
-                02
-              </div>
-              <h3 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.35rem',
-                color: '#1b4332',
-                fontWeight: '800',
-                marginBottom: '10px',
-                letterSpacing: '1px'
-              }}>
-                TINH TẾ
-              </h3>
-              <p style={{ color: '#526058', fontSize: '0.96rem', lineHeight: 1.75, margin: 0 }}>
-                Chăm chút tỉ mỉ từ quy trình đóng gói, hướng dẫn sử dụng đến hương vị trọn vẹn trong bữa cơm.
-              </p>
-            </motion.div>
-
-            {/* 03 BỀN BỈ */}
-            <motion.div
-              variants={fadeInUp}
-              style={{
-                paddingBottom: '24px',
-                borderBottom: '2px solid rgba(176, 125, 53, 0.3)'
-              }}
-            >
-              <div style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '1.8rem',
-                fontWeight: '800',
-                color: '#b07d35',
-                marginBottom: '10px'
-              }}>
-                03
-              </div>
-              <h3 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.35rem',
-                color: '#1b4332',
-                fontWeight: '800',
-                marginBottom: '10px',
-                letterSpacing: '1px'
-              }}>
-                BỀN BỈ
-              </h3>
-              <p style={{ color: '#526058', fontSize: '0.96rem', lineHeight: 1.75, margin: 0 }}>
-                Kiên định với chuẩn mực chất lượng và giá trị bền vững dài lâu cùng khách hàng và đối tác.
-              </p>
-            </motion.div>
+            {[
+              { title: 'Chân Thật', desc: 'Trung thực trong nguồn nguyên liệu và thông tin gửi đến người tiêu dùng.' },
+              { title: 'Trách Nhiệm', desc: 'Đặt sức khỏe người dùng và sự bền vững của nhà nông làm trọng tâm.' },
+              { title: 'Chu Đáo', desc: 'Chăm chút từ khâu chọn giống, đóng gói đến hướng dẫn sử dụng.' },
+              { title: 'Bền Bỉ', desc: 'Kiên định với chuẩn mực chất lượng, đồng hành cùng bữa cơm Việt qua năm tháng.' }
+            ].map((val) => (
+              <motion.div
+                key={val.title}
+                variants={fadeInUp}
+                style={{ borderTop: '2px solid rgba(176, 125, 53, 0.35)', paddingTop: '20px' }}
+              >
+                <h3 style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '1.3rem',
+                  color: '#1b4332',
+                  fontWeight: '800',
+                  margin: '0 0 10px'
+                }}>
+                  {val.title}
+                </h3>
+                <p style={{ color: '#526058', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
+                  {val.desc}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -621,9 +544,6 @@ export default function AboutPage() {
             variants={fadeInUp}
             style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 55px' }}
           >
-            <div className="badge badge-gold" style={{ marginBottom: '14px' }}>
-              QUY TRÌNH KHÉP KÍN
-            </div>
             <h2 style={{
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2rem, 3.4vw, 2.7rem)',
@@ -652,7 +572,7 @@ export default function AboutPage() {
               position: 'relative'
             }}
           >
-            {steps.map((s, idx) => (
+            {steps.map((s) => (
               <motion.div
                 key={s.step}
                 variants={fadeInUp}
