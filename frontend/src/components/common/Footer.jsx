@@ -222,12 +222,12 @@ export default function Footer() {
                 fontSize: '0.92rem'
               }}>
                 <li>
-                  <Link to="/san-pham/gao-st25-an-dong-thuong-hang" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
+                  <Link to="/san-pham/gao-st25" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
                     Gạo ST25 An Đông
                   </Link>
                 </li>
                 <li>
-                  <Link to="/san-pham/gao-vuong-tom-an-dong" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
+                  <Link to="/san-pham/gao-vuong-tom" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
                     Gạo Vuông Tôm An Đông
                   </Link>
                 </li>
