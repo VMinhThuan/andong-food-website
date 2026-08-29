@@ -79,7 +79,7 @@ export default function Footer() {
                 whiteSpace: 'nowrap'
               }}>
                 <a
-                  href="tel:1900886688"
+                  href="tel:0944852464"
                   style={{
                     color: '#1b4332',
                     textDecoration: 'none',
@@ -90,7 +90,7 @@ export default function Footer() {
                   }}
                 >
                   <Phone size={13} color="#b07d35" />
-                  <span>1900 886 688</span>
+                  <span>0944 852 464</span>
                 </a>
                 <span style={{ color: '#d4cebe' }}>•</span>
                 <span style={{ color: '#1b4332', fontWeight: '600', cursor: 'pointer' }}>Facebook</span>
@@ -241,23 +241,13 @@ export default function Footer() {
                 fontSize: '0.92rem'
               }}>
                 <li>
-                  <Link to="/san-pham/gao-st25-an-dong-thuong-hang" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
-                    Gạo ST25 An Đông
+                  <Link to="/san-pham/gao-st25" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
+                    Gạo ST25
                   </Link>
                 </li>
                 <li>
-                  <Link to="/san-pham/gao-nang-thom-cho-dao" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
-                    Gạo Nàng Thơm Chợ Đào
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/san-pham/gao-lut-huyet-rong" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
-                    Gạo Lứt Huyết Rồng
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/san-pham" style={{ color: '#e9c46a', textDecoration: 'none', fontWeight: '700' }}>
-                    Xem tất cả →
+                  <Link to="/san-pham/gao-vuong-tom" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
+                    Gạo Vuông Tôm
                   </Link>
                 </li>
               </ul>
@@ -280,21 +270,21 @@ export default function Footer() {
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
                   <MapPin size={16} color="#e9c46a" style={{ flexShrink: 0, marginTop: '3px' }} />
                   <span style={{ color: '#cbdcd2', lineHeight: 1.5 }}>
-                    Số 88 Đường Phù Sa, Phường An Đông, TP.HCM
+                    Ấp Long Thành, xã Phước Long, tỉnh Cà Mau
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Phone size={16} color="#e9c46a" style={{ flexShrink: 0 }} />
-                  <a href="tel:1900886688" style={{ color: '#fefae0', fontWeight: '700', textDecoration: 'none' }}>
-                    1900 886 688
+                  <a href="tel:0944852464" style={{ color: '#fefae0', fontWeight: '700', textDecoration: 'none' }}>
+                    0944 852 464
                   </a>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Mail size={16} color="#e9c46a" style={{ flexShrink: 0 }} />
-                  <a href="mailto:lienhe@andongfood.vn" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
-                    lienhe@andongfood.vn
+                  <a href="mailto:andongfood@gmail.com" style={{ color: '#cbdcd2', textDecoration: 'none' }}>
+                    andongfood@gmail.com
                   </a>
                 </div>
               </div>

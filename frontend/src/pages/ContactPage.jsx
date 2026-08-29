@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ArrowRight, ExternalLink, MessageSquare } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, CheckCircle2, ArrowRight, ExternalLink } from 'lucide-react';
 import { api } from '../services/api';
 import CustomSelect from '../components/common/CustomSelect';
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 25 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
-  }
-};
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -30 },
@@ -144,9 +135,6 @@ export default function ContactPage() {
               viewport={{ once: false, amount: 0.2 }}
               variants={fadeInLeft}
             >
-              <div className="badge badge-green" style={{ marginBottom: '12px' }}>
-                HỖ TRỢ TRỰC TIẾP
-              </div>
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
@@ -192,13 +180,13 @@ export default function ContactPage() {
                         Tư Vấn & Đặt Hàng
                       </div>
                       <div style={{ fontSize: '1.15rem', fontWeight: '800', color: '#1b4332', marginTop: '2px' }}>
-                        1900 886 688
+                        0944 852 464
                       </div>
                     </div>
                   </div>
 
                   <a
-                    href="tel:1900886688"
+                    href="tel:0944852464"
                     style={{
                       backgroundColor: '#1b4332',
                       color: '#ffffff',
@@ -242,10 +230,10 @@ export default function ContactPage() {
                       Email Hỗ Trợ
                     </div>
                     <a
-                      href="mailto:lienhe@andongfood.vn"
+                      href="mailto:andongfood@gmail.com"
                       style={{ fontSize: '1rem', fontWeight: '700', color: '#1b4332', textDecoration: 'none', display: 'block', marginTop: '2px' }}
                     >
-                      lienhe@andongfood.vn
+                      andongfood@gmail.com
                     </a>
                   </div>
                 </div>
@@ -311,7 +299,7 @@ export default function ContactPage() {
                       Trụ Sở Chính
                     </div>
                     <div style={{ fontSize: '0.95rem', color: '#526058', lineHeight: 1.5, marginTop: '2px' }}>
-                      Số 88 Đường Phù Sa, Phường An Đông, TP. Hồ Chí Minh
+                      Ấp Long Thành, xã Phước Long, tỉnh Cà Mau
                     </div>
                   </div>
                 </div>
@@ -332,9 +320,6 @@ export default function ContactPage() {
                 border: '1px solid #eae5d8',
                 boxShadow: '0 12px 35px rgba(27, 67, 50, 0.06)'
               }}>
-                <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
-                  GỬI YÊU CẦU
-                </div>
                 <h3 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: 'clamp(1.7rem, 2.4vw, 2.1rem)',
@@ -565,178 +550,60 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 3. GHÉ THĂM AN ĐÔNG (GOOGLE MAP + TRỤ SỞ 50/50) */}
+      {/* 3. BẢN ĐỒ */}
       <section style={{
-        padding: '80px 0 90px',
+        padding: '70px 0 80px',
         backgroundColor: '#ffffff',
         borderTop: '1px solid #eae5d8'
       }}>
         <div className="container">
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '50px',
-            alignItems: 'center'
-          }}>
-            {/* Left: Google Map Embed */}
-            <div style={{
-              borderRadius: '24px',
-              overflow: 'hidden',
-              border: '1px solid #e2ded2',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-              height: '380px'
-            }}>
-              <iframe
-                title="Bản đồ chỉ đường An Đông Food"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669658423711!2d106.66698437583802!3d10.759917059496677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ee30d4a974b%3A0xc3cf9c9a6a8b792e!2zQW4gxJDDtG5nLCBRdeG6rW4gNSwgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0, display: 'block' }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-
-            {/* Right: Visiting Details & Directions CTA */}
-            <div>
-              <div className="badge badge-gold" style={{ marginBottom: '12px' }}>
-                ĐỊA ĐIỂM TRỰC TIẾP
-              </div>
-              <h2 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
-                color: '#1b4332',
-                fontWeight: '800',
-                marginBottom: '14px'
-              }}>
-                Ghé Thăm An Đông Food
-              </h2>
-              <p style={{ fontSize: '1rem', color: '#526058', lineHeight: 1.7, marginBottom: '24px' }}>
-                Quý đối tác và khách hàng có thể đến trực tiếp văn phòng để trải nghiệm các mẫu gạo mẫu và trao đổi chi tiết về hợp đồng hợp tác phân phối.
-              </p>
-
-              <div style={{
-                backgroundColor: '#faf8f2',
-                borderRadius: '16px',
-                padding: '20px 24px',
-                marginBottom: '28px',
-                border: '1px solid #eae5d8',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px'
-              }}>
-                <div>
-                  <strong style={{ color: '#1b4332' }}>📍 Địa chỉ: </strong>
-                  <span style={{ color: '#526058' }}>Số 88 Đường Phù Sa, Phường An Đông, TP. Hồ Chí Minh</span>
-                </div>
-                <div>
-                  <strong style={{ color: '#1b4332' }}>🕒 Giờ mở cửa: </strong>
-                  <span style={{ color: '#526058' }}>08:00 – 18:00 (Thứ 2 đến Thứ 7)</span>
-                </div>
-              </div>
-
-              <a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-primary"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '14px 28px'
-                }}
-              >
-                <span>Xem Chỉ Đường Trên Google Maps</span>
-                <ExternalLink size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. KẾT NỐI NHANH VỚI AN ĐÔNG */}
-      <section style={{
-        padding: '50px 0',
-        backgroundColor: '#faf8f2',
-        borderTop: '1px solid #eae5d8'
-      }}>
-        <div className="container">
-          <div style={{
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'flex-end',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '20px'
+            gap: '16px',
+            marginBottom: '28px'
           }}>
-            <div style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1b4332' }}>
-              Kết Nối Nhanh Cùng Chúng Tôi:
-            </div>
+            <h2 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(1.7rem, 2.5vw, 2.2rem)',
+              color: '#1b4332',
+              fontWeight: '800',
+              margin: 0
+            }}>
+              Ghé Thăm An Đông Food
+            </h2>
 
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-              <a
-                href="tel:1900886688"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: '#1b4332',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
-              >
-                <Phone size={15} color="#b07d35" />
-                <span>Hotline: 1900 886 688</span>
-              </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Ph%C6%B0%E1%BB%9Bc+Long,+C%C3%A0+Mau"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+            >
+              <span>Xem Chỉ Đường</span>
+              <ExternalLink size={16} />
+            </a>
+          </div>
 
-              <a
-                href="https://zalo.me"
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: '#1b4332',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
-              >
-                <span>Zalo Official</span>
-              </a>
-
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: '#1b4332',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
-              >
-                <span>Facebook Page</span>
-              </a>
-            </div>
+          <div style={{
+            borderRadius: '24px',
+            overflow: 'hidden',
+            border: '1px solid #e2ded2',
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06)',
+            height: '400px'
+          }}>
+            <iframe
+              title="Bản đồ An Đông Food - Phước Long, Cà Mau"
+              src="https://www.google.com/maps?q=Ph%C6%B0%E1%BB%9Bc+Long,+C%C3%A0+Mau&z=12&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: 'block' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>

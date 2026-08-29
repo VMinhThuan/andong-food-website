@@ -42,15 +42,15 @@ export default function AdminDashboardPage() {
   const [productForm, setProductForm] = useState({
     code: '',
     name: '',
+    nameEn: '',
     slug: '',
-    categoryName: 'Gạo Đặc Sản Thượng Hạng',
-    tagline: '',
+    categoryName: 'Gạo Trắng',
     summary: '',
-    price: 35000,
-    unit: 'kg',
-    packSizes: '2kg, 5kg, 10kg',
-    expiry: '12 tháng',
-    packaging: 'Túi hút chân không cao cấp'
+    shortDesc: '',
+    ingredients: '',
+    expiry: '12 tháng kể từ ngày sản xuất',
+    declarationNo: '',
+    barcode: ''
   });
 
   const [selectedQRProduct, setSelectedQRProduct] = useState(null);
@@ -101,30 +101,30 @@ export default function AdminDashboardPage() {
       setProductForm({
         code: prod.code || '',
         name: prod.name || '',
+        nameEn: prod.nameEn || '',
         slug: prod.slug || '',
-        categoryName: prod.categoryName || 'Gạo Đặc Sản Thượng Hạng',
-        tagline: prod.tagline || '',
+        categoryName: prod.categoryName || 'Gạo Trắng',
         summary: prod.summary || '',
-        price: prod.price || 35000,
-        unit: prod.unit || 'kg',
-        packSizes: Array.isArray(prod.packSizes) ? prod.packSizes.join(', ') : (prod.packSizes || '2kg, 5kg'),
-        expiry: prod.expiry || '12 tháng',
-        packaging: prod.packaging || 'Túi hút chân không'
+        shortDesc: prod.shortDesc || '',
+        ingredients: prod.info?.ingredients || '',
+        expiry: prod.info?.expiry || '12 tháng kể từ ngày sản xuất',
+        declarationNo: prod.info?.declarationNo || '',
+        barcode: prod.info?.barcode || ''
       });
     } else {
       setEditingProduct(null);
       setProductForm({
         code: 'AD-RICE-' + Math.floor(100 + Math.random() * 900),
         name: '',
+        nameEn: '',
         slug: '',
-        categoryName: 'Gạo Đặc Sản Thượng Hạng',
-        tagline: '100% Chuẩn Giống Thuần Nông',
+        categoryName: 'Gạo Trắng',
         summary: '',
-        price: 30000,
-        unit: 'kg',
-        packSizes: '2kg, 5kg, 10kg',
-        expiry: '12 tháng',
-        packaging: 'Túi hút chân không cao cấp'
+        shortDesc: '',
+        ingredients: '',
+        expiry: '12 tháng kể từ ngày sản xuất',
+        declarationNo: '',
+        barcode: ''
       });
     }
     setIsProductModalOpen(true);
@@ -133,9 +133,10 @@ export default function AdminDashboardPage() {
   const handleSaveProduct = async (e) => {
     e.preventDefault();
     try {
+      const { ingredients, expiry, declarationNo, barcode, ...rest } = productForm;
       const payload = {
-        ...productForm,
-        packSizes: productForm.packSizes.split(',').map(s => s.trim()).filter(Boolean)
+        ...rest,
+        info: { ingredients, expiry, declarationNo, barcode }
       };
 
       if (editingProduct) {
@@ -353,7 +354,7 @@ export default function AdminDashboardPage() {
                     <th style={{ padding: '12px 16px' }}>Mã SP</th>
                     <th style={{ padding: '12px 16px' }}>Tên Sản Phẩm</th>
                     <th style={{ padding: '12px 16px' }}>Danh Mục</th>
-                    <th style={{ padding: '12px 16px' }}>Quy Cách</th>
+                    <th style={{ padding: '12px 16px' }}>Thành Phần</th>
                     <th style={{ padding: '12px 16px', textAlign: 'center' }}>Mã QR</th>
                     <th style={{ padding: '12px 16px', textAlign: 'right' }}>Thao Tác</th>
                   </tr>
@@ -369,7 +370,7 @@ export default function AdminDashboardPage() {
                       <td style={{ padding: '14px 16px' }}>
                         <span className="badge badge-green" style={{ fontSize: '0.75rem' }}>{prod.categoryName || 'Gạo An Đông'}</span>
                       </td>
-                      <td style={{ padding: '14px 16px' }}>{prod.packSizes?.join(', ') || '2kg, 5kg'}</td>
+                      <td style={{ padding: '14px 16px' }}>{prod.info?.ingredients || '—'}</td>
                       <td style={{ padding: '14px 16px', textAlign: 'center' }}>
                         <button
                           onClick={() => setSelectedQRProduct(prod)}
@@ -741,18 +742,18 @@ export default function AdminDashboardPage() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Thông Điệp Ngắn (Tagline)</label>
+                <label className="form-label">Tên Tiếng Anh</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Gạo Ngon Chuẩn Giống – Gửi Trọn An Lòng"
-                  value={productForm.tagline}
-                  onChange={e => setProductForm({ ...productForm, tagline: e.target.value })}
+                  placeholder="ST25 Rice"
+                  value={productForm.nameEn}
+                  onChange={e => setProductForm({ ...productForm, nameEn: e.target.value })}
                 />
               </div>
 
               <div className="form-group">
-                <label className="form-label">Mô Tả Sản Phẩm</label>
+                <label className="form-label">Giới Thiệu Sản Phẩm</label>
                 <textarea
                   className="form-control"
                   rows="3"
@@ -761,17 +762,28 @@ export default function AdminDashboardPage() {
                 ></textarea>
               </div>
 
+              <div className="form-group">
+                <label className="form-label">Mô Tả Ngắn (hiển thị ở trang chủ)</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={productForm.shortDesc}
+                  onChange={e => setProductForm({ ...productForm, shortDesc: e.target.value })}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Thành Phần</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="100% gạo trắng thuần ST25"
+                  value={productForm.ingredients}
+                  onChange={e => setProductForm({ ...productForm, ingredients: e.target.value })}
+                />
+              </div>
+
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div className="form-group">
-                  <label className="form-label">Quy Cách Đóng Gói</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="2kg, 5kg, 10kg"
-                    value={productForm.packSizes}
-                    onChange={e => setProductForm({ ...productForm, packSizes: e.target.value })}
-                  />
-                </div>
                 <div className="form-group">
                   <label className="form-label">Hạn Sử Dụng</label>
                   <input
@@ -781,6 +793,26 @@ export default function AdminDashboardPage() {
                     onChange={e => setProductForm({ ...productForm, expiry: e.target.value })}
                   />
                 </div>
+                <div className="form-group">
+                  <label className="form-label">Số Công Bố</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="01/ANDONG-ST25/2026"
+                    value={productForm.declarationNo}
+                    onChange={e => setProductForm({ ...productForm, declarationNo: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Mã Vạch</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={productForm.barcode}
+                  onChange={e => setProductForm({ ...productForm, barcode: e.target.value })}
+                />
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>

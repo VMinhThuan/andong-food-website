@@ -49,31 +49,20 @@ class ProductService {
       categoryName: categoryName || 'Gạo An Đông',
       images: data.images || {
         main: '/assets/product-gao.png',
-        banner: '/assets/banner-gao-3.png',
-        field: '/assets/banner-gao-2.png',
-        detail: '/assets/banner-gao.png'
+        banner: '/assets/banner-gao-3.png'
       },
-      packSizes: data.packSizes || ['2kg', '5kg', '10kg'],
-      origin: data.origin || {
-        location: 'Đồng bằng Sông Cửu Long',
-        soil: 'Đất phù sa màu mỡ',
-        farmerCoop: 'Hợp tác xã Nông nghiệp An Đông',
-        harvestSeason: 'Vụ Đông Xuân'
-      },
-      tasteProfile: data.tasteProfile || {
-        aroma: 'Thơm tự nhiên',
-        texture: 'Dẻo mềm tròn vị',
-        taste: 'Ngọt hậu đậm đà'
-      },
-      cookingGuide: data.cookingGuide || {
-        waterRatio: '1 chén gạo : 1 đến 1.1 chén nước',
-        washingTips: 'Vo nhẹ 1 - 2 lần',
-        cookingTips: 'Nấu chín và ủ nóng 10 phút'
-      },
-      storageGuide: data.storageGuide || 'Bảo quản nơi khô ráo thoáng mát, tránh ẩm ướt.',
-      certifications: data.certifications || [
-        { name: 'VietGAP', code: 'VIETGAP-VN-2026', authority: 'Trung tâm Chứng nhận ATTP' }
-      ]
+      cookingSteps: data.cookingSteps || [],
+      nutrition: data.nutrition || [],
+      info: {
+        ingredients: '',
+        expiry: '12 tháng kể từ ngày sản xuất',
+        declarationNo: '',
+        storage: 'Bảo quản nơi khô ráo, thoáng mát và tránh ánh nắng trực tiếp.',
+        notice: 'Không sử dụng sản phẩm đã hết hạn hoặc có dấu hiệu ẩm mốc.',
+        origin: 'Việt Nam',
+        barcode: '',
+        ...(data.info || {})
+      }
     };
 
     return productModel.create(productPayload);

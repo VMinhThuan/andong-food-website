@@ -1,41 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Wheat, Sun, Heart } from 'lucide-react';
+import { ArrowRight, Sun, Heart } from 'lucide-react';
 
 const slides = [
   {
     id: 1,
-    badge: 'CÂU CHUYỆN AN ĐÔNG',
+    badge: 'AN ĐÔNG FOOD',
     badgeIcon: Sun,
     title: 'Gạo Ngon Chuẩn Giống',
     highlight: 'Gửi Trọn An Lòng',
-    desc: 'Những hạt gạo thơm ngon và chất lượng đáng tin, cho người ăn ngon miệng, người chọn an lòng.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
+    desc: 'Những hạt gạo thơm ngon, chất lượng đáng tin, cho người ăn ngon miệng và người chọn an lòng.',
+    primaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
+    secondaryBtn: { text: 'Về An Đông', link: '/gioi-thieu' },
     bgImage: '/assets/rice-sunrise.jpg',
   },
   {
     id: 2,
-    badge: 'BÌNH AN Ở PHÍA ĐÔNG',
-    badgeIcon: Wheat,
-    title: 'Bình An Ở Phía Đông',
-    highlight: 'Gửi Trao Yêu Thương',
-    desc: 'Từ những hạt gạo chuẩn ST25 được chọn lựa khắt khe, vun đắp những bữa cơm an lành trong mỗi gia đình.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
-    bgImage: '/assets/rice-mekong.jpg',
-  },
-  {
-    id: 3,
-    badge: 'TÂM TÌNH NGƯỜI CHỌN GẠO',
+    badge: 'AN ĐÔNG FOOD',
     badgeIcon: Heart,
     title: 'Người Ăn Ngon Miệng',
     highlight: 'Người Chọn An Lòng',
-    desc: '“Đông” là sự bền bỉ qua năm tháng – “An” là sự bình an gửi trao trọn vẹn đến người mình thương.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
-    bgImage: '/assets/rice-grains.jpg',
+    desc: '“An” là mong muốn trao gửi an lành. “Đông” là tinh thần bền bỉ trước thử thách.',
+    primaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
+    secondaryBtn: { text: 'Về An Đông', link: '/gioi-thieu' },
+    bgImage: '/assets/rice-mekong.jpg',
   }
 ];
 

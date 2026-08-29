@@ -1,32 +1,27 @@
 import mongoose from 'mongoose';
 
+// Nội dung bám theo AN ĐÔNG _ BRAND PROFILE.pdf do An Đông Food cung cấp.
 const companySchema = new mongoose.Schema({
-  name: { type: String, default: 'CÔNG TY TNHH THỰC PHẨM AN ĐÔNG (AN ĐÔNG FOOD)' },
+  name: { type: String, default: 'CÔNG TY TNHH AN ĐÔNG FOOD' },
   shortName: { type: String, default: 'AN ĐÔNG FOOD' },
-  slogan: { type: String, default: 'Bình An Ở Phía Đông – Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng' },
+  slogan: { type: String, default: 'An Đông, gửi trọn an lòng' },
   brandStory: {
     title: { type: String, default: 'Câu Chuyện Thương Hiệu An Đông' },
-    meaning: { type: String, default: '“Đông” đại diện cho sự bền bỉ để đi qua những mùa khó khăn, còn “An” là sự bình an muốn dành cho người mình thương.' },
+    meaning: { type: String, default: '' },
     content: { type: String, default: '' },
-    concept: { type: String, default: 'Bình An Ở Phía Đông (An tâm – Organic – Lý tưởng)' }
+    quote: { type: String, default: '' }
   },
   vision: { type: String, default: '' },
   mission: { type: String, default: '' },
-  brandPromise: [{ type: String }],
-  coreValues: [
-    {
-      title: String,
-      desc: String
-    }
-  ],
+  brandPromise: { type: String, default: '' },
+  positioning: [{ type: String }],
+  toneOfVoice: [{ type: String }],
   contact: {
     address: String,
+    addressEn: String,
     hotline: String,
     email: String,
-    website: String,
-    zalo: String,
-    facebook: String,
-    workingHours: String
+    website: String
   }
 }, {
   timestamps: true

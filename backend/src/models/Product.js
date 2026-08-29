@@ -1,62 +1,47 @@
 import mongoose from 'mongoose';
 
+// Cấu trúc bám theo tài liệu An_Dong_Product_Content_Master.docx
+// do An Đông Food cung cấp (song ngữ Việt - Anh).
 const productSchema = new mongoose.Schema({
   id: { type: String, unique: true },
   code: { type: String, required: true, unique: true, trim: true },
   name: { type: String, required: true, trim: true },
+  nameEn: { type: String, default: '' },
   slug: { type: String, required: true, unique: true, trim: true },
   categoryId: { type: String, default: '' },
-  categoryName: { type: String, default: 'Gạo Đặc Sản' },
-  tagline: { type: String, default: '' },
+  categoryName: { type: String, default: 'Gạo Trắng' },
   summary: { type: String, default: '' },
-  price: { type: Number, default: 0 },
-  unit: { type: String, default: 'kg' },
-  packSizes: [{ type: String }],
-  packaging: { type: String, default: '' },
-  expiry: { type: String, default: '12 tháng' },
-  origin: {
-    location: { type: String, default: '' },
-    soil: { type: String, default: '' },
-    farmerCoop: { type: String, default: '' },
-    harvestSeason: { type: String, default: '' }
-  },
-  specs: {
-    variety: { type: String, default: '' },
-    purity: { type: String, default: '' },
-    moisture: { type: String, default: '' },
-    brokenRate: { type: String, default: '' },
-    preservatives: { type: String, default: '' }
-  },
-  tasteProfile: {
-    aroma: { type: String, default: '' },
-    texture: { type: String, default: '' },
-    taste: { type: String, default: '' }
-  },
-  processSteps: [
+  summaryEn: { type: String, default: '' },
+  shortDesc: { type: String, default: '' },
+  cookingSteps: [
     {
       step: Number,
       title: String,
-      desc: String
+      desc: String,
+      titleEn: String,
+      descEn: String
     }
   ],
-  cookingGuide: {
-    waterRatio: String,
-    washingTips: String,
-    cookingTips: String
-  },
-  storageGuide: { type: String, default: '' },
-  certifications: [
+  nutrition: [
     {
-      name: String,
-      code: String,
-      authority: String
+      label: String,
+      labelEn: String,
+      value: String
     }
   ],
+  info: {
+    ingredients: { type: String, default: '' },
+    ingredientsEn: { type: String, default: '' },
+    expiry: { type: String, default: '' },
+    declarationNo: { type: String, default: '' },
+    storage: { type: String, default: '' },
+    notice: { type: String, default: '' },
+    origin: { type: String, default: 'Việt Nam' },
+    barcode: { type: String, default: '' }
+  },
   images: {
     main: { type: String, default: '/assets/product-gao.png' },
-    banner: { type: String, default: '/assets/banner-gao-3.png' },
-    field: { type: String, default: '/assets/banner-gao-2.png' },
-    detail: { type: String, default: '/assets/banner-gao.png' }
+    banner: { type: String, default: '/assets/banner-gao-3.png' }
   },
   qrCodeString: { type: String, default: '' },
   isFeatured: { type: Boolean, default: false },

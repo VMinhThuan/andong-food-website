@@ -1,9 +1,9 @@
 import { contactModel } from '../models/contactModel.js';
 
 export const contactController = {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      const contacts = contactModel.findAll(req.query);
+      const contacts = await contactModel.findAll(req.query);
       res.json({
         success: true,
         count: contacts.length,
@@ -14,7 +14,7 @@ export const contactController = {
     }
   },
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const { fullName, phone, email, subject, message, company } = req.body;
       if (!fullName || !phone || !message) {
@@ -24,7 +24,7 @@ export const contactController = {
         });
       }
 
-      const newContact = contactModel.create({
+      const newContact = await contactModel.create({
         fullName,
         phone,
         email: email || '',
@@ -43,11 +43,11 @@ export const contactController = {
     }
   },
 
-  updateStatus(req, res, next) {
+  async updateStatus(req, res, next) {
     try {
       const { id } = req.params;
       const { status, assignedTo } = req.body;
-      const updated = contactModel.updateStatus(id, status, assignedTo || req.user?.username);
+      const updated = await contactModel.updateStatus(id, status, assignedTo || req.user?.username);
       if (!updated) {
         return res.status(404).json({ success: false, message: 'Không tìm thấy liên hệ.' });
       }
@@ -61,9 +61,9 @@ export const contactController = {
     }
   },
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     try {
-      contactModel.delete(req.params.id);
+      await contactModel.delete(req.params.id);
       res.json({ success: true, message: 'Đã xóa tin nhắn liên hệ.' });
     } catch (err) {
       next(err);

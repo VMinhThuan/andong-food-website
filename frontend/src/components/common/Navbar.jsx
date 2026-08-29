@@ -147,7 +147,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {/* Hotline button */}
           <a
-            href="tel:1900886688"
+            href="tel:0944852464"
             className="hotline-btn-nav"
             style={{
               display: 'flex',
@@ -166,7 +166,7 @@ export default function Navbar() {
             }}
           >
             <PhoneCall size={15} color="#b07d35" />
-            <span>1900 886 688</span>
+            <span>0944 852 464</span>
           </a>
 
           {/* USER ACCOUNT / PORTAL ICON (MODERN LUXURY CIRCLE) */}
@@ -348,11 +348,11 @@ export default function Navbar() {
             ))}
 
             <a
-              href="tel:1900886688"
+              href="tel:0944852464"
               className="btn btn-outline btn-sm"
               style={{ width: '100%', marginTop: '6px' }}
             >
-              <PhoneCall size={16} /> Hotline: 1900 886 688
+              <PhoneCall size={16} /> Hotline: 0944 852 464
             </a>
 
             <Link

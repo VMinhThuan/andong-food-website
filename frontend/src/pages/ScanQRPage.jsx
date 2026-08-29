@@ -77,7 +77,7 @@ export default function ScanQRPage() {
             <form onSubmit={handleManualSearch} style={{ display: 'flex', gap: '10px' }}>
               <input
                 type="text"
-                placeholder="Ví dụ: AD-ST25-01 hoặc gao-st25-an-dong-thuong-hang"
+                placeholder="Ví dụ: AD-ST25 hoặc gao-st25"
                 value={manualCode}
                 onChange={e => setManualCode(e.target.value)}
                 style={{
@@ -122,24 +122,17 @@ export default function ScanQRPage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
                 <button
                   type="button"
-                  onClick={() => navigate('/san-pham/gao-st25-an-dong-thuong-hang')}
+                  onClick={() => navigate('/san-pham/gao-st25')}
                   className="btn btn-outline btn-sm"
                 >
-                  🌾 Gạo ST25 (AD-ST25-01)
+                  Gạo ST25
                 </button>
                 <button
                   type="button"
-                  onClick={() => navigate('/san-pham/gao-nang-thom-cho-dao-an-dong')}
+                  onClick={() => navigate('/san-pham/gao-vuong-tom')}
                   className="btn btn-outline btn-sm"
                 >
-                  🌾 Nàng Thơm Chợ Đào
-                </button>
-                <button
-                  type="button"
-                  onClick={() => navigate('/san-pham/gao-lut-huyet-rong-dinh-duong-an-dong')}
-                  className="btn btn-outline btn-sm"
-                >
-                  🌾 Gạo Lứt Huyết Rồng
+                  Gạo Vuông Tôm
                 </button>
               </div>
             </div>

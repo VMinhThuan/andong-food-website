@@ -42,7 +42,7 @@ async function seedInitialDatabase() {
     const prodCount = await Product.countDocuments();
     if (prodCount === 0) {
       await Product.insertMany(initialProducts);
-      console.log('🌾 Seeded An Dong Food products (ST25, Nang Thom, etc.) to MongoDB');
+      console.log('🌾 Seeded An Dong Food products to MongoDB');
     }
 
     const companyCount = await Company.countDocuments();
