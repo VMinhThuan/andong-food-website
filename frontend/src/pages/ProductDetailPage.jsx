@@ -104,6 +104,24 @@ export default function ProductDetailPage() {
     );
   }
 
+  // Chỉ hiển thị hạng mục có dữ liệu thật. Trước đây trường rỗng được lấp bằng
+  // vùng trồng, thổ nhưỡng, hợp tác xã và độ thuần giống tưởng tượng, hiển thị
+  // cho người mua như thông tin đã được xác nhận.
+  const originRows = [
+    ['Xuất xứ', product.originCountry],
+    ['Vùng canh tác', product.origin?.location],
+    ['Thổ nhưỡng', product.origin?.soil],
+    ['Hợp tác xã', product.origin?.farmerCoop],
+    ['Vụ mùa', product.origin?.harvestSeason]
+  ].filter(([, value]) => value);
+
+  const tasteRows = [
+    ['Mùi thơm', product.tasteProfile?.aroma],
+    ['Độ dẻo', product.tasteProfile?.texture],
+    ['Vị giác', product.tasteProfile?.taste],
+    ['Độ thuần giống', product.specs?.purity]
+  ].filter(([, value]) => value);
+
   return (
     <div className="product-detail-page" style={{ backgroundColor: 'var(--bg-main)' }}>
       {/* Breadcrumb */}
@@ -277,19 +295,19 @@ export default function ProductDetailPage() {
                 }}>
                   <div>
                     <span style={{ color: 'var(--text-light)' }}>Quy cách:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packSizes?.join(', ') || '2kg, 5kg, 10kg'}</div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packSizes?.length ? product.packSizes.join(', ') : (product.netWeight || 'Đang cập nhật')}</div>
                   </div>
                   <div>
                     <span style={{ color: 'var(--text-light)' }}>Hạn sử dụng:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.expiry || '12 tháng'}</div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.expiry || 'Đang cập nhật'}</div>
                   </div>
                   <div>
                     <span style={{ color: 'var(--text-light)' }}>Bao bì:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packaging || 'Túi hút chân không cao cấp'}</div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packaging || 'Đang cập nhật'}</div>
                   </div>
                   <div>
                     <span style={{ color: 'var(--text-light)' }}>Xuất xứ:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.origin?.location || 'ĐBSCL Việt Nam'}</div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.originCountry || product.origin?.location || 'Đang cập nhật'}</div>
                   </div>
                 </div>
 
@@ -309,26 +327,28 @@ export default function ProductDetailPage() {
           {/* 4 DETAIL TABS / SECTIONS (From Proposal & Brand Specs) */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '40px' }}>
             {/* 1. NGUỒN GỐC & VÙNG NGUYÊN LIỆU */}
-            <div className="card" style={{ padding: '28px' }}>
-              <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Nguồn Gốc & Vùng Trồng</h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
-                <li><strong>Vùng canh tác:</strong> {product.origin?.location || 'Đồng bằng Sông Cửu Long'}</li>
-                <li><strong>Thổ nhưỡng:</strong> {product.origin?.soil || 'Đất phù sa bồi đắp màu mỡ'}</li>
-                <li><strong>Hợp tác xã:</strong> {product.origin?.farmerCoop || 'HTX Nông nghiệp An Đông Mekong'}</li>
-                <li><strong>Vụ mùa:</strong> {product.origin?.harvestSeason || 'Vụ Đông Xuân trĩu hạt'}</li>
-              </ul>
-            </div>
+            {originRows.length > 0 && (
+              <div className="card" style={{ padding: '28px' }}>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Nguồn Gốc & Vùng Trồng</h3>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
+                  {originRows.map(([label, value]) => (
+                    <li key={label}><strong>{label}:</strong> {value}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* 2. ĐẶC TÍNH & HƯƠNG VỊ */}
-            <div className="card" style={{ padding: '28px' }}>
-              <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Đặc Tính & Hương Vị</h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
-                <li><strong>Mùi thơm:</strong> {product.tasteProfile?.aroma || 'Thơm ngát tự nhiên'}</li>
-                <li><strong>Độ dẻo:</strong> {product.tasteProfile?.texture || 'Dẻo mềm, kết dính vừa vặn'}</li>
-                <li><strong>Vị giác:</strong> {product.tasteProfile?.taste || 'Ngọt hậu sâu, để nguội vẫn mềm'}</li>
-                <li><strong>Độ thuần giống:</strong> {product.specs?.purity || '99.5% chuẩn giống'}</li>
-              </ul>
-            </div>
+            {tasteRows.length > 0 && (
+              <div className="card" style={{ padding: '28px' }}>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Đặc Tính & Hương Vị</h3>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
+                  {tasteRows.map(([label, value]) => (
+                    <li key={label}><strong>{label}:</strong> {value}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* 3. HƯỚNG DẪN NẤU CƠM & BẢO QUẢN */}
