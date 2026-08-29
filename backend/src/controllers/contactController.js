@@ -28,14 +28,14 @@ export const contactController = {
         fullName,
         phone,
         email: email || '',
-        subject: subject || 'Tư vấn sản phẩm An Đông Food',
+        subject: subject || 'Tư vấn sản phẩm An Đông',
         message,
         company: company || ''
       });
 
       res.status(201).json({
         success: true,
-        message: 'Cảm ơn quý khách! Thông tin liên hệ đã được gửi thành công. An Đông Food sẽ phản hồi sớm nhất.',
+        message: 'Cảm ơn quý khách! Thông tin liên hệ đã được gửi thành công. An Đông sẽ phản hồi sớm nhất.',
         data: newContact
       });
     } catch (err) {

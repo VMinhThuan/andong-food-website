@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LogoDoc from '../../assets/brand-element/AD_LOGO DỌC.svg';
 
 export default function BrandPreloader({ onFinish }) {
   const [isDone, setIsDone] = useState(false);
@@ -29,8 +30,8 @@ export default function BrandPreloader({ onFinish }) {
             position: 'fixed',
             inset: 0,
             zIndex: 99999,
-            backgroundColor: '#faf9f5',
-            backgroundImage: 'radial-gradient(circle at center 40%, rgba(254, 250, 224, 0.7) 0%, #faf9f5 85%)',
+            backgroundColor: 'var(--bg-main)',
+            backgroundImage: 'radial-gradient(circle at center 40%, rgba(255, 254, 242, 0.7) 0%, var(--bg-main) 85%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -64,51 +65,22 @@ export default function BrandPreloader({ onFinish }) {
             maxWidth: '380px',
             padding: '0 20px'
           }}>
-            {/* BƯỚC 1: ICON MẶT TRỜI / BÔNG LÚA TRONG LOGO VẼ DẦN XUẤT HIỆN */}
+            {/* BƯỚC 1: LOGO DỌC THƯƠNG HIỆU FADE IN */}
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.85 }}
+              initial={{ opacity: 0, y: 15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              style={{ marginBottom: '14px' }}
+              style={{ marginBottom: '20px' }}
             >
               <img
-                src="/assets/logo-gao.png"
-                alt="An Đông Food"
+                src={LogoDoc}
+                alt="An Đông"
                 style={{
-                  height: '75px',
+                  height: '110px',
                   objectFit: 'contain',
-                  filter: 'drop-shadow(0 6px 18px rgba(176, 125, 53, 0.2))'
+                  filter: 'drop-shadow(0 6px 18px rgba(176, 125, 53, 0.15))'
                 }}
-                onError={(e) => { e.target.style.display = 'none'; }}
               />
-            </motion.div>
-
-            {/* BƯỚC 2: TÊN THƯƠNG HIỆU "AN ĐÔNG FOOD" FADE IN */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25, ease: 'easeOut' }}
-            >
-              <div style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.75rem',
-                fontWeight: '800',
-                letterSpacing: '2.5px',
-                color: '#1b4332',
-                lineHeight: 1
-              }}>
-                AN ĐÔNG
-              </div>
-              <div style={{
-                fontSize: '0.78rem',
-                fontWeight: '800',
-                color: '#b07d35',
-                letterSpacing: '5px',
-                textTransform: 'uppercase',
-                marginTop: '4px'
-              }}>
-                FOOD
-              </div>
             </motion.div>
 
             {/* BƯỚC 3: ĐƯỜNG CHÂN TRỜI CÁNH ĐỒNG LÚA CHẠY NGANG MẢNH MAI (SVG HORIZON LINE) */}
@@ -117,7 +89,7 @@ export default function BrandPreloader({ onFinish }) {
                 {/* Lớp đường cong cánh đồng xanh */}
                 <motion.path
                   d="M0 10 Q 45 4, 90 8 T 180 6"
-                  stroke="#2d6a4f"
+                  stroke="var(--primary-light)"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -127,7 +99,7 @@ export default function BrandPreloader({ onFinish }) {
                 {/* Lớp đường cong phù sa / vàng lúa */}
                 <motion.path
                   d="M10 12 Q 55 7, 100 11 T 170 9"
-                  stroke="#d4a373"
+                  stroke="var(--golden)"
                   strokeWidth="1.2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}

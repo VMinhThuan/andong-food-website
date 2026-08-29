@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, UserCheck, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
+import LogoDoc from '../assets/brand-element/AD_LOGO DỌC.svg';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -33,9 +34,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="login-page" style={{ backgroundColor: '#faf9f5', minHeight: '85vh' }}>
+    <div className="login-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '85vh' }}>
       <section style={{
-        background: 'linear-gradient(135deg, #081c15 0%, #1b4332 100%)',
+        background: 'linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 100%)',
         color: '#ffffff',
         padding: '50px 0 70px',
         textAlign: 'center'
@@ -44,11 +45,11 @@ export default function LoginPage() {
           <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
             HỆ THỐNG NỘI BỘ
           </div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: '#fefae0' }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--golden-pale)' }}>
             Đăng Nhập Quản Trị & Nhân Viên
           </h1>
           <p style={{ color: '#d1e3d9', fontSize: '0.95rem' }}>
-            Cổng làm việc dành cho Quản trị viên (Admin) và Nhân viên CSKH An Đông Food
+            Cổng làm việc dành cho Quản trị viên (Admin) và Nhân viên CSKH An Đông
           </p>
         </div>
       </section>
@@ -60,12 +61,11 @@ export default function LoginPage() {
           <div className="card" style={{ padding: '36px', backgroundColor: '#ffffff' }}>
             <div style={{ textAlign: 'center', marginBottom: '24px' }}>
               <img
-                src="/assets/logo-gao.png"
+                src={LogoDoc}
                 alt="Logo An Đông"
-                style={{ height: '56px', objectFit: 'contain', marginBottom: '12px' }}
-                onError={(e) => { e.target.style.display = 'none'; }}
+                style={{ height: '90px', objectFit: 'contain', marginBottom: '12px' }}
               />
-              <h2 style={{ fontSize: '1.35rem', color: '#1b4332' }}>An Đông Food Portal</h2>
+              <h2 style={{ fontSize: '1.2rem', color: 'var(--primary)', fontWeight: '700', marginTop: '6px' }}>HỆ THỐNG PORTAL</h2>
             </div>
 
             {error && (
@@ -88,9 +88,9 @@ export default function LoginPage() {
 
             <form onSubmit={handleLogin}>
               <div className="form-group">
-                <label className="form-label">Tên Đăng Nhập / Email</label>
+                <label className="form-label">Tên đăng nhập hoặc email</label>
                 <div style={{ position: 'relative' }}>
-                  <User size={18} color="#859b8f" style={{ position: 'absolute', top: '13px', left: '14px' }} />
+                  <User size={18} color="var(--text-light)" style={{ position: 'absolute', top: '13px', left: '14px' }} />
                   <input
                     type="text"
                     required
@@ -106,7 +106,7 @@ export default function LoginPage() {
               <div className="form-group">
                 <label className="form-label">Mật Khẩu</label>
                 <div style={{ position: 'relative' }}>
-                  <Lock size={18} color="#859b8f" style={{ position: 'absolute', top: '13px', left: '14px' }} />
+                  <Lock size={18} color="var(--text-light)" style={{ position: 'absolute', top: '13px', left: '14px' }} />
                   <input
                     type="password"
                     required
@@ -130,8 +130,8 @@ export default function LoginPage() {
             </form>
 
             {/* Quick Demo Accounts Helper */}
-            <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid #e4e0d4' }}>
-              <div style={{ fontSize: '0.8rem', color: '#859b8f', fontWeight: '700', marginBottom: '10px', textTransform: 'uppercase' }}>
+            <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontWeight: '700', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Tài Khoản Mẫu Thử Nghiệm (2 Roles):
               </div>
 
@@ -141,15 +141,15 @@ export default function LoginPage() {
                   onClick={() => handleQuickFill('admin', 'admin123')}
                   className="btn btn-outline-white btn-sm"
                   style={{
-                    backgroundColor: '#faf9f5',
-                    color: '#1b4332',
-                    border: '1px solid #e4e0d4',
+                    backgroundColor: 'var(--bg-main)',
+                    color: 'var(--primary)',
+                    border: '1px solid var(--border-color)',
                     justifyContent: 'space-between',
                     textAlign: 'left'
                   }}
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={16} color="#1b4332" /> <strong>Role Admin:</strong> admin / admin123
+                    <ShieldCheck size={16} color="var(--primary)" /> <strong>Tài khoản quản trị:</strong> admin / admin123
                   </span>
                   <ArrowRight size={14} />
                 </button>
@@ -159,15 +159,15 @@ export default function LoginPage() {
                   onClick={() => handleQuickFill('nhanvien', 'staff123')}
                   className="btn btn-outline-white btn-sm"
                   style={{
-                    backgroundColor: '#faf9f5',
-                    color: '#1b4332',
-                    border: '1px solid #e4e0d4',
+                    backgroundColor: 'var(--bg-main)',
+                    color: 'var(--primary)',
+                    border: '1px solid var(--border-color)',
                     justifyContent: 'space-between',
                     textAlign: 'left'
                   }}
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <UserCheck size={16} color="#40916c" /> <strong>Role Nhân Viên:</strong> nhanvien / staff123
+                    <UserCheck size={16} color="var(--primary-light)" /> <strong>Tài khoản nhân viên:</strong> nhanvien / staff123
                   </span>
                   <ArrowRight size={14} />
                 </button>

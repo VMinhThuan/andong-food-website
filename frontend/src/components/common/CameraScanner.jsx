@@ -100,7 +100,7 @@ export default function CameraScanner({ onScanSuccess }) {
           <div className="badge badge-green" style={{ marginBottom: '8px' }}>
             <Camera size={14} /> MÁY QUÉT TRỰC TIẾP
           </div>
-          <h3 style={{ fontSize: '1.25rem', color: '#1b4332' }}>
+          <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)' }}>
             Hướng Camera vào mã QR trên bao bì
           </h3>
           <p style={{ fontSize: '0.85rem', color: '#526058' }}>
@@ -120,7 +120,7 @@ export default function CameraScanner({ onScanSuccess }) {
             backgroundColor: '#e8f5e9',
             border: '1px solid #c8e6c9',
             borderRadius: '12px',
-            color: '#1b4332',
+            color: 'var(--primary)',
             fontSize: '0.9rem',
             display: 'flex',
             alignItems: 'center',
@@ -153,7 +153,7 @@ export default function CameraScanner({ onScanSuccess }) {
         )}
 
         {/* Alternative: Upload photo from device */}
-        <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #e4e0d4' }}>
+        <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
           <p style={{ fontSize: '0.85rem', color: '#526058', marginBottom: '10px' }}>
             Hoặc tải ảnh chụp bao bì từ thư viện:
           </p>

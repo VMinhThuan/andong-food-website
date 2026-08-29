@@ -192,11 +192,11 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="admin-dashboard-page" style={{ backgroundColor: '#faf9f5', minHeight: '90vh', padding: '30px 0 80px' }}>
+    <div className="admin-dashboard-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '90vh', padding: '30px 0 80px' }}>
       <div className="container">
         {/* Top User Badge & Role Banner */}
         <div style={{
-          backgroundColor: '#1b4332',
+          backgroundColor: 'var(--primary)',
           borderRadius: '20px',
           padding: '24px 30px',
           color: '#ffffff',
@@ -213,11 +213,11 @@ export default function AdminDashboardPage() {
               width: '54px',
               height: '54px',
               borderRadius: '50%',
-              backgroundColor: '#e9c46a',
+              backgroundColor: 'var(--golden-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#122820',
+              color: 'var(--bg-dark)',
               fontWeight: '800',
               fontSize: '1.4rem'
             }}>
@@ -225,7 +225,7 @@ export default function AdminDashboardPage() {
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h2 style={{ fontSize: '1.4rem', color: '#fefae0', margin: 0 }}>{user?.fullName}</h2>
+                <h2 style={{ fontSize: '1.4rem', color: 'var(--golden-pale)', margin: 0 }}>{user?.fullName}</h2>
                 <span className={isAdmin ? 'badge badge-gold' : 'badge badge-green'}>
                   {isAdmin ? 'QUẢN TRỊ VIÊN (ADMIN)' : 'NHÂN VIÊN (STAFF)'}
                 </span>
@@ -252,7 +252,7 @@ export default function AdminDashboardPage() {
           flexWrap: 'wrap',
           gap: '10px',
           marginBottom: '24px',
-          borderBottom: '1px solid #e4e0d4',
+          borderBottom: '1px solid var(--border-color)',
           paddingBottom: '12px'
         }}>
           <button
@@ -261,8 +261,8 @@ export default function AdminDashboardPage() {
               padding: '10px 20px',
               borderRadius: '12px',
               border: 'none',
-              backgroundColor: activeTab === 'products' ? '#1b4332' : '#ffffff',
-              color: activeTab === 'products' ? '#ffffff' : '#526058',
+              backgroundColor: activeTab === 'products' ? 'var(--primary)' : '#ffffff',
+              color: activeTab === 'products' ? '#ffffff' : 'var(--text-muted)',
               fontWeight: '700',
               cursor: 'pointer',
               display: 'flex',
@@ -279,8 +279,8 @@ export default function AdminDashboardPage() {
               padding: '10px 20px',
               borderRadius: '12px',
               border: 'none',
-              backgroundColor: activeTab === 'contacts' ? '#1b4332' : '#ffffff',
-              color: activeTab === 'contacts' ? '#ffffff' : '#526058',
+              backgroundColor: activeTab === 'contacts' ? 'var(--primary)' : '#ffffff',
+              color: activeTab === 'contacts' ? '#ffffff' : 'var(--text-muted)',
               fontWeight: '700',
               cursor: 'pointer',
               display: 'flex',
@@ -297,8 +297,8 @@ export default function AdminDashboardPage() {
               padding: '10px 20px',
               borderRadius: '12px',
               border: 'none',
-              backgroundColor: activeTab === 'qr' ? '#1b4332' : '#ffffff',
-              color: activeTab === 'qr' ? '#ffffff' : '#526058',
+              backgroundColor: activeTab === 'qr' ? 'var(--primary)' : '#ffffff',
+              color: activeTab === 'qr' ? '#ffffff' : 'var(--text-muted)',
               fontWeight: '700',
               cursor: 'pointer',
               display: 'flex',
@@ -316,8 +316,8 @@ export default function AdminDashboardPage() {
                 padding: '10px 20px',
                 borderRadius: '12px',
                 border: 'none',
-                backgroundColor: activeTab === 'users' ? '#1b4332' : '#ffffff',
-                color: activeTab === 'users' ? '#ffffff' : '#526058',
+                backgroundColor: activeTab === 'users' ? 'var(--primary)' : '#ffffff',
+                color: activeTab === 'users' ? '#ffffff' : 'var(--text-muted)',
                 fontWeight: '700',
                 cursor: 'pointer',
                 display: 'flex',
@@ -335,8 +335,8 @@ export default function AdminDashboardPage() {
           <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ fontSize: '1.3rem', color: '#1b4332', margin: 0 }}>Danh Sách Sản Phẩm An Đông Food</h3>
-                <p style={{ fontSize: '0.85rem', color: '#859b8f', margin: '4px 0 0' }}>Mỗi sản phẩm có 1 mã định danh QR phục vụ dán lên bao bì.</p>
+                <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Danh Sách Sản Phẩm An Đông</h3>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', margin: '4px 0 0' }}>Mỗi sản phẩm có 1 mã định danh QR phục vụ dán lên bao bì.</p>
               </div>
 
               {(isAdmin || isStaff) && (
@@ -349,7 +349,7 @@ export default function AdminDashboardPage() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                 <thead>
-                  <tr style={{ backgroundColor: '#faf9f5', borderBottom: '2px solid #e4e0d4', textAlign: 'left' }}>
+                  <tr style={{ backgroundColor: 'var(--bg-main)', borderBottom: '2px solid var(--border-color)', textAlign: 'left' }}>
                     <th style={{ padding: '12px 16px' }}>Mã SP</th>
                     <th style={{ padding: '12px 16px' }}>Tên Sản Phẩm</th>
                     <th style={{ padding: '12px 16px' }}>Danh Mục</th>
@@ -360,11 +360,11 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody>
                   {products.map(prod => (
-                    <tr key={prod.id || prod.slug} style={{ borderBottom: '1px solid #e4e0d4' }}>
-                      <td style={{ padding: '14px 16px', fontWeight: '700', color: '#1b4332' }}>{prod.code}</td>
+                    <tr key={prod.id || prod.slug} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '14px 16px', fontWeight: '700', color: 'var(--primary)' }}>{prod.code}</td>
                       <td style={{ padding: '14px 16px' }}>
-                        <div style={{ fontWeight: '600', color: '#1b4332' }}>{prod.name}</div>
-                        <div style={{ fontSize: '0.78rem', color: '#859b8f' }}>slug: {prod.slug}</div>
+                        <div style={{ fontWeight: '600', color: 'var(--primary)' }}>{prod.name}</div>
+                        <div style={{ fontSize: '0.78rem', color: 'var(--text-light)' }}>slug: {prod.slug}</div>
                       </td>
                       <td style={{ padding: '14px 16px' }}>
                         <span className="badge badge-green" style={{ fontSize: '0.75rem' }}>{prod.categoryName || 'Gạo An Đông'}</span>
@@ -418,8 +418,8 @@ export default function AdminDashboardPage() {
         {activeTab === 'contacts' && (
           <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
             <div style={{ marginBottom: '20px' }}>
-              <h3 style={{ fontSize: '1.3rem', color: '#1b4332', margin: 0 }}>Yêu Cầu Liên Hệ & CSKH</h3>
-              <p style={{ fontSize: '0.85rem', color: '#859b8f', margin: '4px 0 0' }}>
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Yêu Cầu Liên Hệ & CSKH</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', margin: '4px 0 0' }}>
                 Tiếp nhận yêu cầu mua sỉ, tư vấn mở đại lý và phản hồi chất lượng từ khách hàng.
               </p>
             </div>
@@ -427,10 +427,10 @@ export default function AdminDashboardPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {contacts.map(c => (
                 <div key={c.id || c._id} style={{
-                  backgroundColor: '#faf9f5',
+                  backgroundColor: 'var(--bg-main)',
                   borderRadius: '16px',
                   padding: '20px',
-                  border: '1px solid #e4e0d4',
+                  border: '1px solid var(--border-color)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'flex-start',
@@ -439,20 +439,20 @@ export default function AdminDashboardPage() {
                 }}>
                   <div style={{ flex: 1, minWidth: '280px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                      <strong style={{ fontSize: '1.05rem', color: '#1b4332' }}>{c.fullName}</strong>
-                      <span style={{ fontSize: '0.85rem', color: '#b07d35', fontWeight: '700' }}>📞 {c.phone}</span>
+                      <strong style={{ fontSize: '1.05rem', color: 'var(--primary)' }}>{c.fullName}</strong>
+                      <span style={{ fontSize: '0.85rem', color: 'var(--earth-brown)', fontWeight: '700' }}>📞 {c.phone}</span>
                       {c.company && <span style={{ fontSize: '0.8rem', background: '#e8f5e9', padding: '2px 8px', borderRadius: '4px' }}>🏢 {c.company}</span>}
                     </div>
 
-                    <div style={{ fontSize: '0.9rem', fontWeight: '600', color: '#1b4332', marginBottom: '6px' }}>
+                    <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--primary)', marginBottom: '6px' }}>
                       Chủ đề: {c.subject}
                     </div>
 
-                    <p style={{ fontSize: '0.88rem', color: '#526058', margin: '0 0 10px', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: '0 0 10px', lineHeight: 1.6 }}>
                       {c.message}
                     </p>
 
-                    <div style={{ fontSize: '0.78rem', color: '#859b8f' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-light)' }}>
                       Ngày gửi: {new Date(c.createdAt).toLocaleString('vi-VN')} {c.email && `• Email: ${c.email}`}
                     </div>
                   </div>
@@ -518,19 +518,19 @@ export default function AdminDashboardPage() {
           <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
             <div style={{ marginBottom: '24px' }}>
               <div className="badge badge-gold" style={{ marginBottom: '6px' }}>BỘ TẠO & XUẤT QR IN ẤN BAO BÌ</div>
-              <h3 style={{ fontSize: '1.3rem', color: '#1b4332', margin: 0 }}>Xuất Mã QR Cho Đơn Vị In Bao Bì</h3>
-              <p style={{ fontSize: '0.88rem', color: '#526058', margin: '4px 0 0' }}>
-                Tải ảnh mã QR độ phân giải cao (1200px / Vector SVG) gửi cho nhà in bao bì để in trực tiếp lên các loại bao gạo An Đông Food.
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Xuất Mã QR Cho Đơn Vị In Bao Bì</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: '4px 0 0' }}>
+                Tải ảnh mã QR độ phân giải cao (1200px / Vector SVG) gửi cho nhà in bao bì để in trực tiếp lên các loại bao gạo An Đông.
               </p>
             </div>
 
             <div className="grid-3">
               {products.map(prod => (
-                <div key={prod.id || prod.slug} className="card" style={{ padding: '20px', textAlign: 'center', background: '#faf9f5' }}>
-                  <div style={{ fontWeight: '700', color: '#1b4332', fontSize: '1.05rem', marginBottom: '4px' }}>
+                <div key={prod.id || prod.slug} className="card" style={{ padding: '20px', textAlign: 'center', background: 'var(--bg-main)' }}>
+                  <div style={{ fontWeight: '700', color: 'var(--primary)', fontSize: '1.05rem', marginBottom: '4px' }}>
                     {prod.name}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#859b8f', marginBottom: '14px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginBottom: '14px' }}>
                     Mã: {prod.code}
                   </div>
 
@@ -561,21 +561,21 @@ export default function AdminDashboardPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
               {/* List of accounts */}
               <div>
-                <h3 style={{ fontSize: '1.2rem', color: '#1b4332', marginBottom: '16px' }}>Danh Sách Tài Khoản Hệ Thống</h3>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--primary)', marginBottom: '16px' }}>Danh Sách Tài Khoản Hệ Thống</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {usersList.map(u => (
                     <div key={u.id || u._id} style={{
                       padding: '14px 18px',
                       borderRadius: '12px',
-                      backgroundColor: '#faf9f5',
-                      border: '1px solid #e4e0d4',
+                      backgroundColor: 'var(--bg-main)',
+                      border: '1px solid var(--border-color)',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center'
                     }}>
                       <div>
-                        <div style={{ fontWeight: '700', color: '#1b4332' }}>{u.fullName}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#859b8f' }}>
+                        <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{u.fullName}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>
                           @{u.username} • {u.email}
                         </div>
                       </div>
@@ -598,8 +598,8 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* Create staff user form */}
-              <div style={{ backgroundColor: '#faf9f5', padding: '24px', borderRadius: '16px', border: '1px solid #e4e0d4' }}>
-                <h3 style={{ fontSize: '1.15rem', color: '#1b4332', marginBottom: '16px' }}>Thêm Tài Khoản Nhân Viên</h3>
+              <div style={{ backgroundColor: 'var(--bg-main)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--primary)', marginBottom: '16px' }}>Thêm Tài Khoản Nhân Viên</h3>
                 <form onSubmit={handleCreateUser}>
                   <div className="form-group">
                     <label className="form-label">Tên Đăng Nhập</label>
@@ -676,7 +676,7 @@ export default function AdminDashboardPage() {
         <div style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(8, 28, 21, 0.7)',
+          backgroundColor: 'rgba(10, 51, 26, 0.7)',
           backdropFilter: 'blur(6px)',
           display: 'flex',
           alignItems: 'center',
@@ -696,12 +696,12 @@ export default function AdminDashboardPage() {
           }}>
             <button
               onClick={() => setIsProductModalOpen(false)}
-              style={{ position: 'absolute', top: '20px', right: '20px', background: '#faf9f5', border: 'none', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer' }}
+              style={{ position: 'absolute', top: '20px', right: '20px', background: 'var(--bg-main)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer' }}
             >
               <X size={18} />
             </button>
 
-            <h3 style={{ fontSize: '1.3rem', color: '#1b4332', marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', marginBottom: '20px' }}>
               {editingProduct ? 'Chỉnh Sửa Thông Tin Sản Phẩm' : 'Thêm Sản Phẩm Mới Vào Hệ Thống'}
             </h3>
 

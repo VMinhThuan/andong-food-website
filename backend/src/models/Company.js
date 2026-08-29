@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const companySchema = new mongoose.Schema({
-  name: { type: String, default: 'CÔNG TY TNHH THỰC PHẨM AN ĐÔNG (AN ĐÔNG FOOD)' },
-  shortName: { type: String, default: 'AN ĐÔNG FOOD' },
+  name: { type: String, default: 'CÔNG TY TNHH THỰC PHẨM AN ĐÔNG (An Đông)' },
+  shortName: { type: String, default: 'An Đông' },
   slogan: { type: String, default: 'Bình An Ở Phía Đông – Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng' },
   brandStory: {
     title: { type: String, default: 'Câu Chuyện Thương Hiệu An Đông' },

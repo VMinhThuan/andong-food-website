@@ -35,10 +35,10 @@ app.use('/api', apiRouter);
 // Root greeting
 app.get('/', (req, res) => {
   res.json({
-    message: 'Chào mừng đến với Hệ Thống API An Đông Food',
+    message: 'Chào mừng đến với Hệ Thống API An Đông',
     version: '1.0.0',
     documentation: '/api/health',
-    brand: 'An Đông Food - Bình An Ở Phía Đông'
+    brand: 'An Đông - Bình An Ở Phía Đông'
   });
 });
 
@@ -50,7 +50,7 @@ app.use(errorHandler);
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`====================================================`);
-    console.log(`🌾 An Đông Food Backend Server running at: http://localhost:${PORT}`);
+    console.log(`🌾 An Đông Backend Server running at: http://localhost:${PORT}`);
     console.log(`🌾 API Root: http://localhost:${PORT}/api`);
     console.log(`🌾 Database: MongoDB (with Mongoose Models & Auto-Seed)`);
     console.log(`🌾 Roles: Admin (admin / admin123), Staff (nhanvien / staff123)`);

@@ -1,12 +1,12 @@
 # 🌾 An Dong Food - Website Thương Hiệu Gạo Sạch & Đặc Sản Cao Cấp
 
-> **"Bình An Ở Phía Đông"** — Hệ thống Website Giới Thiệu & Tra Cứu Nguồn Gốc Sản Phẩm Gạo An Đông Food.
+> **"Bình An Ở Phía Đông"** — Hệ thống Website Giới Thiệu & Tra Cứu Nguồn Gốc Sản Phẩm Gạo An Đông.
 
 ---
 
 ## 🌟 Giới Thiệu Dự Án
 
-**An Đông Food** là nền tảng số giới thiệu thương hiệu gạo sạch, đặc sản và dinh dưỡng cao cấp của Việt Nam. Hệ thống kết hợp trải nghiệm mua sắm, tìm hiểu câu chuyện thương hiệu và giải pháp **Tra cứu nguồn gốc bao bì thông minh qua mã QR**.
+**An Đông** là nền tảng số giới thiệu thương hiệu gạo sạch, đặc sản và dinh dưỡng cao cấp của Việt Nam. Hệ thống kết hợp trải nghiệm mua sắm, tìm hiểu câu chuyện thương hiệu và giải pháp **Tra cứu nguồn gốc bao bì thông minh qua mã QR**.
 
 ---
 
@@ -48,4 +48,4 @@ cd .. && npm run dev
 ---
 
 ## 👥 Bản Quyền & Tác Quyền
-- © 2026 **An Đông Food**. All rights reserved.
+- © 2026 **An Đông**. All rights reserved.

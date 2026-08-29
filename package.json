@@ -1,7 +1,7 @@
 {
   "name": "andong-food-website",
   "version": "1.0.0",
-  "description": "Website Doanh Nghiệp & Truy Xuất Mã QR An Đông Food (Fullstack MVC)",
+  "description": "Website Doanh Nghiệp & Truy Xuất Mã QR An Đông (Fullstack MVC)",
   "private": true,
   "scripts": {
     "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend",

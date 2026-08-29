@@ -33,10 +33,10 @@ export default function ScanQRPage() {
   };
 
   return (
-    <div className="scan-qr-page" style={{ backgroundColor: '#faf9f5', minHeight: '80vh' }}>
+    <div className="scan-qr-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '80vh' }}>
       {/* Header */}
       <section style={{
-        background: 'linear-gradient(135deg, #081c15 0%, #1b4332 100%)',
+        background: 'linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 100%)',
         color: '#ffffff',
         padding: '50px 0 70px',
         textAlign: 'center'
@@ -45,7 +45,7 @@ export default function ScanQRPage() {
           <div className="badge badge-gold" style={{ marginBottom: '12px' }}>
             CÔNG CỤ TRUY XUẤT
           </div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#fefae0', marginBottom: '12px' }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: 'var(--golden-pale)', marginBottom: '12px' }}>
             Quét Mã QR Trên Bao Bì Gạo An Đông
           </h1>
           <p style={{ fontSize: '1rem', color: '#d1e3d9', maxWidth: '600px', margin: '0 auto' }}>
@@ -68,9 +68,9 @@ export default function ScanQRPage() {
             padding: '28px',
             marginTop: '32px',
             boxShadow: 'var(--shadow-sm)',
-            border: '1px solid #e4e0d4'
+            border: '1px solid var(--border-color)'
           }}>
-            <h3 style={{ fontSize: '1.15rem', color: '#1b4332', marginBottom: '12px', textAlign: 'center' }}>
+            <h3 style={{ fontSize: '1.15rem', color: 'var(--primary)', marginBottom: '12px', textAlign: 'center' }}>
               Hoặc nhập mã sản phẩm / đường dẫn thủ công:
             </h3>
 
@@ -84,7 +84,7 @@ export default function ScanQRPage() {
                   flex: 1,
                   padding: '12px 18px',
                   borderRadius: '9999px',
-                  border: '1px solid #e4e0d4',
+                  border: '1px solid var(--border-color)',
                   fontSize: '0.9rem',
                   outline: 'none'
                 }}
@@ -117,7 +117,7 @@ export default function ScanQRPage() {
             )}
 
             {/* Quick Demo links */}
-            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #e4e0d4', fontSize: '0.85rem', color: '#526058' }}>
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)', fontSize: '0.85rem', color: '#526058' }}>
               <span>Thử tra cứu nhanh sản phẩm mẫu:</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
                 <button

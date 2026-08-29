@@ -11,6 +11,7 @@ import {
   LayoutDashboard
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import LogoNgang from '../../assets/brand-element/AD_LOGO NGANG.svg';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,8 +52,8 @@ export default function Navbar() {
         right: 0,
         width: '100%',
         zIndex: 1000,
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid rgba(27, 67, 50, 0.08)',
+        backgroundColor: 'var(--bg-primary)',
+        borderBottom: '1px solid var(--border-light)',
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)'
       }}
     >
@@ -71,74 +72,55 @@ export default function Navbar() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
             textDecoration: 'none'
           }}
         >
           <img
-            src="/assets/logo-gao.png"
-            alt="An Đông Food"
+            src={LogoNgang}
+            alt="An Đông"
             style={{
               height: '52px',
               objectFit: 'contain'
             }}
-            onError={(e) => { e.target.style.display = 'none'; }}
           />
-          <div>
-            <div style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '1.45rem',
-              fontWeight: '800',
-              color: '#1b4332',
-              letterSpacing: '1px',
-              lineHeight: 1
-            }}>
-              AN ĐÔNG
-            </div>
-            <div style={{
-              fontSize: '0.72rem',
-              fontWeight: '800',
-              color: '#d4a373',
-              letterSpacing: '3px',
-              textTransform: 'uppercase',
-              marginTop: '3px'
-            }}>
-              FOOD
-            </div>
-          </div>
         </Link>
 
         {/* CENTER: CREATIVE PILL NAVIGATION */}
         <nav
-          className="desktop-nav"
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            backgroundColor: '#f6f5f0',
-            padding: '5px 8px',
+            backgroundColor: 'var(--bg-secondary)',
+            padding: '6px 8px',
             borderRadius: '9999px',
-            border: '1px solid rgba(27, 67, 50, 0.06)'
+            border: '1px solid var(--border-light)',
+            position: 'relative'
           }}
         >
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
-              style={({ isActive }) => ({
+              end
+              style={{
                 textDecoration: 'none',
                 outline: 'none',
-                fontSize: '0.92rem',
-                fontWeight: isActive ? '700' : '600',
-                color: isActive ? '#ffffff' : '#526058',
-                backgroundColor: isActive ? '#1b4332' : 'transparent',
-                padding: '8px 22px',
-                borderRadius: '9999px',
-                transition: 'all 0.2s ease',
-                boxShadow: isActive ? '0 4px 12px rgba(27, 67, 50, 0.2)' : 'none'
-              })}
+                position: 'relative'
+              }}
             >
-              {link.name}
+              {({ isActive }) => (
+                <span style={{
+                  display: 'block',
+                  color: isActive ? '#ffffff' : 'var(--brand-brown)',
+                  backgroundColor: isActive ? 'var(--primary)' : 'transparent',
+                  boxShadow: isActive ? '0 3px 10px rgba(17, 156, 74, 0.18)' : 'none',
+                  fontSize: '0.92rem', fontWeight: isActive ? '800' : '700',
+                  padding: '8px 22px', borderRadius: '9999px', whiteSpace: 'nowrap'
+                }}>
+                  {link.name}
+                </span>
+              )}
             </NavLink>
           ))}
         </nav>
@@ -147,7 +129,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {/* Hotline button */}
           <a
-            href="tel:1900886688"
+            href="tel:0944852464"
             className="hotline-btn-nav"
             style={{
               display: 'flex',
@@ -155,9 +137,9 @@ export default function Navbar() {
               gap: '8px',
               padding: '9px 18px',
               borderRadius: '9999px',
-              backgroundColor: '#faf9f5',
-              border: '1px solid #e4e0d4',
-              color: '#1b4332',
+              backgroundColor: 'var(--bg-main)',
+              border: '1px solid var(--border-color)',
+              color: 'var(--primary)',
               textDecoration: 'none',
               fontSize: '0.88rem',
               fontWeight: '700',
@@ -165,8 +147,8 @@ export default function Navbar() {
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.03)'
             }}
           >
-            <PhoneCall size={15} color="#b07d35" />
-            <span>1900 886 688</span>
+            <PhoneCall size={15} color="var(--earth-brown)" />
+            <span>0944 852 464</span>
           </a>
 
           {/* USER ACCOUNT / PORTAL ICON (MODERN LUXURY CIRCLE) */}
@@ -183,15 +165,15 @@ export default function Navbar() {
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: user ? '#1b4332' : '#ffffff',
-                color: user ? '#e9c46a' : '#1b4332',
-                border: user ? '2px solid #e9c46a' : '1px solid #e4e0d4',
+                backgroundColor: user ? 'var(--primary)' : '#ffffff',
+                color: user ? 'var(--golden-light)' : 'var(--primary)',
+                border: user ? '2px solid var(--golden-light)' : '1px solid var(--border-color)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 boxShadow: user
-                  ? '0 4px 14px rgba(27, 67, 50, 0.25)'
+                  ? '0 4px 14px rgba(17, 156, 74, 0.25)'
                   : '0 2px 8px rgba(0, 0, 0, 0.06)',
                 transition: 'all 0.2s ease',
                 position: 'relative'
@@ -236,15 +218,15 @@ export default function Navbar() {
                     borderRadius: '18px',
                     padding: '16px',
                     boxShadow: '0 15px 40px rgba(0,0,0,0.15)',
-                    border: '1px solid #e4e0d4',
+                    border: '1px solid var(--border-color)',
                     zIndex: 1001
                   }}
                 >
                   <div style={{ borderBottom: '1px solid #f0f0f0', paddingBottom: '10px', marginBottom: '10px' }}>
-                    <div style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.92rem' }}>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)', fontSize: '0.92rem' }}>
                       {user.fullName}
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: '#859b8f' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-light)' }}>
                       Role: <strong>{isAdmin ? 'Quản Trị Viên (Admin)' : 'Nhân Viên CSKH'}</strong>
                     </div>
                   </div>
@@ -259,14 +241,14 @@ export default function Navbar() {
                         gap: '10px',
                         padding: '10px 12px',
                         borderRadius: '10px',
-                        color: '#1b4332',
+                        color: 'var(--primary)',
                         textDecoration: 'none',
                         fontSize: '0.88rem',
                         fontWeight: '600',
-                        backgroundColor: '#faf9f5'
+                        backgroundColor: 'var(--bg-main)'
                       }}
                     >
-                      <LayoutDashboard size={16} color="#b07d35" />
+                      <LayoutDashboard size={16} color="var(--earth-brown)" />
                       <span>Trang Quản Trị</span>
                     </Link>
 
@@ -309,7 +291,7 @@ export default function Navbar() {
             }}
             className="mobile-hamburger-btn"
           >
-            {mobileMenuOpen ? <X size={26} color="#1b4332" /> : <Menu size={26} color="#1b4332" />}
+            {mobileMenuOpen ? <X size={26} color="var(--primary)" /> : <Menu size={26} color="var(--primary)" />}
           </button>
         </div>
       </div>
@@ -323,7 +305,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             style={{
               backgroundColor: '#ffffff',
-              borderTop: '1px solid #e4e0d4',
+              borderTop: '1px solid var(--border-color)',
               padding: '18px 20px',
               display: 'flex',
               flexDirection: 'column',
@@ -339,7 +321,7 @@ export default function Navbar() {
                   textDecoration: 'none',
                   fontSize: '1rem',
                   fontWeight: isActive ? '700' : '500',
-                  color: isActive ? '#1b4332' : '#526058',
+                  color: isActive ? 'var(--primary)' : 'var(--text-muted)',
                   padding: '8px 0'
                 })}
               >
@@ -348,11 +330,11 @@ export default function Navbar() {
             ))}
 
             <a
-              href="tel:1900886688"
+              href="tel:0944852464"
               className="btn btn-outline btn-sm"
               style={{ width: '100%', marginTop: '6px' }}
             >
-              <PhoneCall size={16} /> Hotline: 1900 886 688
+              <PhoneCall size={16} /> Điện thoại: 0944 852 464
             </a>
 
             <Link

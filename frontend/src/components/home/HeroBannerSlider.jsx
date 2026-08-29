@@ -61,7 +61,7 @@ export default function HeroBannerSlider() {
       height: '680px',
       maxHeight: '680px',
       overflow: 'hidden',
-      backgroundColor: '#081c15',
+      backgroundColor: 'var(--bg-dark)',
       userSelect: 'none',
       display: 'flex',
       alignItems: 'center'
@@ -83,11 +83,11 @@ export default function HeroBannerSlider() {
             zIndex: 1
           }}
         >
-          {/* Natural Brand Green Gradient Overlay (Forest Green to Transparent) */}
+          {/* Natural Dark/Muted Left-side Gradient Overlay for readability of white text */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(90deg, rgba(8,28,21,0.85) 0%, rgba(27,67,50,0.55) 45%, rgba(8,28,21,0.1) 100%)'
+            background: 'linear-gradient(90deg, rgba(10,51,26,0.72) 0%, rgba(10,51,26,0.42) 40%, rgba(10,51,26,0) 80%)'
           }} />
         </motion.div>
       </AnimatePresence>
@@ -114,10 +114,10 @@ export default function HeroBannerSlider() {
               gap: '8px',
               padding: '6px 16px',
               fontSize: '0.82rem',
-              backgroundColor: 'rgba(254, 250, 224, 0.95)',
+              backgroundColor: 'var(--golden-pale)',
               boxShadow: '0 4px 14px rgba(0,0,0,0.2)'
             }}>
-              <BadgeIcon size={15} color="#b07d35" />
+              <BadgeIcon size={15} color="var(--earth-brown)" />
               <span>{slide.badge}</span>
             </span>
           </motion.div>
@@ -141,8 +141,8 @@ export default function HeroBannerSlider() {
             >
               {slide.title} <br />
               <span style={{
-                color: '#e9c46a',
-                textShadow: '0 4px 25px rgba(233,196,106,0.5)',
+                color: 'var(--golden-light)',
+                textShadow: '0 4px 25px rgba(253,185,19,0.5)',
                 display: 'inline-block'
               }}>
                 {slide.highlight}
@@ -205,18 +205,18 @@ export default function HeroBannerSlider() {
             gap: '20px',
             flexWrap: 'wrap',
             fontSize: '0.86rem',
-            color: '#fefae0',
+            color: 'var(--golden-pale)',
             fontWeight: '600',
             letterSpacing: '1.5px',
             textTransform: 'uppercase',
             textShadow: '0 1px 4px rgba(0,0,0,0.5)'
           }}>
             <span>Chân Thật</span>
-            <span style={{ color: '#e9c46a' }}>•</span>
+            <span style={{ color: 'var(--golden-light)' }}>•</span>
             <span>Chu Đáo</span>
-            <span style={{ color: '#e9c46a' }}>•</span>
+            <span style={{ color: 'var(--golden-light)' }}>•</span>
             <span>Trách Nhiệm</span>
-            <span style={{ color: '#e9c46a' }}>•</span>
+            <span style={{ color: 'var(--golden-light)' }}>•</span>
             <span>Bền Bỉ</span>
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function HeroBannerSlider() {
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
-        backgroundColor: 'rgba(8, 28, 21, 0.6)',
+        backgroundColor: 'rgba(10, 51, 26, 0.6)',
         backdropFilter: 'blur(10px)',
         padding: '6px 14px',
         borderRadius: '9999px',
@@ -250,11 +250,11 @@ export default function HeroBannerSlider() {
               width: current === index ? '24px' : '7px',
               height: '7px',
               borderRadius: '9999px',
-              backgroundColor: current === index ? '#e9c46a' : 'rgba(255, 255, 255, 0.35)',
+              backgroundColor: current === index ? 'var(--golden-light)' : 'rgba(255, 255, 255, 0.35)',
               border: 'none',
               cursor: 'pointer',
               transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-              boxShadow: current === index ? '0 0 10px rgba(233,196,106,0.7)' : 'none'
+              boxShadow: current === index ? '0 0 10px rgba(253,185,19,0.7)' : 'none'
             }}
           />
         ))}

@@ -1,7 +1,7 @@
 {
   "name": "andong-food-backend",
   "version": "1.0.0",
-  "description": "Backend MVC API cho Website Doanh Nghiệp & Truy Xuất Mã QR An Đông Food",
+  "description": "Backend MVC API cho Website Doanh Nghiệp & Truy Xuất Mã QR An Đông",
   "main": "src/server.js",
   "type": "module",
   "scripts": {

@@ -38,17 +38,17 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
           height: '50px',
           padding: '0 14px',
           borderRadius: '12px',
-          border: isOpen ? '1.5px solid #1b4332' : '1px solid #ded9cc',
-          backgroundColor: '#faf8f2',
+          border: isOpen ? '1.5px solid var(--primary)' : '1px solid var(--border-color)',
+          backgroundColor: 'var(--bg-main)',
           fontSize: '0.9rem',
-          color: selectedOption ? '#1b4332' : '#859b8f',
+          color: selectedOption ? 'var(--primary)' : 'var(--text-light)',
           fontWeight: '600',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           cursor: 'pointer',
           outline: 'none',
-          boxShadow: isOpen ? '0 0 0 3px rgba(27, 67, 50, 0.08)' : 'none',
+          boxShadow: isOpen ? '0 0 0 3px rgba(17, 156, 74, 0.08)' : 'none',
           transition: 'all 0.2s ease',
           textAlign: 'left'
         }}
@@ -88,8 +88,8 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
               zIndex: 1200,
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              border: '1px solid #eae5d8',
-              boxShadow: '0 16px 36px rgba(27, 67, 50, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04)',
+              border: '1px solid var(--border-color)',
+              boxShadow: '0 16px 36px rgba(17, 156, 74, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04)',
               padding: '6px',
               overflow: 'hidden'
             }}
@@ -108,8 +108,8 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
                     borderRadius: '10px',
                     fontSize: '0.88rem',
                     fontWeight: isSelected ? '700' : '500',
-                    color: isSelected ? '#1b4332' : '#45564e',
-                    backgroundColor: isSelected ? '#eef6f2' : 'transparent',
+                    color: isSelected ? 'var(--primary)' : 'var(--text-muted)',
+                    backgroundColor: isSelected ? 'rgba(17, 156, 74, 0.08)' : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -122,19 +122,19 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
                   onMouseEnter={(e) => {
                     if (!isSelected) {
                       e.currentTarget.style.backgroundColor = '#f7f5ed';
-                      e.currentTarget.style.color = '#1b4332';
+                      e.currentTarget.style.color = 'var(--primary)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) {
                       e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = '#45564e';
+                      e.currentTarget.style.color = 'var(--text-muted)';
                     }
                   }}
                 >
                   <span>{opt.label}</span>
                   {isSelected && (
-                    <Check size={15} color="#1b4332" strokeWidth={2.5} style={{ flexShrink: 0 }} />
+                    <Check size={15} color="var(--primary)" strokeWidth={2.5} style={{ flexShrink: 0 }} />
                   )}
                 </div>
               );

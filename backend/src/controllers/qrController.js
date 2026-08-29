@@ -116,13 +116,13 @@ export const qrController = {
       if (!product) {
         return res.status(404).json({
           success: false,
-          message: 'Mã QR không khớp với sản phẩm chính hãng nào của An Đông Food.'
+          message: 'Mã QR không khớp với sản phẩm chính hãng nào của An Đông.'
         });
       }
 
       res.json({
         success: true,
-        message: 'Xác thực sản phẩm chính hãng An Đông Food thành công!',
+        message: 'Xác thực sản phẩm chính hãng An Đông thành công!',
         data: product
       });
     } catch (err) {

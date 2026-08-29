@@ -72,11 +72,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="contact-page" style={{ backgroundColor: '#faf8f2', color: '#1b4332' }}>
-      
+    <div className="contact-page" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--primary)' }}>
+
       {/* 1. CONTACT HERO (COMPACT & ELEGANT) */}
       <section style={{
-        background: 'linear-gradient(135deg, #081c15 0%, #0d281e 50%, #16382a 100%)',
+        background: 'linear-gradient(135deg, var(--bg-dark) 0%, rgba(10, 51, 26, 0.95) 50%, var(--primary) 100%)',
         color: '#ffffff',
         padding: '65px 0 75px',
         textAlign: 'center',
@@ -91,7 +91,7 @@ export default function ContactPage() {
           width: '450px',
           height: '450px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(233, 196, 106, 0.12) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(253, 185, 19, 0.12) 0%, transparent 65%)',
           pointerEvents: 'none'
         }} />
 
@@ -108,13 +108,13 @@ export default function ContactPage() {
             <h1 style={{
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2.1rem, 3.4vw, 2.9rem)',
-              color: '#fefae0',
+              color: 'var(--golden-pale)',
               lineHeight: 1.22,
               marginBottom: '14px',
               fontWeight: '800',
               letterSpacing: '0.5px'
             }}>
-              Kết Nối Cùng An Đông Food
+              Kết Nối Cùng An Đông
             </h1>
             <p style={{
               fontSize: '1.04rem',
@@ -150,7 +150,7 @@ export default function ContactPage() {
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
-                color: '#1b4332',
+                color: 'var(--primary)',
                 fontWeight: '800',
                 marginBottom: '12px'
               }}>
@@ -167,8 +167,8 @@ export default function ContactPage() {
                   padding: '20px 22px',
                   backgroundColor: '#ffffff',
                   borderRadius: '18px',
-                  border: '1px solid #eae5d8',
-                  boxShadow: '0 4px 18px rgba(27, 67, 50, 0.04)',
+                  border: '1px solid var(--border-color)',
+                  boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -179,28 +179,28 @@ export default function ContactPage() {
                       width: '44px',
                       height: '44px',
                       borderRadius: '50%',
-                      backgroundColor: '#fefae0',
+                      backgroundColor: 'var(--golden-pale)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0
                     }}>
-                      <Phone size={20} color="#b07d35" />
+                      <Phone size={20} color="var(--earth-brown)" />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.8rem', color: '#859b8f', fontWeight: '700', textTransform: 'uppercase' }}>
                         Tư Vấn & Đặt Hàng
                       </div>
-                      <div style={{ fontSize: '1.15rem', fontWeight: '800', color: '#1b4332', marginTop: '2px' }}>
-                        1900 886 688
+                      <div style={{ fontSize: '1.15rem', fontWeight: '800', color: 'var(--primary)', marginTop: '2px' }}>
+                        0944 852 464
                       </div>
                     </div>
                   </div>
 
                   <a
-                    href="tel:1900886688"
+                    href="tel:0944852464"
                     style={{
-                      backgroundColor: '#1b4332',
+                      backgroundColor: 'var(--primary)',
                       color: '#ffffff',
                       padding: '7px 14px',
                       borderRadius: '9999px',
@@ -219,8 +219,8 @@ export default function ContactPage() {
                   padding: '20px 22px',
                   backgroundColor: '#ffffff',
                   borderRadius: '18px',
-                  border: '1px solid #eae5d8',
-                  boxShadow: '0 4px 18px rgba(27, 67, 50, 0.04)',
+                  border: '1px solid var(--border-color)',
+                  boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px'
@@ -229,23 +229,23 @@ export default function ContactPage() {
                     width: '44px',
                     height: '44px',
                     borderRadius: '50%',
-                    backgroundColor: '#e8f5e9',
+                    backgroundColor: 'var(--bg-main)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <Mail size={20} color="#1b4332" />
+                    <Mail size={20} color="var(--primary)" />
                   </div>
                   <div>
                     <div style={{ fontSize: '0.8rem', color: '#859b8f', fontWeight: '700', textTransform: 'uppercase' }}>
                       Email Hỗ Trợ
                     </div>
                     <a
-                      href="mailto:lienhe@andongfood.vn"
-                      style={{ fontSize: '1rem', fontWeight: '700', color: '#1b4332', textDecoration: 'none', display: 'block', marginTop: '2px' }}
+                      href="mailto:andongfood@gmail.com"
+                      style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--primary)', textDecoration: 'none', display: 'block', marginTop: '2px' }}
                     >
-                      lienhe@andongfood.vn
+                      andongfood@gmail.com
                     </a>
                   </div>
                 </div>
@@ -255,8 +255,8 @@ export default function ContactPage() {
                   padding: '20px 22px',
                   backgroundColor: '#ffffff',
                   borderRadius: '18px',
-                  border: '1px solid #eae5d8',
-                  boxShadow: '0 4px 18px rgba(27, 67, 50, 0.04)',
+                  border: '1px solid var(--border-color)',
+                  boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px'
@@ -265,19 +265,19 @@ export default function ContactPage() {
                     width: '44px',
                     height: '44px',
                     borderRadius: '50%',
-                    backgroundColor: '#fefae0',
+                    backgroundColor: 'var(--golden-pale)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <Clock size={20} color="#b07d35" />
+                    <Clock size={20} color="var(--earth-brown)" />
                   </div>
                   <div>
                     <div style={{ fontSize: '0.8rem', color: '#859b8f', fontWeight: '700', textTransform: 'uppercase' }}>
                       Thời Gian Hỗ Trợ
                     </div>
-                    <div style={{ fontSize: '0.96rem', fontWeight: '700', color: '#1b4332', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.96rem', fontWeight: '700', color: 'var(--primary)', marginTop: '2px' }}>
                       08:00 – 18:00 (Thứ 2 – Thứ 7)
                     </div>
                   </div>
@@ -288,8 +288,8 @@ export default function ContactPage() {
                   padding: '20px 22px',
                   backgroundColor: '#ffffff',
                   borderRadius: '18px',
-                  border: '1px solid #eae5d8',
-                  boxShadow: '0 4px 18px rgba(27, 67, 50, 0.04)',
+                  border: '1px solid var(--border-color)',
+                  boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '14px'
@@ -298,20 +298,20 @@ export default function ContactPage() {
                     width: '44px',
                     height: '44px',
                     borderRadius: '50%',
-                    backgroundColor: '#e8f5e9',
+                    backgroundColor: 'var(--bg-main)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <MapPin size={20} color="#1b4332" />
+                    <MapPin size={20} color="var(--primary)" />
                   </div>
                   <div>
                     <div style={{ fontSize: '0.8rem', color: '#859b8f', fontWeight: '700', textTransform: 'uppercase' }}>
                       Trụ Sở Chính
                     </div>
                     <div style={{ fontSize: '0.95rem', color: '#526058', lineHeight: 1.5, marginTop: '2px' }}>
-                      Số 88 Đường Phù Sa, Phường An Đông, TP. Hồ Chí Minh
+                      Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.
                     </div>
                   </div>
                 </div>
@@ -329,8 +329,8 @@ export default function ContactPage() {
                 backgroundColor: '#ffffff',
                 borderRadius: '26px',
                 padding: '42px clamp(24px, 4vw, 48px)',
-                border: '1px solid #eae5d8',
-                boxShadow: '0 12px 35px rgba(27, 67, 50, 0.06)'
+                border: '1px solid var(--border-color)',
+                boxShadow: '0 12px 35px rgba(17, 156, 74, 0.06)'
               }}>
                 <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
                   GỬI YÊU CẦU
@@ -338,7 +338,7 @@ export default function ContactPage() {
                 <h3 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: 'clamp(1.7rem, 2.4vw, 2.1rem)',
-                  color: '#1b4332',
+                  color: 'var(--primary)',
                   fontWeight: '800',
                   marginBottom: '8px'
                 }}>
@@ -355,18 +355,18 @@ export default function ContactPage() {
                     style={{
                       padding: '40px 24px',
                       textAlign: 'center',
-                      backgroundColor: '#f6f9f7',
+                      backgroundColor: 'var(--bg-main)',
                       borderRadius: '20px',
-                      border: '1px solid #cce3d7',
-                      color: '#1b4332'
+                      border: '1px solid var(--border-color)',
+                      color: 'var(--primary)'
                     }}
                   >
-                    <CheckCircle2 size={54} color="#2d6a4f" style={{ margin: '0 auto 16px' }} />
-                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: '800', color: '#1b4332', marginBottom: '8px' }}>
+                    <CheckCircle2 size={54} color="var(--primary)" style={{ margin: '0 auto 16px' }} />
+                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '8px' }}>
                       An Đông Đã Nhận Được Yêu Cầu!
                     </h4>
                     <p style={{ fontSize: '0.96rem', color: '#526058', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto 24px' }}>
-                      Cảm ơn bạn đã gửi thông tin. Đội ngũ nhân viên An Đông Food sẽ gọi điện tư vấn và hỗ trợ bạn trong thời gian sớm nhất.
+                      Cảm ơn bạn đã gửi thông tin. Đội ngũ nhân viên An Đông sẽ gọi điện tư vấn và hỗ trợ bạn trong thời gian sớm nhất.
                     </p>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
                       <button
@@ -386,7 +386,7 @@ export default function ContactPage() {
                     {/* Row 1: Name & Phone */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '18px' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                           Họ và Tên *
                         </label>
                         <input
@@ -400,8 +400,8 @@ export default function ContactPage() {
                             height: '50px',
                             padding: '0 16px',
                             borderRadius: '12px',
-                            border: '1px solid #ded9cc',
-                            backgroundColor: '#faf8f2',
+                            border: '1px solid var(--border-color)',
+                            backgroundColor: 'var(--bg-main)',
                             fontSize: '0.92rem',
                             outline: 'none',
                             transition: 'border-color 0.2s'
@@ -410,13 +410,13 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                           Số Điện Thoại *
                         </label>
                         <input
                           type="tel"
                           required
-                          placeholder="0988 123 456"
+                          placeholder="0944 852 464"
                           value={formData.phone}
                           onChange={e => setFormData({ ...formData, phone: e.target.value })}
                           style={{
@@ -424,8 +424,8 @@ export default function ContactPage() {
                             height: '50px',
                             padding: '0 16px',
                             borderRadius: '12px',
-                            border: '1px solid #ded9cc',
-                            backgroundColor: '#faf8f2',
+                            border: '1px solid var(--border-color)',
+                            backgroundColor: 'var(--bg-main)',
                             fontSize: '0.92rem',
                             outline: 'none',
                             transition: 'border-color 0.2s'
@@ -437,7 +437,7 @@ export default function ContactPage() {
                     {/* Row 2: Email & Subject */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '18px' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                           Email
                         </label>
                         <input
@@ -450,8 +450,8 @@ export default function ContactPage() {
                             height: '50px',
                             padding: '0 16px',
                             borderRadius: '12px',
-                            border: '1px solid #ded9cc',
-                            backgroundColor: '#faf8f2',
+                            border: '1px solid var(--border-color)',
+                            backgroundColor: 'var(--bg-main)',
                             fontSize: '0.92rem',
                             outline: 'none'
                           }}
@@ -459,7 +459,7 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                           Bạn Liên Hệ Về *
                         </label>
                         <CustomSelect
@@ -484,7 +484,7 @@ export default function ContactPage() {
                         animate={{ opacity: 1, height: 'auto' }}
                         transition={{ duration: 0.3 }}
                       >
-                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                        <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                           Tên Công Ty / Khu Vực Kinh Doanh
                         </label>
                         <input
@@ -497,8 +497,8 @@ export default function ContactPage() {
                             height: '50px',
                             padding: '0 16px',
                             borderRadius: '12px',
-                            border: '1px solid #ded9cc',
-                            backgroundColor: '#faf8f2',
+                            border: '1px solid var(--border-color)',
+                            backgroundColor: 'var(--bg-main)',
                             fontSize: '0.92rem',
                             outline: 'none'
                           }}
@@ -508,7 +508,7 @@ export default function ContactPage() {
 
                     {/* Message Field */}
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: '#1b4332', marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
                         Nội Dung Cần Hỗ Trợ *
                       </label>
                       <textarea
@@ -521,8 +521,8 @@ export default function ContactPage() {
                           width: '100%',
                           padding: '14px 16px',
                           borderRadius: '12px',
-                          border: '1px solid #ded9cc',
-                          backgroundColor: '#faf8f2',
+                          border: '1px solid var(--border-color)',
+                          backgroundColor: 'var(--bg-main)',
                           fontSize: '0.92rem',
                           outline: 'none',
                           resize: 'vertical'
@@ -569,7 +569,7 @@ export default function ContactPage() {
       <section style={{
         padding: '80px 0 90px',
         backgroundColor: '#ffffff',
-        borderTop: '1px solid #eae5d8'
+        borderTop: '1px solid var(--border-color)'
       }}>
         <div className="container">
           <div style={{
@@ -582,12 +582,12 @@ export default function ContactPage() {
             <div style={{
               borderRadius: '24px',
               overflow: 'hidden',
-              border: '1px solid #e2ded2',
+              border: '1px solid var(--border-color)',
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
               height: '380px'
             }}>
               <iframe
-                title="Bản đồ chỉ đường An Đông Food"
+                title="Bản đồ chỉ đường An Đông"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669658423711!2d106.66698437583802!3d10.759917059496677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ee30d4a974b%3A0xc3cf9c9a6a8b792e!2zQW4gxJDDtG5nLCBRdeG6rW4gNSwgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
                 width="100%"
                 height="100%"
@@ -606,32 +606,32 @@ export default function ContactPage() {
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
-                color: '#1b4332',
+                color: 'var(--primary)',
                 fontWeight: '800',
                 marginBottom: '14px'
               }}>
-                Ghé Thăm An Đông Food
+                Ghé Thăm An Đông
               </h2>
               <p style={{ fontSize: '1rem', color: '#526058', lineHeight: 1.7, marginBottom: '24px' }}>
                 Quý đối tác và khách hàng có thể đến trực tiếp văn phòng để trải nghiệm các mẫu gạo mẫu và trao đổi chi tiết về hợp đồng hợp tác phân phối.
               </p>
 
               <div style={{
-                backgroundColor: '#faf8f2',
+                backgroundColor: 'var(--bg-main)',
                 borderRadius: '16px',
                 padding: '20px 24px',
                 marginBottom: '28px',
-                border: '1px solid #eae5d8',
+                border: '1px solid var(--border-color)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '10px'
               }}>
                 <div>
-                  <strong style={{ color: '#1b4332' }}>📍 Địa chỉ: </strong>
-                  <span style={{ color: '#526058' }}>Số 88 Đường Phù Sa, Phường An Đông, TP. Hồ Chí Minh</span>
+                  <strong style={{ color: 'var(--primary)' }}>📍 Địa chỉ: </strong>
+                  <span style={{ color: '#526058' }}>Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.</span>
                 </div>
                 <div>
-                  <strong style={{ color: '#1b4332' }}>🕒 Giờ mở cửa: </strong>
+                  <strong style={{ color: 'var(--primary)' }}>🕒 Giờ mở cửa: </strong>
                   <span style={{ color: '#526058' }}>08:00 – 18:00 (Thứ 2 đến Thứ 7)</span>
                 </div>
               </div>
@@ -659,8 +659,8 @@ export default function ContactPage() {
       {/* 4. KẾT NỐI NHANH VỚI AN ĐÔNG */}
       <section style={{
         padding: '50px 0',
-        backgroundColor: '#faf8f2',
-        borderTop: '1px solid #eae5d8'
+        backgroundColor: 'var(--bg-main)',
+        borderTop: '1px solid var(--border-color)'
       }}>
         <div className="container">
           <div style={{
@@ -670,29 +670,29 @@ export default function ContactPage() {
             flexWrap: 'wrap',
             gap: '20px'
           }}>
-            <div style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1b4332' }}>
+            <div style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--primary)' }}>
               Kết Nối Nhanh Cùng Chúng Tôi:
             </div>
 
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <a
-                href="tel:1900886688"
+                href="tel:0944852464"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
                   backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
+                  border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',
-                  color: '#1b4332',
+                  color: 'var(--primary)',
                   textDecoration: 'none',
                   fontWeight: '700',
                   fontSize: '0.88rem'
                 }}
               >
-                <Phone size={15} color="#b07d35" />
-                <span>Hotline: 1900 886 688</span>
+                <Phone size={15} color="var(--earth-brown)" />
+                <span>Điện thoại: 0944 852 464</span>
               </a>
 
               <a
@@ -704,10 +704,10 @@ export default function ContactPage() {
                   alignItems: 'center',
                   gap: '8px',
                   backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
+                  border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',
-                  color: '#1b4332',
+                  color: 'var(--primary)',
                   textDecoration: 'none',
                   fontWeight: '700',
                   fontSize: '0.88rem'
@@ -725,10 +725,10 @@ export default function ContactPage() {
                   alignItems: 'center',
                   gap: '8px',
                   backgroundColor: '#ffffff',
-                  border: '1px solid #ded9cc',
+                  border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',
-                  color: '#1b4332',
+                  color: 'var(--primary)',
                   textDecoration: 'none',
                   fontWeight: '700',
                   fontSize: '0.88rem'

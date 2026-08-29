@@ -1,42 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Ysabeau+Office:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Mansalva&display=swap');
 
 :root {
-  /* An Đông Brand Color Palette */
-  --primary: #1b4332;       /* Deep Forest Green */
-  --primary-light: #2d6a4f; /* Fresh Rice Green */
-  --primary-dark: #081c15;  /* Deep Evergreen */
-  --primary-accent: #40916c;/* Bright Leaf Green */
-  
-  --golden: #d4a373;        /* Warm Harvest Gold */
-  --golden-light: #e9c46a;  /* Bright Ripe Rice Gold */
-  --golden-pale: #fefae0;   /* Cream Sunlight */
-  
-  --earth-brown: #5c4033;   /* Rich Soil Brown */
-  --earth-light: #8d6e63;   /* Soft Bark Brown */
-  
-  --bg-main: #faf9f5;       /* Rice Paper Cream */
-  --bg-card: #ffffff;
-  --bg-dark: #122820;       /* Footer & Deep Green */
-  
-  --text-main: #1f2421;     /* Charcoal Soil */
-  --text-muted: #526058;    /* Muted Sage */
-  --text-light: #859b8f;
-  
-  --border-color: #e4e0d4;
-  --border-focus: #2d6a4f;
-  
-  --shadow-sm: 0 2px 8px rgba(27, 67, 50, 0.06);
-  --shadow-md: 0 8px 24px rgba(27, 67, 50, 0.08);
-  --shadow-lg: 0 16px 40px rgba(27, 67, 50, 0.12);
-  --shadow-gold: 0 8px 24px rgba(212, 163, 115, 0.25);
-  
+  /* ===== BRAND An Đông ===== */
+  --brand-green: #39B54A;
+  --brand-green-dark: #119C4A;
+  --brand-brown: #754C1F;
+  --brand-yellow: #FDB913;
+  --brand-orange: #F99D1B;
+
+  /* ===== BACKGROUND ===== */
+  --bg-primary: #FFFEF2;
+  --bg-secondary: #FFF8DD;
+  --bg-card: #FFFFFF;
+
+  /* ===== TEXT ===== */
+  --text-primary: #292A26;
+  --text-secondary: #66645D;
+  --text-heading: #754C1F;
+  --text-on-primary: #FFFFFF;
+
+  /* ===== BORDER ===== */
+  --border-light: #EEE9DB;
+  --border-medium: #DED6C2;
+
+  /* ===== ACTION ===== */
+  --button-primary: #119C4A;
+  --button-primary-hover: #39B54A;
+
+  --link: #119C4A;
+  --link-hover: #39B54A;
+
+  /* ===== ACCENT ===== */
+  --accent: #FDB913;
+  --accent-secondary: #F99D1B;
+
+  /* ===== SEMANTIC STATE COLORS ===== */
+  --success: #2e7d32;
+  --warning: #fbc02d;
+  --error: #d32f2f;
+  --info: #0288d1;
+  --disabled: #9e9e9e;
+
+  /* ===== LEGACY ALIAS COMPATIBILITY ===== */
+  --primary: var(--brand-green-dark);
+  --primary-light: var(--brand-green);
+  --primary-dark: var(--brand-brown);
+  --primary-accent: var(--brand-green);
+
+  --golden: var(--brand-orange);
+  --golden-light: var(--brand-yellow);
+  --golden-pale: var(--bg-secondary);
+
+  --earth-brown: var(--brand-brown);
+  --earth-light: var(--brand-brown);
+
+  --bg-main: var(--bg-primary);
+  --bg-dark: #0a331a;
+  /* Deep forest green */
+
+  --text-main: var(--text-primary);
+  --text-muted: var(--text-secondary);
+  --text-light: var(--text-secondary);
+
+  --border-color: var(--border-light);
+  --border-focus: var(--brand-green-dark);
+
+  /* ===== SHADOW & RADII ===== */
+  --shadow-sm: 0 2px 8px rgba(17, 156, 74, 0.06);
+  --shadow-md: 0 8px 24px rgba(17, 156, 74, 0.08);
+  --shadow-lg: 0 16px 40px rgba(17, 156, 74, 0.12);
+  --shadow-gold: 0 8px 24px rgba(249, 157, 27, 0.25);
+
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
   --radius-full: 9999px;
-  
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+
+  --font-sans: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Ysabeau Office', sans-serif;
+  --font-accent: 'Mansalva', cursive;
 }
 
 * {
@@ -45,8 +87,8 @@
   box-sizing: border-box;
 }
 
-/* Fix overscroll elastic bounce so Header & Footer never pull away */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -56,11 +98,17 @@ html, body {
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-sans);
+  font-weight: 600;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-#root, .app-layout {
+.font-accent {
+  font-family: var(--font-accent), cursive;
+}
+
+#root,
+.app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -81,15 +129,18 @@ main {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #faf9f5;
+  background: var(--bg-main);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #2d6a4f;
+  background: var(--primary-light);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #1b4332;
+  background: var(--primary);
 }
 
 /* Scroll Reading Progress Bar */
@@ -99,13 +150,18 @@ main {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1b4332 0%, #40916c 40%, #e9c46a 80%, #d4a373 100%);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 40%, var(--golden-light) 80%, var(--golden) 100%);
   transform-origin: 0%;
   z-index: 10000;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--primary-dark);
   font-weight: 700;
   line-height: 1.25;
@@ -142,17 +198,17 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary {
   background-color: var(--primary);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.2);
+  box-shadow: 0 4px 14px rgba(17, 156, 74, 0.2);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-light);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 22px rgba(27, 67, 50, 0.3);
+  box-shadow: 0 8px 22px rgba(17, 156, 74, 0.3);
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, #e9c46a 0%, #d4a373 100%);
+  background: linear-gradient(135deg, var(--golden-light) 0%, var(--golden) 100%);
   color: var(--primary-dark);
   font-weight: 700;
   box-shadow: var(--shadow-gold);
@@ -161,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-gold:hover {
   filter: brightness(1.06);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 26px rgba(212, 163, 115, 0.4);
+  box-shadow: 0 8px 26px rgba(249, 157, 27, 0.4);
 }
 
 .btn-outline {
@@ -171,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-outline:hover {
-  background-color: rgba(27, 67, 50, 0.08);
+  background-color: rgba(17, 156, 74, 0.08);
   transform: translateY(-3px);
 }
 
@@ -211,9 +267,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-gold {
-  background: #fefae0;
-  color: #b07d35;
-  border: 1px solid #e9c46a;
+  background: var(--golden-pale);
+  color: var(--earth-brown);
+  border: 1px solid var(--golden-light);
 }
 
 .badge-green {
@@ -238,13 +294,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card:hover {
-  box-shadow: 0 20px 40px rgba(27, 67, 50, 0.12);
+  box-shadow: 0 20px 40px rgba(17, 156, 74, 0.12);
   transform: translateY(-6px);
-  border-color: rgba(212, 163, 115, 0.4);
+  border-color: rgba(249, 157, 27, 0.4);
 }
 
 .glass-panel-dark {
-  background: rgba(18, 40, 32, 0.88);
+  background: rgba(10, 51, 26, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -299,7 +355,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-control:focus {
   outline: none;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+  box-shadow: 0 0 0 3px rgba(57, 181, 74, 0.15);
 }
 
 textarea.form-control {
@@ -327,12 +383,22 @@ textarea.form-control {
 }
 
 @media (max-width: 992px) {
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Back To Top Floating Button (Subtle & Elegant) */
@@ -343,9 +409,9 @@ textarea.form-control {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #1b4332;
-  color: #fefae0;
-  border: 1px solid rgba(233, 196, 106, 0.4);
+  background: var(--primary);
+  color: var(--golden-pale);
+  border: 1px solid rgba(253, 185, 19, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -356,14 +422,206 @@ textarea.form-control {
 }
 
 .back-to-top-btn:hover {
-  background: #e9c46a;
-  color: #122820;
+  background: var(--golden-light);
+  color: var(--bg-dark);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 22px rgba(233, 196, 106, 0.3);
+  box-shadow: 0 8px 22px rgba(253, 185, 19, 0.3);
 }
 
 @media (max-width: 900px) {
   .mini-footer-center {
     display: none !important;
+  }
+}
+
+/* Footer Styling overrides */
+#main-full-footer a {
+  color: var(--golden-pale) !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#main-full-footer a:hover {
+  color: var(--accent) !important;
+}
+
+#main-full-footer p,
+#main-full-footer span {
+  color: #ebdcb9 !important;
+  /* Soft warm cream text for dark brown footer background */
+}
+
+#main-full-footer h4 {
+  color: var(--bg-primary) !important;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+/* Brand Features Horizontal Card Styles */
+.brand-features-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.brand-features-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.brand-features-divider {
+  width: 1px;
+  height: 50px;
+  background-color: var(--border-medium);
+  flex-shrink: 0;
+}
+
+@media (max-width: 991px) {
+  .brand-features-divider {
+    display: none;
+  }
+}
+
+/* Quality Process Timeline responsive styles */
+.quality-timeline-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+  position: relative;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.quality-step-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(9, 37, 18, 0.56));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+  min-height: 275px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quality-step-card:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.19), rgba(9, 37, 18, 0.68));
+  border-color: rgba(253, 185, 19, 0.35);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+}
+
+.quality-step-number {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: rgba(253, 185, 19, 0.92);
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.quality-step-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  margin-bottom: 22px;
+  background: rgba(255, 254, 242, 0.94);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.quality-step-title {
+  color: #ffffff;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.quality-step-description {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .quality-timeline-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .quality-timeline-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .quality-step-card {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  .quality-timeline-container {
+    grid-template-columns: 1fr;
+  }
+
+  .quality-step-card {
+    min-height: 0;
+  }
+}
+
+/* === PRODUCT CARD HOVER EFFECTS === */
+/* Flip to back image */
+.product-image-wrapper:hover .product-img-front {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.product-image-wrapper:hover .product-img-back {
+  opacity: 1 !important;
+  transform: scale(1.02);
+}
+
+/* Golden eye button hover */
+.product-image-wrapper:hover .product-view-btn {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.packaging-image-loader {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(17, 156, 74, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: packaging-image-spin 0.7s linear infinite;
+}
+
+@keyframes packaging-image-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .packaging-image-loader {
+    animation: none;
   }
 }

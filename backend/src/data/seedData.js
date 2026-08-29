@@ -53,8 +53,8 @@ export const initialCategories = [
 ];
 
 export const initialCompany = {
-  name: 'CÔNG TY TNHH THỰC PHẨM AN ĐÔNG (AN ĐÔNG FOOD)',
-  shortName: 'AN ĐÔNG FOOD',
+  name: 'CÔNG TY TNHH THỰC PHẨM AN ĐÔNG (An Đông)',
+  shortName: 'An Đông',
   slogan: 'Bình An Ở Phía Đông – Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng',
   brandStory: {
     title: 'Câu Chuyện Thương Hiệu An Đông',
@@ -93,7 +93,7 @@ export const initialCompany = {
     hotline: '1900 886 688 - 0988 123 456',
     email: 'lienhe@andongfood.vn',
     website: 'https://andongfood.vn',
-    zalo: '0988 123 456 (Zalo OA An Đông Food)',
+    zalo: '0988 123 456 (Zalo OA An Đông)',
     facebook: 'https://facebook.com/andongfood.vietnam',
     workingHours: '08:00 - 18:00 (Thứ Hai - Thứ Bảy)'
   }
@@ -367,7 +367,7 @@ export const initialContacts = [
     email: 'maihuong.tran@gmail.com',
     company: 'Chuỗi Nhà Hàng Cơm Quê Mẹ Nấu',
     subject: 'Tư vấn hợp tác nguồn cung cấp Gạo ST25 số lượng lớn định kỳ',
-    message: 'Chào An Đông Food, chúng tôi đang tìm kiếm nhà cung cấp gạo ST25 chuẩn giống để sử dụng cho chuỗi 5 nhà hàng tại TP.HCM. Mỗi tháng tiêu thụ khoảng 2-3 tấn. Xin vui lòng gửi bảng báo giá đại lý và chính sách giao hàng.',
+    message: 'Chào An Đông, chúng tôi đang tìm kiếm nhà cung cấp gạo ST25 chuẩn giống để sử dụng cho chuỗi 5 nhà hàng tại TP.HCM. Mỗi tháng tiêu thụ khoảng 2-3 tấn. Xin vui lòng gửi bảng báo giá đại lý và chính sách giao hàng.',
     status: 'processing',
     assignedTo: 'nhanvien',
     createdAt: new Date(Date.now() - 3600 * 1000 * 24).toISOString()
