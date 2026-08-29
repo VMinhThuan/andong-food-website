@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LogoDoc from '../../assets/brand-element/AD_LOGO DỌC.svg';
+const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
 export default function BrandPreloader({ onFinish }) {
   const [isDone, setIsDone] = useState(false);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import LogoFooter from '../../assets/brand-element/AD_LOGO NỀN MÀU.svg';
+const LogoFooter = '/assets/brand-element/AD_LOGO%20N%E1%BB%80N%20M%C3%80U.svg';
 
 export default function Footer() {
   const [showStickyMiniFooter, setShowStickyMiniFooter] = useState(false);

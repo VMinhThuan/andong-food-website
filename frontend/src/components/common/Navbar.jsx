@@ -11,7 +11,7 @@ import {
   LayoutDashboard
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import LogoNgang from '../../assets/brand-element/AD_LOGO NGANG.svg';
+const LogoNgang = '/assets/brand-element/AD_LOGO%20NGANG.svg';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

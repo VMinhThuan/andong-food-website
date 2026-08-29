@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, UserCheck, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
-import LogoDoc from '../assets/brand-element/AD_LOGO DỌC.svg';
+const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');

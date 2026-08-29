@@ -22,8 +22,8 @@ import {
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
 import HeroBannerSlider from '../components/home/HeroBannerSlider';
-import MatTruocBaoBi from '../assets/brand-element/MẶT TRƯỚC BAO BÌ.png';
-import MatSauBaoBi from '../assets/brand-element/MẶT SAU BAO BÌ.png';
+const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
+const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 import BannerGao4 from '../assets/brand/banner-gao-4.png';
 
 // Animation variants that trigger smoothly both when scrolling up and down
