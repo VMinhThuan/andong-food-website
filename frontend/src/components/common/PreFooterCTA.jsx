@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function PreFooterCTA() {
   return (
-    <section style={{
+    <section className="pre-footer-cta" style={{
       position: 'relative',
       padding: '110px 0 115px',
       overflow: 'hidden',

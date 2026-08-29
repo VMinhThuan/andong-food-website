@@ -45,6 +45,7 @@ export default function Navbar() {
 
   return (
     <header
+      className="site-navbar"
       style={{
         position: 'sticky',
         top: 0,
@@ -58,7 +59,7 @@ export default function Navbar() {
       }}
     >
       {/* Full-width container stretched edge-to-edge */}
-      <div style={{
+      <div className="site-navbar__inner" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -68,6 +69,7 @@ export default function Navbar() {
       }}>
         {/* BRAND LOGO (ALIGNED SÁT MÉP TRÁI) */}
         <Link
+          className="site-navbar__brand"
           to="/"
           style={{
             display: 'flex',
@@ -76,6 +78,7 @@ export default function Navbar() {
           }}
         >
           <img
+            className="site-navbar__logo"
             src={LogoNgang}
             alt="An Đông"
             style={{
@@ -87,6 +90,7 @@ export default function Navbar() {
 
         {/* CENTER: CREATIVE PILL NAVIGATION */}
         <nav
+          className="desktop-nav site-navbar__nav"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -126,7 +130,7 @@ export default function Navbar() {
         </nav>
 
         {/* RIGHT ACTION: HOTLINE + USER ICON (ALIGNED SÁT MÉP PHẢI) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div className="site-navbar__actions" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           {/* Hotline button */}
           <a
             href="tel:0944852464"
@@ -154,6 +158,7 @@ export default function Navbar() {
           {/* USER ACCOUNT / PORTAL ICON (MODERN LUXURY CIRCLE) */}
           <div style={{ position: 'relative' }} ref={dropdownRef}>
             <button
+              className="site-navbar__account"
               onClick={() => {
                 if (user) {
                   setUserDropdownOpen(!userDropdownOpen);
@@ -300,6 +305,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            className="site-navbar__drawer"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

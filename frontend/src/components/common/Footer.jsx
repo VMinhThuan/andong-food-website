@@ -35,6 +35,7 @@ export default function Footer() {
       <AnimatePresence>
         {showStickyMiniFooter && (
           <motion.div
+            className="mini-footer"
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
@@ -52,7 +53,7 @@ export default function Footer() {
               padding: '0 clamp(16px, 3.5vw, 48px)'
             }}
           >
-            <div style={{
+            <div className="mini-footer__inner" style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -104,7 +105,7 @@ export default function Footer() {
       </AnimatePresence>
 
       {/* 2. FULL FOOTER ĐẦY ĐỦ (HIỂN THỊ KHI CUỘN XUỐNG HẾT TRANG) */}
-      <footer id="main-full-footer" style={{
+      <footer id="main-full-footer" className="main-full-footer" style={{
         background: 'linear-gradient(160deg, #081c15 0%, #0d261a 55%, #102b1e 100%)',
         color: '#ffffff',
         position: 'relative',
@@ -116,7 +117,7 @@ export default function Footer() {
       }}>
         <div className="container">
           {/* 4-COLUMN PREMIUM FOOTER GRID */}
-          <div style={{
+          <div className="footer-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '45px',
@@ -281,7 +282,7 @@ export default function Footer() {
           </div>
 
           {/* BOTTOM COPYRIGHT BAR */}
-          <div style={{
+          <div className="footer-bottom" style={{
             borderTop: '1px solid rgba(255, 255, 255, 0.07)',
             paddingTop: '20px',
             display: 'flex',

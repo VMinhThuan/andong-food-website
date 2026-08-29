@@ -56,7 +56,7 @@ export default function HeroBannerSlider() {
   const BadgeIcon = slide.badgeIcon;
 
   return (
-    <section style={{
+    <section className="home-hero" style={{
       position: 'relative',
       height: '680px',
       maxHeight: '680px',
@@ -93,13 +93,13 @@ export default function HeroBannerSlider() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div style={{
+      <div className="home-hero__content" style={{
         position: 'relative',
         zIndex: 2,
         width: '100%',
         padding: '0 clamp(20px, 4vw, 60px)'
       }}>
-        <div style={{ maxWidth: '780px' }}>
+        <div className="home-hero__copy" style={{ maxWidth: '780px' }}>
           {/* Badge nhỏ */}
           <motion.div
             key={`badge-${slide.id}`}
@@ -123,7 +123,7 @@ export default function HeroBannerSlider() {
           </motion.div>
 
           {/* Heading lớn: GẠO NGON CHUẨN GIỐNG / GỬI TRỌN AN LÒNG */}
-          <div style={{ minHeight: '125px', display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '14px 0 10px' }}>
+          <div className="home-hero__heading" style={{ minHeight: '125px', display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '14px 0 10px' }}>
             <motion.h1
               key={`title-${slide.id}`}
               initial={{ opacity: 0, y: 20 }}
@@ -151,7 +151,7 @@ export default function HeroBannerSlider() {
           </div>
 
           {/* Description ngắn gọn cảm xúc (2-3 dòng) */}
-          <div style={{ minHeight: '56px', marginBottom: '28px' }}>
+          <div className="home-hero__description" style={{ minHeight: '56px', marginBottom: '28px' }}>
             <motion.p
               key={`desc-${slide.id}`}
               initial={{ opacity: 0, y: 15 }}
@@ -172,6 +172,7 @@ export default function HeroBannerSlider() {
 
           {/* CTA Buttons: [ KHÁM PHÁ AN ĐÔNG → ]  Khám phá sản phẩm */}
           <motion.div
+            className="home-hero__actions"
             key={`btn-${slide.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -196,7 +197,7 @@ export default function HeroBannerSlider() {
           </motion.div>
 
           {/* 4 Giá Trị Định Vị Chuẩn Brand Profile */}
-          <div style={{
+          <div className="home-hero__values" style={{
             marginTop: '36px',
             borderTop: '1px solid rgba(255, 255, 255, 0.2)',
             paddingTop: '20px',
@@ -223,7 +224,7 @@ export default function HeroBannerSlider() {
       </div>
 
       {/* Tinh tế Bottom Indicator (Không dùng mũi tên to thô, chuẩn Luxury Brand) */}
-      <div style={{
+      <div className="home-hero__dots" style={{
         position: 'absolute',
         bottom: '22px',
         left: '50%',

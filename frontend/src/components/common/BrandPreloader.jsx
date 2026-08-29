@@ -20,6 +20,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
     <AnimatePresence>
       {!isDone && (
         <motion.div
+          className="brand-preloader"
           key="brand-preloader"
           initial={{ opacity: 1 }}
           exit={{
@@ -55,7 +56,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             }}
           />
 
-          <div style={{
+          <div className="brand-preloader__content" style={{
             position: 'relative',
             zIndex: 2,
             display: 'flex',

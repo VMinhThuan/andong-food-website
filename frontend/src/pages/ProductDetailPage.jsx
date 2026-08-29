@@ -96,7 +96,7 @@ export default function ProductDetailPage() {
   return (
     <div className="product-detail-page" style={{ backgroundColor: 'var(--bg-main)' }}>
       {/* Breadcrumb */}
-      <div style={{ backgroundColor: 'var(--primary)', color: 'var(--golden-pale)', padding: '12px 0', fontSize: '0.85rem' }}>
+      <div className="product-breadcrumb" style={{ backgroundColor: 'var(--primary)', color: 'var(--golden-pale)', padding: '12px 0', fontSize: '0.85rem' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Link to="/" style={{ color: '#d1e3d9', textDecoration: 'none' }}>Trang Chủ</Link>
@@ -113,25 +113,25 @@ export default function ProductDetailPage() {
       </div>
 
       {/* PRODUCT HERO & OVERVIEW */}
-      <section style={{ padding: '32px 0 64px' }}>
+      <section className="product-detail-section" style={{ padding: '32px 0 64px' }}>
         <div className="container">
-          <div className="qr-landing-card" style={{ padding: '28px', marginBottom: '36px', boxShadow: '0 14px 38px rgba(17, 67, 40, 0.07)' }}>
-            <div style={{
+          <div className="qr-landing-card product-hero-card" style={{ padding: '28px', marginBottom: '36px', boxShadow: '0 14px 38px rgba(17, 67, 40, 0.07)' }}>
+            <div className="product-hero-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: '52px',
               alignItems: 'center'
             }}>
               {/* Product Image on Packaging Frame */}
-              <div style={{ textAlign: 'center', position: 'relative' }}>
-                <div style={{
+              <div className="product-packaging-column" style={{ textAlign: 'center', position: 'relative' }}>
+                <div className="product-packaging-frame" style={{
                   backgroundColor: 'var(--bg-main)',
                   borderRadius: '20px',
                   padding: '24px',
                   position: 'relative',
                   border: '1px solid var(--border-color)'
                 }}>
-                  <div style={{
+                  <div className="product-packaging-image" style={{
                     position: 'relative',
                     height: '430px',
                     display: 'flex',
@@ -230,7 +230,7 @@ export default function ProductDetailPage() {
               </div>
 
               {/* Product Info */}
-              <div>
+              <div className="product-overview">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                   {product.categoryName && <span className="badge badge-green">{product.categoryName}</span>}
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: '600' }}>
@@ -253,7 +253,7 @@ export default function ProductDetailPage() {
                 </p>
 
                 {/* Only fields provided by the product record are shown. */}
-                <div style={{
+                <div className="product-key-specs" style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
                   gap: '12px',
@@ -275,7 +275,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Hotline & Order consultation */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                   <a href="tel:0944852464" className="btn btn-primary btn-lg" style={{ flex: 1 }}>
                     Điện thoại đặt hàng: 0944 852 464
                   </a>
@@ -319,10 +319,9 @@ function ProductFacts({ product }) {
   ].filter(([, value]) => value);
   const nutritionRows = [['Năng lượng / Calories', product.nutrition?.energy], ['Đạm / Total Protein', product.nutrition?.protein], ['Chất béo / Total Fat', product.nutrition?.fat], ['Carbohydrate', product.nutrition?.carbohydrate]].filter(([, value]) => value);
   return <>
-    <section style={section}><div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div><h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '14px', marginTop: '24px' }}>{(product.cookingSteps || []).map(step => <article key={step.step} style={{ padding: '20px', borderRadius: '18px', background: 'linear-gradient(145deg,#fffdf6,#f7f2e5)', border: '1px solid #e8ddc5' }}><div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}><span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800 }}>{step.step}</span><div style={{ color: 'var(--primary)', fontWeight: 800 }}>{step.viTitle || step.titleVi}</div></div><p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>{step.vi || step.descVi}</p><div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em' }}>{step.enTitle || step.titleEn}</div><p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.9rem', lineHeight: 1.55 }}>{step.en || step.descEn}</p></article>)}</div></section>
-    <section style={section}><div style={subtitle}>GIÁ TRỊ THAM KHẢO TRÊN 100 G</div><h3 style={heading}>THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '24px' }}>{nutritionRows.map(([label, value], index) => <div key={label} style={{ padding: '20px', background: index % 2 ? '#fffaf0' : '#f0f7f2', borderRadius: '16px', border: '1px solid #e5e2d5' }}><div style={{ color: '#68776f', fontSize: '.82rem', lineHeight: 1.4, minHeight: 36 }}>{label}</div><div style={{ color: 'var(--primary)', fontSize: '1.35rem', fontWeight: 800, marginTop: 8 }}>{value}</div></div>)}</div></section>
-    <section style={section}><div style={subtitle}>MINH BẠCH THÔNG TIN</div><h3 style={heading}>{product.name} / THÔNG TIN SẢN PHẨM</h3><div style={{ overflowX: 'auto', marginTop: '24px', border: '1px solid #e9e2d4', borderRadius: '16px' }}><table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 650 }}><thead><tr style={{ background: '#f5f0e4' }}><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>HẠNG MỤC</th><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>NỘI DUNG</th></tr></thead><tbody>{infoRows.map(([label, value], index) => <tr key={label} style={{ background: index % 2 ? '#fffdf9' : '#fff' }}><td style={{ ...row, color: '#765a2e', fontWeight: 800, fontSize: '.84rem', width: '34%' }}>{label}</td><td style={{ ...row, whiteSpace: 'pre-line', color: 'var(--text-muted)' }}>{value}</td></tr>)}</tbody></table></div></section>
-    <section style={{ ...section, background: 'linear-gradient(135deg,#148d48,#064523)', border: 0, color: '#fff' }}><div style={{ ...subtitle, color: '#f7bb27' }}>AN ĐÔNG FOOD</div><h3 style={{ ...heading, color: '#fff' }}>THÔNG TIN NHÀ SẢN XUẤT / MANUFACTURER</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px', marginTop: 24 }}><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><b style={{ fontSize: '1.1rem' }}>{product.manufacturer?.name}</b><p style={{ margin: '14px 0 5px', color: '#d6eadc' }}>{product.manufacturer?.address}</p><p style={{ margin: 0, color: '#d6eadc' }}>{product.manufacturer?.addressEn}</p></div><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><div style={{ color: '#d6eadc', marginBottom: 10 }}>Email: <b style={{ color: '#fff' }}>{product.manufacturer?.email}</b></div><div style={{ color: '#d6eadc' }}>Điện thoại / Phone: <b style={{ color: '#f7bb27' }}>{product.manufacturer?.phone}</b></div></div></div></section>
+    <section className="product-facts-section" style={section}><div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div><h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3><div className="product-facts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '14px', marginTop: '24px' }}>{(product.cookingSteps || []).map(step => <article key={step.step} style={{ padding: '20px', borderRadius: '18px', background: 'linear-gradient(145deg,#fffdf6,#f7f2e5)', border: '1px solid #e8ddc5' }}><div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}><span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800 }}>{step.step}</span><div style={{ color: 'var(--primary)', fontWeight: 800 }}>{step.viTitle || step.titleVi}</div></div><p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>{step.vi || step.descVi}</p><div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em' }}>{step.enTitle || step.titleEn}</div><p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.9rem', lineHeight: 1.55 }}>{step.en || step.descEn}</p></article>)}</div></section>
+    <section className="product-facts-section" style={section}><div style={subtitle}>GIÁ TRỊ THAM KHẢO TRÊN 100 G</div><h3 style={heading}>THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION</h3><div className="product-nutrition-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '24px' }}>{nutritionRows.map(([label, value], index) => <div key={label} style={{ padding: '20px', background: index % 2 ? '#fffaf0' : '#f0f7f2', borderRadius: '16px', border: '1px solid #e5e2d5' }}><div style={{ color: '#68776f', fontSize: '.82rem', lineHeight: 1.4, minHeight: 36 }}>{label}</div><div style={{ color: 'var(--primary)', fontSize: '1.35rem', fontWeight: 800, marginTop: 8 }}>{value}</div></div>)}</div></section>
+    <section className="product-facts-section" style={section}><div style={subtitle}>MINH BẠCH THÔNG TIN</div><h3 style={heading}>{product.name} / THÔNG TIN SẢN PHẨM</h3><div className="product-info-table" style={{ overflowX: 'auto', marginTop: '24px', border: '1px solid #e9e2d4', borderRadius: '16px' }}><table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 650 }}><thead><tr style={{ background: '#f5f0e4' }}><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>HẠNG MỤC</th><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>NỘI DUNG</th></tr></thead><tbody>{infoRows.map(([label, value], index) => <tr key={label} style={{ background: index % 2 ? '#fffdf9' : '#fff' }}><td style={{ ...row, color: '#765a2e', fontWeight: 800, fontSize: '.84rem', width: '34%' }}>{label}</td><td style={{ ...row, whiteSpace: 'pre-line', color: 'var(--text-muted)' }}>{value}</td></tr>)}</tbody></table></div></section>
+    <section className="product-facts-section product-manufacturer-section" style={{ ...section, background: 'linear-gradient(135deg,#148d48,#064523)', border: 0, color: '#fff' }}><div style={{ ...subtitle, color: '#f7bb27' }}>AN ĐÔNG FOOD</div><h3 style={{ ...heading, color: '#fff' }}>THÔNG TIN NHÀ SẢN XUẤT / MANUFACTURER</h3><div className="product-manufacturer-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px', marginTop: 24 }}><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><b style={{ fontSize: '1.1rem' }}>{product.manufacturer?.name}</b><p style={{ margin: '14px 0 5px', color: '#d6eadc' }}>{product.manufacturer?.address}</p><p style={{ margin: 0, color: '#d6eadc' }}>{product.manufacturer?.addressEn}</p></div><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><div style={{ color: '#d6eadc', marginBottom: 10 }}>Email: <b style={{ color: '#fff' }}>{product.manufacturer?.email}</b></div><div style={{ color: '#d6eadc' }}>Điện thoại / Phone: <b style={{ color: '#f7bb27' }}>{product.manufacturer?.phone}</b></div></div></div></section>
   </>;
 }
-
