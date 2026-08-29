@@ -129,17 +129,10 @@ export default function ScanQRPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => navigate('/san-pham/gao-nang-thom-cho-dao-an-dong')}
+                  onClick={() => navigate('/san-pham/gao-vuong-tom')}
                   className="btn btn-outline btn-sm"
                 >
-                  🌾 Nàng Thơm Chợ Đào
-                </button>
-                <button
-                  type="button"
-                  onClick={() => navigate('/san-pham/gao-lut-huyet-rong-dinh-duong-an-dong')}
-                  className="btn btn-outline btn-sm"
-                >
-                  🌾 Gạo Lứt Huyết Rồng
+                  🌾 Gạo Vuông Tôm (AD-VT-02)
                 </button>
               </div>
             </div>

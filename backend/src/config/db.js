@@ -13,7 +13,12 @@ export async function connectDB() {
 }
 
 async function connect() {
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/andong_food';
+  const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+  const uri = process.env.MONGODB_URI || (!isProduction ? 'mongodb://127.0.0.1:27017/andong_food' : '');
+
+  if (!uri) {
+    throw new Error('MONGODB_URI chưa được cấu hình cho môi trường production.');
+  }
   
   try {
     mongoose.set('strictQuery', false);
@@ -26,8 +31,13 @@ async function connect() {
     await seedInitialDatabase();
   } catch (error) {
     connectionPromise = null;
+    if (isProduction) {
+      // Production must never serve the old in-memory sample catalogue when
+      // MongoDB is unavailable. Let the deployment fail loudly instead.
+      throw new Error(`Không thể kết nối MongoDB production: ${error.message}`);
+    }
     console.warn(`⚠️ Warning: Could not connect to MongoDB at ${uri} (${error.message}).`);
-    console.log(`ℹ️ App will continue in fallback mode if MongoDB service is not started locally.`);
+    console.log('ℹ️ App will continue with the local official-product fallback.');
   }
 }
 

@@ -8,6 +8,7 @@ import {
   initialProducts,
   initialContacts
 } from '../data/seedData.js';
+import { officialProducts } from '../data/officialProducts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +31,10 @@ class DataStore {
       if (fs.existsSync(DATA_FILE)) {
         const raw = fs.readFileSync(DATA_FILE, 'utf-8');
         this.data = JSON.parse(raw);
+        // The file existed in older builds with four invented products.
+        // Offline/local fallback is allowed, but it must use the approved
+        // two-product catalogue rather than silently expose old mock data.
+        this.data.products = officialProducts;
       } else {
         this.data = {
           users: initialUsers,

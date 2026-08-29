@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import authRoutes from './authRoutes.js';
 import productRoutes from './productRoutes.js';
 import categoryRoutes from './categoryRoutes.js';
@@ -19,6 +20,7 @@ apiRouter.get('/health', (req, res) => {
   res.json({
     status: 'OK',
     app: 'An Dong Food MVC API Service',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
     time: new Date().toISOString()
   });
 });
