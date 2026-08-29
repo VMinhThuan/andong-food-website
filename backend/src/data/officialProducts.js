@@ -27,13 +27,18 @@ const sharedOfficialFields = {
   storageGuideEn: 'Store in a cool, dry place away from direct sunlight.',
   notice: 'Không sử dụng sản phẩm đã hết hạn hoặc có dấu hiệu ẩm mốc.',
   noticeEn: 'Do not consume if expired or if there are any signs of mold.',
-  originCountry: 'Việt Nam', originCountryEn: 'Made in Vietnam', barcode: '0 651294 378024 3',
+  originCountry: 'Việt Nam', originCountryEn: 'Made in Vietnam',
+  // Không đặt barcode dùng chung: mã in trên bao bì sai số kiểm tra ở cả
+  // hai cách đọc (EAN-13/GTIN-14 đều phải kết thúc bằng 5, bao bì lại in
+  // 4 và 3), và tiền tố 065 là dải Mỹ/Canada trong khi sản phẩm ghi Made
+  // in Vietnam (mã Việt Nam do GS1 VN cấp bắt đầu bằng 893). Để trống cho
+  // tới khi có mã hợp lệ.
   nutrition: { basis: '100 g', energy: '320–400 kcal', protein: '6–8%', fat: '0,5–0,8%', carbohydrate: '75–85%' },
   cookingSteps: cookingInstructions,
   manufacturer: { name: 'CÔNG TY TNHH AN ĐÔNG FOOD', address: 'Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.', addressEn: 'Long Thanh Hamlet, Phuoc Long Commune, Ca Mau Province.', email: 'andongfood@gmail.com', phone: '0944 852 464' }
 };
 
-function content(number, englishName, introductionVi, introductionEn, ingredient) {
+function content(number, englishName, introductionVi, introductionEn, ingredient, declarationNo, barcode) {
   return {
     number,
     englishName,
@@ -43,13 +48,13 @@ function content(number, englishName, introductionVi, introductionEn, ingredient
     information: [
       ['THÀNH PHẦN / INGREDIENTS', ingredient],
       ['HẠN SỬ DỤNG / EXPIRY DATE', '12 tháng kể từ ngày sản xuất.\n12 months from the date of manufacture.'],
-      ['SỐ CB / DECLARATION NO.', '01/ANDONG-ST25/2026'],
+      ['SỐ CB / DECLARATION NO.', declarationNo],
       ['BẢO QUẢN / STORAGE', 'Bảo quản nơi khô ráo, thoáng mát và tránh ánh nắng trực tiếp.\nStore in a cool, dry place away from direct sunlight.'],
       ['CẢNH BÁO / NOTICE', 'Không sử dụng sản phẩm đã hết hạn hoặc có dấu hiệu ẩm mốc.\nDo not consume if expired or if there are any signs of mold.'],
       ['NSX / PRODUCTION DATE', '________________________________'],
       ['XUẤT XỨ / ORIGIN', 'Việt Nam / Made in Vietnam'],
-      ['MÃ VẠCH / BARCODE', '0 651294 378024 3']
-    ],
+      ['MÃ VẠCH / BARCODE', barcode]
+    ].filter(([, value]) => value),
     manufacturer
   };
 }
@@ -60,17 +65,19 @@ export const officialProducts = [
     ...sharedOfficialFields,
     summary: 'Gạo ST25 thuần được gieo trồng trên vùng đất màu mỡ, mang phẩm chất của giống gạo Việt từng được vinh danh “Gạo ngon nhất thế giới” năm 2023 tại Cebu, Philippines. Hạt thon dài, thơm tự nhiên, cho cơm dẻo mềm và vị ngọt thanh.',
     nameEn: 'ST25 RICE', summaryEn: 'Grown in fertile lands, pure ST25 rice carries the qualities of the Vietnamese variety recognized as “World’s Best Rice” in 2023 in Cebu, Philippines. Its long, slender grains are naturally aromatic, cooking into soft, tender rice with a delicate sweetness.',
-    ingredients: '100% gạo trắng thuần ST25.', ingredientsEn: '100% Pure ST25 White Rice.', declarationNo: '01/ANDONG-ST25/2026',
-    images: { main: '/assets/product-gao.png', front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png', back: '/assets/brand-element/MẶT SAU BAO BÌ.png' }, qrCodeString: 'https://andofood.vn/san-pham/gao-st25', isFeatured: true, inStock: true,
-    content: content('SẢN PHẨM 01  /  PRODUCT 01', 'ST25 RICE', 'Gạo ST25 thuần được gieo trồng trên vùng đất màu mỡ, mang phẩm chất của giống gạo Việt từng được vinh danh “Gạo ngon nhất thế giới” năm 2023 tại Cebu, Philippines. Hạt thon dài, thơm tự nhiên, cho cơm dẻo mềm và vị ngọt thanh.', 'Grown in fertile lands, pure ST25 rice carries the qualities of the Vietnamese variety recognized as “World’s Best Rice” in 2023 in Cebu, Philippines. Its long, slender grains are naturally aromatic, cooking into soft, tender rice with a delicate sweetness.', '100% gạo trắng thuần ST25.\n100% Pure ST25 White Rice.')
+    ingredients: '100% gạo trắng thuần ST25.', ingredientsEn: '100% Pure ST25 White Rice.', declarationNo: '01/ANDONG-ST25/2026', barcode: '',
+    images: { main: '/assets/product-gao.png', front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png', back: '/assets/brand-element/MẶT SAU BAO BÌ.png' }, qrCodeString: 'https://andongfood.vn/san-pham/gao-st25', isFeatured: true, inStock: true,
+    content: content('SẢN PHẨM 01  /  PRODUCT 01', 'ST25 RICE', 'Gạo ST25 thuần được gieo trồng trên vùng đất màu mỡ, mang phẩm chất của giống gạo Việt từng được vinh danh “Gạo ngon nhất thế giới” năm 2023 tại Cebu, Philippines. Hạt thon dài, thơm tự nhiên, cho cơm dẻo mềm và vị ngọt thanh.', 'Grown in fertile lands, pure ST25 rice carries the qualities of the Vietnamese variety recognized as “World’s Best Rice” in 2023 in Cebu, Philippines. Its long, slender grains are naturally aromatic, cooking into soft, tender rice with a delicate sweetness.', '100% gạo trắng thuần ST25.\n100% Pure ST25 White Rice.', '01/ANDONG-ST25/2026', '')
   },
   {
     id: 'prod_vuong_tom_02', code: 'AD-VT-02', name: 'GẠO VUÔNG TÔM', slug: 'gao-vuong-tom',
     ...sharedOfficialFields,
     summary: 'Gạo Vuông Tôm được gieo trồng theo mô hình luân canh lúa – tôm, thuận theo nhịp nước mặn – ngọt tự nhiên của miền Tây. Hạt gạo mang hương thơm dịu, cơm dẻo mềm và vị ngọt thanh đặc trưng – kết tinh từ sự hài hòa giữa đất, nước và mùa vụ.',
     nameEn: 'RICE-SHRIMP RICE', summaryEn: 'Rice–Shrimp Rice is grown through a traditional rice–shrimp rotation, following the natural rhythm of fresh and brackish water in the Mekong Delta. This unique ecosystem produces naturally aromatic grains with a soft, tender texture and delicate sweetness.',
-    ingredients: '100% gạo trắng Vuông Tôm.', ingredientsEn: '100% Pure Rice–Shrimp Rice.', declarationNo: '01/ANDONG-ST25/2026',
-    images: { main: '/assets/product-gao.png', front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png', back: '/assets/brand-element/MẶT SAU BAO BÌ.png' }, qrCodeString: 'https://andofood.vn/san-pham/gao-vuong-tom', isFeatured: true, inStock: true,
-    content: content('SẢN PHẨM 02  /  PRODUCT 02', 'RICE-SHRIMP RICE', 'Gạo Vuông Tôm được gieo trồng theo mô hình luân canh lúa – tôm, thuận theo nhịp nước mặn – ngọt tự nhiên của miền Tây. Hạt gạo mang hương thơm dịu, cơm dẻo mềm và vị ngọt thanh đặc trưng – kết tinh từ sự hài hòa giữa đất, nước và mùa vụ.', 'Rice–Shrimp Rice is grown through a traditional rice–shrimp rotation, following the natural rhythm of fresh and brackish water in the Mekong Delta. This unique ecosystem produces naturally aromatic grains with a soft, tender texture and delicate sweetness.', '100% gạo trắng Vuông Tôm.\n100% Pure Rice–Shrimp Rice.')
+    // SỐ CB để trống có chủ đích: bao bì Vuông Tôm đang in nhầm số công bố
+    // của ST25 (01/ANDONG-ST25/2026). Điền lại khi có số thật, không suy đoán.
+    ingredients: '100% gạo trắng Vuông Tôm.', ingredientsEn: '100% Pure Rice–Shrimp Rice.', declarationNo: '', barcode: '',
+    images: { main: '/assets/product-gao.png', front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png', back: '/assets/brand-element/MẶT SAU BAO BÌ.png' }, qrCodeString: 'https://andongfood.vn/san-pham/gao-vuong-tom', isFeatured: true, inStock: true,
+    content: content('SẢN PHẨM 02  /  PRODUCT 02', 'RICE-SHRIMP RICE', 'Gạo Vuông Tôm được gieo trồng theo mô hình luân canh lúa – tôm, thuận theo nhịp nước mặn – ngọt tự nhiên của miền Tây. Hạt gạo mang hương thơm dịu, cơm dẻo mềm và vị ngọt thanh đặc trưng – kết tinh từ sự hài hòa giữa đất, nước và mùa vụ.', 'Rice–Shrimp Rice is grown through a traditional rice–shrimp rotation, following the natural rhythm of fresh and brackish water in the Mekong Delta. This unique ecosystem produces naturally aromatic grains with a soft, tender texture and delicate sweetness.', '100% gạo trắng Vuông Tôm.\n100% Pure Rice–Shrimp Rice.', '', '')
   }
 ];
