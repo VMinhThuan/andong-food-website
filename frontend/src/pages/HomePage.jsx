@@ -236,33 +236,16 @@ export default function HomePage() {
     }).catch(err => console.error(err));
   }, []);
 
-  // Chỉ 2 sản phẩm thực tế của An Đông
-  const featuredProducts = [
-    {
-      id: 'st25',
-      slug: products[0]?.slug || 'gao-st25-an-dong-thuong-hang',
-      name: 'Gạo ST25 An Đông',
-      desc: 'Hạt thon dài, thơm tự nhiên, cơm dẻo mềm và vị ngọt thanh — giống gạo Việt từng được vinh danh "Gạo ngon nhất thế giới" năm 2023 tại Cebu, Philippines.',
-      spec: 'ST25 • 5 KG',
-      tag: 'Gạo Đặc Sản',
-      origin: 'Việt Nam',
-      declaration: '01/ANDONG-ST25/2026',
-      image: MatTruocBaoBi,
-      imageBack: MatSauBaoBi
-    },
-    {
-      id: 'vuong-tom',
-      slug: products[1]?.slug || 'gao-vuong-tom-an-dong',
-      name: 'Gạo Vuông Tôm An Đông',
-      desc: 'Trồng theo mô hình luân canh lúa – tôm thuận tự nhiên miền Tây. Hạt gạo thơm dịu, cơm dẻo mềm và vị ngọt thanh đặc trưng từ sự hài hòa giữa đất, nước và mùa vụ.',
-      spec: 'VUÔNG TÔM • 5 KG',
-      tag: 'Gạo Đặc Sản',
-      origin: 'Cà Mau, Việt Nam',
-      declaration: '01/ANDONG-VT/2026',
-      image: MatTruocBaoBi,
-      imageBack: MatSauBaoBi
-    }
-  ];
+  // Cards are derived solely from the product documents returned by the API.
+  const featuredProducts = products.slice(0, 2).map((product) => ({
+    ...product,
+    desc: product.summary,
+    spec: product.code,
+    tag: product.content?.number,
+    origin: product.content?.information?.find(([label]) => label === 'XUẤT XỨ / ORIGIN')?.[1],
+    image: product.images?.main,
+    imageBack: product.images?.main
+  }));
 
   return (
     <div className="home-page" style={{ overflow: 'hidden' }}>
@@ -810,14 +793,6 @@ export default function HomePage() {
                       >
                         <Link
                           to={`/san-pham/${prod.slug}`}
-                          state={{
-                            product: products.find((item) => item.slug === prod.slug) || {
-                              ...prod,
-                              summary: prod.desc,
-                              origin: { location: prod.origin },
-                              packSizes: ['5 kg']
-                            }
-                          }}
                           style={{
                             display: 'flex',
                             alignItems: 'center',

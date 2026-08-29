@@ -26,9 +26,8 @@ const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png
 export default function ProductDetailPage() {
   const { slug } = useParams();
   const location = useLocation();
-  const productPreview = location.state?.product || null;
-  const [product, setProduct] = useState(() => productPreview);
-  const [loading, setLoading] = useState(() => !productPreview);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [viewBack, setViewBack] = useState(false);
@@ -57,16 +56,6 @@ export default function ProductDetailPage() {
   };
 
   useEffect(() => {
-    // Sản phẩm đã được truyền từ card ở trang chủ: hiển thị ngay để không có
-    // khoảng loading làm màn hình nháy khi đổi route. Dữ liệu đầy đủ vẫn được
-    // tải nền và cập nhật ngay sau đó.
-    if (productPreview) {
-      setProduct(productPreview);
-      setError('');
-      setLoading(false);
-      return;
-    }
-
     setProduct(null);
     setError('');
     setLoading(true);
@@ -75,10 +64,10 @@ export default function ProductDetailPage() {
         setProduct(data);
       })
       .catch(err => {
-        if (!productPreview) setError(err.message || 'Không tìm thấy sản phẩm.');
+        setError(err.message || 'Không tìm thấy sản phẩm.');
       })
       .finally(() => setLoading(false));
-  }, [slug, productPreview]);
+  }, [slug, location.key]);
 
   if (loading) {
     return (
@@ -243,7 +232,7 @@ export default function ProductDetailPage() {
               {/* Product Info */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <span className="badge badge-green">{product.categoryName || 'Gạo Đặc Sản'}</span>
+                  {product.categoryName && <span className="badge badge-green">{product.categoryName}</span>}
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: '600' }}>
                     MÃ SẢN PHẨM: <strong>{product.code}</strong>
                   </span>
@@ -263,7 +252,7 @@ export default function ProductDetailPage() {
                   {product.summary}
                 </p>
 
-                {/* Key specs highlight */}
+                {/* Only fields provided by the product record are shown. */}
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
@@ -275,22 +264,14 @@ export default function ProductDetailPage() {
                   marginBottom: '24px',
                   fontSize: '0.88rem'
                 }}>
-                  <div>
-                    <span style={{ color: 'var(--text-light)' }}>Quy cách:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packSizes?.join(', ') || '2kg, 5kg, 10kg'}</div>
-                  </div>
-                  <div>
+                  {product.expiry && <div>
                     <span style={{ color: 'var(--text-light)' }}>Hạn sử dụng:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.expiry || '12 tháng'}</div>
-                  </div>
-                  <div>
-                    <span style={{ color: 'var(--text-light)' }}>Bao bì:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.packaging || 'Túi hút chân không cao cấp'}</div>
-                  </div>
-                  <div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.expiry}</div>
+                  </div>}
+                  {product.originCountry && <div>
                     <span style={{ color: 'var(--text-light)' }}>Xuất xứ:</span>
-                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.origin?.location || 'ĐBSCL Việt Nam'}</div>
-                  </div>
+                    <div style={{ fontWeight: '700', color: 'var(--primary)' }}>{product.originCountry} / {product.originCountryEn}</div>
+                  </div>}
                 </div>
 
                 {/* Hotline & Order consultation */}
@@ -306,150 +287,8 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* 4 DETAIL TABS / SECTIONS (From Proposal & Brand Specs) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '40px' }}>
-            {/* 1. NGUỒN GỐC & VÙNG NGUYÊN LIỆU */}
-            <div className="card" style={{ padding: '28px' }}>
-              <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Nguồn Gốc & Vùng Trồng</h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
-                <li><strong>Vùng canh tác:</strong> {product.origin?.location || 'Đồng bằng Sông Cửu Long'}</li>
-                <li><strong>Thổ nhưỡng:</strong> {product.origin?.soil || 'Đất phù sa bồi đắp màu mỡ'}</li>
-                <li><strong>Hợp tác xã:</strong> {product.origin?.farmerCoop || 'HTX Nông nghiệp An Đông Mekong'}</li>
-                <li><strong>Vụ mùa:</strong> {product.origin?.harvestSeason || 'Vụ Đông Xuân trĩu hạt'}</li>
-              </ul>
-            </div>
+          <ProductFacts product={product} />
 
-            {/* 2. ĐẶC TÍNH & HƯƠNG VỊ */}
-            <div className="card" style={{ padding: '28px' }}>
-              <h3 style={{ fontSize: '1.25rem', color: 'var(--primary)', margin: '0 0 16px' }}>Đặc Tính & Hương Vị</h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', color: 'var(--text-muted)' }}>
-                <li><strong>Mùi thơm:</strong> {product.tasteProfile?.aroma || 'Thơm ngát tự nhiên'}</li>
-                <li><strong>Độ dẻo:</strong> {product.tasteProfile?.texture || 'Dẻo mềm, kết dính vừa vặn'}</li>
-                <li><strong>Vị giác:</strong> {product.tasteProfile?.taste || 'Ngọt hậu sâu, để nguội vẫn mềm'}</li>
-                <li><strong>Độ thuần giống:</strong> {product.specs?.purity || '99.5% chuẩn giống'}</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* 3. HƯỚNG DẪN NẤU CƠM & BẢO QUẢN */}
-          <div className="card" style={{ padding: '32px', marginBottom: '40px', background: '#ffffff' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '20px' }}>
-              Hướng Dẫn Nấu Cơm & Bảo Quản
-            </h3>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-              <div style={{ background: 'var(--bg-main)', padding: '20px', borderRadius: '16px', borderLeft: '4px solid var(--primary)' }}>
-                <h4 style={{ color: 'var(--primary)', fontSize: '1.05rem', marginBottom: '8px' }}>1. Tỉ Lệ Nước & Vo Gạo</h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
-                  <strong>Tỉ lệ:</strong> {product.cookingGuide?.waterRatio || '1 bát gạo : 1 đến 1.1 bát nước'}. <br />
-                  <strong>Vo gạo:</strong> {product.cookingGuide?.washingTips || 'Vo nhẹ 1 - 2 lần để giữ lớp cám dưỡng chất.'}
-                </p>
-              </div>
-
-              <div style={{ background: 'var(--bg-main)', padding: '20px', borderRadius: '16px', borderLeft: '4px solid var(--golden-light)' }}>
-                <h4 style={{ color: 'var(--primary)', fontSize: '1.05rem', marginBottom: '8px' }}>2. Chế Độ Nấu</h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
-                  {product.cookingGuide?.cookingTips || 'Nấu bằng nồi cơm điện bình thường. Khi cơm chín, để ủ thêm 10 phút rồi xới đều.'}
-                </p>
-              </div>
-
-              <div style={{ background: 'var(--bg-main)', padding: '20px', borderRadius: '16px', borderLeft: '4px solid var(--golden)' }}>
-                <h4 style={{ color: 'var(--primary)', fontSize: '1.05rem', marginBottom: '8px' }}>3. Bảo Quản Đúng Cách</h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
-                  {product.storageGuide || 'Bảo quản nơi khô ráo, thoáng mát. Sau khi mở túi đậy kín trong thùng gạo chuyên dụng.'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* 4. QUY TRÌNH SẢN XUẤT 5 BƯỚC KHÉP KÍN */}
-          <div className="card" style={{ padding: '32px', marginBottom: '40px', background: '#ffffff' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '20px' }}>
-              Quy Trình Sản Xuất Khép Kín An Đông
-            </h3>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-              {(product.processSteps || []).map((step, idx) => (
-                <div key={idx} style={{
-                  background: 'var(--bg-main)',
-                  padding: '18px',
-                  borderRadius: '14px',
-                  border: '1px solid var(--border-color)',
-                  position: 'relative'
-                }}>
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'var(--primary)',
-                    color: 'var(--golden-light)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: '800',
-                    fontSize: '0.85rem',
-                    marginBottom: '10px'
-                  }}>
-                    {step.step || idx + 1}
-                  </div>
-                  <h4 style={{ fontSize: '0.98rem', color: 'var(--primary)', marginBottom: '6px' }}>{step.title}</h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 5. CHỨNG NHẬN CHẤT LƯỢNG & DOANH NGHIỆP */}
-          <div style={{
-            background: 'linear-gradient(135deg, var(--primary) 0%, var(--bg-dark) 100%)',
-            borderRadius: '24px',
-            padding: '36px',
-            color: '#ffffff'
-          }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', alignItems: 'center' }}>
-              <div>
-                <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
-                  CHỨNG NHẬN & TIÊU CHUẨN
-                </div>
-                <h3 style={{ color: 'var(--golden-pale)', fontSize: '1.4rem', marginBottom: '12px' }}>
-                  Hồ Sơ An Toàn Thực Phẩm
-                </h3>
-                <p style={{ color: '#d1e3d9', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '16px' }}>
-                  Mọi sản phẩm của An Đông đều được kiểm định nghiêm ngặt theo các tiêu chuẩn quốc tế và quốc gia:
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                  {(product.certifications || []).map((cert, idx) => (
-                    <div key={idx} style={{ background: 'rgba(255,255,255,0.1)', padding: '8px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)' }}>
-                      <div style={{ color: 'var(--golden-light)', fontWeight: '700', fontSize: '0.9rem' }}>{cert.name}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#d1e3d9' }}>Mã: {cert.code}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Company Quick Contact */}
-              <div style={{ background: 'rgba(255,255,255,0.06)', borderRadius: '16px', padding: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--golden-light)', fontWeight: '700', textTransform: 'uppercase', marginBottom: '6px' }}>
-                  ĐƠN VỊ SẢN XUẤT & PHÂN PHỐI
-                </div>
-                <h4 style={{ color: '#ffffff', fontSize: '1.1rem', marginBottom: '10px' }}>
-                  CÔNG TY TNHH An Đông
-                </h4>
-                <p style={{ fontSize: '0.85rem', color: '#b7c4bd', margin: '0 0 6px' }}>
-                  Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.
-                </p>
-                <p style={{ fontSize: '0.85rem', color: '#b7c4bd', margin: '0 0 12px' }}>
-                  Điện thoại: <strong style={{ color: 'var(--golden-light)' }}>0944 852 464</strong>
-                </p>
-                <p style={{ fontSize: '0.85rem', color: '#b7c4bd', margin: '0 0 12px' }}>
-                  Email: andongfood@gmail.com
-                </p>
-                <div style={{ fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--golden-light)' }}>
-                  “Bình An Ở Phía Đông – Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng”
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -461,4 +300,28 @@ export default function ProductDetailPage() {
       />
     </div>
   );
+}
+
+function ProductFacts({ product }) {
+  const section = { padding: 'clamp(22px, 4vw, 36px)', marginBottom: '32px', background: '#fff', borderRadius: '24px', border: '1px solid #e7e0d2', boxShadow: '0 10px 30px rgba(27,67,50,.055)' };
+  const heading = { fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.35rem, 2.5vw, 1.75rem)', color: 'var(--primary)', margin: '0 0 8px' };
+  const subtitle = { fontSize: '.82rem', color: '#aa7a2d', fontWeight: 800, letterSpacing: '.08em', marginBottom: '10px' };
+  const row = { padding: '15px 18px', borderBottom: '1px solid #eee8dc', verticalAlign: 'top', lineHeight: 1.65 };
+  const infoRows = [
+    ['THÀNH PHẦN / INGREDIENTS', [product.ingredients, product.ingredientsEn].filter(Boolean).join('\n')],
+    ['HẠN SỬ DỤNG / EXPIRY DATE', [product.expiry, product.expiryEn].filter(Boolean).join('\n')],
+    ['SỐ CB / DECLARATION NO.', product.declarationNo],
+    ['BẢO QUẢN / STORAGE', [product.storageGuide, product.storageGuideEn].filter(Boolean).join('\n')],
+    ['CẢNH BÁO / NOTICE', [product.notice, product.noticeEn].filter(Boolean).join('\n')],
+    ['NSX / PRODUCTION DATE', '________________________________'],
+    ['XUẤT XỨ / ORIGIN', [product.originCountry, product.originCountryEn].filter(Boolean).join(' / ')],
+    ['MÃ VẠCH / BARCODE', product.barcode]
+  ].filter(([, value]) => value);
+  const nutritionRows = [['Năng lượng / Calories', product.nutrition?.energy], ['Đạm / Total Protein', product.nutrition?.protein], ['Chất béo / Total Fat', product.nutrition?.fat], ['Carbohydrate', product.nutrition?.carbohydrate]].filter(([, value]) => value);
+  return <>
+    <section style={section}><div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div><h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '14px', marginTop: '24px' }}>{(product.cookingSteps || []).map(step => <article key={step.step} style={{ padding: '20px', borderRadius: '18px', background: 'linear-gradient(145deg,#fffdf6,#f7f2e5)', border: '1px solid #e8ddc5' }}><div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}><span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800 }}>{step.step}</span><div style={{ color: 'var(--primary)', fontWeight: 800 }}>{step.viTitle || step.titleVi}</div></div><p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>{step.vi || step.descVi}</p><div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em' }}>{step.enTitle || step.titleEn}</div><p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.9rem', lineHeight: 1.55 }}>{step.en || step.descEn}</p></article>)}</div></section>
+    <section style={section}><div style={subtitle}>GIÁ TRỊ THAM KHẢO TRÊN 100 G</div><h3 style={heading}>THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '24px' }}>{nutritionRows.map(([label, value], index) => <div key={label} style={{ padding: '20px', background: index % 2 ? '#fffaf0' : '#f0f7f2', borderRadius: '16px', border: '1px solid #e5e2d5' }}><div style={{ color: '#68776f', fontSize: '.82rem', lineHeight: 1.4, minHeight: 36 }}>{label}</div><div style={{ color: 'var(--primary)', fontSize: '1.35rem', fontWeight: 800, marginTop: 8 }}>{value}</div></div>)}</div></section>
+    <section style={section}><div style={subtitle}>MINH BẠCH THÔNG TIN</div><h3 style={heading}>{product.name} / THÔNG TIN SẢN PHẨM</h3><div style={{ overflowX: 'auto', marginTop: '24px', border: '1px solid #e9e2d4', borderRadius: '16px' }}><table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 650 }}><thead><tr style={{ background: '#f5f0e4' }}><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>HẠNG MỤC</th><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>NỘI DUNG</th></tr></thead><tbody>{infoRows.map(([label, value], index) => <tr key={label} style={{ background: index % 2 ? '#fffdf9' : '#fff' }}><td style={{ ...row, color: '#765a2e', fontWeight: 800, fontSize: '.84rem', width: '34%' }}>{label}</td><td style={{ ...row, whiteSpace: 'pre-line', color: 'var(--text-muted)' }}>{value}</td></tr>)}</tbody></table></div></section>
+    <section style={{ ...section, background: 'linear-gradient(135deg,#148d48,#064523)', border: 0, color: '#fff' }}><div style={{ ...subtitle, color: '#f7bb27' }}>AN ĐÔNG FOOD</div><h3 style={{ ...heading, color: '#fff' }}>THÔNG TIN NHÀ SẢN XUẤT / MANUFACTURER</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px', marginTop: 24 }}><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><b style={{ fontSize: '1.1rem' }}>{product.manufacturer?.name}</b><p style={{ margin: '14px 0 5px', color: '#d6eadc' }}>{product.manufacturer?.address}</p><p style={{ margin: 0, color: '#d6eadc' }}>{product.manufacturer?.addressEn}</p></div><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><div style={{ color: '#d6eadc', marginBottom: 10 }}>Email: <b style={{ color: '#fff' }}>{product.manufacturer?.email}</b></div><div style={{ color: '#d6eadc' }}>Điện thoại / Phone: <b style={{ color: '#f7bb27' }}>{product.manufacturer?.phone}</b></div></div></div></section>
+  </>;
 }

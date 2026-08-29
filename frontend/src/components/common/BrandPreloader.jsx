@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
-export default function BrandPreloader({ onFinish }) {
+export default function BrandPreloader({ onFinish, persistent = false }) {
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     // Total loading sequence takes ~1.35 seconds, then smoothly fades out
+    if (persistent) return undefined;
     const timer = setTimeout(() => {
       setIsDone(true);
       if (onFinish) onFinish();
     }, 1350);
 
     return () => clearTimeout(timer);
-  }, [onFinish]);
+  }, [onFinish, persistent]);
 
   return (
     <AnimatePresence>

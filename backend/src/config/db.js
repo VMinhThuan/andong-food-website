@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { initialUsers, initialCategories, initialProducts, initialCompany, initialContacts } from '../data/seedData.js';
+import { initialUsers, initialCategories, initialCompany, initialContacts } from '../data/seedData.js';
+import { officialProducts } from '../data/officialProducts.js';
 
 export async function connectDB() {
   const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/andong_food';
@@ -41,8 +42,8 @@ async function seedInitialDatabase() {
 
     const prodCount = await Product.countDocuments();
     if (prodCount === 0) {
-      await Product.insertMany(initialProducts);
-      console.log('🌾 Seeded An Dong Food products (ST25, Nang Thom, etc.) to MongoDB');
+      await Product.insertMany(officialProducts);
+      console.log('🌾 Seeded official An Dong Food product catalogue to MongoDB');
     }
 
     const companyCount = await Company.countDocuments();
