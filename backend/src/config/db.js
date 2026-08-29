@@ -2,7 +2,17 @@ import mongoose from 'mongoose';
 import { initialUsers, initialCategories, initialCompany, initialContacts } from '../data/seedData.js';
 import { officialProducts } from '../data/officialProducts.js';
 
+let connectionPromise;
+
 export async function connectDB() {
+  if (mongoose.connection.readyState === 1) return;
+  if (connectionPromise) return connectionPromise;
+
+  connectionPromise = connect();
+  return connectionPromise;
+}
+
+async function connect() {
   const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/andong_food';
   
   try {
@@ -15,6 +25,7 @@ export async function connectDB() {
     // Seed initial data if collections are empty
     await seedInitialDatabase();
   } catch (error) {
+    connectionPromise = null;
     console.warn(`⚠️ Warning: Could not connect to MongoDB at ${uri} (${error.message}).`);
     console.log(`ℹ️ App will continue in fallback mode if MongoDB service is not started locally.`);
   }
