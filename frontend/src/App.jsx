@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -17,16 +17,25 @@ import LoginPage from './pages/LoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 
 export default function App() {
+  return <AuthProvider><Router><AppContent /></Router></AuthProvider>;
+}
+
+function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  // Use the same brand loading screen for every page navigation.
+  useEffect(() => {
+    setIsLoading(true);
+  }, [location.pathname]);
 
   return (
-    <AuthProvider>
-      <Router>
+    <>
         {/* Tự động cuộn trang lên đầu mỗi khi chuyển tab / route */}
         <ScrollToTop />
 
         {/* Luxury Brand Preloader on initial load */}
-        {isLoading && <BrandPreloader onFinish={() => setIsLoading(false)} />}
+        {isLoading && <BrandPreloader key={location.pathname} onFinish={() => setIsLoading(false)} />}
 
         <div className="app-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
           {/* Global Scroll Reading Progress Bar & Back to top button */}
@@ -48,7 +57,6 @@ export default function App() {
           <PreFooterCTA />
           <Footer />
         </div>
-      </Router>
-    </AuthProvider>
+    </>
   );
 }

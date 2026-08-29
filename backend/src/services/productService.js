@@ -19,19 +19,19 @@ class ProductService {
     return productModel.findAll(query);
   }
 
-  getProductById(id) {
-    const product = productModel.findById(id);
+  async getProductById(id) {
+    const product = await productModel.findById(id);
     if (!product) throw new Error('Không tìm thấy sản phẩm.');
     return product;
   }
 
-  getProductBySlug(slug) {
-    const product = productModel.findBySlug(slug);
+  async getProductBySlug(slug) {
+    const product = await productModel.findBySlug(slug);
     if (!product) throw new Error(`Không tìm thấy sản phẩm có mã slug: ${slug}`);
     return product;
   }
 
-  createProduct(data) {
+  async createProduct(data) {
     if (!data.name) throw new Error('Tên sản phẩm là bắt buộc.');
 
     const slug = data.slug ? slugify(data.slug) : slugify(data.name);
@@ -76,20 +76,20 @@ class ProductService {
       ]
     };
 
-    return productModel.create(productPayload);
+    return await productModel.create(productPayload);
   }
 
-  updateProduct(id, updates) {
+  async updateProduct(id, updates) {
     if (updates.name && !updates.slug) {
       updates.slug = slugify(updates.name);
     }
-    const updated = productModel.update(id, updates);
+    const updated = await productModel.update(id, updates);
     if (!updated) throw new Error('Không tìm thấy sản phẩm để cập nhật.');
     return updated;
   }
 
-  deleteProduct(id) {
-    const success = productModel.delete(id);
+  async deleteProduct(id) {
+    const success = await productModel.delete(id);
     if (!success) throw new Error('Không tìm thấy sản phẩm để xóa.');
     return { message: 'Đã xóa sản phẩm thành công.' };
   }

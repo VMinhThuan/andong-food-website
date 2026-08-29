@@ -1,4 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+// Production calls the API through the same domain (/api). During local Vite
+// development this path is proxied to the backend below.
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 function getAuthHeaders() {
   const token = localStorage.getItem('andong_token');
@@ -61,15 +63,11 @@ export const api = {
 
   // Products
   async getProducts(params = {}) {
-    try {
-      const query = new URLSearchParams(params).toString();
-      const res = await fetch(`${API_BASE}/products?${query}`);
-      if (!res.ok) return [];
-      const data = await res.json();
-      return Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
-    } catch {
-      return [];
-    }
+    const query = new URLSearchParams(params).toString();
+    const res = await fetch(`${API_BASE}/products?${query}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Không thể tải danh sách sản phẩm');
+    return Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
   },
 
   async getProductBySlug(slug) {

@@ -38,7 +38,7 @@ export const qrController = {
   async generateProductQR(req, res, next) {
     try {
       const { slug } = req.params;
-      const product = productModel.findBySlug(slug) || productModel.findByCode(slug);
+      const product = await productModel.findBySlug(slug) || await productModel.findByCode(slug);
       if (!product) {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
@@ -70,7 +70,7 @@ export const qrController = {
   async downloadProductQRPNG(req, res, next) {
     try {
       const { slug } = req.params;
-      const product = productModel.findBySlug(slug) || productModel.findByCode(slug);
+      const product = await productModel.findBySlug(slug) || await productModel.findByCode(slug);
       if (!product) {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
@@ -95,7 +95,7 @@ export const qrController = {
   async downloadProductQRSVG(req, res, next) {
     try {
       const { slug } = req.params;
-      const product = productModel.findBySlug(slug) || productModel.findByCode(slug);
+      const product = await productModel.findBySlug(slug) || await productModel.findByCode(slug);
       if (!product) {
         return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm.' });
       }
@@ -117,7 +117,7 @@ export const qrController = {
   async verifyCode(req, res, next) {
     try {
       const { code } = req.body;
-      const product = qrService.verifyScannedCode(code);
+      const product = await qrService.verifyScannedCode(code);
 
       if (!product) {
         return res.status(404).json({

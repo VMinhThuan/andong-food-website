@@ -48,8 +48,8 @@ class QRService {
   /**
    * Generates standard QR landing URL for a product
    */
-  getProductQRUrl(slugOrCode) {
-    const product = productModel.findBySlug(slugOrCode) || productModel.findByCode(slugOrCode);
+  async getProductQRUrl(slugOrCode) {
+    const product = await productModel.findBySlug(slugOrCode) || await productModel.findByCode(slugOrCode);
     if (!product) return null;
     return `${CLIENT_URL}/san-pham/${product.slug}`;
   }
@@ -57,7 +57,7 @@ class QRService {
   /**
    * Verifies scanned text / code and returns matching product info
    */
-  verifyScannedCode(codeOrUrl) {
+  async verifyScannedCode(codeOrUrl) {
     if (!codeOrUrl) return null;
 
     // Check if it's a URL ending in slug
@@ -65,19 +65,19 @@ class QRService {
     if (target.includes('/san-pham/')) {
       const parts = target.split('/san-pham/');
       const slug = parts[1].split(/[?#]/)[0];
-      return productModel.findBySlug(slug);
+      return await productModel.findBySlug(slug);
     }
 
     // Direct slug search
-    const bySlug = productModel.findBySlug(target);
+    const bySlug = await productModel.findBySlug(target);
     if (bySlug) return bySlug;
 
     // Direct product code search (e.g. AD-ST25-01)
-    const byCode = productModel.findByCode(target);
+    const byCode = await productModel.findByCode(target);
     if (byCode) return byCode;
 
     // Fuzzy search by name or summary
-    const all = productModel.findAll({ search: target });
+    const all = await productModel.findAll({ search: target });
     return all.length > 0 ? all[0] : null;
   }
 }
