@@ -54,7 +54,11 @@
   --earth-brown: var(--brand-brown);
   --earth-light: var(--brand-brown);
 
-  --bg-main: var(--bg-primary);
+  /* Theo docs/andofoodredesignspec.md mục 1 & 3: nền chủ đạo là kem ấm
+     --bg-secondary (#FFF8DD), không phải --bg-primary (#FFFEF2, kem nhạt
+     hơn). Đổi 1 alias này áp dụng cho toàn site vì mọi nơi đều đi qua
+     --bg-main, không sửa từng chỗ. */
+  --bg-main: var(--bg-secondary);
   --bg-dark: #0a331a;
   /* Deep forest green */
 
@@ -70,6 +74,10 @@
   --shadow-md: 0 8px 24px rgba(17, 156, 74, 0.08);
   --shadow-lg: 0 16px 40px rgba(17, 156, 74, 0.12);
   --shadow-gold: 0 8px 24px rgba(249, 157, 27, 0.25);
+  /* redesignspec mục 1 & 5: thẻ mặc định KHÔNG đổ bóng; khi cần (hover)
+     chỉ dùng bóng ấm mảnh này, không dùng bóng xanh to như trước */
+  --shadow-none: none;
+  --shadow-subtle: 0 6px 16px -10px rgba(74, 45, 15, 0.18);
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -288,13 +296,13 @@ h6 {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-none);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .card:hover {
-  box-shadow: 0 20px 40px rgba(17, 156, 74, 0.12);
+  box-shadow: var(--shadow-subtle);
   transform: translateY(-6px);
   border-color: rgba(249, 157, 27, 0.4);
 }
