@@ -319,32 +319,6 @@ export default function AboutPage() {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Watermark chữ AN ĐÔNG thay cho hoạ tiết cây lúa cũ (bị chê xấu dù đã
-            vẽ lại) — chữ lớn mờ kiểu logo nền, không phải minh hoạ botanical. */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}>
-          <span style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 800,
-            fontSize: 'clamp(4rem, 14vw, 14rem)',
-            color: 'var(--brand-green-dark)',
-            opacity: 0.07,
-            letterSpacing: '0.02em',
-            whiteSpace: 'nowrap',
-            userSelect: 'none'
-          }}>
-            AN ĐÔNG
-          </span>
-        </div>
-
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{
             display: 'grid',
@@ -504,31 +478,7 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                {/* Watermark chữ AN ĐÔNG thay cho hoạ tiết cây lúa cũ, thu nhỏ cho vừa thẻ trích dẫn */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'flex-end',
-                  overflow: 'hidden',
-                  pointerEvents: 'none'
-                }}>
-                  <span style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontWeight: 800,
-                    fontSize: '2.6rem',
-                    color: '#ffffff',
-                    opacity: 0.16,
-                    letterSpacing: '0.02em',
-                    whiteSpace: 'nowrap',
-                    marginRight: '-6px',
-                    marginBottom: '-8px',
-                    userSelect: 'none'
-                  }}>
-                    AN ĐÔNG
-                  </span>
-                </div>
+
               </div>
             </motion.div>
           </div>
