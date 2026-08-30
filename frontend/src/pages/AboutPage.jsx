@@ -319,69 +319,30 @@ export default function AboutPage() {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Elegant background rice stalk SVGs */}
+        {/* Watermark chữ AN ĐÔNG thay cho hoạ tiết cây lúa cũ (bị chê xấu dù đã
+            vẽ lại) — chữ lớn mờ kiểu logo nền, không phải minh hoạ botanical. */}
         <div style={{
           position: 'absolute',
-          top: '5%',
-          left: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.12,
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
           pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'rotate(-10deg)'
+          zIndex: 0
         }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-            <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
-            <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
-            <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
-            <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
-            <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
-            <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
-            <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
-            <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
-            <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
-            <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
-            <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
-            <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
-            <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
-            <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
-            <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
-            <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
-          </svg>
-        </div>
-
-        <div style={{
-          position: 'absolute',
-          bottom: '5%',
-          right: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.12,
-          pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'scaleX(-1) rotate(-15deg)'
-        }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-            <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
-            <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
-            <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
-            <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
-            <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
-            <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
-            <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
-            <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
-            <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
-            <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
-            <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
-            <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
-            <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
-            <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
-            <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
-            <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
-          </svg>
+          <span style={{
+            fontFamily: 'var(--font-serif)',
+            fontWeight: 800,
+            fontSize: 'clamp(4rem, 14vw, 14rem)',
+            color: 'var(--brand-green-dark)',
+            opacity: 0.07,
+            letterSpacing: '0.02em',
+            whiteSpace: 'nowrap',
+            userSelect: 'none'
+          }}>
+            AN ĐÔNG
+          </span>
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -543,36 +504,30 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                {/* Họa tiết bông lúa mờ ở góc phải */}
+                {/* Watermark chữ AN ĐÔNG thay cho hoạ tiết cây lúa cũ, thu nhỏ cho vừa thẻ trích dẫn */}
                 <div style={{
                   position: 'absolute',
-                  right: '10px',
-                  bottom: '-15px',
-                  width: '75px',
-                  height: '110px',
-                  opacity: 0.15,
-                  color: '#ffffff',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-end',
+                  overflow: 'hidden',
                   pointerEvents: 'none'
                 }}>
-                  <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-                    <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                    <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
-                    <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
-                    <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
-                    <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
-                    <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
-                    <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
-                    <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
-                    <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
-                    <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
-                    <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
-                    <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
-                    <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
-                    <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
-                    <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
-                    <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
-                    <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
-                  </svg>
+                  <span style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontWeight: 800,
+                    fontSize: '2.6rem',
+                    color: '#ffffff',
+                    opacity: 0.16,
+                    letterSpacing: '0.02em',
+                    whiteSpace: 'nowrap',
+                    marginRight: '-6px',
+                    marginBottom: '-8px',
+                    userSelect: 'none'
+                  }}>
+                    AN ĐÔNG
+                  </span>
                 </div>
               </div>
             </motion.div>
