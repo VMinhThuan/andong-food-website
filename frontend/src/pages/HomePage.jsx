@@ -1199,7 +1199,7 @@ export default function HomePage() {
               </div>
 
               <Link
-                to="/san-pham"
+                to="/quet-ma-qr"
                 className="btn btn-primary btn-lg"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               >
