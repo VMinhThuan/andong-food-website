@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, Compass, Wheat, Heart } from 'lucide-react';
 import { QualityProcessSection } from './HomePage';
+import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -308,6 +309,9 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Chuyển từ hero tối sang nội dung nền sáng */}
+      <RiceHorizonDivider idSuffix="-about-1" seed={23} variant="toGreen" />
+
       {/* 2. CÂU CHUYỆN TÊN GỌI (EDITORIAL 50/50 - REFINED PROPORTIONS) */}
       <section style={{
         padding: '95px 0',
@@ -315,57 +319,6 @@ export default function AboutPage() {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Elegant background rice stalk SVGs */}
-        <div style={{
-          position: 'absolute',
-          top: '5%',
-          left: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.05,
-          pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'rotate(-10deg)'
-        }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
-          </svg>
-        </div>
-
-        <div style={{
-          position: 'absolute',
-          bottom: '5%',
-          right: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.05,
-          pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'scaleX(-1) rotate(-15deg)'
-        }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
-          </svg>
-        </div>
-
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{
             display: 'grid',
@@ -525,27 +478,7 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                {/* Họa tiết bông lúa mờ ở góc phải */}
-                <div style={{
-                  position: 'absolute',
-                  right: '10px',
-                  bottom: '-15px',
-                  width: '75px',
-                  height: '110px',
-                  opacity: 0.15,
-                  color: '#ffffff',
-                  pointerEvents: 'none'
-                }}>
-                  <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-                    <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-                    <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-                    <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-                    <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-                    <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-                    <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-                  </svg>
-                </div>
+
               </div>
             </motion.div>
           </div>
@@ -592,7 +525,7 @@ export default function AboutPage() {
                       width: '56px',
                       height: '56px',
                       borderRadius: '50%',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       border: `2px solid ${item.borderColor}`,
                       display: 'flex',
                       alignItems: 'center',
@@ -939,7 +872,7 @@ export default function AboutPage() {
                 ].map((item) => (
                   <div key={item.name} style={{
                     padding: '16px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--bg-card)',
                     borderRadius: '16px',
                     border: '1px solid var(--border-light)',
                     boxShadow: 'var(--shadow-sm)'
@@ -967,7 +900,7 @@ export default function AboutPage() {
               viewport={{ once: false, amount: 0.25 }}
               variants={fadeInRight}
               style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--bg-card)',
                 padding: '40px 32px',
                 borderRadius: '24px',
                 border: '1px solid var(--border-light)',
@@ -1142,6 +1075,9 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Chuyển từ nội dung nền sáng sang khối tối cuối trang */}
+      <RiceHorizonDivider idSuffix="-about-2" seed={59} variant="toEarth" />
 
       <QualityProcessSection />
 

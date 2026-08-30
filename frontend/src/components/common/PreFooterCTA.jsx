@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 
 export default function PreFooterCTA() {
   return (
@@ -9,18 +9,27 @@ export default function PreFooterCTA() {
       position: 'relative',
       padding: '110px 0 115px',
       overflow: 'hidden',
-      backgroundImage: 'url(/assets/rice-sunrise.jpg)',
+      // rice-sunrise.jpg dùng lặp lại 9 lần khắp site, kể cả ngay ở
+      // QualityProcessSection phía trên component này trên HomePage/AboutPage —
+      // 2 khối ảnh giống hệt nhau nối liền nhau trông như lặp lại dù đã sửa màu
+      // phủ. Đổi sang rice-mekong.jpg (mới dùng 2 lần) để có nét riêng.
+      backgroundImage: 'url(/assets/rice-mekong.jpg)',
       backgroundSize: 'cover',
-      backgroundPosition: 'center 40%',
+      backgroundPosition: 'center 45%',
       backgroundColor: '#081c15',
       textAlign: 'center',
       color: '#ffffff'
     }}>
-      {/* Cinematic Brand Green Gradient Overlay */}
+      {/* Lớp phủ trước đây rgba(8,28,21,...) ở điểm cuối — trùng khớp tuyệt đối
+          với màu #081c15 mở đầu gradient của Footer ngay bên dưới (component
+          này nằm ngay trước Footer trên MỌI trang), nên luôn mất ranh giới dù
+          section phía trên là gì. Giữ tối ở giữa (chữ + nút nằm đây, cần
+          tương phản) nhưng ấm + nhạt dần ở điểm cuối để lộ tông vàng ruộng
+          lúa — tạo khác biệt rõ với xanh-đen lạnh của Footer. */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(180deg, rgba(8, 28, 21, 0.72) 0%, rgba(27, 67, 50, 0.65) 50%, rgba(8, 28, 21, 0.88) 100%)',
+        background: 'linear-gradient(180deg, rgba(8, 28, 21, 0.72) 0%, rgba(27, 67, 50, 0.65) 50%, rgba(20, 14, 4, 0.42) 100%)',
         zIndex: 1
       }} />
 
@@ -59,20 +68,42 @@ export default function PreFooterCTA() {
             Gạo ngon chuẩn giống, gửi trọn an lòng trong từng bữa cơm gia đình.
           </p>
 
-          <Link
-            to="/san-pham"
-            className="btn btn-gold btn-lg"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '16px 36px',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
-            }}
-          >
-            <span>Khám Phá Sản Phẩm</span>
-            <ArrowRight size={18} />
-          </Link>
+          {/* redesignspec.md mục 7: "thêm CTA mua hàng thật" — trước đây cả
+              trang này chỉ có nút Khám Phá, không có đường mua. Kênh mua
+              thật duy nhất đã xác nhận là gọi hotline (chưa có sàn TMĐT/cửa
+              hàng online), nên thêm nút gọi thẳng cạnh nút khám phá. */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', justifyContent: 'center' }}>
+            <a
+              href="tel:0944852464"
+              className="btn btn-gold btn-lg"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '16px 36px',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
+              }}
+            >
+              <Phone size={18} />
+              <span>Gọi Đặt Hàng: 0944 852 464</span>
+            </a>
+
+            <Link
+              to="/san-pham"
+              className="btn btn-outline-white btn-lg"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '16px 36px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(8px)'
+              }}
+            >
+              <span>Khám Phá Sản Phẩm</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

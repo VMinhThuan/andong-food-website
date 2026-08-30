@@ -63,7 +63,7 @@ export default function ScanQRPage() {
 
           {/* Alternative: Enter Product Code Manually */}
           <div style={{
-            backgroundColor: '#ffffff',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: '24px',
             padding: '28px',
             marginTop: '32px',

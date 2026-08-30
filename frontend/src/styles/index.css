@@ -11,7 +11,10 @@
   /* ===== BACKGROUND ===== */
   --bg-primary: #FFFEF2;
   --bg-secondary: #FFF8DD;
-  --bg-card: #FFFFFF;
+  /* Trắng tinh (#FFFFFF) chói hơn hẳn khi đặt cạnh nền kem đậm --bg-secondary
+     (#FFF8DD) — dùng lại --bg-primary (kem rất nhạt, gần trắng) làm màu card
+     thay vì trắng tuyệt đối, để card vẫn nổi khối nhưng không gắt mắt. */
+  --bg-card: var(--bg-primary);
 
   /* ===== TEXT ===== */
   --text-primary: #292A26;
@@ -54,7 +57,11 @@
   --earth-brown: var(--brand-brown);
   --earth-light: var(--brand-brown);
 
-  --bg-main: var(--bg-primary);
+  /* Theo docs/andofoodredesignspec.md mục 1 & 3: nền chủ đạo là kem ấm
+     --bg-secondary (#FFF8DD), không phải --bg-primary (#FFFEF2, kem nhạt
+     hơn). Đổi 1 alias này áp dụng cho toàn site vì mọi nơi đều đi qua
+     --bg-main, không sửa từng chỗ. */
+  --bg-main: var(--bg-secondary);
   --bg-dark: #0a331a;
   /* Deep forest green */
 
@@ -70,6 +77,10 @@
   --shadow-md: 0 8px 24px rgba(17, 156, 74, 0.08);
   --shadow-lg: 0 16px 40px rgba(17, 156, 74, 0.12);
   --shadow-gold: 0 8px 24px rgba(249, 157, 27, 0.25);
+  /* redesignspec mục 1 & 5: thẻ mặc định KHÔNG đổ bóng; khi cần (hover)
+     chỉ dùng bóng ấm mảnh này, không dùng bóng xanh to như trước */
+  --shadow-none: none;
+  --shadow-subtle: 0 6px 16px -10px rgba(74, 45, 15, 0.18);
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -288,13 +299,13 @@ h6 {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-none);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .card:hover {
-  box-shadow: 0 20px 40px rgba(17, 156, 74, 0.12);
+  box-shadow: var(--shadow-subtle);
   transform: translateY(-6px);
   border-color: rgba(249, 157, 27, 0.4);
 }
@@ -428,11 +439,6 @@ textarea.form-control {
   box-shadow: 0 8px 22px rgba(253, 185, 19, 0.3);
 }
 
-@media (max-width: 900px) {
-  .mini-footer-center {
-    display: none !important;
-  }
-}
 
 /* Footer Styling overrides */
 #main-full-footer a {
@@ -877,15 +883,6 @@ textarea {
     gap: 10px !important;
   }
 
-  .mini-footer__inner > :first-child {
-    max-width: 55%;
-  }
-
-  .mini-footer__inner > :last-child > span:not(:first-of-type),
-  .mini-footer__inner > :last-child > span:nth-of-type(1) {
-    display: none;
-  }
-
   .back-to-top-btn {
     right: 16px;
     bottom: 16px;
@@ -990,19 +987,6 @@ textarea {
   .footer-grid {
     grid-template-columns: 1fr !important;
     gap: 28px !important;
-  }
-
-  .mini-footer {
-    padding-inline: 14px !important;
-  }
-
-  .mini-footer__inner {
-    height: 48px !important;
-    font-size: .72rem !important;
-  }
-
-  .mini-footer__inner > :first-child {
-    max-width: 48%;
   }
 
   .brand-preloader__content img {

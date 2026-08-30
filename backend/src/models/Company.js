@@ -8,7 +8,10 @@ const companySchema = new mongoose.Schema({
     title: { type: String, default: 'Câu Chuyện Thương Hiệu An Đông' },
     meaning: { type: String, default: '“Đông” đại diện cho sự bền bỉ để đi qua những mùa khó khăn, còn “An” là sự bình an muốn dành cho người mình thương.' },
     content: { type: String, default: '' },
-    concept: { type: String, default: 'Bình An Ở Phía Đông (An tâm – Organic – Lý tưởng)' }
+    // Đã bỏ chữ "Organic" khỏi khái niệm thương hiệu: không được dùng khi chưa
+    // có chứng nhận hữu cơ (Nghị định 109/2018/NĐ-CP, TCVN 11041). Đồng bộ với
+    // giá trị seed thật trong data/seedData.js.
+    concept: { type: String, default: 'Bình An Ở Phía Đông (An tâm – An lành – An vui)' }
   },
   vision: { type: String, default: '' },
   mission: { type: String, default: '' },

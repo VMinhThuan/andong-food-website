@@ -89,7 +89,7 @@ export default function CameraScanner({ onScanSuccess }) {
   return (
     <div style={{ maxWidth: '500px', margin: '0 auto' }}>
       <div style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--bg-card)',
         borderRadius: '24px',
         padding: '24px',
         boxShadow: 'var(--shadow-md)',

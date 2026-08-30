@@ -22,6 +22,7 @@ import {
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
 import HeroBannerSlider from '../components/home/HeroBannerSlider';
+import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
 const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 import BannerGao4 from '../assets/brand/banner-gao-4.png';
@@ -195,7 +196,12 @@ export function QualityProcessSection() {
     <section style={{ padding: '100px 0 110px', position: 'relative', color: '#ffffff', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img src="/assets/rice-sunrise.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 50%, rgba(4,22,10,0.88) 100%)' }} />
+        {/* Lớp phủ trước đây tối đều (82-88%) khiến toàn bộ section gần như đen
+            tuyền, trùng màu với Footer ngay bên dưới — không phân biệt được ranh
+            giới 2 khối. Giữ tối ở phần trên (nơi có chữ, cần tương phản) nhưng
+            nhạt + ấm dần về phía đáy, để lộ tông vàng ruộng lúa thật — tạo khác
+            biệt rõ với màu xanh-đen lạnh của Footer ngay chỗ tiếp giáp. */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 40%, rgba(20,14,4,0.4) 100%)' }} />
       </div>
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.25 }} variants={fadeInUp} style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -252,6 +258,9 @@ export default function HomePage() {
       {/* 1. HERO BANNER SLIDER */}
       <HeroBannerSlider />
 
+      {/* Chuyển từ hero tối sang nội dung nền sáng */}
+      <RiceHorizonDivider idSuffix="-home-1" seed={11} variant="toGreen" />
+
       {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
       <section style={{
         padding: '95px 0',
@@ -260,57 +269,6 @@ export default function HomePage() {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Elegant background rice stalk SVGs */}
-        <div style={{
-          position: 'absolute',
-          top: '5%',
-          left: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.05,
-          pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'rotate(-10deg)'
-        }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
-          </svg>
-        </div>
-
-        <div style={{
-          position: 'absolute',
-          bottom: '5%',
-          right: '1%',
-          width: '180px',
-          height: '320px',
-          opacity: 0.05,
-          pointerEvents: 'none',
-          color: 'var(--brand-green-dark)',
-          transform: 'scaleX(-1) rotate(-15deg)'
-        }}>
-          <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
-          </svg>
-        </div>
-
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div style={{
             display: 'grid',
@@ -470,27 +428,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                {/* Họa tiết bông lúa mờ ở góc phải */}
-                <div style={{
-                  position: 'absolute',
-                  right: '10px',
-                  bottom: '-15px',
-                  width: '75px',
-                  height: '110px',
-                  opacity: 0.15,
-                  color: '#ffffff',
-                  pointerEvents: 'none'
-                }}>
-                  <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-                    <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-                    <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-                    <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-                    <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-                    <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-                    <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-                  </svg>
-                </div>
+
               </div>
             </motion.div>
           </div>
@@ -537,7 +475,7 @@ export default function HomePage() {
                       width: '56px',
                       height: '56px',
                       borderRadius: '50%',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       border: `2px solid ${item.borderColor}`,
                       display: 'flex',
                       alignItems: 'center',
@@ -579,7 +517,7 @@ export default function HomePage() {
       {/* 3. SẢN PHẨM AN ĐÔNG - 2-COLUMN PREMIUM LAYOUT */}
       <section style={{
         padding: '90px 0 100px',
-        backgroundColor: '#FFFEF7',
+        backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-light)',
         position: 'relative',
         overflow: 'hidden'
@@ -700,7 +638,7 @@ export default function HomePage() {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       borderRadius: '24px',
                       overflow: 'hidden',
                       border: '1px solid rgba(200, 223, 210, 0.7)',
@@ -966,7 +904,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. GIÁ TRỊ AN ĐÔNG (EDITORIAL 40/60) */}
-      <section style={{ padding: '100px 0', backgroundColor: '#ffffff' }}>
+      <section style={{ padding: '100px 0', backgroundColor: 'var(--bg-secondary)' }}>
         <div className="container">
           <div style={{
             display: 'grid',
@@ -1195,7 +1133,7 @@ export default function HomePage() {
               </div>
 
               <Link
-                to="/san-pham"
+                to="/quet-ma-qr"
                 className="btn btn-primary btn-lg"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               >
@@ -1213,7 +1151,7 @@ export default function HomePage() {
               style={{ position: 'relative' }}
             >
               <div style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: '30px',
                 padding: '36px 30px',
                 boxShadow: '0 20px 45px rgba(17, 156, 74, 0.08)',
@@ -1244,7 +1182,7 @@ export default function HomePage() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--bg-card)',
                     padding: '4px 10px',
                     borderRadius: '9999px',
                     border: '1px solid var(--border-color)',
@@ -1266,7 +1204,8 @@ export default function HomePage() {
                   border: '3px solid var(--border-color)',
                   position: 'relative'
                 }}>
-                  {/* Phone Screen */}
+                  {/* Phone Screen — giữ trắng thật (không dùng --bg-card) vì đây
+                      là mô phỏng màn hình điện thoại, cần trắng để đúng ẩn dụ */}
                   <div style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '16px',
@@ -1308,6 +1247,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Chuyển từ nội dung nền sáng sang khối tối cuối trang */}
+      <RiceHorizonDivider idSuffix="-home-2" seed={47} variant="toEarth" />
 
       {/* 7. TẦM NHÌN & SỨ MỆNH (REFINED SPLIT EDITORIAL 46/54 LAYOUT) */}
       <section style={{

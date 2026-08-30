@@ -16,7 +16,7 @@ const manufacturer = [
   'CÔNG TY TNHH AN ĐÔNG FOOD',
   'Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.',
   'Long Thanh Hamlet, Phuoc Long Commune, Ca Mau Province.',
-  'Email: andongfood@gmail.com',
+  'Email: andofoodvn@gmail.com',
   'Điện thoại / Phone: 0944 852 464'
 ];
 
@@ -30,7 +30,7 @@ const sharedOfficialFields = {
   originCountry: 'Việt Nam', originCountryEn: 'Made in Vietnam', barcode: '0 651294 378024 3',
   nutrition: { basis: '100 g', energy: '320–400 kcal', protein: '6–8%', fat: '0,5–0,8%', carbohydrate: '75–85%' },
   cookingSteps: cookingInstructions,
-  manufacturer: { name: 'CÔNG TY TNHH AN ĐÔNG FOOD', address: 'Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.', addressEn: 'Long Thanh Hamlet, Phuoc Long Commune, Ca Mau Province.', email: 'andongfood@gmail.com', phone: '0944 852 464' }
+  manufacturer: { name: 'CÔNG TY TNHH AN ĐÔNG FOOD', address: 'Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.', addressEn: 'Long Thanh Hamlet, Phuoc Long Commune, Ca Mau Province.', email: 'andofoodvn@gmail.com', phone: '0944 852 464' }
 };
 
 function content(number, englishName, introductionVi, introductionEn, ingredient) {
