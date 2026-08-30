@@ -53,7 +53,9 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="card" style={{ padding: '32px', backgroundColor: '#ffffff', borderTop: '3px solid var(--golden-light)' }}>
+        {/* backgroundColor bỏ khỏi style inline vì đè lên background: var(--bg-card)
+            của class .card (inline có độ ưu tiên cao hơn) — vô hiệu hoá fix chói thẻ trắng */}
+        <div className="card" style={{ padding: '32px', borderTop: '3px solid var(--golden-light)' }}>
 
             {error && (
               <div style={{

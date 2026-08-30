@@ -332,7 +332,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 1: PRODUCT MANAGEMENT */}
         {activeTab === 'products' && (
-          <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
+          <div className="card" style={{ padding: '28px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
               <div>
                 <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Danh Sách Sản Phẩm An Đông</h3>
@@ -416,7 +416,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 2: CONTACTS & CSKH */}
         {activeTab === 'contacts' && (
-          <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
+          <div className="card" style={{ padding: '28px' }}>
             <div style={{ marginBottom: '20px' }}>
               <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Yêu Cầu Liên Hệ & CSKH</h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', margin: '4px 0 0' }}>
@@ -515,7 +515,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 3: BATCH QR EXPORTER */}
         {activeTab === 'qr' && (
-          <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
+          <div className="card" style={{ padding: '28px' }}>
             <div style={{ marginBottom: '24px' }}>
               <div className="badge badge-gold" style={{ marginBottom: '6px' }}>BỘ TẠO & XUẤT QR IN ẤN BAO BÌ</div>
               <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', margin: 0 }}>Xuất Mã QR Cho Đơn Vị In Bao Bì</h3>
@@ -557,7 +557,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 4: USER MANAGEMENT (ADMIN ONLY) */}
         {isAdmin && activeTab === 'users' && (
-          <div className="card" style={{ padding: '28px', backgroundColor: '#ffffff' }}>
+          <div className="card" style={{ padding: '28px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
               {/* List of accounts */}
               <div>
@@ -685,7 +685,7 @@ export default function AdminDashboardPage() {
           padding: '20px'
         }}>
           <div style={{
-            backgroundColor: '#ffffff',
+            backgroundColor: 'var(--bg-card)',
             borderRadius: '24px',
             maxWidth: '620px',
             width: '100%',

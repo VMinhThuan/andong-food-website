@@ -302,7 +302,7 @@ export default function ProductDetailPage() {
 }
 
 function ProductFacts({ product }) {
-  const section = { padding: 'clamp(22px, 4vw, 36px)', marginBottom: '32px', background: '#fff', borderRadius: '24px', border: '1px solid #e7e0d2', boxShadow: '0 10px 30px rgba(27,67,50,.055)' };
+  const section = { padding: 'clamp(22px, 4vw, 36px)', marginBottom: '32px', background: 'var(--bg-card)', borderRadius: '24px', border: '1px solid var(--border-color)', boxShadow: '0 10px 30px rgba(27,67,50,.055)' };
   const heading = { fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.35rem, 2.5vw, 1.75rem)', color: 'var(--primary)', margin: '0 0 8px' };
   const subtitle = { fontSize: '.82rem', color: '#aa7a2d', fontWeight: 800, letterSpacing: '.08em', marginBottom: '10px' };
   const row = { padding: '15px 18px', borderBottom: '1px solid #eee8dc', verticalAlign: 'top', lineHeight: 1.65 };
