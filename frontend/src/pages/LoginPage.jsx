@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { ShieldCheck, UserCheck, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Lock, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
@@ -25,11 +25,6 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleQuickFill = (u, p) => {
-    setUsername(u);
-    setPassword(p);
   };
 
   return (
@@ -84,7 +79,7 @@ export default function LoginPage() {
                     type="text"
                     required
                     className="form-control"
-                    placeholder="admin hoặc nhanvien"
+                    placeholder="Nhập tài khoản được cấp"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     style={{ paddingLeft: '40px' }}
@@ -118,50 +113,6 @@ export default function LoginPage() {
               </button>
             </form>
 
-            {/* Quick Demo Accounts Helper */}
-            <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontWeight: '700', marginBottom: '10px', textTransform: 'uppercase' }}>
-                Tài Khoản Mẫu Thử Nghiệm (2 Roles):
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill('admin', 'admin123')}
-                  className="btn btn-outline-white btn-sm"
-                  style={{
-                    backgroundColor: 'var(--bg-main)',
-                    color: 'var(--primary)',
-                    border: '1px solid var(--border-color)',
-                    justifyContent: 'space-between',
-                    textAlign: 'left'
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={16} color="var(--primary)" /> <strong>Tài khoản quản trị:</strong> admin / admin123
-                  </span>
-                  <ArrowRight size={14} />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill('nhanvien', 'staff123')}
-                  className="btn btn-outline-white btn-sm"
-                  style={{
-                    backgroundColor: 'var(--bg-main)',
-                    color: 'var(--primary)',
-                    border: '1px solid var(--border-color)',
-                    justifyContent: 'space-between',
-                    textAlign: 'left'
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <UserCheck size={16} color="var(--primary-light)" /> <strong>Tài khoản nhân viên:</strong> nhanvien / staff123
-                  </span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

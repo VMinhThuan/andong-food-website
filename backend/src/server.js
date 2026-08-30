@@ -12,7 +12,7 @@ connectDB().then(() => {
     console.log(`🌾 An Đông Backend Server running at: http://localhost:${PORT}`);
     console.log(`🌾 API Root: http://localhost:${PORT}/api`);
     console.log(`🌾 Database: MongoDB (with Mongoose Models & Auto-Seed)`);
-    console.log(`🌾 Roles: Admin (admin / admin123), Staff (nhanvien / staff123)`);
+    console.log(`🌾 Roles: Admin and Staff authentication enabled`);
     console.log(`====================================================`);
   });
 });
