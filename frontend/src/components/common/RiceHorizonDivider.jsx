@@ -3,40 +3,62 @@ import React from 'react';
 /**
  * Dải phân cách "đồng lúa xé giấy" — theo docs/andofoodredesignspec.md mục 4.
  *
- * Khác với 2 bản trước (khối màu vẽ tay bằng toạ độ cố định, rồi ảnh thật
- * cắt bằng clip-path cố định), bản này tạo mép rách bằng SVG filter
- * (feTurbulence + feDisplacementMap) — mép rách sinh ra từ nhiễu ngẫu
- * nhiên có tham số, không phải toạ độ vẽ tay, nên không lặp khuôn giữa
- * các lần dùng và không cần ảnh gốc nào.
+ * Mép rách tạo bằng SVG filter (feTurbulence + feDisplacementMap), không
+ * phải toạ độ vẽ tay hay ảnh cắt — nên không lặp khuôn giữa các lần dùng.
  *
- * Lưu ý: <defs> chứa id (torn/grain/bandA) nên nếu dùng component này
- * nhiều hơn 1 lần trên cùng một trang, cần đổi idSuffix cho mỗi lần để
- * tránh trùng id trong DOM (SVG id phải duy nhất).
+ * 2 biến thể màu đáy (đúng gợi ý "bandB/bandC" trong spec — đổi đường cong
+ * + màu đáy tuỳ ngữ cảnh, không dùng lặp lại y hệt 1 dải ở mọi nơi):
+ *   - variant="toGreen" (mặc định): đáy xanh lúa tươi — dùng khi đoạn dưới
+ *     divider là nền sáng/nội dung thường.
+ *   - variant="toEarth": đáy nâu đất sẫm #2e2110 — dùng khi đoạn dưới
+ *     divider là khối nền tối (chuẩn bị vào footer hoặc section tối).
+ *
+ * Mỗi lần dùng nên đổi `seed` (số nguyên bất kỳ) để mép rách không giống
+ * hệt lần dùng khác trên cùng 1 trang.
+ *
+ * Lưu ý: <defs> chứa id (torn/grain/band) nên nếu dùng nhiều hơn 1 lần
+ * trên cùng một trang, mỗi lần cần 1 idSuffix khác nhau để tránh trùng id.
  */
-export default function RiceHorizonDivider({ className = '', height = 104, idSuffix = '' }) {
+const CURVES = {
+  toGreen: {
+    gold: 'M-30,34 C120,24 240,42 360,31 C480,21 600,40 720,29 C840,21 960,42 1080,32 C1200,24 1320,40 1470,30 L1470,130 L-30,130 Z',
+    brown: 'M-30,66 C160,57 300,74 460,64 C620,55 780,72 940,63 C1100,56 1280,73 1470,65 L1470,130 L-30,130 Z',
+    base: 'M-30,80 C150,73 320,88 480,78 C640,70 800,86 960,77 C1120,71 1300,87 1470,78 L1470,130 L-30,130 Z',
+    baseColor: '#2f9e43'
+  },
+  toEarth: {
+    gold: 'M-30,28 C180,40 340,18 500,32 C660,44 820,22 980,34 C1140,46 1300,24 1470,36 L1470,130 L-30,130 Z',
+    brown: 'M-30,60 C200,72 380,52 560,64 C740,74 900,56 1080,66 C1260,76 1360,58 1470,62 L1470,130 L-30,130 Z',
+    base: 'M-30,76 C190,86 360,68 540,80 C720,90 880,72 1060,82 C1240,92 1350,74 1470,80 L1470,130 L-30,130 Z',
+    baseColor: '#2e2110'
+  }
+};
+
+export default function RiceHorizonDivider({ className = '', height = 104, idSuffix = '', variant = 'toGreen', seed = 11 }) {
   const tornId = `torn${idSuffix}`;
   const grainId = `grain${idSuffix}`;
   const bandId = `bandA${idSuffix}`;
+  const curve = CURVES[variant] || CURVES.toGreen;
 
   return (
     <div className={`horizon-torn-divider ${className}`} style={{ display: 'block', lineHeight: 0, margin: 0, padding: 0 }}>
       <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
         <defs>
           <filter id={tornId} x="-3%" y="-40%" width="106%" height="180%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.09" numOctaves="4" seed="11" result="n" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.09" numOctaves="4" seed={seed} result="n" />
             <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" />
           </filter>
           <filter id={grainId}>
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
             <feColorMatrix type="matrix" values="0 0 0 0 0.29  0 0 0 0 0.19  0 0 0 0 0.07  0 0 0 0.5 0" />
           </filter>
-          {/* Lát cắt: trời kem -> vàng lớn -> nâu (hàng cây) mỏng -> ruộng xanh */}
+          {/* Lát cắt: trời kem -> vàng lớn -> nâu (hàng cây) mỏng -> đáy (xanh lúa hoặc đất) */}
           <symbol id={bandId} viewBox="0 0 1440 100" preserveAspectRatio="none">
             <g filter={`url(#${tornId})`}>
               <rect x="-30" y="-30" width="1500" height="160" fill="#FFF8DD" />
-              <path d="M-30,34 C120,24 240,42 360,31 C480,21 600,40 720,29 C840,21 960,42 1080,32 C1200,24 1320,40 1470,30 L1470,130 L-30,130 Z" fill="#fdb913" />
-              <path d="M-30,66 C160,57 300,74 460,64 C620,55 780,72 940,63 C1100,56 1280,73 1470,65 L1470,130 L-30,130 Z" fill="#754c1f" />
-              <path d="M-30,80 C150,73 320,88 480,78 C640,70 800,86 960,77 C1120,71 1300,87 1470,78 L1470,130 L-30,130 Z" fill="#2f9e43" />
+              <path d={curve.gold} fill="#fdb913" />
+              <path d={curve.brown} fill="#754c1f" />
+              <path d={curve.base} fill={curve.baseColor} />
             </g>
             <rect width="1440" height="100" filter={`url(#${grainId})`} opacity="0.05" />
           </symbol>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, Compass, Wheat, Heart } from 'lucide-react';
 import { QualityProcessSection } from './HomePage';
+import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -307,6 +308,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Chuyển từ hero tối sang nội dung nền sáng */}
+      <RiceHorizonDivider idSuffix="-about-1" seed={23} variant="toGreen" />
 
       {/* 2. CÂU CHUYỆN TÊN GỌI (EDITORIAL 50/50 - REFINED PROPORTIONS) */}
       <section style={{
@@ -1142,6 +1146,9 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Chuyển từ nội dung nền sáng sang khối tối cuối trang */}
+      <RiceHorizonDivider idSuffix="-about-2" seed={59} variant="toEarth" />
 
       <QualityProcessSection />
 

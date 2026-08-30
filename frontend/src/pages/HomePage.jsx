@@ -22,6 +22,7 @@ import {
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
 import HeroBannerSlider from '../components/home/HeroBannerSlider';
+import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
 const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 import BannerGao4 from '../assets/brand/banner-gao-4.png';
@@ -251,6 +252,9 @@ export default function HomePage() {
     <div className="home-page" style={{ overflow: 'hidden' }}>
       {/* 1. HERO BANNER SLIDER */}
       <HeroBannerSlider />
+
+      {/* Chuyển từ hero tối sang nội dung nền sáng */}
+      <RiceHorizonDivider idSuffix="-home-1" seed={11} variant="toGreen" />
 
       {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
       <section style={{
@@ -1308,6 +1312,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Chuyển từ nội dung nền sáng sang khối tối cuối trang */}
+      <RiceHorizonDivider idSuffix="-home-2" seed={47} variant="toEarth" />
 
       {/* 7. TẦM NHÌN & SỨ MỆNH (REFINED SPLIT EDITORIAL 46/54 LAYOUT) */}
       <section style={{
