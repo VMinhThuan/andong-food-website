@@ -596,7 +596,7 @@ export default function AboutPage() {
                       width: '56px',
                       height: '56px',
                       borderRadius: '50%',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       border: `2px solid ${item.borderColor}`,
                       display: 'flex',
                       alignItems: 'center',
@@ -943,7 +943,7 @@ export default function AboutPage() {
                 ].map((item) => (
                   <div key={item.name} style={{
                     padding: '16px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--bg-card)',
                     borderRadius: '16px',
                     border: '1px solid var(--border-light)',
                     boxShadow: 'var(--shadow-sm)'
@@ -971,7 +971,7 @@ export default function AboutPage() {
               viewport={{ once: false, amount: 0.25 }}
               variants={fadeInRight}
               style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--bg-card)',
                 padding: '40px 32px',
                 borderRadius: '24px',
                 border: '1px solid var(--border-light)',

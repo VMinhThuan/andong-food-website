@@ -541,7 +541,7 @@ export default function HomePage() {
                       width: '56px',
                       height: '56px',
                       borderRadius: '50%',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       border: `2px solid ${item.borderColor}`,
                       display: 'flex',
                       alignItems: 'center',
@@ -704,7 +704,7 @@ export default function HomePage() {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'var(--bg-card)',
                       borderRadius: '24px',
                       overflow: 'hidden',
                       border: '1px solid rgba(200, 223, 210, 0.7)',
@@ -1217,7 +1217,7 @@ export default function HomePage() {
               style={{ position: 'relative' }}
             >
               <div style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: '30px',
                 padding: '36px 30px',
                 boxShadow: '0 20px 45px rgba(17, 156, 74, 0.08)',
@@ -1248,7 +1248,7 @@ export default function HomePage() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--bg-card)',
                     padding: '4px 10px',
                     borderRadius: '9999px',
                     border: '1px solid var(--border-color)',
@@ -1270,7 +1270,8 @@ export default function HomePage() {
                   border: '3px solid var(--border-color)',
                   position: 'relative'
                 }}>
-                  {/* Phone Screen */}
+                  {/* Phone Screen — giữ trắng thật (không dùng --bg-card) vì đây
+                      là mô phỏng màn hình điện thoại, cần trắng để đúng ẩn dụ */}
                   <div style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '16px',

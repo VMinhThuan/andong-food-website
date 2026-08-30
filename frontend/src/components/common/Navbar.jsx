@@ -219,7 +219,7 @@ export default function Navbar() {
                     top: '52px',
                     right: 0,
                     width: '240px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--bg-card)',
                     borderRadius: '18px',
                     padding: '16px',
                     boxShadow: '0 15px 40px rgba(0,0,0,0.15)',
@@ -310,7 +310,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             style={{
-              backgroundColor: '#ffffff',
+              backgroundColor: 'var(--bg-card)',
               borderTop: '1px solid var(--border-color)',
               padding: '18px 20px',
               display: 'flex',

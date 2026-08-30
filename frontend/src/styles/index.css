@@ -11,7 +11,10 @@
   /* ===== BACKGROUND ===== */
   --bg-primary: #FFFEF2;
   --bg-secondary: #FFF8DD;
-  --bg-card: #FFFFFF;
+  /* Trắng tinh (#FFFFFF) chói hơn hẳn khi đặt cạnh nền kem đậm --bg-secondary
+     (#FFF8DD) — dùng lại --bg-primary (kem rất nhạt, gần trắng) làm màu card
+     thay vì trắng tuyệt đối, để card vẫn nổi khối nhưng không gắt mắt. */
+  --bg-card: var(--bg-primary);
 
   /* ===== TEXT ===== */
   --text-primary: #292A26;

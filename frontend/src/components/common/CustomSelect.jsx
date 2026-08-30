@@ -86,7 +86,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
               width: 'max-content',
               maxWidth: '360px',
               zIndex: 1200,
-              backgroundColor: '#ffffff',
+              backgroundColor: 'var(--bg-card)',
               borderRadius: '16px',
               border: '1px solid var(--border-color)',
               boxShadow: '0 16px 36px rgba(17, 156, 74, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04)',

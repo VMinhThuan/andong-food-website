@@ -165,7 +165,7 @@ export default function ContactPage() {
                 {/* Item 1: Hotline */}
                 <div style={{
                   padding: '20px 22px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   borderRadius: '18px',
                   border: '1px solid var(--border-color)',
                   boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
@@ -217,7 +217,7 @@ export default function ContactPage() {
                 {/* Item 2: Email */}
                 <div style={{
                   padding: '20px 22px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   borderRadius: '18px',
                   border: '1px solid var(--border-color)',
                   boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
@@ -253,7 +253,7 @@ export default function ContactPage() {
                 {/* Item 3: Working Hours */}
                 <div style={{
                   padding: '20px 22px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   borderRadius: '18px',
                   border: '1px solid var(--border-color)',
                   boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
@@ -286,7 +286,7 @@ export default function ContactPage() {
                 {/* Item 4: Address */}
                 <div style={{
                   padding: '20px 22px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   borderRadius: '18px',
                   border: '1px solid var(--border-color)',
                   boxShadow: '0 4px 18px rgba(17, 156, 74, 0.04)',
@@ -326,7 +326,7 @@ export default function ContactPage() {
               variants={fadeInRight}
             >
               <div style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: '26px',
                 padding: '42px clamp(24px, 4vw, 48px)',
                 border: '1px solid var(--border-color)',
@@ -568,7 +568,7 @@ export default function ContactPage() {
       {/* 3. GHÉ THĂM AN ĐÔNG (GOOGLE MAP + TRỤ SỞ 50/50) */}
       <section style={{
         padding: '80px 0 90px',
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--bg-card)',
         borderTop: '1px solid var(--border-color)'
       }}>
         <div className="container">
@@ -681,7 +681,7 @@ export default function ContactPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',
@@ -703,7 +703,7 @@ export default function ContactPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',
@@ -726,7 +726,7 @@ export default function ContactPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--bg-card)',
                   border: '1px solid var(--border-color)',
                   padding: '10px 20px',
                   borderRadius: '9999px',

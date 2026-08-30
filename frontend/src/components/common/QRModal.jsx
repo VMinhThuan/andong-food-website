@@ -42,7 +42,7 @@ export default function QRModal({ product, isOpen, onClose }) {
       padding: '20px'
     }}>
       <div style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--bg-card)',
         borderRadius: '20px',
         maxWidth: '440px',
         width: '100%',
@@ -79,7 +79,7 @@ export default function QRModal({ product, isOpen, onClose }) {
         </div>
 
         <div style={{
-          backgroundColor: '#ffffff',
+          backgroundColor: 'var(--bg-card)',
           border: '1px solid var(--border-color)',
           borderRadius: '14px',
           padding: '18px',
