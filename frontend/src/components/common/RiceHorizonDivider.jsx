@@ -68,9 +68,14 @@ export default function RiceHorizonDivider({ className = '', height = 104, overl
               màu section phía trên hiện xuyên qua các khe hở của mép rách. */}
           <symbol id={bandId} viewBox="0 0 1440 100" preserveAspectRatio="none">
             <g filter={`url(#${tornId})`}>
-              <path d={curve.gold} fill="#fdb913" />
-              <path d={curve.brown} fill="#754c1f" />
-              <path d={curve.base} fill={curve.baseColor} />
+              {/* stroke cùng màu fill để vá các khe hở li ti mà feDisplacementMap
+                  tạo ra khi độ lệch (scale=22) đẩy 2 điểm gần nhau trên cùng 1
+                  path tách rời — không có backing kem đặc phía sau nên khe hở
+                  lộ ra thành đường trắng mảnh dọc mép, thay vì vô hình như bản
+                  cũ. Đã tự kiểm tra 6px chưa đủ, 10px vá kín hoàn toàn. */}
+              <path d={curve.gold} fill="#fdb913" stroke="#fdb913" strokeWidth="10" />
+              <path d={curve.brown} fill="#754c1f" stroke="#754c1f" strokeWidth="10" />
+              <path d={curve.base} fill={curve.baseColor} stroke={curve.baseColor} strokeWidth="10" />
             </g>
             <rect width="1440" height="100" filter={`url(#${grainId})`} opacity="0.05" />
           </symbol>
