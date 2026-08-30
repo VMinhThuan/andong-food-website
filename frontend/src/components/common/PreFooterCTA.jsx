@@ -16,11 +16,16 @@ export default function PreFooterCTA() {
       textAlign: 'center',
       color: '#ffffff'
     }}>
-      {/* Cinematic Brand Green Gradient Overlay */}
+      {/* Lớp phủ trước đây rgba(8,28,21,...) ở điểm cuối — trùng khớp tuyệt đối
+          với màu #081c15 mở đầu gradient của Footer ngay bên dưới (component
+          này nằm ngay trước Footer trên MỌI trang), nên luôn mất ranh giới dù
+          section phía trên là gì. Giữ tối ở giữa (chữ + nút nằm đây, cần
+          tương phản) nhưng ấm + nhạt dần ở điểm cuối để lộ tông vàng ruộng
+          lúa — tạo khác biệt rõ với xanh-đen lạnh của Footer. */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(180deg, rgba(8, 28, 21, 0.72) 0%, rgba(27, 67, 50, 0.65) 50%, rgba(8, 28, 21, 0.88) 100%)',
+        background: 'linear-gradient(180deg, rgba(8, 28, 21, 0.72) 0%, rgba(27, 67, 50, 0.65) 50%, rgba(20, 14, 4, 0.42) 100%)',
         zIndex: 1
       }} />
 

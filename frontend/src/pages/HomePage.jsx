@@ -282,16 +282,23 @@ export default function HomePage() {
           transform: 'rotate(-10deg)'
         }}>
           <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
+            <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
+            <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
+            <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
+            <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
+            <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
+            <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
+            <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
+            <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
+            <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
+            <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
+            <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
+            <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
+            <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
+            <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
+            <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
+            <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
           </svg>
         </div>
 
@@ -307,16 +314,23 @@ export default function HomePage() {
           transform: 'scaleX(-1) rotate(-15deg)'
         }}>
           <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-            <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-            <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-            <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-            <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-            <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-            <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
-            <path d="M 58,53 C 64,58 67,68 64,73 C 61,68 57,58 58,53 Z" />
-            <path d="M 50,78 C 56,83 59,93 56,98 C 53,93 49,83 50,78 Z" />
-            <path d="M 20,160 C 50,150 80,110 90,80 C 75,100 45,130 20,160 Z" />
+            <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
+            <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
+            <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
+            <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
+            <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
+            <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
+            <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
+            <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
+            <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
+            <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
+            <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
+            <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
+            <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
+            <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
+            <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
+            <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
           </svg>
         </div>
 
@@ -491,13 +505,23 @@ export default function HomePage() {
                   pointerEvents: 'none'
                 }}>
                   <svg viewBox="0 0 100 200" width="100%" height="100%" fill="currentColor">
-                    <path d="M 10,200 C 30,120 40,60 70,10" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <path d="M 70,10 C 65,15 62,25 65,30 C 68,25 72,15 70,10 Z" />
-                    <path d="M 62,35 C 57,40 54,50 57,55 C 60,50 64,40 62,35 Z" />
-                    <path d="M 54,60 C 49,65 46,75 49,80 C 52,75 56,65 54,60 Z" />
-                    <path d="M 46,85 C 41,90 38,100 41,105 C 44,100 48,90 46,85 Z" />
-                    <path d="M 70,10 C 75,15 78,25 75,30 C 72,25 68,15 70,10 Z" />
-                    <path d="M 66,28 C 72,33 75,43 72,48 C 69,43 65,33 66,28 Z" />
+                    <path d="M 20,196 C 24,150 26,108 34,74 C 44,34 62,20 78,26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <ellipse cx="70" cy="18" rx="9" ry="3.4" transform="rotate(-25 70 18)" />
+                    <ellipse cx="76" cy="27" rx="9" ry="3.4" transform="rotate(10 76 27)" />
+                    <ellipse cx="75" cy="38" rx="9.5" ry="3.6" transform="rotate(35 75 38)" />
+                    <ellipse cx="69" cy="48" rx="10" ry="3.7" transform="rotate(55 69 48)" />
+                    <ellipse cx="60" cy="56" rx="10" ry="3.7" transform="rotate(75 60 56)" />
+                    <ellipse cx="50" cy="62" rx="10.5" ry="3.8" transform="rotate(88 50 62)" />
+                    <ellipse cx="40" cy="68" rx="10.5" ry="3.8" transform="rotate(100 40 68)" />
+                    <ellipse cx="31" cy="76" rx="10" ry="3.6" transform="rotate(108 31 76)" />
+                    <ellipse cx="24" cy="86" rx="9.5" ry="3.5" transform="rotate(115 24 86)" />
+                    <ellipse cx="72" cy="20" rx="7" ry="2.7" transform="rotate(-45 72 20)" />
+                    <ellipse cx="80" cy="33" rx="7" ry="2.7" transform="rotate(-5 80 33)" />
+                    <ellipse cx="78" cy="45" rx="7.5" ry="2.8" transform="rotate(18 78 45)" />
+                    <ellipse cx="70" cy="55" rx="7.5" ry="2.8" transform="rotate(40 70 55)" />
+                    <ellipse cx="59" cy="63" rx="7.5" ry="2.8" transform="rotate(60 59 63)" />
+                    <ellipse cx="47" cy="70" rx="7.5" ry="2.8" transform="rotate(75 47 70)" />
+                    <ellipse cx="36" cy="78" rx="7" ry="2.6" transform="rotate(85 36 78)" />
                   </svg>
                 </div>
               </div>
