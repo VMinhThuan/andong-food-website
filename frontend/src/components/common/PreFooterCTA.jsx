@@ -9,9 +9,13 @@ export default function PreFooterCTA() {
       position: 'relative',
       padding: '110px 0 115px',
       overflow: 'hidden',
-      backgroundImage: 'url(/assets/rice-sunrise.jpg)',
+      // rice-sunrise.jpg dùng lặp lại 9 lần khắp site, kể cả ngay ở
+      // QualityProcessSection phía trên component này trên HomePage/AboutPage —
+      // 2 khối ảnh giống hệt nhau nối liền nhau trông như lặp lại dù đã sửa màu
+      // phủ. Đổi sang rice-mekong.jpg (mới dùng 2 lần) để có nét riêng.
+      backgroundImage: 'url(/assets/rice-mekong.jpg)',
       backgroundSize: 'cover',
-      backgroundPosition: 'center 40%',
+      backgroundPosition: 'center 45%',
       backgroundColor: '#081c15',
       textAlign: 'center',
       color: '#ffffff'
