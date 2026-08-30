@@ -1,56 +1,55 @@
 import React from 'react';
 
-const DEFAULT_IMAGE = '/assets/rice-sunrise.jpg';
-
 /**
- * Đồ họa bổ trợ chính thức của An Đông (Hồ sơ thương hiệu, mục 2.4):
- * "Yếu tố đồ họa được khai thác từ sự phân lớp của khung cảnh đồng lúa khi
- * hoàng hôn hoặc bình minh... dùng để làm khung chứa hình ảnh và có chức
- * năng phân chia bố cục." Trang minh họa đặt song song một hình khối phẳng
- * và một tấm ảnh đồng lúa hoàng hôn thật.
+ * Dải phân cách "đồng lúa xé giấy" — theo docs/andofoodredesignspec.md mục 4.
  *
- * Bản trước dùng khối màu phẳng (xem lịch sử component) nhưng bị đánh giá
- * xấu trên thực tế. Bản này đổi sang dùng ảnh thật, cắt theo đúng đường
- * viền gãy góc kiểu "xé giấy" đã tinh chỉnh — giữ đúng ý tưởng "khung chứa
- * hình ảnh" của brand book, ưu tiên độ đẹp hơn là bám cứng cấu trúc 3 dải
- * màu trong bản minh họa gốc.
+ * Khác với 2 bản trước (khối màu vẽ tay bằng toạ độ cố định, rồi ảnh thật
+ * cắt bằng clip-path cố định), bản này tạo mép rách bằng SVG filter
+ * (feTurbulence + feDisplacementMap) — mép rách sinh ra từ nhiễu ngẫu
+ * nhiên có tham số, không phải toạ độ vẽ tay, nên không lặp khuôn giữa
+ * các lần dùng và không cần ảnh gốc nào.
  *
- * Toạ độ viền dùng đơn vị %, không phải px cố định, để co giãn đúng theo
- * mọi kích thước khung chứa — đã tự kiểm tra bằng Chrome headless ở khổ
- * desktop (1440px) và mobile (390px) trước khi đưa vào đây.
+ * Lưu ý: <defs> chứa id (torn/grain/bandA) nên nếu dùng component này
+ * nhiều hơn 1 lần trên cùng một trang, cần đổi idSuffix cho mỗi lần để
+ * tránh trùng id trong DOM (SVG id phải duy nhất).
  */
-const EDGE_POINTS = [
-  [0, 80], [12.5, 70], [31.94, 86.25], [51.39, 65], [61.11, 82.5], [81.94, 67.5], [100, 85]
-];
-
-export default function RiceHorizonDivider({ invert = false, className = '', image = DEFAULT_IMAGE, height = 150 }) {
-  // invert: lật dọc đường viền (răng cưa quay lên trên) để dùng khi đi từ
-  // nền sáng vào nền tối, thay vì xoay nguyên tấm ảnh 180° (sẽ làm ảnh lộn ngược).
-  const points = invert ? EDGE_POINTS.map(([x, y]) => [x, 100 - y]) : EDGE_POINTS;
-  const clipPath = invert
-    ? `polygon(0 100%, 100% 100%, ${[...points].reverse().map(([x, y]) => `${x}% ${y}%`).join(', ')})`
-    : `polygon(0 0, 100% 0, ${[...points].reverse().map(([x, y]) => `${x}% ${y}%`).join(', ')})`;
+export default function RiceHorizonDivider({ className = '', height = 104, idSuffix = '' }) {
+  const tornId = `torn${idSuffix}`;
+  const grainId = `grain${idSuffix}`;
+  const bandId = `bandA${idSuffix}`;
 
   return (
-    <div
-      className={`horizon-photo-divider ${className}`}
-      style={{ position: 'relative', height: `${height}px`, overflow: 'hidden', margin: 0, padding: 0 }}
-    >
-      <img
-        src={image}
-        alt=""
+    <div className={`horizon-torn-divider ${className}`} style={{ display: 'block', lineHeight: 0, margin: 0, padding: 0 }}>
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+        <defs>
+          <filter id={tornId} x="-3%" y="-40%" width="106%" height="180%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.09" numOctaves="4" seed="11" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          <filter id={grainId}>
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0.29  0 0 0 0 0.19  0 0 0 0 0.07  0 0 0 0.5 0" />
+          </filter>
+          {/* Lát cắt: trời kem -> vàng lớn -> nâu (hàng cây) mỏng -> ruộng xanh */}
+          <symbol id={bandId} viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <g filter={`url(#${tornId})`}>
+              <rect x="-30" y="-30" width="1500" height="160" fill="#FFF8DD" />
+              <path d="M-30,34 C120,24 240,42 360,31 C480,21 600,40 720,29 C840,21 960,42 1080,32 C1200,24 1320,40 1470,30 L1470,130 L-30,130 Z" fill="#fdb913" />
+              <path d="M-30,66 C160,57 300,74 460,64 C620,55 780,72 940,63 C1100,56 1280,73 1470,65 L1470,130 L-30,130 Z" fill="#754c1f" />
+              <path d="M-30,80 C150,73 320,88 480,78 C640,70 800,86 960,77 C1120,71 1300,87 1470,78 L1470,130 L-30,130 Z" fill="#2f9e43" />
+            </g>
+            <rect width="1440" height="100" filter={`url(#${grainId})`} opacity="0.05" />
+          </symbol>
+        </defs>
+      </svg>
+
+      <svg
+        className="band"
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center 60%',
-          clipPath,
-          display: 'block'
-        }}
-      />
+        style={{ display: 'block', width: '100%', height: `${height}px`, filter: 'drop-shadow(0 4px 3px rgba(74,45,15,.16))' }}
+      >
+        <use href={`#${bandId}`} />
+      </svg>
     </div>
   );
 }
