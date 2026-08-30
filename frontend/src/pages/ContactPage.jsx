@@ -588,7 +588,14 @@ export default function ContactPage() {
             }}>
               <iframe
                 title="Bản đồ chỉ đường An Đông"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669658423711!2d106.66698437583802!3d10.759917059496677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ee30d4a974b%3A0xc3cf9c9a6a8b792e!2zQW4gxJDDtG5nLCBRdeG6rW4gNSwgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+                // URL cũ nhúng toạ độ của "An Đông, Quận 5, TP.HCM" — một địa
+                // danh trùng tên thương hiệu, cách trụ sở thật (Cà Mau) hàng
+                // trăm km. Đổi sang embed dạng tìm kiếm theo đúng địa chỉ thật
+                // (không tự đoán toạ độ/place ID) để Google tự định vị chính
+                // xác. CẦN ĐỐI CHIẾU: nhờ ai đó mở link này trên trình duyệt
+                // thật để xác nhận ghim đúng vị trí — môi trường kiểm tra tự
+                // động ở đây bị chặn tải ảnh bản đồ nên chưa thấy được hình.
+                src="https://www.google.com/maps?q=%E1%BA%A4p%20Long%20Th%C3%A0nh%2C%20x%C3%A3%20Ph%C6%B0%E1%BB%9Bc%20Long%2C%20t%E1%BB%89nh%20C%C3%A0%20Mau%2C%20Vi%E1%BB%87t%20Nam&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, display: 'block' }}
