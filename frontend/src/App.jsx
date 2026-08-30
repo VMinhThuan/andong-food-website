@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -21,21 +21,14 @@ export default function App() {
 }
 
 function AppContent() {
-  const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
 
-  // Use the same brand loading screen for every page navigation.
-  useEffect(() => {
-    setIsLoading(true);
-  }, [location.pathname]);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
-        {/* Tự động cuộn trang lên đầu mỗi khi chuyển tab / route */}
         <ScrollToTop />
 
-        {/* Luxury Brand Preloader on initial load */}
-        {isLoading && <BrandPreloader key={location.pathname} onFinish={() => setIsLoading(false)} />}
+        {isLoading && <BrandPreloader onFinish={() => setIsLoading(false)} />}
 
         <div className="app-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
           {/* Global Scroll Reading Progress Bar & Back to top button */}
