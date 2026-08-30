@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
-import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
 const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 
