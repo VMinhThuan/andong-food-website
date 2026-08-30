@@ -113,6 +113,17 @@ export const api = {
     return data;
   },
 
+  async uploadProductImage(image, fileName) {
+    const res = await fetch(`${API_BASE}/uploads/product-image`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ image, fileName })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Không thể tải ảnh sản phẩm lên.');
+    return data.data;
+  },
+
   // Categories
   async getCategories() {
     try {

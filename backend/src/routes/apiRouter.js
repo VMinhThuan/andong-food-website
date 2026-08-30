@@ -6,6 +6,7 @@ import categoryRoutes from './categoryRoutes.js';
 import contactRoutes from './contactRoutes.js';
 import companyRoutes from './companyRoutes.js';
 import qrRoutes from './qrRoutes.js';
+import uploadRoutes from './uploadRoutes.js';
 
 const apiRouter = Router();
 
@@ -15,6 +16,7 @@ apiRouter.use('/categories', categoryRoutes);
 apiRouter.use('/contacts', contactRoutes);
 apiRouter.use('/company', companyRoutes);
 apiRouter.use('/qr', qrRoutes);
+apiRouter.use('/uploads', uploadRoutes);
 
 apiRouter.get('/health', (req, res) => {
   res.json({

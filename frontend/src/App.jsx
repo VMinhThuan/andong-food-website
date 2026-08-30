@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -16,11 +16,17 @@ import ScanQRPage from './pages/ScanQRPage';
 import LoginPage from './pages/LoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 
-export default function App() {
-  return <AuthProvider><Router><AppContent /></Router></AuthProvider>;
+function isAdminHostname() {
+  if (typeof window === 'undefined') return false;
+  const hostname = window.location.hostname;
+  return hostname === 'admin.andofood.vn' || hostname.startsWith('admin.');
 }
 
-function AppContent() {
+export default function App() {
+  return <AuthProvider><Router>{isAdminHostname() ? <AdminAppContent /> : <PublicAppContent />}</Router></AuthProvider>;
+}
+
+function PublicAppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
@@ -50,8 +56,8 @@ function AppContent() {
               <Route path="/san-pham/:slug" element={<ProductDetailPage />} />
               <Route path="/lien-he" element={<ContactPage />} />
               <Route path="/quet-ma-qr" element={<ScanQRPage />} />
-              <Route path="/dang-nhap" element={<LoginPage />} />
-              <Route path="/quan-tri" element={<AdminDashboardPage />} />
+              <Route path="/dang-nhap" element={<Navigate to="/" replace />} />
+              <Route path="/quan-tri" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
           <PreFooterCTA />
@@ -59,4 +65,15 @@ function AppContent() {
         </div>
     </>
   );
+}
+
+function AdminAppContent() {
+  return <div className="admin-app-layout">
+    <Routes>
+      <Route path="/dang-nhap" element={<LoginPage />} />
+      <Route path="/quan-tri" element={<AdminDashboardPage />} />
+      <Route path="/" element={<Navigate to="/quan-tri" replace />} />
+      <Route path="*" element={<Navigate to="/quan-tri" replace />} />
+    </Routes>
+  </div>;
 }

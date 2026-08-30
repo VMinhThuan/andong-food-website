@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ShieldCheck, UserCheck, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
+import { Lock, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
@@ -28,11 +28,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickFill = (u, p) => {
-    setUsername(u);
-    setPassword(p);
-  };
-
   return (
     <div className="login-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '85vh' }}>
       <section style={{
@@ -43,13 +38,13 @@ export default function LoginPage() {
       }}>
         <div className="container">
           <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
-            HỆ THỐNG NỘI BỘ
+            CỔNG QUẢN TRỊ
           </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--golden-pale)' }}>
-            Đăng Nhập Quản Trị & Nhân Viên
+            Đăng Nhập Quản Trị
           </h1>
           <p style={{ color: '#d1e3d9', fontSize: '0.95rem' }}>
-            Cổng làm việc dành cho Quản trị viên (Admin) và Nhân viên CSKH An Đông
+            Cổng quản lý danh mục sản phẩm dành cho Quản trị viên An Đông
           </p>
         </div>
       </section>
@@ -95,7 +90,7 @@ export default function LoginPage() {
                     type="text"
                     required
                     className="form-control"
-                    placeholder="admin hoặc nhanvien"
+                    placeholder="Tên đăng nhập quản trị"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     style={{ paddingLeft: '40px' }}
@@ -129,50 +124,6 @@ export default function LoginPage() {
               </button>
             </form>
 
-            {/* Quick Demo Accounts Helper */}
-            <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontWeight: '700', marginBottom: '10px', textTransform: 'uppercase' }}>
-                Tài Khoản Mẫu Thử Nghiệm (2 Roles):
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill('admin', 'admin123')}
-                  className="btn btn-outline-white btn-sm"
-                  style={{
-                    backgroundColor: 'var(--bg-main)',
-                    color: 'var(--primary)',
-                    border: '1px solid var(--border-color)',
-                    justifyContent: 'space-between',
-                    textAlign: 'left'
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={16} color="var(--primary)" /> <strong>Tài khoản quản trị:</strong> admin / admin123
-                  </span>
-                  <ArrowRight size={14} />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill('nhanvien', 'staff123')}
-                  className="btn btn-outline-white btn-sm"
-                  style={{
-                    backgroundColor: 'var(--bg-main)',
-                    color: 'var(--primary)',
-                    border: '1px solid var(--border-color)',
-                    justifyContent: 'space-between',
-                    textAlign: 'left'
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <UserCheck size={16} color="var(--primary-light)" /> <strong>Tài khoản nhân viên:</strong> nhanvien / staff123
-                  </span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </section>

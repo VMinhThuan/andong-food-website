@@ -4,12 +4,12 @@ import { userModel } from '../models/userModel.js';
 import { JWT_SECRET } from '../config/constants.js';
 
 class AuthService {
-  login(usernameOrEmail, password) {
+  async login(usernameOrEmail, password) {
     if (!usernameOrEmail || !password) {
       throw new Error('Vui lòng nhập đầy đủ tên đăng nhập/email và mật khẩu.');
     }
 
-    const user = userModel.findByUsername(usernameOrEmail) || userModel.findByEmail(usernameOrEmail);
+    const user = await userModel.findByUsername(usernameOrEmail) || await userModel.findByEmail(usernameOrEmail);
     if (!user) {
       throw new Error('Tài khoản hoặc mật khẩu không chính xác.');
     }
@@ -35,8 +35,8 @@ class AuthService {
     };
   }
 
-  getProfile(userId) {
-    const user = userModel.findById(userId);
+  async getProfile(userId) {
+    const user = await userModel.findById(userId);
     if (!user) {
       throw new Error('Không tìm thấy thông tin người dùng.');
     }
@@ -44,18 +44,18 @@ class AuthService {
     return safeUser;
   }
 
-  createUser(data) {
-    const existingUsername = userModel.findByUsername(data.username);
+  async createUser(data) {
+    const existingUsername = await userModel.findByUsername(data.username);
     if (existingUsername) {
       throw new Error('Tên đăng nhập đã được sử dụng.');
     }
-    const existingEmail = userModel.findByEmail(data.email);
+    const existingEmail = await userModel.findByEmail(data.email);
     if (existingEmail) {
       throw new Error('Email đã được sử dụng.');
     }
 
     const hashedPassword = bcrypt.hashSync(data.password, 10);
-    return userModel.create({
+    return await userModel.create({
       username: data.username,
       email: data.email,
       password: hashedPassword,
@@ -65,12 +65,12 @@ class AuthService {
     });
   }
 
-  getAllUsers() {
-    return userModel.findAll();
+  async getAllUsers() {
+    return await userModel.findAll();
   }
 
-  deleteUser(id) {
-    return userModel.delete(id);
+  async deleteUser(id) {
+    return await userModel.delete(id);
   }
 }
 

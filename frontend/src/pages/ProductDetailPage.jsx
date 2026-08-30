@@ -20,8 +20,6 @@ import {
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
-const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
-const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
@@ -34,10 +32,15 @@ export default function ProductDetailPage() {
   const [isPackagingLoading, setIsPackagingLoading] = useState(false);
   const packagingRequestRef = useRef(0);
 
+  const getPackagingImage = (nextViewBack) => {
+    const images = product?.images || {};
+    return nextViewBack ? (images.back || images.main || '') : (images.front || images.main || '');
+  };
+
   const changePackagingFace = (nextViewBack) => {
     if (nextViewBack === viewBack || isPackagingLoading) return;
 
-    const imageSrc = nextViewBack ? MatSauBaoBi : MatTruocBaoBi;
+    const imageSrc = getPackagingImage(nextViewBack);
     const requestId = ++packagingRequestRef.current;
     setIsPackagingLoading(true);
 
@@ -93,6 +96,9 @@ export default function ProductDetailPage() {
     );
   }
 
+  const hasTwoPackagingFaces = Boolean(product.images?.front && product.images?.back);
+  const packagingImage = getPackagingImage(viewBack);
+
   return (
     <div className="product-detail-page" style={{ backgroundColor: 'var(--bg-main)' }}>
       {/* Breadcrumb */}
@@ -141,7 +147,7 @@ export default function ProductDetailPage() {
                     overflow: 'hidden'
                   }}>
                     <img
-                      src={viewBack ? MatSauBaoBi : MatTruocBaoBi}
+                      src={packagingImage}
                       alt={product.name}
                       style={{
                         maxHeight: '400px',
@@ -167,8 +173,8 @@ export default function ProductDetailPage() {
                     )}
                   </div>
 
-                  {/* Face Toggle Tabs */}
-                  <div style={{
+                  {/* Show the front/back control only when this product record has both images. */}
+                  {hasTwoPackagingFaces && <div style={{
                     display: 'inline-flex', alignSelf: 'center', justifyContent: 'center', gap: '4px',
                     margin: '16px auto', padding: '4px', borderRadius: '9999px',
                     backgroundColor: '#eef5f0', border: '1px solid #d8e8dd'
@@ -209,7 +215,7 @@ export default function ProductDetailPage() {
                     >
                       Mặt Sau
                     </button>
-                  </div>
+                  </div>}
 
                   <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '8px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
                     <button
