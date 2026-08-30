@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, UserCheck, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
 export default function LoginPage() {
@@ -34,39 +33,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="login-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '85vh' }}>
-      <section style={{
-        background: 'linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 100%)',
-        color: '#ffffff',
-        padding: '50px 0 70px',
-        textAlign: 'center'
-      }}>
-        <div className="container">
-          <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
-            HỆ THỐNG NỘI BỘ
-          </div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--golden-pale)' }}>
-            Đăng Nhập Quản Trị & Nhân Viên
+    // Trang tiện ích nội bộ, không phải trang marketing: bỏ hero gradient tối +
+    // pill nhãn (công thức đang lặp lại ở mọi trang khác) và bỏ luôn dải sóng
+    // trang trí RiceHorizonDivider. Một khối duy nhất, căn giữa màn hình, chỉ
+    // có một điểm nhấn là viền vàng mỏng phía trên thẻ đăng nhập.
+    <div className="login-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '48px 20px' }}>
+      <div style={{ maxWidth: '400px', margin: '0 auto', width: '100%' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <img
+            src={LogoDoc}
+            alt="Logo An Đông"
+            style={{ height: '64px', objectFit: 'contain', marginBottom: '18px' }}
+          />
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--primary)', margin: '0 0 6px' }}>
+            Cổng Làm Việc Nội Bộ
           </h1>
-          <p style={{ color: '#d1e3d9', fontSize: '0.95rem' }}>
-            Cổng làm việc dành cho Quản trị viên (Admin) và Nhân viên CSKH An Đông
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', margin: 0 }}>
+            Dành cho Quản trị viên và Nhân viên CSKH An Đông
           </p>
         </div>
-      </section>
 
-      <RiceHorizonDivider />
-
-      <section style={{ padding: '40px 20px 80px' }}>
-        <div style={{ maxWidth: '440px', margin: '0 auto' }}>
-          <div className="card" style={{ padding: '36px', backgroundColor: '#ffffff' }}>
-            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-              <img
-                src={LogoDoc}
-                alt="Logo An Đông"
-                style={{ height: '90px', objectFit: 'contain', marginBottom: '12px' }}
-              />
-              <h2 style={{ fontSize: '1.2rem', color: 'var(--primary)', fontWeight: '700', marginTop: '6px' }}>HỆ THỐNG PORTAL</h2>
-            </div>
+        <div className="card" style={{ padding: '32px', backgroundColor: '#ffffff', borderTop: '3px solid var(--golden-light)' }}>
 
             {error && (
               <div style={{
@@ -175,7 +162,6 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
   );
 }
