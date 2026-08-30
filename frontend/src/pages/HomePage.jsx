@@ -583,7 +583,7 @@ export default function HomePage() {
       {/* 3. SẢN PHẨM AN ĐÔNG - 2-COLUMN PREMIUM LAYOUT */}
       <section style={{
         padding: '90px 0 100px',
-        backgroundColor: '#FFFEF7',
+        backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-light)',
         position: 'relative',
         overflow: 'hidden'
@@ -970,7 +970,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. GIÁ TRỊ AN ĐÔNG (EDITORIAL 40/60) */}
-      <section style={{ padding: '100px 0', backgroundColor: '#ffffff' }}>
+      <section style={{ padding: '100px 0', backgroundColor: 'var(--bg-secondary)' }}>
         <div className="container">
           <div style={{
             display: 'grid',
