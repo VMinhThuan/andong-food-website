@@ -1,5 +1,16 @@
 import React from 'react';
 
+/**
+ * Đồ họa bổ trợ chính thức của An Đông (Hồ sơ thương hiệu, mục 2.4):
+ * "Yếu tố đồ họa được khai thác từ sự phân lớp của khung cảnh đồng lúa khi
+ * hoàng hôn hoặc bình minh, được tạo ra bởi đường chân trời, bầu trời và
+ * đồng lúa... dùng để làm khung chứa hình ảnh và có chức năng phân chia bố cục."
+ *
+ * Bản trước đây dùng đường cong Bezier mượt + 3 lớp chồng mờ (fillOpacity) —
+ * đúng tinh thần 3 lớp màu nhưng sai ngôn ngữ hình học: brand book vẽ đường
+ * chân trời răng cưa kiểu xé giấy, dải màu phẳng không chồng trong suốt.
+ * Bản này vẽ lại bằng đường thẳng gãy góc (không dùng bezier) để đúng chất liệu.
+ */
 export default function RiceHorizonDivider({ invert = false, className = '', topBg = 'transparent' }) {
   return (
     <div
@@ -20,22 +31,23 @@ export default function RiceHorizonDivider({ invert = false, className = '', top
         preserveAspectRatio="none"
         style={{ display: 'block', width: '100%', height: '60px', margin: 0, padding: 0 }}
       >
-        {/* Layer 1: Golden Harvest Sun Wave */}
+        {/* Lớp 1: dải hoàng hôn vàng — dải lớn nhất, đường chân trời gãy góc,
+            khoảng cách các đỉnh cố ý lệch nhau (180/280/280/140/300/260) để
+            không đều nhịp, tránh cảm giác lặp khuôn máy móc */}
         <path
-          d="M0,30 C320,70 420,-10 720,35 C1020,80 1200,10 1440,40 L1440,80 L0,80 Z"
+          d="M0,26 L180,20 L460,37 L740,19 L880,33 L1180,21 L1440,36 L1440,80 L0,80 Z"
           fill="var(--golden-light)"
-          fillOpacity="0.4"
         />
-        {/* Layer 2: Warm Earth Brown Wave */}
+        {/* Lớp 2: dải đất nâu — bám theo lớp vàng với khoảng lệch cố định ~14px
+            để dải luôn dày đều, không bị bóp mỏng ở những đoạn lớp vàng xuống thấp */}
         <path
-          d="M0,45 C280,10 520,75 800,30 C1080,-15 1260,60 1440,35 L1440,80 L0,80 Z"
-          fill="var(--golden)"
-          fillOpacity="0.7"
+          d="M0,40 L180,34 L460,51 L740,33 L880,47 L1180,35 L1440,50 L1440,80 L0,80 Z"
+          fill="var(--earth-brown)"
         />
-        {/* Layer 3: Lush Rice Field Green Wave */}
+        {/* Lớp 3: dải đồng lúa xanh tươi — dải nền, luôn dùng xanh lúa sáng, không dùng xanh rừng tối */}
         <path
-          d="M0,55 C360,25 640,80 1000,45 C1240,20 1360,65 1440,55 L1440,80 L0,80 Z"
-          fill="var(--bg-dark)"
+          d="M0,64 L180,56 L460,69 L740,52 L880,66 L1180,54 L1440,68 L1440,80 L0,80 Z"
+          fill="var(--brand-green)"
         />
       </svg>
     </div>
