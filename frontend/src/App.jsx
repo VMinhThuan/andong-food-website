@@ -21,17 +21,13 @@ export default function App() {
 }
 
 function AppContent() {
-  // Chỉ hiện màn hình chào thương hiệu MỘT LẦN khi mở app lần đầu, không phải
-  // mỗi lần chuyển tab. state này không phụ thuộc route nên không có lý do gì
-  // để bật lại sau khi đã tắt.
+
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
-        {/* Tự động cuộn trang lên đầu mỗi khi chuyển tab / route */}
         <ScrollToTop />
 
-        {/* Luxury Brand Preloader - chỉ chạy ở lần tải app đầu tiên */}
         {isLoading && <BrandPreloader onFinish={() => setIsLoading(false)} />}
 
         <div className="app-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
