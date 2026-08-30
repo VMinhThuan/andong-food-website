@@ -242,10 +242,10 @@ export default function ContactPage() {
                       Email Hỗ Trợ
                     </div>
                     <a
-                      href="mailto:andongfood@gmail.com"
+                      href="mailto:andofoodvn@gmail.com"
                       style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--primary)', textDecoration: 'none', display: 'block', marginTop: '2px' }}
                     >
-                      andongfood@gmail.com
+                      andofoodvn@gmail.com
                     </a>
                   </div>
                 </div>

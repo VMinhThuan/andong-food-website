@@ -16,7 +16,7 @@ export const initialUsers = [
   {
     id: 'usr_admin_01',
     username: 'admin',
-    email: 'andongfood@gmail.com',
+    email: 'andofoodvn@gmail.com',
     password: adminPasswordHash,
     fullName: 'Quản Trị Viên An Đông',
     role: 'admin',
@@ -50,7 +50,7 @@ const manufacturer = {
   name: 'CÔNG TY TNHH AN ĐÔNG FOOD',
   address: 'Ấp Long Thành, xã Phước Long, tỉnh Cà Mau',
   addressEn: 'Long Thanh Hamlet, Phuoc Long Commune, Ca Mau Province',
-  email: 'andongfood@gmail.com',
+  email: 'andofoodvn@gmail.com',
   phone: '0944 852 464',
   // CẦN BỔ SUNG: mã số doanh nghiệp / MST — bắt buộc công bố trên website
   // theo Nghị định 52/2013/NĐ-CP (sửa đổi bởi Nghị định 85/2021/NĐ-CP).

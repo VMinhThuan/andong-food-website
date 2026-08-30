@@ -273,8 +273,8 @@ export default function Footer() {
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Mail size={15} color="#FDB913" style={{ flexShrink: 0 }} />
-                  <a href="mailto:andongfood@gmail.com" style={{ color: '#8fba9f', textDecoration: 'none' }}>
-                    andongfood@gmail.com
+                  <a href="mailto:andofoodvn@gmail.com" style={{ color: '#8fba9f', textDecoration: 'none' }}>
+                    andofoodvn@gmail.com
                   </a>
                 </div>
               </div>
