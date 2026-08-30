@@ -326,7 +326,7 @@ export default function AboutPage() {
           left: '1%',
           width: '180px',
           height: '320px',
-          opacity: 0.05,
+          opacity: 0.12,
           pointerEvents: 'none',
           color: 'var(--brand-green-dark)',
           transform: 'rotate(-10deg)'
@@ -351,7 +351,7 @@ export default function AboutPage() {
           right: '1%',
           width: '180px',
           height: '320px',
-          opacity: 0.05,
+          opacity: 0.12,
           pointerEvents: 'none',
           color: 'var(--brand-green-dark)',
           transform: 'scaleX(-1) rotate(-15deg)'

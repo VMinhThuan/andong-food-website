@@ -196,7 +196,12 @@ export function QualityProcessSection() {
     <section style={{ padding: '100px 0 110px', position: 'relative', color: '#ffffff', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img src="/assets/rice-sunrise.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 50%, rgba(4,22,10,0.88) 100%)' }} />
+        {/* Lớp phủ trước đây tối đều (82-88%) khiến toàn bộ section gần như đen
+            tuyền, trùng màu với Footer ngay bên dưới — không phân biệt được ranh
+            giới 2 khối. Giữ tối ở phần trên (nơi có chữ, cần tương phản) nhưng
+            nhạt + ấm dần về phía đáy, để lộ tông vàng ruộng lúa thật — tạo khác
+            biệt rõ với màu xanh-đen lạnh của Footer ngay chỗ tiếp giáp. */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 40%, rgba(20,14,4,0.4) 100%)' }} />
       </div>
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.25 }} variants={fadeInUp} style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -271,7 +276,7 @@ export default function HomePage() {
           left: '1%',
           width: '180px',
           height: '320px',
-          opacity: 0.05,
+          opacity: 0.12,
           pointerEvents: 'none',
           color: 'var(--brand-green-dark)',
           transform: 'rotate(-10deg)'
@@ -296,7 +301,7 @@ export default function HomePage() {
           right: '1%',
           width: '180px',
           height: '320px',
-          opacity: 0.05,
+          opacity: 0.12,
           pointerEvents: 'none',
           color: 'var(--brand-green-dark)',
           transform: 'scaleX(-1) rotate(-15deg)'
