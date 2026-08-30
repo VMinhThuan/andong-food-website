@@ -1,110 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin } from 'lucide-react';
 const LogoFooter = '/assets/brand-element/AD_LOGO%20N%E1%BB%80N%20M%C3%80U.svg';
 
 export default function Footer() {
-  const [showStickyMiniFooter, setShowStickyMiniFooter] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      // Check if user is scrolled past 350px AND not yet at the absolute bottom (leaving 320px threshold for full footer)
-      const isPastHeader = scrollY > 350;
-      const isNearBottom = (scrollY + windowHeight) >= (documentHeight - 320);
-
-      if (isPastHeader && !isNearBottom) {
-        setShowStickyMiniFooter(true);
-      } else {
-        setShowStickyMiniFooter(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <>
-      {/* 1. STICKY LUXURY MINI BOTTOM BAR (HIỂN THỊ KHI ĐANG CUỘN TRANG) */}
-      <AnimatePresence>
-        {showStickyMiniFooter && (
-          <motion.div
-            className="mini-footer"
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              position: 'fixed',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              zIndex: 900,
-              backgroundColor: 'var(--golden-pale)', // Luxury warm ivory cream
-              borderTop: '1px solid var(--border-color)',
-              boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.08)',
-              color: 'var(--primary)',
-              padding: '0 clamp(16px, 3.5vw, 48px)'
-            }}
-          >
-            <div className="mini-footer__inner" style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: '52px',
-              width: '100%',
-              fontSize: '0.82rem',
-              gap: '16px'
-            }}>
-              {/* Left: Copyright */}
-              <div style={{
-                color: 'var(--text-muted)',
-                fontWeight: '500',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                © {new Date().getFullYear()} <strong>An Đông</strong>. Đã đăng ký bản quyền.
-              </div>
-
-              {/* Right: Hotline + Socials aligned to the far right */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                whiteSpace: 'nowrap'
-              }}>
-                <a
-                  href="tel:0944852464"
-                  style={{
-                    color: 'var(--primary)',
-                    textDecoration: 'none',
-                    fontWeight: '700',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <Phone size={13} color="var(--earth-brown)" />
-                  <span>0944 852 464</span>
-                </a>
-                <span style={{ color: '#d4cebe' }}>•</span>
-                <span style={{ color: 'var(--primary)', fontWeight: '600', cursor: 'pointer' }}>Facebook</span>
-                <span style={{ color: '#d4cebe' }}>•</span>
-                <span style={{ color: 'var(--primary)', fontWeight: '600', cursor: 'pointer' }}>Zalo</span>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 2. FULL FOOTER ĐẦY ĐỦ (HIỂN THỊ KHI CUỘN XUỐNG HẾT TRANG) */}
+      {/* Đã bỏ thanh mini sticky nổi ở đáy màn hình khi cuộn (redesignspec.md
+          mục 7: "gộp thanh nổi" — nav trên + thanh này + nút lên đầu cùng lúc
+          nổi, ăn diện tích mobile). Nội dung của nó (bản quyền, hotline,
+          Facebook, Zalo) đã có sẵn y hệt trong footer đầy đủ ngay bên dưới,
+          nên bỏ hẳn thay vì giữ một bản trùng lặp luôn nổi trên màn hình. */}
       <footer id="main-full-footer" className="main-full-footer" style={{
         background: 'linear-gradient(160deg, #081c15 0%, #0d261a 55%, #102b1e 100%)',
         color: '#ffffff',
@@ -298,9 +204,20 @@ export default function Footer() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <span style={{ color: '#8fba9f', cursor: 'pointer', transition: 'color 0.2s' }}>Facebook</span>
+              {/* CẦN BỔ SUNG: chưa có link fanpage Facebook thật — để chữ
+                  thường, không giả vờ là link, tới khi có URL thật. */}
+              <span style={{ color: '#8fba9f' }}>Facebook</span>
               <span style={{ color: '#2d5040' }}>•</span>
-              <span style={{ color: '#8fba9f', cursor: 'pointer', transition: 'color 0.2s' }}>Zalo</span>
+              <a
+                href="https://zalo.me/0944852464"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#8fba9f', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#8fba9f'; }}
+              >
+                Zalo
+              </a>
             </div>
           </div>
         </div>

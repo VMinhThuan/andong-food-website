@@ -696,7 +696,7 @@ export default function ContactPage() {
               </a>
 
               <a
-                href="https://zalo.me"
+                href="https://zalo.me/0944852464"
                 target="_blank"
                 rel="noreferrer"
                 style={{
@@ -716,6 +716,8 @@ export default function ContactPage() {
                 <span>Zalo Official</span>
               </a>
 
+              {/* CẦN BỔ SUNG: đang trỏ về trang chủ Facebook, chưa có link
+                  fanpage thật của An Đông — thay bằng URL thật khi có. */}
               <a
                 href="https://facebook.com"
                 target="_blank"

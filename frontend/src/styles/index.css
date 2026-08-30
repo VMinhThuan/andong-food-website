@@ -436,11 +436,6 @@ textarea.form-control {
   box-shadow: 0 8px 22px rgba(253, 185, 19, 0.3);
 }
 
-@media (max-width: 900px) {
-  .mini-footer-center {
-    display: none !important;
-  }
-}
 
 /* Footer Styling overrides */
 #main-full-footer a {
@@ -885,15 +880,6 @@ textarea {
     gap: 10px !important;
   }
 
-  .mini-footer__inner > :first-child {
-    max-width: 55%;
-  }
-
-  .mini-footer__inner > :last-child > span:not(:first-of-type),
-  .mini-footer__inner > :last-child > span:nth-of-type(1) {
-    display: none;
-  }
-
   .back-to-top-btn {
     right: 16px;
     bottom: 16px;
@@ -998,19 +984,6 @@ textarea {
   .footer-grid {
     grid-template-columns: 1fr !important;
     gap: 28px !important;
-  }
-
-  .mini-footer {
-    padding-inline: 14px !important;
-  }
-
-  .mini-footer__inner {
-    height: 48px !important;
-    font-size: .72rem !important;
-  }
-
-  .mini-footer__inner > :first-child {
-    max-width: 48%;
   }
 
   .brand-preloader__content img {
