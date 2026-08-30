@@ -18,6 +18,14 @@ import React from 'react';
  *
  * Lưu ý: <defs> chứa id (torn/grain/band) nên nếu dùng nhiều hơn 1 lần
  * trên cùng một trang, mỗi lần cần 1 idSuffix khác nhau để tránh trùng id.
+ *
+ * Hoà vào section phía trên: bản đầu có nền kem đặc phủ hết phần trên của
+ * dải, nên đỉnh vàng bị chặn bởi một mép hình chữ nhật thẳng cứng phía
+ * trên — nhìn như một khối dán thêm, không phải bị "xé" ra. Đã bỏ khối
+ * nền kem đặc đó (phần trên trong suốt, cho màu section phía trên hiện
+ * xuyên qua các khe hở), đồng thời kéo cả dải chồng ngược lên section phía
+ * trên bằng margin-top âm — để chính đỉnh răng cưa vàng là đường cắt thật
+ * sự, cắn thẳng vào section trên thay vì có một mép thẳng ở giữa.
  */
 const CURVES = {
   toGreen: {
@@ -34,14 +42,17 @@ const CURVES = {
   }
 };
 
-export default function RiceHorizonDivider({ className = '', height = 104, idSuffix = '', variant = 'toGreen', seed = 11 }) {
+export default function RiceHorizonDivider({ className = '', height = 104, overlap = 34, idSuffix = '', variant = 'toGreen', seed = 11 }) {
   const tornId = `torn${idSuffix}`;
   const grainId = `grain${idSuffix}`;
   const bandId = `bandA${idSuffix}`;
   const curve = CURVES[variant] || CURVES.toGreen;
 
   return (
-    <div className={`horizon-torn-divider ${className}`} style={{ display: 'block', lineHeight: 0, margin: 0, padding: 0 }}>
+    <div
+      className={`horizon-torn-divider ${className}`}
+      style={{ display: 'block', lineHeight: 0, margin: 0, padding: 0, position: 'relative', zIndex: 2, marginTop: `-${overlap}px` }}
+    >
       <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
         <defs>
           <filter id={tornId} x="-3%" y="-40%" width="106%" height="180%">
@@ -52,10 +63,11 @@ export default function RiceHorizonDivider({ className = '', height = 104, idSuf
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
             <feColorMatrix type="matrix" values="0 0 0 0 0.29  0 0 0 0 0.19  0 0 0 0 0.07  0 0 0 0.5 0" />
           </filter>
-          {/* Lát cắt: trời kem -> vàng lớn -> nâu (hàng cây) mỏng -> đáy (xanh lúa hoặc đất) */}
+          {/* Lát cắt: vàng lớn -> nâu (hàng cây) mỏng -> đáy (xanh lúa hoặc đất).
+              Không còn rect nền kem đặc phía trên — phần trên trong suốt, để
+              màu section phía trên hiện xuyên qua các khe hở của mép rách. */}
           <symbol id={bandId} viewBox="0 0 1440 100" preserveAspectRatio="none">
             <g filter={`url(#${tornId})`}>
-              <rect x="-30" y="-30" width="1500" height="160" fill="#FFF8DD" />
               <path d={curve.gold} fill="#fdb913" />
               <path d={curve.brown} fill="#754c1f" />
               <path d={curve.base} fill={curve.baseColor} />
