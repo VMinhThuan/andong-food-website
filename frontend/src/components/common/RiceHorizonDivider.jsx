@@ -1,55 +1,56 @@
 import React from 'react';
 
+const DEFAULT_IMAGE = '/assets/rice-sunrise.jpg';
+
 /**
  * Đồ họa bổ trợ chính thức của An Đông (Hồ sơ thương hiệu, mục 2.4):
  * "Yếu tố đồ họa được khai thác từ sự phân lớp của khung cảnh đồng lúa khi
- * hoàng hôn hoặc bình minh, được tạo ra bởi đường chân trời, bầu trời và
- * đồng lúa... dùng để làm khung chứa hình ảnh và có chức năng phân chia bố cục."
+ * hoàng hôn hoặc bình minh... dùng để làm khung chứa hình ảnh và có chức
+ * năng phân chia bố cục." Trang minh họa đặt song song một hình khối phẳng
+ * và một tấm ảnh đồng lúa hoàng hôn thật.
  *
- * Bản trước đây dùng đường cong Bezier mượt + 3 lớp chồng mờ (fillOpacity) —
- * đúng tinh thần 3 lớp màu nhưng sai ngôn ngữ hình học: brand book vẽ đường
- * chân trời răng cưa kiểu xé giấy, dải màu phẳng không chồng trong suốt.
- * Bản này vẽ lại bằng đường thẳng gãy góc (không dùng bezier) để đúng chất liệu.
+ * Bản trước dùng khối màu phẳng (xem lịch sử component) nhưng bị đánh giá
+ * xấu trên thực tế. Bản này đổi sang dùng ảnh thật, cắt theo đúng đường
+ * viền gãy góc kiểu "xé giấy" đã tinh chỉnh — giữ đúng ý tưởng "khung chứa
+ * hình ảnh" của brand book, ưu tiên độ đẹp hơn là bám cứng cấu trúc 3 dải
+ * màu trong bản minh họa gốc.
+ *
+ * Toạ độ viền dùng đơn vị %, không phải px cố định, để co giãn đúng theo
+ * mọi kích thước khung chứa — đã tự kiểm tra bằng Chrome headless ở khổ
+ * desktop (1440px) và mobile (390px) trước khi đưa vào đây.
  */
-export default function RiceHorizonDivider({ invert = false, className = '', topBg = 'transparent' }) {
+const EDGE_POINTS = [
+  [0, 80], [12.5, 70], [31.94, 86.25], [51.39, 65], [61.11, 82.5], [81.94, 67.5], [100, 85]
+];
+
+export default function RiceHorizonDivider({ invert = false, className = '', image = DEFAULT_IMAGE, height = 150 }) {
+  // invert: lật dọc đường viền (răng cưa quay lên trên) để dùng khi đi từ
+  // nền sáng vào nền tối, thay vì xoay nguyên tấm ảnh 180° (sẽ làm ảnh lộn ngược).
+  const points = invert ? EDGE_POINTS.map(([x, y]) => [x, 100 - y]) : EDGE_POINTS;
+  const clipPath = invert
+    ? `polygon(0 100%, 100% 100%, ${[...points].reverse().map(([x, y]) => `${x}% ${y}%`).join(', ')})`
+    : `polygon(0 0, 100% 0, ${[...points].reverse().map(([x, y]) => `${x}% ${y}%`).join(', ')})`;
+
   return (
     <div
-      className={`horizon-wave-divider ${className}`}
-      style={{
-        transform: invert ? 'rotate(180deg)' : 'none',
-        lineHeight: 0,
-        margin: 0,
-        padding: 0,
-        display: 'block',
-        backgroundColor: topBg
-      }}
+      className={`horizon-photo-divider ${className}`}
+      style={{ position: 'relative', height: `${height}px`, overflow: 'hidden', margin: 0, padding: 0 }}
     >
-      <svg
-        viewBox="0 0 1440 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        style={{ display: 'block', width: '100%', height: '60px', margin: 0, padding: 0 }}
-      >
-        {/* Lớp 1: dải hoàng hôn vàng — dải lớn nhất, đường chân trời gãy góc,
-            khoảng cách các đỉnh cố ý lệch nhau (180/280/280/140/300/260) để
-            không đều nhịp, tránh cảm giác lặp khuôn máy móc */}
-        <path
-          d="M0,26 L180,20 L460,37 L740,19 L880,33 L1180,21 L1440,36 L1440,80 L0,80 Z"
-          fill="var(--golden-light)"
-        />
-        {/* Lớp 2: dải đất nâu — bám theo lớp vàng với khoảng lệch cố định ~14px
-            để dải luôn dày đều, không bị bóp mỏng ở những đoạn lớp vàng xuống thấp */}
-        <path
-          d="M0,40 L180,34 L460,51 L740,33 L880,47 L1180,35 L1440,50 L1440,80 L0,80 Z"
-          fill="var(--earth-brown)"
-        />
-        {/* Lớp 3: dải đồng lúa xanh tươi — dải nền, luôn dùng xanh lúa sáng, không dùng xanh rừng tối */}
-        <path
-          d="M0,64 L180,56 L460,69 L740,52 L880,66 L1180,54 L1440,68 L1440,80 L0,80 Z"
-          fill="var(--brand-green)"
-        />
-      </svg>
+      <img
+        src={image}
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center 60%',
+          clipPath,
+          display: 'block'
+        }}
+      />
     </div>
   );
 }
