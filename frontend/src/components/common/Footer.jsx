@@ -12,7 +12,7 @@ export default function Footer() {
           Facebook, Zalo) đã có sẵn y hệt trong footer đầy đủ ngay bên dưới,
           nên bỏ hẳn thay vì giữ một bản trùng lặp luôn nổi trên màn hình. */}
       <footer id="main-full-footer" className="main-full-footer" style={{
-        background: 'linear-gradient(160deg, #081c15 0%, #0d261a 55%, #102b1e 100%)',
+        background: 'var(--brand-brown)',
         color: '#ffffff',
         position: 'relative',
         margin: 0,
@@ -29,34 +29,12 @@ export default function Footer() {
             gap: '45px',
             paddingBottom: '50px'
           }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '14px' }}>
-                <img
-                  src={LogoFooter}
-                  alt="Logo An Đông"
-                  style={{ height: '56px', width: 'auto', maxWidth: '160px', objectFit: 'contain' }}
-                />
-              </div>
-
-              <div style={{
-                color: '#FDB913',
-                fontSize: '0.82rem',
-                fontWeight: '700',
-                textTransform: 'uppercase',
-                letterSpacing: '1.2px',
-                marginBottom: '10px'
-              }}>
-                Bình An ở Phía Đông
-              </div>
-
-              <p style={{
-                fontSize: '0.88rem',
-                lineHeight: '1.65',
-                color: '#7aa08a',
-                margin: 0
-              }}>
-                Gạo ngon chuẩn giống, gửi trọn an lòng.
-              </p>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img
+                src={LogoFooter}
+                alt="Logo An Đông"
+                style={{ height: '92px', width: 'auto', maxWidth: '260px', objectFit: 'contain' }}
+              />
             </div>
 
             {/* CỘT 2: KHÁM PHÁ NAVIGATION */}
@@ -81,26 +59,26 @@ export default function Footer() {
                 fontSize: '0.92rem'
               }}>
                 <li>
-                  <Link to="/" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
-                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#8fba9f'}>
+                  <Link to="/" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
+                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#d9c2a0'}>
                     Trang Chủ
                   </Link>
                 </li>
                 <li>
-                  <Link to="/gioi-thieu" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
-                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#8fba9f'}>
+                  <Link to="/gioi-thieu" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
+                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#d9c2a0'}>
                     Giới Thiệu
                   </Link>
                 </li>
                 <li>
-                  <Link to="/san-pham" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
-                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#8fba9f'}>
+                  <Link to="/san-pham" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
+                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#d9c2a0'}>
                     Sản Phẩm
                   </Link>
                 </li>
                 <li>
-                  <Link to="/lien-he" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
-                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#8fba9f'}>
+                  <Link to="/lien-he" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
+                    onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#d9c2a0'}>
                     Liên Hệ
                   </Link>
                 </li>
@@ -129,12 +107,12 @@ export default function Footer() {
                 fontSize: '0.92rem'
               }}>
                 <li>
-                  <Link to="/san-pham/gao-st25" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
+                  <Link to="/san-pham/gao-st25" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem' }}>
                     Gạo ST25 An Đông
                   </Link>
                 </li>
                 <li>
-                  <Link to="/san-pham/gao-vuong-tom" style={{ color: '#8fba9f', textDecoration: 'none', fontSize: '0.9rem' }}>
+                  <Link to="/san-pham/gao-vuong-tom" style={{ color: '#d9c2a0', textDecoration: 'none', fontSize: '0.9rem' }}>
                     Gạo Vuông Tôm An Đông
                   </Link>
                 </li>
@@ -165,7 +143,7 @@ export default function Footer() {
                 </div>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
                   <MapPin size={15} color="#FDB913" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <span style={{ color: '#8fba9f', lineHeight: 1.5 }}>
+                  <span style={{ color: '#d9c2a0', lineHeight: 1.5 }}>
                     Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.
                   </span>
                 </div>
@@ -179,7 +157,7 @@ export default function Footer() {
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Mail size={15} color="#FDB913" style={{ flexShrink: 0 }} />
-                  <a href="mailto:andofoodvn@gmail.com" style={{ color: '#8fba9f', textDecoration: 'none' }}>
+                  <a href="mailto:andofoodvn@gmail.com" style={{ color: '#d9c2a0', textDecoration: 'none' }}>
                     andofoodvn@gmail.com
                   </a>
                 </div>
@@ -197,24 +175,24 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: '16px',
             fontSize: '0.83rem',
-            color: '#4d7a60'
+            color: '#a9855f'
           }}>
             <div>
-              © {new Date().getFullYear()} <strong style={{ color: '#7aaa8a' }}>An Đông</strong>. Đã đăng ký bản quyền.
+              © {new Date().getFullYear()} <strong style={{ color: '#FDB913' }}>An Đông</strong>. Đã đăng ký bản quyền.
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
               {/* CẦN BỔ SUNG: chưa có link fanpage Facebook thật — để chữ
                   thường, không giả vờ là link, tới khi có URL thật. */}
-              <span style={{ color: '#8fba9f' }}>Facebook</span>
-              <span style={{ color: '#2d5040' }}>•</span>
+              <span style={{ color: '#d9c2a0' }}>Facebook</span>
+              <span style={{ color: '#8a5f3a' }}>•</span>
               <a
                 href="https://zalo.me/0944852464"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: '#8fba9f', textDecoration: 'none', transition: 'color 0.2s' }}
+                style={{ color: '#d9c2a0', textDecoration: 'none', transition: 'color 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#8fba9f'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#d9c2a0'; }}
               >
                 Zalo
               </a>
