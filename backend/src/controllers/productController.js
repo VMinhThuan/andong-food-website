@@ -1,5 +1,4 @@
 import { productService } from '../services/productService.js';
-import { qrService } from '../services/qrService.js';
 
 export const productController = {
   async getAll(req, res, next) {
@@ -20,17 +19,12 @@ export const productController = {
       const { slug } = req.params;
       const product = await productService.getProductBySlug(slug);
       
-      // Also generate live QR code dataURL for convenient rendering
-      const qrDataUrl = await qrService.generateDataURL(
-        product.qrCodeString || `${req.protocol}://${req.get('host')}/san-pham/${product.slug}`
-      );
-
+      // QR is generated only when the visitor opens the QR dialog, avoiding
+      // needless CPU work and a large data-URL in every product response.
+      res.set('Cache-Control', 'public, max-age=60, s-maxage=60, stale-while-revalidate=300');
       res.json({
         success: true,
-        data: {
-          ...product,
-          qrCodeDataUrl: qrDataUrl
-        }
+        data: product
       });
     } catch (err) {
       res.status(404).json({

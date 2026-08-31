@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import {
   QrCode,
   ShieldCheck,
@@ -18,12 +18,12 @@ import {
   Info
 } from 'lucide-react';
 import { api } from '../services/api';
-import QRModal from '../components/common/QRModal';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
+
+const QRModal = lazy(() => import('../components/common/QRModal'));
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
-  const location = useLocation();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -70,7 +70,7 @@ export default function ProductDetailPage() {
         setError(err.message || 'Không tìm thấy sản phẩm.');
       })
       .finally(() => setLoading(false));
-  }, [slug, location.key]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -149,6 +149,8 @@ export default function ProductDetailPage() {
                     <img
                       src={packagingImage}
                       alt={product.name}
+                      fetchPriority="high"
+                      decoding="async"
                       style={{
                         maxHeight: '400px',
                         maxWidth: '82%',
@@ -299,11 +301,11 @@ export default function ProductDetailPage() {
       </section>
 
       {/* QR Modal */}
-      <QRModal
+      {isQRModalOpen && <Suspense fallback={null}><QRModal
         product={product}
         isOpen={isQRModalOpen}
         onClose={() => setIsQRModalOpen(false)}
-      />
+      /></Suspense>}
     </div>
   );
 }

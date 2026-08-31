@@ -5,6 +5,9 @@ export default function QRModal({ product, isOpen, onClose }) {
   const [qrDataUrl, setQrDataUrl] = useState('');
 
   useEffect(() => {
+    if (!isOpen || !product) return undefined;
+
+    setQrDataUrl('');
     if (product?.qrCodeDataUrl) {
       setQrDataUrl(product.qrCodeDataUrl);
     } else if (product) {
@@ -18,7 +21,7 @@ export default function QRModal({ product, isOpen, onClose }) {
         }
       }).then(dataUrl => setQrDataUrl(dataUrl));
     }
-  }, [product]);
+  }, [isOpen, product]);
 
   if (!isOpen || !product) return null;
 

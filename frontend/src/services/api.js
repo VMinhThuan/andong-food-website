@@ -1,6 +1,12 @@
 // Production calls the API through the same domain (/api). During local Vite
 // development this path is proxied to the backend below.
 const API_BASE = import.meta.env.VITE_API_URL || '/api';
+const productDetailCache = new Map();
+const PRODUCT_CACHE_TTL = 5 * 60 * 1000;
+
+function clearProductDetailCache() {
+  productDetailCache.clear();
+}
 
 function getAuthHeaders() {
   const token = localStorage.getItem('andong_token');
@@ -71,10 +77,14 @@ export const api = {
   },
 
   async getProductBySlug(slug) {
+    const cached = productDetailCache.get(slug);
+    if (cached && Date.now() - cached.savedAt < PRODUCT_CACHE_TTL) return cached.data;
+
     try {
       const res = await fetch(`${API_BASE}/products/slug/${slug}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Không tìm thấy sản phẩm');
+      productDetailCache.set(slug, { data: data.data, savedAt: Date.now() });
       return data.data;
     } catch (err) {
       throw err;
@@ -89,6 +99,7 @@ export const api = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Không thể thêm sản phẩm');
+    clearProductDetailCache();
     return data;
   },
 
@@ -100,6 +111,7 @@ export const api = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Không thể cập nhật sản phẩm');
+    clearProductDetailCache();
     return data;
   },
 
@@ -110,6 +122,7 @@ export const api = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Không thể xóa sản phẩm');
+    clearProductDetailCache();
     return data;
   },
 

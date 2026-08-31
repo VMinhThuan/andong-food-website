@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import React, { lazy, Suspense, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -7,14 +7,14 @@ import ScrollProgress from './components/common/ScrollProgress';
 import BrandPreloader from './components/common/BrandPreloader';
 import PreFooterCTA from './components/common/PreFooterCTA';
 import ScrollToTop from './components/common/ScrollToTop';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProductsPage from './pages/ProductsPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import ContactPage from './pages/ContactPage';
-import ScanQRPage from './pages/ScanQRPage';
-import LoginPage from './pages/LoginPage';
-import AdminDashboardPage from './pages/AdminDashboardPage';
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const ScanQRPage = lazy(() => import('./pages/ScanQRPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
 
 function isAdminHostname() {
   if (typeof window === 'undefined') return false;
@@ -28,12 +28,6 @@ export default function App() {
 
 function PublicAppContent() {
   const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
-
-  // Use the same brand loading screen for every page navigation.
-  useEffect(() => {
-    setIsLoading(true);
-  }, [location.pathname]);
 
   return (
     <>
@@ -41,7 +35,7 @@ function PublicAppContent() {
         <ScrollToTop />
 
         {/* Luxury Brand Preloader on initial load */}
-        {isLoading && <BrandPreloader key={location.pathname} onFinish={() => setIsLoading(false)} />}
+        {isLoading && <BrandPreloader onFinish={() => setIsLoading(false)} />}
 
         <div className="app-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
           {/* Global Scroll Reading Progress Bar & Back to top button */}
@@ -49,6 +43,7 @@ function PublicAppContent() {
           
           <Navbar />
           <main style={{ flex: 1 }}>
+            <Suspense fallback={<PageLoading />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/gioi-thieu" element={<AboutPage />} />
@@ -59,6 +54,7 @@ function PublicAppContent() {
               <Route path="/dang-nhap" element={<Navigate to="/" replace />} />
               <Route path="/quan-tri" element={<Navigate to="/" replace />} />
             </Routes>
+            </Suspense>
           </main>
           <PreFooterCTA />
           <Footer />
@@ -68,12 +64,18 @@ function PublicAppContent() {
 }
 
 function AdminAppContent() {
-  return <div className="admin-app-layout">
+  return <div className="admin-app-layout"><Suspense fallback={<PageLoading />}>
     <Routes>
       <Route path="/dang-nhap" element={<LoginPage />} />
       <Route path="/quan-tri" element={<AdminDashboardPage />} />
       <Route path="/" element={<Navigate to="/quan-tri" replace />} />
       <Route path="*" element={<Navigate to="/quan-tri" replace />} />
     </Routes>
+  </Suspense></div>;
+}
+
+function PageLoading() {
+  return <div style={{ minHeight: '45vh', display: 'grid', placeItems: 'center', color: 'var(--primary)' }} aria-live="polite">
+    Đang mở trang…
   </div>;
 }
