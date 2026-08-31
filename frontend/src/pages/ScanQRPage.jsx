@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { QrCode, Search, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 import CameraScanner from '../components/common/CameraScanner';
 import { api } from '../services/api';
-import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 
 export default function ScanQRPage() {
   const [manualCode, setManualCode] = useState('');
@@ -53,8 +52,6 @@ export default function ScanQRPage() {
           </p>
         </div>
       </section>
-
-      <RiceHorizonDivider />
 
       <section style={{ padding: '50px 0 80px' }}>
         <div className="container" style={{ maxWidth: '640px' }}>
