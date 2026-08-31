@@ -1,9 +1,10 @@
 import { contactModel } from '../models/contactModel.js';
+import { emailService } from '../services/emailService.js';
 
 export const contactController = {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      const contacts = contactModel.findAll(req.query);
+      const contacts = await contactModel.findAll(req.query);
       res.json({
         success: true,
         count: contacts.length,
@@ -14,24 +15,49 @@ export const contactController = {
     }
   },
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const { fullName, phone, email, subject, message, company } = req.body;
-      if (!fullName || !phone || !message) {
+      if (!fullName || !phone || !email || !message) {
         return res.status(400).json({
           success: false,
-          message: 'Vui lòng điền Họ tên, Số điện thoại và Nội dung liên hệ.'
+          message: 'Vui lòng điền đầy đủ Họ tên, Số điện thoại, Email và Nội dung liên hệ.'
         });
       }
 
-      const newContact = contactModel.create({
-        fullName,
-        phone,
-        email: email || '',
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.trim())) {
+        return res.status(400).json({
+          success: false,
+          message: 'Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại.'
+        });
+      }
+
+      const newContact = await contactModel.create({
+        fullName: fullName.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
         subject: subject || 'Tư vấn sản phẩm An Đông',
-        message,
-        company: company || ''
+        message: message.trim(),
+        company: company ? company.trim() : ''
       });
+
+      const plainContact = newContact && typeof newContact.toObject === 'function' ? newContact.toObject() : newContact;
+
+      // Gửi tuần tự 2 email qua SMTP: 1 thông báo công ty + 1 xác nhận khách hàng (tránh nghẽn socket SMTP Gmail)
+      (async () => {
+        try {
+          await emailService.sendInquiryNotificationToCompany(plainContact);
+        } catch (err) {
+          console.error('⚠️ [contactController] Lỗi gửi email công ty:', err);
+        }
+
+        try {
+          await emailService.sendCustomerConfirmationEmail(plainContact);
+        } catch (err) {
+          console.error('⚠️ [contactController] Lỗi gửi email khách hàng:', err);
+        }
+      })();
 
       res.status(201).json({
         success: true,
@@ -43,11 +69,11 @@ export const contactController = {
     }
   },
 
-  updateStatus(req, res, next) {
+  async updateStatus(req, res, next) {
     try {
       const { id } = req.params;
       const { status, assignedTo } = req.body;
-      const updated = contactModel.updateStatus(id, status, assignedTo || req.user?.username);
+      const updated = await contactModel.updateStatus(id, status, assignedTo || req.user?.username);
       if (!updated) {
         return res.status(404).json({ success: false, message: 'Không tìm thấy liên hệ.' });
       }
@@ -61,12 +87,13 @@ export const contactController = {
     }
   },
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     try {
-      contactModel.delete(req.params.id);
+      await contactModel.delete(req.params.id);
       res.json({ success: true, message: 'Đã xóa tin nhắn liên hệ.' });
     } catch (err) {
       next(err);
     }
   }
 };
+

@@ -42,6 +42,7 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [lastSubmitted, setLastSubmitted] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -54,7 +55,12 @@ export default function ContactPage() {
     setError('');
 
     try {
-      await api.sendContact(formData);
+      const res = await api.sendContact(formData);
+      setLastSubmitted({
+        ...formData,
+        id: res?.data?.id || 'N/A',
+        submittedAt: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+      });
       setSubmitted(true);
       setFormData({
         fullName: '',
@@ -70,6 +76,7 @@ export default function ContactPage() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="contact-page" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--primary)' }}>
@@ -350,33 +357,102 @@ export default function ContactPage() {
 
                 {submitted ? (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
+                    initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
                     style={{
-                      padding: '40px 24px',
-                      textAlign: 'center',
+                      padding: '36px 28px',
                       backgroundColor: 'var(--bg-main)',
-                      borderRadius: '20px',
+                      borderRadius: '22px',
                       border: '1px solid var(--border-color)',
-                      color: 'var(--primary)'
+                      color: 'var(--primary)',
+                      textAlign: 'center'
                     }}
                   >
-                    <CheckCircle2 size={54} color="var(--primary)" style={{ margin: '0 auto 16px' }} />
-                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '8px' }}>
+                    <div style={{
+                      width: '68px',
+                      height: '68px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(17, 156, 74, 0.1)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 18px'
+                    }}>
+                      <CheckCircle2 size={40} color="var(--primary)" />
+                    </div>
+
+                    <div className="badge badge-gold" style={{ marginBottom: '10px', fontSize: '0.78rem' }}>
+                      TIẾP NHẬN YÊU CẦU THÀNH CÔNG
+                    </div>
+
+                    <h4 style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: 'clamp(1.4rem, 2vw, 1.65rem)',
+                      fontWeight: '800',
+                      color: 'var(--primary)',
+                      marginBottom: '8px'
+                    }}>
                       An Đông Đã Nhận Được Yêu Cầu!
                     </h4>
-                    <p style={{ fontSize: '0.96rem', color: '#526058', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto 24px' }}>
-                      Cảm ơn bạn đã gửi thông tin. Đội ngũ nhân viên An Đông sẽ gọi điện tư vấn và hỗ trợ bạn trong thời gian sớm nhất.
+
+                    <p style={{
+                      fontSize: '0.94rem',
+                      color: '#526058',
+                      lineHeight: 1.65,
+                      maxWidth: '460px',
+                      margin: '0 auto 20px'
+                    }}>
+                      Thông tin yêu cầu của bạn đã được chuyển đến bộ phận hỗ trợ khách hàng An Đông Food. Thư xác nhận cũng đã được gửi tới email của bạn. Chuyên viên An Đông sẽ liên hệ tư vấn lại cho bạn trong thời gian sớm nhất.
                     </p>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+
+                    {/* Snapshot info box */}
+                    {lastSubmitted && (
+                      <div style={{
+                        backgroundColor: 'var(--bg-card)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '16px',
+                        padding: '16px 20px',
+                        textAlign: 'left',
+                        marginBottom: '26px',
+                        fontSize: '0.88rem',
+                        color: 'var(--text-primary)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '8px'
+                      }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--border-color)', paddingBottom: '6px' }}>
+                          <span style={{ color: '#859b8f', fontWeight: '600' }}>Khách hàng:</span>
+                          <span style={{ fontWeight: '700', color: 'var(--primary)' }}>{lastSubmitted.fullName}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--border-color)', paddingBottom: '6px' }}>
+                          <span style={{ color: '#859b8f', fontWeight: '600' }}>Số điện thoại:</span>
+                          <span style={{ fontWeight: '700', color: 'var(--brand-green-dark)' }}>{lastSubmitted.phone}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--border-color)', paddingBottom: '6px' }}>
+                          <span style={{ color: '#859b8f', fontWeight: '600' }}>Chủ đề:</span>
+                          <span style={{ fontWeight: '700' }}>{lastSubmitted.subject}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#859b8f', fontWeight: '600' }}>Thời gian gửi:</span>
+                          <span style={{ fontWeight: '600', color: 'var(--brand-brown)' }}>{lastSubmitted.submittedAt}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
                       <button
                         onClick={() => setSubmitted(false)}
                         className="btn btn-outline"
-                        style={{ padding: '10px 24px' }}
+                        style={{ padding: '10px 22px', fontSize: '0.9rem' }}
                       >
                         Gửi Yêu Cầu Khác
                       </button>
-                      <Link to="/" className="btn btn-primary" style={{ padding: '10px 24px' }}>
+                      <Link
+                        to="/"
+                        className="btn btn-primary"
+                        style={{ padding: '10px 22px', fontSize: '0.9rem' }}
+                      >
                         Trở Về Trang Chủ
                       </Link>
                     </div>
@@ -416,7 +492,9 @@ export default function ContactPage() {
                         <input
                           type="tel"
                           required
-                          placeholder="0944 852 464"
+                          inputMode="tel"
+                          autoComplete="tel"
+                          placeholder="Ví dụ: 090 123 4567"
                           value={formData.phone}
                           onChange={e => setFormData({ ...formData, phone: e.target.value })}
                           style={{
@@ -438,10 +516,11 @@ export default function ContactPage() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '18px' }}>
                       <div>
                         <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '6px' }}>
-                          Email
+                          Email *
                         </label>
                         <input
                           type="email"
+                          required
                           placeholder="email@example.com"
                           value={formData.email}
                           onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -634,11 +713,11 @@ export default function ContactPage() {
                 gap: '10px'
               }}>
                 <div>
-                  <strong style={{ color: 'var(--primary)' }}>📍 Địa chỉ: </strong>
+                  <strong style={{ color: 'var(--primary)' }}>Địa chỉ: </strong>
                   <span style={{ color: '#526058' }}>Ấp Long Thành, xã Phước Long, tỉnh Cà Mau.</span>
                 </div>
                 <div>
-                  <strong style={{ color: 'var(--primary)' }}>🕒 Giờ mở cửa: </strong>
+                  <strong style={{ color: 'var(--primary)' }}>Giờ mở cửa: </strong>
                   <span style={{ color: '#526058' }}>08:00 – 18:00 (Thứ 2 đến Thứ 7)</span>
                 </div>
               </div>
