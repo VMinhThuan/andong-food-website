@@ -109,9 +109,6 @@ export default function ContactPage() {
             transition={{ duration: 0.7 }}
             style={{ maxWidth: '640px', margin: '0 auto' }}
           >
-            <div className="badge badge-gold" style={{ marginBottom: '14px' }}>
-              KẾT NỐI VỚI AN ĐÔNG
-            </div>
             <h1 style={{
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2.1rem, 3.4vw, 2.9rem)',
@@ -151,9 +148,6 @@ export default function ContactPage() {
               viewport={{ once: false, amount: 0.2 }}
               variants={fadeInLeft}
             >
-              <div className="badge badge-green" style={{ marginBottom: '12px' }}>
-                HỖ TRỢ TRỰC TIẾP
-              </div>
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
@@ -339,9 +333,6 @@ export default function ContactPage() {
                 border: '1px solid var(--border-color)',
                 boxShadow: '0 12px 35px rgba(17, 156, 74, 0.06)'
               }}>
-                <div className="badge badge-gold" style={{ marginBottom: '10px' }}>
-                  GỬI YÊU CẦU
-                </div>
                 <h3 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: 'clamp(1.7rem, 2.4vw, 2.1rem)',
@@ -380,10 +371,6 @@ export default function ContactPage() {
                       margin: '0 auto 18px'
                     }}>
                       <CheckCircle2 size={40} color="var(--primary)" />
-                    </div>
-
-                    <div className="badge badge-gold" style={{ marginBottom: '10px', fontSize: '0.78rem' }}>
-                      TIẾP NHẬN YÊU CẦU THÀNH CÔNG
                     </div>
 
                     <h4 style={{
@@ -686,9 +673,6 @@ export default function ContactPage() {
 
             {/* Right: Visiting Details & Directions CTA */}
             <div>
-              <div className="badge badge-gold" style={{ marginBottom: '12px' }}>
-                ĐỊA ĐIỂM TRỰC TIẾP
-              </div>
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.8rem, 2.6vw, 2.3rem)',
