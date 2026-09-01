@@ -271,22 +271,6 @@ export default function ProductDetailPage() {
                       Mặt Sau
                     </button>
                   </div>
-
-                  <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '8px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
-                    <button
-                      onClick={() => setIsQRModalOpen(true)}
-                      className="btn btn-gold btn-sm"
-                    >
-                      Xem mã QR bao bì
-                    </button>
-                    <a
-                      href={api.getDownloadQRPNGUrl(product.slug)}
-                      className="btn btn-outline btn-sm"
-                      download
-                    >
-                      Tải mã QR
-                    </a>
-                  </div>
                 </div>
               </div>
 
