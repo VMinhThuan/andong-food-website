@@ -6,7 +6,6 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ScrollProgress from './components/common/ScrollProgress';
 import BrandPreloader from './components/common/BrandPreloader';
-import PreFooterCTA from './components/common/PreFooterCTA';
 import ScrollToTop from './components/common/ScrollToTop';
 import HotlineModal from './components/common/HotlineModal';
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -62,7 +61,6 @@ function PublicAppContent() {
             </Routes>
             </Suspense>
           </main>
-          <PreFooterCTA />
           <Footer />
         </div>
 
