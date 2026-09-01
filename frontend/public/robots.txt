@@ -1,0 +1,9 @@
+# Robots.txt for An Dong Food (https://www.andofood.vn)
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dang-nhap
+
+# Host & Sitemap
+Host: https://www.andofood.vn
+Sitemap: https://www.andofood.vn/sitemap.xml

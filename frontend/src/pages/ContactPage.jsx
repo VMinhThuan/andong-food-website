@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ArrowRight, ExternalLin
 import { api } from '../services/api';
 import CustomSelect from '../components/common/CustomSelect';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
+import SEO from '../components/common/SEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -81,6 +82,11 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--primary)' }}>
+      <SEO
+        title="Liên Hệ & Tư Vấn Đại Lý"
+        description="Liên hệ với An Đông Food để nhận tư vấn phân phối, chính sách đại lý và đặt hàng các dòng gạo sạch chuẩn giống: ST25, Vuông Tôm."
+        keywords="Liên hệ An Đông Food, Đại lý gạo An Đông, Mua gạo sỉ, Phân phối gạo sạch"
+      />
 
       {/* 1. CONTACT HERO (COMPACT & ELEGANT) */}
       <section style={{

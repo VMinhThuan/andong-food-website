@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Trang Chủ -->
+  <url>
+    <loc>https://www.andofood.vn/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Trang Sản Phẩm Danh Mục -->
+  <url>
+    <loc>https://www.andofood.vn/san-pham</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Chi Tiết Gạo ST25 -->
+  <url>
+    <loc>https://www.andofood.vn/san-pham/gao-st25</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/jeuco62x/image/upload/v1788253748/andong_food/products/ecom-st25.svg</image:loc>
+      <image:title>Gạo ST25 An Đông Thuần Chủng Thơm Dẻo Đậm Vị</image:title>
+      <image:caption>Gạo ST25 đặc sản Việt Nam thương hiệu An Đông Food</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Chi Tiết Gạo Vuông Tôm -->
+  <url>
+    <loc>https://www.andofood.vn/san-pham/gao-vuong-tom</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/jeuco62x/image/upload/v1788253760/andong_food/products/ecom-vuongtom.svg</image:loc>
+      <image:title>Gạo Vuông Tôm An Đông Luân Canh Sinh Thái Tự Nhiên</image:title>
+      <image:caption>Gạo sinh thái Vuông Tôm miền Tây trọn vị an lành</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Trang Giới Thiệu -->
+  <url>
+    <loc>https://www.andofood.vn/gioi-thieu</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Trang Liên Hệ -->
+  <url>
+    <loc>https://www.andofood.vn/lien-he</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Trang Quét Mã QR & Truy Xuất Nguồn Gốc -->
+  <url>
+    <loc>https://www.andofood.vn/tra-cuu</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

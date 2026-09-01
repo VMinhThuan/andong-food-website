@@ -9,6 +9,7 @@ import BannerSvg from '../assets/brand/banner.svg';
 import FooterBannerSvg from '../assets/brand/footer-banner.svg';
 import AnDongAnLongSvg from '../assets/brand/andong-anlong.svg';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
+import SEO from '../components/common/SEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -203,7 +204,12 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="about-page" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--primary)' }}>
+    <div className="about-page" style={{ overflow: 'hidden', backgroundColor: 'var(--bg-primary)' }}>
+      <SEO
+        title="Về Chúng Tôi – Câu Chuyện Hạt Gạo An Đông"
+        description="Khám phá câu chuyện thương hiệu An Đông Food, tầm nhìn, sứ mệnh vì bữa cơm an lành và 3 giá trị cốt lõi Chân Thành - Tinh Tế - Bền Bỉ."
+        keywords="Về An Đông, Giới thiệu An Đông Food, Câu chuyện thương hiệu, Gạo sạch An Đông, Tầm nhìn sứ mệnh"
+      />
 
       {/* 1. HERO BANNER AN ĐÔNG - CHUẨN GIAO DIỆN ẢNH 2 */}
       <section className="about-hero-reveal" style={{ backgroundColor: '#FFFDF9', overflow: 'hidden' }}>

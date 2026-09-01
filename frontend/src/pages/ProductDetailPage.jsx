@@ -20,6 +20,7 @@ import {
 import { api } from '../services/api';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
+import SEO from '../components/common/SEO';
 
 import VoGaoStep1 from '../assets/brand/vogao-step1.png';
 import ThemNuocStep2 from '../assets/brand/themnuoc-step2.png';
@@ -127,9 +128,41 @@ export default function ProductDetailPage() {
   }
 
   const packagingImage = getPackagingImage(selectedFace);
+  const seoImage = product.images?.ecom || product.images?.chinhDien || product.images?.front || product.images?.main;
+
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: seoImage,
+    description: product.summary,
+    sku: product.code,
+    brand: {
+      '@type': 'Brand',
+      name: 'An Đông Food'
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `https://www.andofood.vn/san-pham/${product.slug}`,
+      priceCurrency: 'VND',
+      availability: product.inStock !== false ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'An Đông Food'
+      }
+    }
+  };
 
   return (
     <div className="product-detail-page" style={{ backgroundColor: 'var(--bg-main)' }}>
+      <SEO
+        title={`${product.name} – Gạo Sạch Chuẩn Giống`}
+        description={product.summary || 'Gạo ngon chuẩn giống An Đông, gửi trọn an lòng trong từng bữa cơm gia đình.'}
+        keywords={`${product.name}, Gạo ${product.name}, Gạo An Đông, Mua gạo sạch, Gạo đặc sản`}
+        image={seoImage}
+        type="product"
+        schema={productSchema}
+      />
       {/* Breadcrumb */}
       <div className="product-breadcrumb" style={{ backgroundColor: 'var(--primary)', color: 'var(--golden-pale)', padding: '12px 0', fontSize: '0.85rem' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>

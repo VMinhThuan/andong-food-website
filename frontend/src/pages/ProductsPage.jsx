@@ -5,6 +5,7 @@ import { api } from '../services/api';
 import BrandPreloader from '../components/common/BrandPreloader';
 import EcomSt25 from '../assets/brand/ecom-st25.svg';
 import EcomVuongTom from '../assets/brand/ecom-vuongtom.svg';
+import SEO from '../components/common/SEO';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -30,6 +31,11 @@ export default function ProductsPage() {
 
   return (
     <main style={{ background: '#FFFDF9', minHeight: '80vh', padding: '60px 0 100px' }}>
+      <SEO
+        title="Sản Phẩm Gạo An Đông – Gạo ST25 & Gạo Vuông Tôm"
+        description="Khám phá các sản phẩm gạo sạch An Đông: Gạo ST25 chuẩn ngon nhất thế giới và Gạo sinh thái Vuông Tôm trọn vị an lành. Đóng túi tiện lợi, chuẩn chất lượng."
+        keywords="Gạo An Đông, Gạo ST25, Gạo Vuông Tôm, Mua gạo sạch, Gạo đặc sản đóng gói"
+      />
       <div className="container" style={{ maxWidth: '1280px' }}>
         {/* Header danh mục */}
         <div style={{ maxWidth: 720, marginBottom: 50, textAlign: 'left' }}>

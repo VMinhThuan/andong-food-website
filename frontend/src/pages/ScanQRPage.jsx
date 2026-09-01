@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { QrCode, Search, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 import CameraScanner from '../components/common/CameraScanner';
 import { api } from '../services/api';
+import SEO from '../components/common/SEO';
 
 export default function ScanQRPage() {
   const [manualCode, setManualCode] = useState('');
@@ -31,8 +32,27 @@ export default function ScanQRPage() {
     }
   };
 
+  const handleScanSuccess = (decodedText) => {
+    if (decodedText.startsWith('http://') || decodedText.startsWith('https://')) {
+      try {
+        const url = new URL(decodedText);
+        navigate(url.pathname);
+      } catch {
+        window.location.href = decodedText;
+      }
+    } else {
+      setManualCode(decodedText);
+      handleManualSearch({ preventDefault: () => {} });
+    }
+  };
+
   return (
-    <div className="scan-qr-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '80vh' }}>
+    <div className="scan-qr-page" style={{ backgroundColor: 'var(--bg-main)', minHeight: '80vh', padding: '40px 0 80px' }}>
+      <SEO
+        title="Quét Mã QR & Truy Xuất Nguồn Gốc Gạo"
+        description="Tra cứu và quét mã QR trên bao bì gạo An Đông để xem chi tiết nguồn gốc, tiêu chuẩn chất lượng và hướng dẫn nấu."
+        keywords="Quét mã QR gạo, Truy xuất nguồn gốc gạo An Đông, Mã QR bao bì"
+      />
       {/* Header */}
       <section style={{
         background: 'linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 100%)',

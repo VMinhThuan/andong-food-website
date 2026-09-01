@@ -23,6 +23,7 @@ import { api } from '../services/api';
 import QRCode from 'qrcode';
 import QRModal from '../components/common/QRModal';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
+import SEO from '../components/common/SEO';
 import HeroBannerSlider from '../components/home/HeroBannerSlider';
 import BrandValueBar from '../components/home/BrandValueBar';
 import FlipProductCard from '../components/home/FlipProductCard';
@@ -285,6 +286,10 @@ export default function HomePage() {
 
   return (
     <div className="home-page" style={{ overflow: 'hidden' }}>
+      <SEO
+        title="Trang Chủ – Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng"
+        description="An Đông Food – Thương hiệu gạo sạch chuẩn giống Việt Nam. Cung cấp Gạo ST25 chuẩn thế giới và Gạo sinh thái Vuông Tôm thơm dẻo đậm vị, minh bạch nguồn gốc."
+      />
       {/* 1. HERO BANNER SLIDER (Banner SVG thuần 100% không bị che) */}
       <HeroBannerSlider />
 
