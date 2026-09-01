@@ -426,6 +426,35 @@ function ProductFacts({ product }) {
                   </div>
                 </div>
 
+                {/* Icon / Hình ảnh minh họa bước nấu - nằm ngay dưới tiêu đề, phóng to rõ nét */}
+                {iconSrc && (
+                  <div
+                    style={{
+                      marginBottom: '18px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: '200px',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <img
+                      src={iconSrc}
+                      alt={step.viTitle || `Bước ${step.step}`}
+                      style={{
+                        height: '150px',
+                        maxWidth: '220px',
+                        width: 'auto',
+                        objectFit: 'contain',
+                        mixBlendMode: 'multiply',
+                        transform: 'scale(2.5)',
+                        transformOrigin: 'center center',
+                        display: 'block'
+                      }}
+                    />
+                  </div>
+                )}
+
                 <p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65, fontSize: '0.94rem' }}>
                   {step.vi || step.descVi}
                 </p>
@@ -438,37 +467,6 @@ function ProductFacts({ product }) {
                   {step.en || step.descEn}
                 </p>
               </div>
-
-              {/* Icon / Hình ảnh minh họa các bước nấu căn đều ở dưới cùng - Phóng to rõ nét */}
-              {iconSrc && (
-                <div
-                  style={{
-                    marginTop: '24px',
-                    paddingTop: '20px',
-                    borderTop: '1px solid rgba(216, 203, 169, 0.45)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '145px',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <img
-                    src={iconSrc}
-                    alt={step.viTitle || `Bước ${step.step}`}
-                    style={{
-                      height: '110px',
-                      maxWidth: '180px',
-                      width: 'auto',
-                      objectFit: 'contain',
-                      mixBlendMode: 'multiply',
-                      transform: 'scale(2.5)',
-                      transformOrigin: 'center center',
-                      display: 'block'
-                    }}
-                  />
-                </div>
-              )}
             </article>
           );
         })}

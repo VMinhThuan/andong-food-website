@@ -464,33 +464,6 @@ textarea.form-control {
   margin-bottom: 20px;
 }
 
-/* Brand Features Horizontal Card Styles - 4 Cột Cùng 1 Hàng */
-.brand-features-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-}
-
-@media (max-width: 991px) {
-  .brand-features-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-  .brand-features-card {
-    border-right: none !important;
-    padding-right: 0 !important;
-  }
-}
-
-@media (max-width: 580px) {
-  .brand-features-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
 /* Quality Process Timeline responsive styles */
 .quality-timeline-container {
   display: grid;
