@@ -399,22 +399,22 @@ function ProductFacts({ product }) {
       <div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div>
       <h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3>
 
-      {/* Khung hướng dẫn nấu dạng bảng ngang liền mạch chuẩn Ảnh 1 */}
+      {/* Khung hướng dẫn nấu dạng bảng ngang liền mạch chuẩn Ảnh 2 */}
       <div
         style={{
           marginTop: '28px',
-          padding: 'clamp(24px, 3.5vw, 36px) clamp(20px, 3vw, 32px)',
+          padding: 'clamp(28px, 4vw, 44px) clamp(20px, 3vw, 36px)',
           background: '#FFFDF0',
-          border: '2px solid #E5A93C',
-          borderRadius: '28px',
-          boxShadow: '0 8px 30px rgba(229, 169, 60, 0.08)'
+          border: '3.5px solid #EAA838',
+          borderRadius: '32px',
+          boxShadow: '0 10px 35px rgba(234, 168, 56, 0.1)'
         }}
       >
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 'clamp(20px, 2.5vw, 32px)',
+            gap: 'clamp(24px, 3vw, 38px)',
             alignItems: 'start'
           }}
         >
@@ -432,43 +432,44 @@ function ProductFacts({ product }) {
                 }}
               >
                 {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '10px', minHeight: '52px' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'flex-start', justifyContent: 'center', gap: '9px', minHeight: '52px', textAlign: 'left' }}>
                   <span
                     style={{
-                      width: 32,
-                      height: 32,
+                      width: 34,
+                      height: 34,
                       borderRadius: '50%',
-                      display: 'grid',
-                      placeItems: 'center',
-                      background: '#E5A93C',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: '#EAA838',
                       color: '#ffffff',
                       fontWeight: 800,
                       fontSize: '1.05rem',
                       flexShrink: 0,
-                      marginTop: '2px'
+                      marginTop: '1px'
                     }}
                   >
                     {step.step}
                   </span>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ color: '#4A2E14', fontWeight: 800, fontSize: '1.15rem', lineHeight: 1.2, letterSpacing: '0.2px' }}>
+                  <div>
+                    <div style={{ color: '#4A2E14', fontWeight: 800, fontSize: '1.22rem', lineHeight: 1.15, letterSpacing: '0.2px' }}>
                       {step.viTitle || step.titleVi}
                     </div>
-                    <div style={{ color: '#8C7355', fontSize: '0.82rem', fontWeight: 600, marginTop: '2px' }}>
+                    <div style={{ color: '#8C7355', fontSize: '0.86rem', fontWeight: 600, marginTop: '3px' }}>
                       {step.enTitle || step.titleEn}
                     </div>
                   </div>
                 </div>
 
-                {/* 2. Icon Minh Họa To Rõ Ở Giữa */}
+                {/* 2. Icon Minh Họa Cực Kỳ To Rõ Ở Giữa (Chuẩn Ảnh 2) */}
                 {iconSrc && (
                   <div
                     style={{
-                      margin: '16px 0 14px',
+                      margin: '12px 0 16px',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      height: '135px',
+                      height: '190px',
                       width: '100%',
                       overflow: 'hidden'
                     }}
@@ -477,12 +478,12 @@ function ProductFacts({ product }) {
                       src={iconSrc}
                       alt={step.viTitle || `Bước ${step.step}`}
                       style={{
-                        height: '110px',
-                        maxWidth: '180px',
+                        height: '160px',
+                        maxWidth: '220px',
                         width: 'auto',
                         objectFit: 'contain',
                         mixBlendMode: 'multiply',
-                        transform: 'scale(2.3)',
+                        transform: 'scale(3.6)',
                         transformOrigin: 'center center',
                         display: 'block'
                       }}
@@ -491,11 +492,11 @@ function ProductFacts({ product }) {
                 )}
 
                 {/* 3. Nội dung mô tả Tiếng Việt & Tiếng Anh căn giữa */}
-                <p style={{ margin: '0 0 8px', color: '#4A2E14', fontWeight: 700, lineHeight: 1.5, fontSize: '0.94rem' }}>
+                <p style={{ margin: '0 0 8px', color: '#4A2E14', fontWeight: 700, lineHeight: 1.5, fontSize: 'clamp(0.96rem, 1.1vw, 1.05rem)' }}>
                   {step.vi || step.descVi}
                 </p>
 
-                <p style={{ margin: 0, color: '#8A7563', fontSize: '0.84rem', lineHeight: 1.45, fontWeight: 500 }}>
+                <p style={{ margin: 0, color: '#8A7563', fontSize: 'clamp(0.84rem, 0.95vw, 0.9rem)', lineHeight: 1.45, fontWeight: 500 }}>
                   {step.en || step.descEn}
                 </p>
               </div>
