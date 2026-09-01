@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QrCode, Search, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
-import CameraScanner from '../components/common/CameraScanner';
+// html5-qrcode ~280KB — tách riêng, chỉ tải khi khối camera thực sự hiển thị.
+const CameraScanner = lazy(() => import('../components/common/CameraScanner'));
 import { api } from '../services/api';
 import SEO from '../components/common/SEO';
 
@@ -76,7 +77,9 @@ export default function ScanQRPage() {
       <section style={{ padding: '50px 0 80px' }}>
         <div className="container" style={{ maxWidth: '640px' }}>
           {/* Live Camera Scanner Box */}
-          <CameraScanner />
+          <Suspense fallback={<div style={{ minHeight: '260px', display: 'grid', placeItems: 'center', color: 'var(--text-muted)' }}>Đang tải trình quét…</div>}>
+            <CameraScanner />
+          </Suspense>
 
           {/* Alternative: Enter Product Code Manually */}
           <div style={{

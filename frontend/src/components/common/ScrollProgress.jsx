@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { m, useScroll, useSpring } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 
 export default function ScrollProgress() {
@@ -25,11 +25,11 @@ export default function ScrollProgress() {
   return (
     <>
       {/* Top Reading Progress Bar */}
-      <motion.div className="scroll-progress-bar" style={{ scaleX }} />
+      <m.div className="scroll-progress-bar" style={{ scaleX }} />
 
       {/* Floating Back To Top Button */}
       {showBackToTop && (
-        <motion.button
+        <m.button
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
@@ -40,7 +40,7 @@ export default function ScrollProgress() {
           title="Lên đầu trang"
         >
           <ChevronUp size={22} />
-        </motion.button>
+        </m.button>
       )}
     </>
   );

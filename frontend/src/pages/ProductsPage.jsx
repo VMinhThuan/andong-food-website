@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { api } from '../services/api';
 import BrandPreloader from '../components/common/BrandPreloader';
-import EcomSt25 from '../assets/brand/ecom-st25.svg';
-import EcomVuongTom from '../assets/brand/ecom-vuongtom.svg';
+import EcomSt25 from '../assets/optimized/ecom-st25.webp';
+import EcomVuongTom from '../assets/optimized/ecom-vuongtom.webp';
 import SEO from '../components/common/SEO';
 
 export default function ProductsPage() {
@@ -73,7 +73,7 @@ export default function ProductsPage() {
             const productNumber = product.content?.number || (isSt25 ? 'SẢN PHẨM 01 / PRODUCT 01' : 'SẢN PHẨM 02 / PRODUCT 02');
 
             return (
-              <motion.article
+              <m.article
                 key={product.id || product._id}
                 whileHover={{ y: -6, boxShadow: '0 20px 38px rgba(0,0,0,0.08)' }}
                 transition={{ duration: 0.3 }}
@@ -169,7 +169,7 @@ export default function ProductsPage() {
                     Xem chi tiết
                   </Link>
                 </div>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>

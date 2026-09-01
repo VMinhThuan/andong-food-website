@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, Compass, Wheat, Heart } from 'lucide-react';
 import { QualityProcessSection } from './HomePage';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 
-import BannerSvg from '../assets/brand/banner.svg';
+import BannerSvg from '../assets/optimized/banner.webp';
 import FooterBannerSvg from '../assets/brand/footer-banner.svg';
 import AnDongAnLongSvg from '../assets/brand/andong-anlong.svg';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
@@ -223,6 +223,10 @@ export default function AboutPage() {
           <img
             src={BannerSvg}
             alt="An Đông - Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng"
+            width={1920}
+            height={1521}
+            fetchPriority="high"
+            decoding="async"
             style={{
               width: '100%',
               height: 'auto',
@@ -243,6 +247,8 @@ export default function AboutPage() {
           <img
             src={FooterBannerSvg}
             alt="Dải sóng xanh An Đông"
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: 'auto',
@@ -264,7 +270,7 @@ export default function AboutPage() {
             textAlign: 'center'
           }}>
             <div className="container" style={{ maxWidth: '880px', margin: '0 auto' }}>
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.3 }}
@@ -281,9 +287,9 @@ export default function AboutPage() {
                 }}
               >
                 Trong cuộc sống, sự quan tâm dành cho gia đình không phải lúc nào cũng được thể hiện bằng những điều lớn lao. Đôi khi, đó chỉ là việc lựa chọn nguồn thực phẩm chất lượng, thơm ngon.
-              </motion.p>
+              </m.p>
 
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.3 }}
@@ -300,7 +306,7 @@ export default function AboutPage() {
                 }}
               >
                 An Đông mong muốn giúp mỗi người gửi gắm sự quan tâm đến người thân và gia đình qua từng bữa cơm — để dù gần hay xa, người ăn ngon miệng, người chọn cũng an lòng
-              </motion.p>
+              </m.p>
             </div>
           </div>
         </div>
@@ -315,7 +321,7 @@ export default function AboutPage() {
       }}>
         <div className="container" style={{ maxWidth: '1360px', padding: '0 28px', margin: '0 auto' }}>
           {/* Tiêu đề mục */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
@@ -333,12 +339,12 @@ export default function AboutPage() {
             }}>
               KHÔNG NGỪNG CẦU TIẾN
             </h2>
-          </motion.div>
+          </m.div>
 
           {/* 2 Cột: 01 TẦM NHÌN & 02 SỨ MỆNH (Căn đều tăm tắp tuyệt đối) */}
           <div className="about-editorial-grid-2">
             {/* 01 TẦM NHÌN */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -377,10 +383,10 @@ export default function AboutPage() {
                 </p>
               </div>
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
-            </motion.div>
+            </m.div>
 
             {/* 02 SỨ MỆNH */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -419,7 +425,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -432,7 +438,7 @@ export default function AboutPage() {
       }}>
         <div className="container" style={{ maxWidth: '1360px', padding: '0 28px', margin: '0 auto' }}>
           {/* Tiêu đề mục */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
@@ -450,12 +456,12 @@ export default function AboutPage() {
             }}>
               THƯƠNG HIỆU VIỆT
             </h2>
-          </motion.div>
+          </m.div>
 
           {/* 3 Cột: CHÂN THÀNH - TINH TẾ - BỀN BỈ (Căn đều tăm tắp tuyệt đối) */}
           <div className="about-editorial-grid-3">
             {/* CHÂN THÀNH */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -490,10 +496,10 @@ export default function AboutPage() {
                 </p>
               </div>
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
-            </motion.div>
+            </m.div>
 
             {/* TINH TẾ */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -528,10 +534,10 @@ export default function AboutPage() {
                 </p>
               </div>
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
-            </motion.div>
+            </m.div>
 
             {/* BỀN BỈ */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
@@ -566,7 +572,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -596,7 +602,7 @@ export default function AboutPage() {
 
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '880px', margin: '0 auto' }}>
           {/* Logo / Typography Slogan: AN ĐÔNG gửi trọn AN LÒNG */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -622,10 +628,10 @@ export default function AboutPage() {
                 filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.35))'
               }}
             />
-          </motion.div>
+          </m.div>
 
           {/* Lời cam kết chân thành */}
-          <motion.p
+          <m.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -640,10 +646,10 @@ export default function AboutPage() {
             }}
           >
             "An Đông cam kết mang đến những hạt gạo thơm ngon, chất lượng đáng tin, để người ăn ngon miệng và người chọn an lòng."
-          </motion.p>
+          </m.p>
 
           {/* 2 Nút Hành Động Màu Xanh Lá Cạnh Nhau */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -717,7 +723,7 @@ export default function AboutPage() {
               <span>Khám phá sản phẩm</span>
               <ArrowRight size={17} />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

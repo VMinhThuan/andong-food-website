@@ -148,9 +148,9 @@ export const initialProducts = [
     ...commonLabel,
     manufacturer,
     images: {
-      main: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      back: '/assets/brand-element/MẶT SAU BAO BÌ.png',
+      main: '/assets/brand-element/mat-truoc-bao-bi.webp',
+      front: '/assets/brand-element/mat-truoc-bao-bi.webp',
+      back: '/assets/brand-element/mat-sau-bao-bi.webp',
       ecom: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788253748/andong_food/products/ecom-st25.svg',
       chinhDien: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788254853/andong_food/products/chinh-dien-st25.svg'
     },
@@ -175,9 +175,9 @@ export const initialProducts = [
     ...commonLabel,
     manufacturer,
     images: {
-      main: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      back: '/assets/brand-element/MẶT SAU BAO BÌ.png',
+      main: '/assets/brand-element/mat-truoc-bao-bi.webp',
+      front: '/assets/brand-element/mat-truoc-bao-bi.webp',
+      back: '/assets/brand-element/mat-sau-bao-bi.webp',
       ecom: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788253760/andong_food/products/ecom-vuongtom.svg',
       chinhDien: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788254856/andong_food/products/chinh-dien-vuongtom.svg'
     },

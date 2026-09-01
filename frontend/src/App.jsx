@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -24,7 +25,11 @@ function isAdminHostname() {
 }
 
 export default function App() {
-  return <AuthProvider><Router>{isAdminHostname() ? <AdminAppContent /> : <PublicAppContent />}</Router></AuthProvider>;
+  return (
+    <LazyMotion features={domAnimation}>
+      <AuthProvider><Router>{isAdminHostname() ? <AdminAppContent /> : <PublicAppContent />}</Router></AuthProvider>
+    </LazyMotion>
+  );
 }
 
 function PublicAppContent() {

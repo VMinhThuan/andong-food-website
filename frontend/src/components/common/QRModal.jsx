@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import QRCode from 'qrcode';
 
 export default function QRModal({ product, isOpen, onClose }) {
   const [qrDataUrl, setQrDataUrl] = useState('');
@@ -12,14 +11,16 @@ export default function QRModal({ product, isOpen, onClose }) {
       setQrDataUrl(product.qrCodeDataUrl);
     } else if (product) {
       const url = `${window.location.origin}/san-pham/${product.slug}`;
-      QRCode.toDataURL(url, {
-        width: 600,
-        margin: 2,
-        color: {
-          dark: '#171717',
-          light: '#ffffff'
-        }
-      }).then(dataUrl => setQrDataUrl(dataUrl));
+      import('qrcode').then(({ default: QRCode }) =>
+        QRCode.toDataURL(url, {
+          width: 600,
+          margin: 2,
+          color: {
+            dark: '#171717',
+            light: '#ffffff'
+          }
+        }).then(dataUrl => setQrDataUrl(dataUrl))
+      );
     }
   }, [isOpen, product]);
 

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Ysabeau+Office:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Mansalva&display=swap');
+/* Fonts được nạp qua <link> trong index.html (preconnect + tải song song),
+   không dùng @import ở đây vì nó chặn render và tạo request nối chuỗi. */
 
 :root {
   /* ===== BRAND An Đông ===== */

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   QrCode,
   ArrowRight,
@@ -20,7 +20,6 @@ import {
   Sparkles
 } from 'lucide-react';
 import { api } from '../services/api';
-import QRCode from 'qrcode';
 import QRModal from '../components/common/QRModal';
 import { triggerHotlineModal } from '../components/common/HotlineModal';
 import SEO from '../components/common/SEO';
@@ -28,10 +27,9 @@ import HeroBannerSlider from '../components/home/HeroBannerSlider';
 import BrandValueBar from '../components/home/BrandValueBar';
 import FlipProductCard from '../components/home/FlipProductCard';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
-const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
-const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
-import BannerGao4 from '../assets/brand/banner-gao-4.png';
-import GuiGam1 from '../assets/brand/guigam-1.svg';
+const MatTruocBaoBi = '/assets/brand-element/mat-truoc-bao-bi.webp';
+const MatSauBaoBi = '/assets/brand-element/mat-sau-bao-bi.webp';
+import GuiGam1 from '../assets/optimized/guigam-1.webp';
 import AnDongAnLongSvg from '../assets/brand/andong-anlong.svg';
 
 // Animation variants that trigger smoothly both when scrolling up and down
@@ -202,7 +200,7 @@ export function QualityProcessSection() {
   return (
     <section style={{ padding: '100px 0 110px', position: 'relative', color: '#ffffff', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <img src="/assets/rice-sunrise.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
+        <img src="/assets/rice-sunrise.webp" alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
         {/* Lớp phủ trước đây tối đều (82-88%) khiến toàn bộ section gần như đen
             tuyền, trùng màu với Footer ngay bên dưới — không phân biệt được ranh
             giới 2 khối. Giữ tối ở phần trên (nơi có chữ, cần tương phản) nhưng
@@ -211,14 +209,14 @@ export function QualityProcessSection() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 40%, rgba(20,14,4,0.4) 100%)' }} />
       </div>
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.25 }} variants={fadeInUp} style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
+        <m.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.25 }} variants={fadeInUp} style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
           <div style={{ marginBottom: '12px', display: 'inline-block' }}>
             <span style={{ border: '1px solid rgba(253,185,19,0.6)', borderRadius: '9999px', padding: '4px 16px', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1.5px', color: '#FDB913', textTransform: 'uppercase' }}>QUY TRÌNH CHẤT LƯỢNG</span>
           </div>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 3.6vw, 3rem)', color: '#ffffff', marginBottom: '14px', fontWeight: '800' }}>Từ Cánh Đồng <span style={{ color: '#FDB913' }}>Đến Bữa Cơm</span></h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.02rem', lineHeight: 1.7, margin: 0 }}>Hành trình của hạt gạo An Đông, từ nguồn nguyên liệu đến khi hiện diện trong mỗi bữa cơm gia đình.</p>
-        </motion.div>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={staggerContainer} className="quality-timeline-container">
+        </m.div>
+        <m.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={staggerContainer} className="quality-timeline-container">
           {[
             { step: '01', title: 'Chọn Giống', desc: 'Lựa chọn nguồn giống thuần chủng, chất lượng tốt nhất.', icon: StepSeedIcon },
             { step: '02', title: 'Canh Tác', desc: 'Chăm sóc theo quy trình tự nhiên, an toàn sinh thái.', icon: StepCultivateIcon },
@@ -226,14 +224,14 @@ export function QualityProcessSection() {
             { step: '04', title: 'Sản Xuất', desc: 'Xay xát và làm sạch với quy trình khép kín.', icon: StepProduceIcon },
             { step: '05', title: 'Đóng Gói', desc: 'Bảo quản cẩn thận và dán mã QR minh bạch thông tin.', icon: StepPackageIcon }
           ].map((item) => (
-            <motion.div key={item.step} variants={fadeInUp} className="quality-step-card">
+            <m.div key={item.step} variants={fadeInUp} className="quality-step-card">
               <span className="quality-step-number">{item.step}</span>
               <div className="quality-step-icon"><item.icon /></div>
               <h3 className="quality-step-title">{item.title}</h3>
               <p className="quality-step-description">{item.desc}</p>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
@@ -250,16 +248,19 @@ export default function HomePage() {
       setProducts(data);
     }).catch(err => console.error(err));
 
-    // Tạo mã QR thật cho sản phẩm ST25
+    // Tạo mã QR thật cho sản phẩm ST25 — nạp thư viện qrcode động để không
+    // kéo ~16KB gzip vào bundle chính (chỉ cần khi trang chủ đã render xong).
     const qrTargetUrl = `${window.location.origin}/san-pham/gao-st25`;
-    QRCode.toDataURL(qrTargetUrl, {
-      width: 320,
-      margin: 1,
-      color: {
-        dark: '#0A3B1F',
-        light: '#ffffff'
-      }
-    }).then(setSt25QRDataUrl).catch(console.error);
+    import('qrcode').then(({ default: QRCode }) =>
+      QRCode.toDataURL(qrTargetUrl, {
+        width: 320,
+        margin: 1,
+        color: {
+          dark: '#0A3B1F',
+          light: '#ffffff'
+        }
+      }).then(setSt25QRDataUrl)
+    ).catch(console.error);
   }, []);
 
   // Sắp xếp đảm bảo Gạo ST25 luôn đứng trước (bên trái), Gạo Vuông Tôm đứng sau (bên phải)
@@ -280,8 +281,8 @@ export default function HomePage() {
     subtitle: product.slug?.includes('st25') ? 'Gạo đặc sản thuần chủng' : 'Gạo sạch luân canh lúa - tôm',
     highlightTitle: product.slug?.includes('st25') ? 'Gạo ST25 • Thơm dẻo đậm vị' : 'Gạo Vuông Tôm • Ngọt lành tự nhiên',
     origin: product.content?.information?.find(([label]) => label === 'XUẤT XỨ / ORIGIN')?.[1],
-    image: product.images?.front || product.images?.main || '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-    imageBack: product.images?.back || '/assets/brand-element/MẶT SAU BAO BÌ.png'
+    image: product.images?.front || product.images?.main || MatTruocBaoBi,
+    imageBack: product.images?.back || MatSauBaoBi
   }));
 
   return (
@@ -307,7 +308,7 @@ export default function HomePage() {
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1300px', margin: '0 auto', padding: '0 20px' }}>
           
           {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm (Chuẩn Ảnh 1) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.25 }}
@@ -338,10 +339,10 @@ export default function HomePage() {
             }}>
               Bình an không chỉ là lời chúc dành cho người mình thương — mà còn hiện diện trong từng bữa cơm được chăm chút mỗi ngày
             </p>
-          </motion.div>
+          </m.div>
 
           {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An (guigam-1.svg) Full Width Chiều Dài */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
@@ -361,6 +362,10 @@ export default function HomePage() {
             <img
               src={GuiGam1}
               alt="Gửi gắm bình an trong từng bữa cơm Việt - An Đông Food"
+              width={1920}
+              height={793}
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: 'auto',
@@ -368,10 +373,10 @@ export default function HomePage() {
                 objectFit: 'cover'
               }}
             />
-          </motion.div>
+          </m.div>
 
           {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh 1) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -407,7 +412,7 @@ export default function HomePage() {
               <span>Tìm hiểu thêm</span>
               <ArrowRight size={18} />
             </Link>
-          </motion.div>
+          </m.div>
 
           {/* Dải card ngang gồm 4 giá trị thương hiệu ở chân section - Cùng 1 hàng */}
           <div style={{
@@ -509,7 +514,7 @@ export default function HomePage() {
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
           
           {/* Heading lớn ở giữa: GẠO NGON - CHUẨN GIÁ (Có khoảng cách đẹp mắt với sản phẩm) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.25 }}
@@ -527,10 +532,10 @@ export default function HomePage() {
             }}>
               GẠO NGON - CHUẨN GIÁ
             </h2>
-          </motion.div>
+          </m.div>
 
           {/* 2 Sản Phẩm Đứng Cạnh Nhau + Card Thông Tin Nằm Trực Tiếp Dưới Từng ẢNH (Ảnh 2 & 3) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
@@ -544,18 +549,18 @@ export default function HomePage() {
             }}
           >
             {featuredProducts.map((prod) => (
-              <motion.div key={prod.id} variants={fadeInUp}>
+              <m.div key={prod.id} variants={fadeInUp}>
                 <FlipProductCard
                   product={prod}
                   isSelected={selectedProductId === prod.id}
                   onSelect={(p) => setSelectedProductId(selectedProductId === p.id ? null : p.id)}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
 
           {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh Yêu Cầu) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -591,7 +596,7 @@ export default function HomePage() {
               <span>Tìm hiểu thêm</span>
               <ArrowRight size={18} />
             </Link>
-          </motion.div>
+          </m.div>
 
         </div>
       </section>
@@ -608,8 +613,10 @@ export default function HomePage() {
           position: 'absolute', inset: 0, zIndex: 0
         }}>
           <img
-            src="/assets/rice-sunrise.jpg"
+            src="/assets/rice-sunrise.webp"
             alt=""
+            loading="lazy"
+            decoding="async"
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
           />
           <div style={{
@@ -620,7 +627,7 @@ export default function HomePage() {
 
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.25 }}
@@ -651,10 +658,10 @@ export default function HomePage() {
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.02rem', lineHeight: 1.7, margin: 0 }}>
               Hành trình của hạt gạo An Đông, từ nguồn nguyên liệu đến khi hiện diện trong mỗi bữa cơm gia đình.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Quy trình 5 bước */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
@@ -668,14 +675,14 @@ export default function HomePage() {
               { step: '04', title: 'Sản Xuất', desc: 'Xay xát và làm sạch với quy trình khép kín.', icon: StepProduceIcon },
               { step: '05', title: 'Đóng Gói', desc: 'Bảo quản cẩn thận và dán mã QR minh bạch thông tin.', icon: StepPackageIcon }
             ].map((item) => (
-              <motion.div key={item.step} variants={fadeInUp} className="quality-step-card">
+              <m.div key={item.step} variants={fadeInUp} className="quality-step-card">
                 <span className="quality-step-number">{item.step}</span>
                 <div className="quality-step-icon"><item.icon /></div>
                 <h3 className="quality-step-title">{item.title}</h3>
                 <p className="quality-step-description">{item.desc}</p>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -689,7 +696,7 @@ export default function HomePage() {
             alignItems: 'center'
           }}>
             {/* CỘT TRÁI 40% */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -702,13 +709,15 @@ export default function HomePage() {
                 boxShadow: '0 20px 45px rgba(17, 156, 74, 0.12)',
                 border: '4px solid var(--bg-main)'
               }}>
-                <motion.img
+                <m.img
                   whileHover={{ scale: 1.04 }}
                   transition={{ duration: 0.6, ease: 'easeOut' }}
-                  src="/assets/rice-grains.jpg"
+                  src="/assets/rice-grains.webp"
                   alt="Bông lúa vàng An Đông"
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '520px', objectFit: 'cover', display: 'block' }}
-                  onError={(e) => { e.target.src = '/assets/rice-sunrise.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/rice-sunrise.webp'; }}
                 />
               </div>
 
@@ -729,10 +738,10 @@ export default function HomePage() {
               }}>
                 Tinh Hoa Đất Trời
               </div>
-            </motion.div>
+            </m.div>
 
             {/* CỘT PHẢI 60%: 01 - 04 */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -753,7 +762,7 @@ export default function HomePage() {
                 Gìn Giữ Điều Tốt Lành <br />Trong Từng Hạt Gạo
               </h2>
 
-              <motion.div
+              <m.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.2, }}
@@ -772,7 +781,7 @@ export default function HomePage() {
                   { num: '03', title: 'TRÁCH NHIỆM', desc: 'Chất lượng đáng tin cậy trong từng mẻ gạo xuất xưởng mỗi ngày.' },
                   { num: '04', title: 'BỀN BỈ', desc: 'Đồng hành cùng bữa cơm ngon của người Việt qua nhiều thế hệ.' }
                 ].map((val, idx) => (
-                  <motion.div
+                  <m.div
                     key={val.num}
                     variants={{
                       hidden: { opacity: 0, x: 30, y: 10 },
@@ -808,10 +817,10 @@ export default function HomePage() {
                         </p>
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -832,7 +841,7 @@ export default function HomePage() {
             alignItems: 'center'
           }}>
             {/* Trái: Thông điệp & 3 Lợi ích (01, 02, 03) */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -916,10 +925,10 @@ export default function HomePage() {
                 <span>Trải Nghiệm Quét QR</span>
                 <ArrowRight size={18} />
               </Link>
-            </motion.div>
+            </m.div>
 
             {/* Phải: Visual Mockup Smartphone + Bao Gạo + QR Line Flow */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -1025,6 +1034,8 @@ export default function HomePage() {
                       <img
                         src={MatTruocBaoBi}
                         alt="Bao bì Gạo ST25 An Đông"
+                        loading="lazy"
+                        decoding="async"
                         style={{ height: '100%', maxWidth: '110px', objectFit: 'contain', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.15))' }}
                       />
                     </div>
@@ -1056,7 +1067,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -1088,7 +1099,7 @@ export default function HomePage() {
 
 
           {/* Logo / Typography Slogan Nghệ Thuật: AN ĐÔNG gửi trọn AN LÒNG (andong-anlong.svg) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -1107,6 +1118,8 @@ export default function HomePage() {
             <img
               src={AnDongAnLongSvg}
               alt="An Đông gửi trọn An Lòng"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: 'auto',
@@ -1114,10 +1127,10 @@ export default function HomePage() {
                 filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.35))'
               }}
             />
-          </motion.div>
+          </m.div>
 
           {/* Lời cam kết chân thành */}
-          <motion.p
+          <m.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -1132,10 +1145,10 @@ export default function HomePage() {
             }}
           >
             "An Đông bền bỉ mang đến những hạt gạo thơm ngon, chất lượng đáng tin, để người ăn ngon miệng và người chọn an lòng."
-          </motion.p>
+          </m.p>
 
           {/* 2 Nút Hành Động Màu Xanh Lá Cạnh Nhau (Chuẩn Ảnh 1 & 2) */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
@@ -1210,7 +1223,7 @@ export default function HomePage() {
               <span>Khám phá sản phẩm</span>
               <ArrowRight size={18} />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -1245,7 +1258,7 @@ export default function HomePage() {
             alignItems: 'center'
           }}>
             {/* CỘT TRÁI 46%: ẢNH CÁNH ĐỒNG LÚA MEKONG CÂN XỨNG (CROP 4:5 VỪA VẶN) */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -1257,19 +1270,21 @@ export default function HomePage() {
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
                 border: '3px solid rgba(255, 255, 255, 0.12)'
               }}>
-                <motion.img
+                <m.img
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
-                  src="/assets/rice-mekong.jpg"
+                  src="/assets/rice-mekong.webp"
                   alt="Cánh đồng lúa và người nông dân An Đông"
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '410px', objectFit: 'cover', display: 'block' }}
-                  onError={(e) => { e.target.src = '/assets/rice-sunrise.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/rice-sunrise.webp'; }}
                 />
               </div>
-            </motion.div>
+            </m.div>
 
             {/* CỘT PHẢI 54%: HEADING CÂN ĐỐI 3 DÒNG + 01 TẦM NHÌN / 02 SỨ MỆNH */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.25 }}
@@ -1368,7 +1383,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ArrowRight, ExternalLink, MessageSquare } from 'lucide-react';
 import { api } from '../services/api';
 import CustomSelect from '../components/common/CustomSelect';
@@ -110,7 +110,7 @@ export default function ContactPage() {
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -135,7 +135,7 @@ export default function ContactPage() {
             }}>
               Dù bạn cần tư vấn sản phẩm, đặt hàng hay hợp tác phân phối, An Đông luôn sẵn sàng đồng hành và hỗ trợ tận tâm.
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -149,7 +149,7 @@ export default function ContactPage() {
             alignItems: 'start'
           }}>
             {/* CỘT TRÁI (38%): BẠN CẦN HỖ TRỢ? */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.2 }}
@@ -326,10 +326,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* CỘT PHẢI (62%): GỬI YÊU CẦU TRỰC TUYẾN */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.2 }}
@@ -356,7 +356,7 @@ export default function ContactPage() {
                 </p>
 
                 {submitted ? (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
@@ -452,7 +452,7 @@ export default function ContactPage() {
                         Trở Về Trang Chủ
                       </Link>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                     {/* Row 1: Name & Phone */}
@@ -554,7 +554,7 @@ export default function ContactPage() {
 
                     {/* Conditional Business Field */}
                     {isBusinessSubject && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         transition={{ duration: 0.3 }}
@@ -578,7 +578,7 @@ export default function ContactPage() {
                             outline: 'none'
                           }}
                         />
-                      </motion.div>
+                      </m.div>
                     )}
 
                     {/* Message Field */}
@@ -635,7 +635,7 @@ export default function ContactPage() {
                   </form>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>

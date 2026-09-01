@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check } from 'lucide-react';
 
 export default function CustomSelect({ value, onChange, options, placeholder = 'Chọn chủ đề...', style = {} }) {
@@ -61,19 +61,19 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
         }}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <motion.div
+        <m.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
           style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: '#526058' }}
         >
           <ChevronDown size={17} />
-        </motion.div>
+        </m.div>
       </button>
 
       {/* Animated Dropdown Menu Panel (Rộng rãi, không bị rớt dòng, không scrollbar thô) */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
@@ -139,7 +139,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
                 </div>
               );
             })}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

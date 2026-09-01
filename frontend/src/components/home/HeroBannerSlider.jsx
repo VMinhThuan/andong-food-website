@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import Carousel1 from '../../assets/brand/carousel-1.svg';
-import Carousel2 from '../../assets/brand/carousel-2.svg';
+import Carousel1 from '../../assets/optimized/carousel-1.webp';
+import Carousel2 from '../../assets/optimized/carousel-2.webp';
 
 const slides = [
   {
@@ -74,7 +74,7 @@ export default function HeroBannerSlider() {
     >
       {/* 2 Banner Slides dạng Ảnh thuần (Hiển thị 100% toàn bộ ảnh SVG không bị che cắt) */}
       <AnimatePresence initial={false} custom={direction}>
-        <motion.div
+        <m.div
           key={slide.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -95,6 +95,10 @@ export default function HeroBannerSlider() {
             <img
               src={slide.image}
               alt={slide.alt}
+              width={1920}
+              height={1070}
+              fetchPriority={current === 0 ? 'high' : 'auto'}
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -104,7 +108,7 @@ export default function HeroBannerSlider() {
               }}
             />
           </Link>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       {/* Nút Chuyển Banner Sang Trái (Back Button) */}

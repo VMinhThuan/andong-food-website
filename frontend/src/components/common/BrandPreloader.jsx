@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 const LogoDoc = '/assets/brand-element/AD_LOGO%20D%E1%BB%8CC.svg';
 
 export default function BrandPreloader({ onFinish, persistent = false }) {
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    // Total loading sequence takes ~1.35 seconds, then smoothly fades out
+    // Màn chào thương hiệu: giữ ngắn (~700ms) để không trì hoãn nội dung thật.
     if (persistent) return undefined;
     const timer = setTimeout(() => {
       setIsDone(true);
       if (onFinish) onFinish();
-    }, 1350);
+    }, 700);
 
     return () => clearTimeout(timer);
   }, [onFinish, persistent]);
@@ -19,7 +19,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
   return (
     <AnimatePresence>
       {!isDone && (
-        <motion.div
+        <m.div
           className="brand-preloader"
           key="brand-preloader"
           initial={{ opacity: 1 }}
@@ -42,7 +42,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
           }}
         >
           {/* Subtle Ambient Sunlight Glow */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 0.6, scale: 1.2 }}
             transition={{ duration: 1.2, ease: 'easeOut' }}
@@ -68,7 +68,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             padding: '0 20px'
           }}>
             {/* BƯỚC 1: LOGO DỌC THƯƠNG HIỆU FADE IN */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -83,13 +83,13 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
                   filter: 'drop-shadow(0 6px 18px rgba(176, 125, 53, 0.15))'
                 }}
               />
-            </motion.div>
+            </m.div>
 
             {/* BƯỚC 3: ĐƯỜNG CHÂN TRỜI CÁNH ĐỒNG LÚA CHẠY NGANG MẢNH MAI (SVG HORIZON LINE) */}
             <div style={{ width: '180px', height: '14px', margin: '14px 0 10px' }}>
               <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
                 {/* Lớp đường cong cánh đồng xanh */}
-                <motion.path
+                <m.path
                   d="M0 10 Q 45 4, 90 8 T 180 6"
                   stroke="var(--primary-light)"
                   strokeWidth="1.8"
@@ -99,7 +99,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
                   transition={{ duration: 0.75, delay: 0.35, ease: 'easeInOut' }}
                 />
                 {/* Lớp đường cong phù sa / vàng lúa */}
-                <motion.path
+                <m.path
                   d="M10 12 Q 55 7, 100 11 T 170 9"
                   stroke="var(--golden)"
                   strokeWidth="1.2"
@@ -112,10 +112,10 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             </div>
 
             {/* BƯỚC 4: SLOGAN "GỬI TRỌN AN LÒNG" FADE IN THANH THOÁT */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6, ease: 'easeOut' }}
+              transition={{ duration: 0.4, delay: 0.28, ease: 'easeOut' }}
               style={{
                 fontSize: '0.86rem',
                 color: '#526058',
@@ -125,9 +125,9 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
               }}
             >
               Gửi Trọn An Lòng
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

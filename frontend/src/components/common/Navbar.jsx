@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { PhoneCall, Menu, X } from 'lucide-react';
 import { triggerHotlineModal } from './HotlineModal';
 const LogoNgang = '/assets/brand-element/AD_LOGO%20NGANG.svg';
@@ -187,7 +187,7 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <m.div
             className="site-navbar__drawer"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -230,7 +230,7 @@ export default function Navbar() {
               <PhoneCall size={16} /> Điện thoại: 0944 852 464
             </a>
 
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
-import hoaLuaImg from '../../assets/brand/hoa-lua.png';
+import hoaLuaImg from '../../assets/optimized/hoa-lua.webp';
 import TieuChuan1 from '../../assets/brand/tieuchuan-1.svg';
 import TieuChuan2 from '../../assets/brand/tieuchuan-2.svg';
 import TieuChuan3 from '../../assets/brand/tieuchuan-3.svg';
@@ -95,7 +95,7 @@ export default function BrandValueBar() {
           justifyContent: 'center'
         }}>
           {values.map((val, idx) => (
-            <motion.div
+            <m.div
               key={val.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export default function BrandValueBar() {
               }}
             >
               <LaurelBadge image={val.image} alt={val.alt} />
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

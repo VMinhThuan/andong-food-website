@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
 import { triggerHotlineModal } from './HotlineModal';
 
@@ -14,7 +14,7 @@ export default function PreFooterCTA() {
       // QualityProcessSection phía trên component này trên HomePage/AboutPage —
       // 2 khối ảnh giống hệt nhau nối liền nhau trông như lặp lại dù đã sửa màu
       // phủ. Đổi sang rice-mekong.jpg (mới dùng 2 lần) để có nét riêng.
-      backgroundImage: 'url(/assets/rice-mekong.jpg)',
+      backgroundImage: 'url(/assets/rice-mekong.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center 45%',
       backgroundColor: '#081c15',
@@ -35,7 +35,7 @@ export default function PreFooterCTA() {
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
@@ -107,7 +107,7 @@ export default function PreFooterCTA() {
               <ArrowRight size={18} />
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

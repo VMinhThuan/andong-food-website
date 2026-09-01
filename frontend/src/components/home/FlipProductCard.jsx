@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -12,8 +12,8 @@ import { ArrowRight } from 'lucide-react';
 export default function FlipProductCard({ product, isSelected, onSelect }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const frontImg = product?.images?.front || product?.images?.main || product?.image || '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png';
-  const backImg = product?.images?.back || product?.imageBack || '/assets/brand-element/MẶT SAU BAO BÌ.png';
+  const frontImg = product?.images?.front || product?.images?.main || product?.image || '/assets/brand-element/mat-truoc-bao-bi.webp';
+  const backImg = product?.images?.back || product?.imageBack || '/assets/brand-element/mat-sau-bao-bi.webp';
 
   const isVuongTom = product?.slug === 'gao-vuong-tom' || product?.code === 'AD-VT-02';
   // Tinh chỉnh baseScale Vuông Tôm về 1.03 để khớp chính xác tuyệt đối 1:1 với ST25
@@ -57,7 +57,7 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
         }}
         onClick={handleClick}
       >
-        <motion.div
+        <m.div
           animate={{
             rotateY: active ? 180 : 0,
             scale: (active ? 1.03 : 1.0) * baseScale,
@@ -94,6 +94,8 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
             <img
               src={frontImg}
               alt={product?.name || 'Gạo An Đông - Mặt trước'}
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -102,7 +104,7 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
                 pointerEvents: 'none'
               }}
               onError={(e) => {
-                e.target.src = '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png';
+                e.target.src = '/assets/brand-element/mat-truoc-bao-bi.webp';
               }}
             />
           </div>
@@ -124,6 +126,8 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
             <img
               src={backImg}
               alt={`${product?.name || 'Gạo An Đông'} - Mặt sau`}
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',
@@ -132,18 +136,18 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
                 pointerEvents: 'none'
               }}
               onError={(e) => {
-                e.target.src = '/assets/brand-element/MẶT SAU BAO BÌ.png';
+                e.target.src = '/assets/brand-element/mat-sau-bao-bi.webp';
               }}
             />
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* 2. CARD THÔNG TIN NẰM TRỰC TIẾP DƯỚI TỪNG ẢNH - CHỈ HIỆN KHI BẤM / HOVER (Ảnh 2) */}
       <div style={{ width: '100%', minHeight: '80px', marginTop: '22px' }}>
         <AnimatePresence>
           {active && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 12, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -206,7 +210,7 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
                   <ArrowRight size={24} strokeWidth={2.4} color="#07381A" />
                 </div>
               </Link>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

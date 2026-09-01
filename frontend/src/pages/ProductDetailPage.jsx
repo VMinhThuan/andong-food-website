@@ -27,8 +27,8 @@ import ThemNuocStep2 from '../assets/brand/themnuoc-step2.png';
 import NauComStep3 from '../assets/brand/naucom-step3.png';
 import ThuongThucStep4 from '../assets/brand/thuongthuc-step4.png';
 
-import STChinhDien from '../assets/brand/ST_CHÍNH DIỆN.svg';
-import VTChinhDien from '../assets/brand/VT_CHÍNH DIỆN.svg';
+import STChinhDien from '../assets/optimized/st-chinhdien.webp';
+import VTChinhDien from '../assets/optimized/vt-chinhdien.webp';
 
 const COOKING_STEP_ICONS = {
   1: VoGaoStep1,
