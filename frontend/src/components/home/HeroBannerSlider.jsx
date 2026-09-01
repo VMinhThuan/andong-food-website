@@ -1,261 +1,222 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Wheat, Sun, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import Carousel1 from '../../assets/brand/carousel-1.svg';
+import Carousel2 from '../../assets/brand/carousel-2.svg';
 
 const slides = [
   {
     id: 1,
-    badge: 'CÂU CHUYỆN AN ĐÔNG',
-    badgeIcon: Sun,
-    title: 'Gạo Ngon Chuẩn Giống',
-    highlight: 'Gửi Trọn An Lòng',
-    desc: 'Những hạt gạo thơm ngon và chất lượng đáng tin, cho người ăn ngon miệng, người chọn an lòng.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
-    bgImage: '/assets/rice-sunrise.jpg',
+    image: Carousel1,
+    alt: 'An Đông Food Banner 1',
+    link: '/san-pham'
   },
   {
     id: 2,
-    badge: 'BÌNH AN Ở PHÍA ĐÔNG',
-    badgeIcon: Wheat,
-    title: 'Bình An Ở Phía Đông',
-    highlight: 'Gửi Trao Yêu Thương',
-    desc: 'Từ những hạt gạo chuẩn ST25 được chọn lựa khắt khe, vun đắp những bữa cơm an lành trong mỗi gia đình.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
-    bgImage: '/assets/rice-mekong.jpg',
-  },
-  {
-    id: 3,
-    badge: 'TÂM TÌNH NGƯỜI CHỌN GẠO',
-    badgeIcon: Heart,
-    title: 'Người Ăn Ngon Miệng',
-    highlight: 'Người Chọn An Lòng',
-    desc: '“Đông” là sự bền bỉ qua năm tháng – “An” là sự bình an gửi trao trọn vẹn đến người mình thương.',
-    primaryBtn: { text: 'Khám Phá An Đông', link: '/gioi-thieu' },
-    secondaryBtn: { text: 'Khám Phá Sản Phẩm', link: '/san-pham' },
-    bgImage: '/assets/rice-grains.jpg',
+    image: Carousel2,
+    alt: 'An Đông Food Banner 2',
+    link: '/gioi-thieu'
   }
 ];
 
 export default function HeroBannerSlider() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const timerRef = useRef(null);
 
-  // Tự động chuyển slide mỗi 5 giây (5s)
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       setDirection(1);
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    }, 5500);
+  };
+
+  useEffect(() => {
+    resetTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [current]);
 
+  const handlePrev = (e) => {
+    if (e) e.stopPropagation();
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    resetTimer();
+  };
+
+  const handleNext = (e) => {
+    if (e) e.stopPropagation();
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % slides.length);
+    resetTimer();
+  };
+
   const slide = slides[current];
-  const BadgeIcon = slide.badgeIcon;
 
   return (
-    <section className="home-hero" style={{
-      position: 'relative',
-      height: '680px',
-      maxHeight: '680px',
-      overflow: 'hidden',
-      backgroundColor: 'var(--bg-dark)',
-      userSelect: 'none',
-      display: 'flex',
-      alignItems: 'center'
-    }}>
-      {/* Full-width Vietnam Rice Field Background Banner */}
+    <section
+      className="home-hero"
+      style={{
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '2880 / 1605',
+        overflow: 'hidden',
+        backgroundColor: '#FFFDF9',
+        userSelect: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      {/* 2 Banner Slides dạng Ảnh thuần (Hiển thị 100% toàn bộ ảnh SVG không bị che cắt) */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={slide.id}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `url(${slide.bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 45%',
+            width: '100%',
+            height: '100%',
             zIndex: 1
           }}
         >
-          {/* Natural Dark/Muted Left-side Gradient Overlay for readability of white text */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(90deg, rgba(10,51,26,0.72) 0%, rgba(10,51,26,0.42) 40%, rgba(10,51,26,0) 80%)'
-          }} />
+          <Link
+            to={slide.link}
+            style={{ display: 'block', width: '100%', height: '100%', cursor: 'pointer' }}
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'top center',
+                display: 'block'
+              }}
+            />
+          </Link>
         </motion.div>
       </AnimatePresence>
 
-      {/* Main Content */}
-      <div className="home-hero__content" style={{
-        position: 'relative',
-        zIndex: 2,
-        width: '100%',
-        padding: '0 clamp(20px, 4vw, 60px)'
-      }}>
-        <div className="home-hero__copy" style={{ maxWidth: '780px' }}>
-          {/* Badge nhỏ */}
-          <motion.div
-            key={`badge-${slide.id}`}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            style={{ height: '36px' }}
-          >
-            <span className="badge badge-gold" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              fontSize: '0.82rem',
-              backgroundColor: 'var(--golden-pale)',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.2)'
-            }}>
-              <BadgeIcon size={15} color="var(--earth-brown)" />
-              <span>{slide.badge}</span>
-            </span>
-          </motion.div>
+      {/* Nút Chuyển Banner Sang Trái (Back Button) */}
+      <button
+        onClick={handlePrev}
+        aria-label="Slide trước"
+        style={{
+          position: 'absolute',
+          left: 'clamp(12px, 2.5vw, 36px)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 15,
+          width: 'clamp(38px, 4vw, 48px)',
+          height: 'clamp(38px, 4vw, 48px)',
+          borderRadius: '10px',
+          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          color: '#1e293b',
+          border: 'none',
+          boxShadow: '0 4px 18px rgba(0, 0, 0, 0.25)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+          e.currentTarget.style.backgroundColor = '#ffffff';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.92)';
+        }}
+      >
+        <ChevronLeft size={24} strokeWidth={2.4} color="#0f172a" />
+      </button>
 
-          {/* Heading lớn: GẠO NGON CHUẨN GIỐNG / GỬI TRỌN AN LÒNG */}
-          <div className="home-hero__heading" style={{ minHeight: '125px', display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '14px 0 10px' }}>
-            <motion.h1
-              key={`title-${slide.id}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08 }}
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2.3rem, 4.2vw, 3.4rem)',
-                lineHeight: 1.16,
-                color: '#ffffff',
-                margin: 0,
-                fontWeight: '800',
-                textShadow: '0 3px 16px rgba(0,0,0,0.65)'
-              }}
-            >
-              {slide.title} <br />
-              <span style={{
-                color: 'var(--golden-light)',
-                textShadow: '0 4px 25px rgba(253,185,19,0.5)',
-                display: 'inline-block'
-              }}>
-                {slide.highlight}
-              </span>
-            </motion.h1>
-          </div>
+      {/* Nút Chuyển Banner Sang Phải (Next Button) */}
+      <button
+        onClick={handleNext}
+        aria-label="Slide tiếp theo"
+        style={{
+          position: 'absolute',
+          right: 'clamp(12px, 2.5vw, 36px)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 15,
+          width: 'clamp(38px, 4vw, 48px)',
+          height: 'clamp(38px, 4vw, 48px)',
+          borderRadius: '10px',
+          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          color: '#1e293b',
+          border: 'none',
+          boxShadow: '0 4px 18px rgba(0, 0, 0, 0.25)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+          e.currentTarget.style.backgroundColor = '#ffffff';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.92)';
+        }}
+      >
+        <ChevronRight size={24} strokeWidth={2.4} color="#0f172a" />
+      </button>
 
-          {/* Description ngắn gọn cảm xúc (2-3 dòng) */}
-          <div className="home-hero__description" style={{ minHeight: '56px', marginBottom: '28px' }}>
-            <motion.p
-              key={`desc-${slide.id}`}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.16 }}
-              style={{
-                fontSize: '1.1rem',
-                color: '#f0f7f3',
-                lineHeight: 1.7,
-                margin: 0,
-                maxWidth: '620px',
-                textShadow: '0 2px 10px rgba(0,0,0,0.6)'
-              }}
-            >
-              {slide.desc}
-            </motion.p>
-          </div>
-
-          {/* CTA Buttons: [ KHÁM PHÁ AN ĐÔNG → ]  Khám phá sản phẩm */}
-          <motion.div
-            className="home-hero__actions"
-            key={`btn-${slide.id}`}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.22 }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}
-          >
-            <Link to={slide.primaryBtn.link} className="btn btn-gold btn-lg">
-              <span>{slide.primaryBtn.text}</span>
-              <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              to={slide.secondaryBtn.link}
-              className="btn btn-outline-white btn-lg"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(8px)'
-              }}
-            >
-              <span>{slide.secondaryBtn.text}</span>
-            </Link>
-          </motion.div>
-
-          {/* 4 Giá Trị Định Vị Chuẩn Brand Profile */}
-          <div className="home-hero__values" style={{
-            marginTop: '36px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.2)',
-            paddingTop: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-            flexWrap: 'wrap',
-            fontSize: '0.86rem',
-            color: 'var(--golden-pale)',
-            fontWeight: '600',
-            letterSpacing: '1.5px',
-            textTransform: 'uppercase',
-            textShadow: '0 1px 4px rgba(0,0,0,0.5)'
-          }}>
-            <span>Chân Thật</span>
-            <span style={{ color: 'var(--golden-light)' }}>•</span>
-            <span>Chu Đáo</span>
-            <span style={{ color: 'var(--golden-light)' }}>•</span>
-            <span>Trách Nhiệm</span>
-            <span style={{ color: 'var(--golden-light)' }}>•</span>
-            <span>Bền Bỉ</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Tinh tế Bottom Indicator (Không dùng mũi tên to thô, chuẩn Luxury Brand) */}
-      <div className="home-hero__dots" style={{
-        position: 'absolute',
-        bottom: '22px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 10,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        backgroundColor: 'rgba(10, 51, 26, 0.6)',
-        backdropFilter: 'blur(10px)',
-        padding: '6px 14px',
-        borderRadius: '9999px',
-        border: '1px solid rgba(255, 255, 255, 0.12)'
-      }}>
+      {/* Nút Chuyển Slide Dạng Gạch Ngang (2 Gạch tương ứng 2 Slides) */}
+      <div
+        className="home-hero__dashes"
+        style={{
+          position: 'absolute',
+          bottom: 'clamp(14px, 3vw, 28px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 15,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}
+      >
         {slides.map((s, index) => (
           <button
             key={s.id}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setDirection(index > current ? 1 : -1);
               setCurrent(index);
+              resetTimer();
             }}
             aria-label={`Chuyển đến slide ${index + 1}`}
             style={{
-              width: current === index ? '24px' : '7px',
-              height: '7px',
-              borderRadius: '9999px',
-              backgroundColor: current === index ? 'var(--golden-light)' : 'rgba(255, 255, 255, 0.35)',
+              width: current === index ? '48px' : '24px',
+              height: '4px',
+              borderRadius: '2px',
+              backgroundColor: current === index ? '#ffffff' : 'rgba(255, 255, 255, 0.45)',
               border: 'none',
               cursor: 'pointer',
+              padding: 0,
               transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-              boxShadow: current === index ? '0 0 10px rgba(253,185,19,0.7)' : 'none'
+              boxShadow: current === index ? '0 0 10px rgba(255, 255, 255, 0.9), 0 2px 4px rgba(0,0,0,0.5)' : 'none'
+            }}
+            onMouseEnter={(e) => {
+              if (current !== index) e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+            }}
+            onMouseLeave={(e) => {
+              if (current !== index) e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.45)';
             }}
           />
         ))}

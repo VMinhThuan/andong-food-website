@@ -122,14 +122,14 @@ export default function ScanQRPage() {
                   onClick={() => navigate('/san-pham/gao-st25')}
                   className="btn btn-outline btn-sm"
                 >
-                  🌾 Gạo ST25 (AD-ST25-01)
+                  🌾 Gạo ST25
                 </button>
                 <button
                   type="button"
                   onClick={() => navigate('/san-pham/gao-vuong-tom')}
                   className="btn btn-outline btn-sm"
                 >
-                  🌾 Gạo Vuông Tôm (AD-VT-02)
+                  🌾 Gạo Vuông Tôm
                 </button>
               </div>
             </div>

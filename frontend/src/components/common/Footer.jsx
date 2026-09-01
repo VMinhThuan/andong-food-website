@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Heart, ArrowRight } from 'lucide-react';
+import { triggerHotlineModal } from './HotlineModal';
 const LogoFooter = '/assets/brand-element/AD_LOGO%20N%E1%BB%80N%20M%C3%80U.svg';
 
 export default function Footer() {
@@ -150,7 +151,11 @@ export default function Footer() {
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Phone size={15} color="#FDB913" style={{ flexShrink: 0 }} />
-                  <a href="tel:0944852464" style={{ color: '#ffffff', fontWeight: '700', textDecoration: 'none', fontSize: '1rem' }}>
+                  <a
+                    href="tel:0944852464"
+                    onClick={triggerHotlineModal}
+                    style={{ color: '#ffffff', fontWeight: '700', textDecoration: 'none', fontSize: '1rem', cursor: 'pointer' }}
+                  >
                     0944 852 464
                   </a>
                 </div>

@@ -7,10 +7,16 @@ import { useAuth } from '../context/AuthContext';
 const emptyProduct = {
   code: '', name: '', nameEn: '', slug: '', categoryName: '', summary: '', summaryEn: '',
   ingredients: '', ingredientsEn: '', expiry: '', expiryEn: '', declarationNo: '', barcode: '',
-  originCountry: '', originCountryEn: '', images: { main: '', front: '', back: '' }
+  originCountry: '', originCountryEn: '', images: { main: '', front: '', chinhDien: '', back: '', ecom: '' }
 };
 
-const imageSlots = [['main', 'Ảnh đại diện *'], ['front', 'Ảnh mặt trước bao bì'], ['back', 'Ảnh mặt sau bao bì']];
+const imageSlots = [
+  ['main', 'Ảnh đại diện *'],
+  ['front', 'Ảnh mặt trước bao bì'],
+  ['chinhDien', 'Ảnh chính diện bao bì'],
+  ['back', 'Ảnh mặt sau bao bì'],
+  ['ecom', 'Ảnh E-commerce banner']
+];
 
 function toDataUrl(file) {
   return new Promise((resolve, reject) => {

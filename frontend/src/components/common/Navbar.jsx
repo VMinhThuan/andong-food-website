@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Menu,
-  X,
-  PhoneCall
-} from 'lucide-react';
+import { PhoneCall, Menu, X } from 'lucide-react';
+import { triggerHotlineModal } from './HotlineModal';
 const LogoNgang = '/assets/brand-element/AD_LOGO%20NGANG.svg';
 
 // Dấu ngoặc vẽ tay dùng chung một bộ path (qua <use>) cho cả hai bên của nav-link
@@ -94,17 +91,13 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* CENTER: CREATIVE PILL NAVIGATION */}
+        {/* CENTER NAVIGATION - Clean Flat Style (Bỏ card tròn) */}
         <nav
           className="desktop-nav site-navbar__nav"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            backgroundColor: 'var(--bg-secondary)',
-            padding: '6px 8px',
-            borderRadius: '9999px',
-            border: '1px solid var(--border-light)',
+            gap: '8px',
             position: 'relative'
           }}
         >
@@ -151,6 +144,7 @@ export default function Navbar() {
           {/* Hotline button */}
           <a
             href="tel:0944852464"
+            onClick={triggerHotlineModal}
             className="hotline-btn-nav"
             style={{
               display: 'flex',
@@ -158,14 +152,15 @@ export default function Navbar() {
               gap: '8px',
               padding: '9px 18px',
               borderRadius: '9999px',
-              backgroundColor: 'var(--bg-main)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--primary)',
-              textDecoration: 'none',
-              fontSize: '0.88rem',
+              backgroundColor: '#FAF5ED',
+              border: '1.5px solid #F0D9B5',
+              color: '#3B593F',
               fontWeight: '700',
-              transition: 'all 0.2s',
-              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.03)'
+              fontSize: '0.88rem',
+              textDecoration: 'none',
+              transition: 'all 0.25s ease',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+              cursor: 'pointer'
             }}
           >
             <PhoneCall size={15} color="var(--earth-brown)" />
@@ -225,8 +220,12 @@ export default function Navbar() {
 
             <a
               href="tel:0944852464"
+              onClick={(e) => {
+                setIsOpen(false);
+                triggerHotlineModal(e);
+              }}
               className="btn btn-outline btn-sm"
-              style={{ width: '100%', marginTop: '6px' }}
+              style={{ width: '100%', marginTop: '6px', cursor: 'pointer' }}
             >
               <PhoneCall size={16} /> Điện thoại: 0944 852 464
             </a>

@@ -1,11 +1,173 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { api } from '../services/api';
 import BrandPreloader from '../components/common/BrandPreloader';
+import EcomSt25 from '../assets/brand/ecom-st25.svg';
+import EcomVuongTom from '../assets/brand/ecom-vuongtom.svg';
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]); const [loading, setLoading] = useState(true); const [error, setError] = useState('');
-  useEffect(() => { api.getProducts().then(setProducts).catch(err => setError(err.message || 'Không thể tải sản phẩm.')).finally(() => setLoading(false)); }, []);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    api.getProducts()
+      .then(setProducts)
+      .catch((err) => setError(err.message || 'Không thể tải sản phẩm.'))
+      .finally(() => setLoading(false));
+  }, []);
+
   if (loading) return <BrandPreloader persistent />;
-  return <main style={{ background: 'var(--bg-main)', minHeight: '70vh', padding: '64px 0 80px' }}><div className="container"><div style={{ maxWidth: 680, marginBottom: 40 }}><div className="badge badge-gold">AN ĐÔNG FOOD</div><h1 style={{ color: 'var(--primary)', fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.2rem)', margin: '14px 0' }}>Sản Phẩm</h1><p style={{ color: 'var(--text-muted)', lineHeight: 1.7 }}>Danh sách sản phẩm được tải trực tiếp từ cơ sở dữ liệu.</p></div>{error && <p style={{ color: '#b42318' }}>{error}</p>}{!error && products.length === 0 && <p>Chưa có sản phẩm trong cơ sở dữ liệu.</p>}<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: 24 }}>{products.map(product => <article key={product.id || product._id} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 20, padding: 24, display: 'flex', flexDirection: 'column' }}><img src={product.images?.main} alt={product.name} style={{ width: '100%', height: 'auto', display: 'block', marginBottom: 20 }} /><h2 style={{ color: 'var(--primary)', fontFamily: 'var(--font-serif)', margin: '8px 0' }}>{product.name}</h2><p style={{ color: 'var(--text-muted)', lineHeight: 1.6, flex: 1 }}>{product.summary}</p><Link className="btn btn-outline" to={`/san-pham/${product.slug}`} style={{ textAlign: 'center', textDecoration: 'none' }}>Xem chi tiết</Link></article>)}</div></div></main>;
+
+  const sortedProducts = [...products].sort((a, b) => {
+    const aIsSt25 = a.slug?.includes('st25') || a.code?.includes('ST25');
+    const bIsSt25 = b.slug?.includes('st25') || b.code?.includes('ST25');
+    if (aIsSt25 && !bIsSt25) return -1;
+    if (!aIsSt25 && bIsSt25) return 1;
+    return 0;
+  });
+
+  return (
+    <main style={{ background: '#FFFDF9', minHeight: '80vh', padding: '60px 0 100px' }}>
+      <div className="container" style={{ maxWidth: '1280px' }}>
+        {/* Header danh mục */}
+        <div style={{ maxWidth: 720, marginBottom: 50, textAlign: 'left' }}>
+          <div className="badge badge-gold" style={{ marginBottom: 12 }}>
+            DANH MỤC SẢN PHẨM
+          </div>
+          <h1 style={{
+            color: 'var(--brand-brown)',
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+            margin: '10px 0 16px',
+            fontWeight: 800
+          }}>
+            Sản Phẩm An Đông
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.7, margin: 0 }}>
+            Nguồn gạo sạch chuẩn giống, thơm dẻo đậm vị cho từng bữa cơm an lành của gia đình Việt.
+          </p>
+        </div>
+
+        {error && <p style={{ color: '#b42318' }}>{error}</p>}
+        {!error && products.length === 0 && <p>Chưa có sản phẩm trong cơ sở dữ liệu.</p>}
+
+        {/* Grid danh sách sản phẩm (ST25 đứng trước, căn đều chiều ngang) */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: '40px',
+          alignItems: 'stretch'
+        }}>
+          {sortedProducts.map((product) => {
+            const isSt25 = product.slug?.includes('st25') || product.code?.includes('ST25');
+            const defaultEcom = isSt25 ? EcomSt25 : EcomVuongTom;
+            const imgSrc = product.images?.ecom || defaultEcom || product.images?.front || product.images?.main;
+            const productNumber = product.content?.number || (isSt25 ? 'SẢN PHẨM 01 / PRODUCT 01' : 'SẢN PHẨM 02 / PRODUCT 02');
+
+            return (
+              <motion.article
+                key={product.id || product._id}
+                whileHover={{ y: -6, boxShadow: '0 20px 38px rgba(0,0,0,0.08)' }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  background: '#FFFBEA',
+                  border: '1px solid rgba(197, 160, 89, 0.3)',
+                  borderRadius: 24,
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxShadow: 'var(--shadow-sm)'
+                }}
+              >
+                {/* Ảnh Ecom Full Size sắc nét trọn vẹn, không bị che đầu ảnh */}
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '1 / 1',
+                  backgroundColor: '#FFFEF2',
+                  borderBottom: '1px solid rgba(197, 160, 89, 0.2)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <img
+                    src={imgSrc}
+                    alt={product.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'block',
+                      objectFit: 'contain',
+                      objectPosition: 'center center'
+                    }}
+                    onError={(e) => {
+                      e.target.src = defaultEcom;
+                    }}
+                  />
+                </div>
+
+                {/* Khối thông tin chi tiết bên dưới */}
+                <div style={{
+                  padding: '28px 28px 32px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flexGrow: 1
+                }}>
+                  <h2 style={{
+                    color: '#11994A',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1.45rem',
+                    fontWeight: 800,
+                    margin: '0 0 12px'
+                  }}>
+                    {product.name}
+                  </h2>
+
+                  <p style={{
+                    color: '#555555',
+                    fontSize: '0.96rem',
+                    lineHeight: 1.7,
+                    flexGrow: 1,
+                    margin: '0 0 24px'
+                  }}>
+                    {product.summary || product.description}
+                  </p>
+
+                  <Link
+                    className="btn"
+                    to={`/san-pham/${product.slug}`}
+                    style={{
+                      textAlign: 'center',
+                      textDecoration: 'none',
+                      border: '1.5px solid #11994A',
+                      color: '#11994A',
+                      backgroundColor: 'transparent',
+                      borderRadius: '999px',
+                      padding: '12px 24px',
+                      fontWeight: 700,
+                      fontSize: '0.95rem',
+                      transition: 'all 0.25s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#11994A';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = '#11994A';
+                    }}
+                  >
+                    Xem chi tiết
+                  </Link>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </main>
+  );
 }

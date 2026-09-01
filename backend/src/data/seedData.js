@@ -149,7 +149,10 @@ export const initialProducts = [
     manufacturer,
     images: {
       main: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      back: '/assets/brand-element/MẶT SAU BAO BÌ.png'
+      front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
+      back: '/assets/brand-element/MẶT SAU BAO BÌ.png',
+      ecom: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788253748/andong_food/products/ecom-st25.svg',
+      chinhDien: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788254853/andong_food/products/chinh-dien-st25.svg'
     },
     isFeatured: true,
     inStock: true
@@ -166,12 +169,6 @@ export const initialProducts = [
     summaryEn: 'Rice–Shrimp Rice is grown through a traditional rice–shrimp rotation, following the natural rhythm of fresh and brackish water in the Mekong Delta. This unique ecosystem produces naturally aromatic grains with a soft, tender texture and delicate sweetness.',
     ingredients: '100% gạo trắng Vuông Tôm.',
     ingredientsEn: '100% Pure Rice–Shrimp Rice.',
-    /**
-     * Để trống có chủ đích. Bao bì Vuông Tôm đang in "01/ANDONG-ST25/2026" —
-     * là số của sản phẩm ST25, copy nhầm. Mỗi sản phẩm phải có hồ sơ tự công bố
-     * riêng (Nghị định 15/2018/NĐ-CP). Điền lại bằng số thật trên hồ sơ đã nộp,
-     * không suy đoán.
-     */
     declarationNo: '',
     nutrition: nutritionPer100g,
     cookingSteps,
@@ -179,7 +176,10 @@ export const initialProducts = [
     manufacturer,
     images: {
       main: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
-      back: '/assets/brand-element/MẶT SAU BAO BÌ.png'
+      front: '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
+      back: '/assets/brand-element/MẶT SAU BAO BÌ.png',
+      ecom: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788253760/andong_food/products/ecom-vuongtom.svg',
+      chinhDien: 'https://res.cloudinary.com/jeuco62x/image/upload/v1788254856/andong_food/products/chinh-dien-vuongtom.svg'
     },
     isFeatured: true,
     inStock: true

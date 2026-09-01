@@ -463,33 +463,30 @@ textarea.form-control {
   margin-bottom: 20px;
 }
 
-/* Brand Features Horizontal Card Styles */
-.brand-features-container {
-  display: flex;
-  justify-content: space-between;
+/* Brand Features Horizontal Card Styles - 4 Cột Cùng 1 Hàng */
+.brand-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.brand-features-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex: 1;
-  min-width: 220px;
-}
-
-.brand-features-divider {
-  width: 1px;
-  height: 50px;
-  background-color: var(--border-medium);
-  flex-shrink: 0;
+  gap: 14px;
+  width: 100%;
 }
 
 @media (max-width: 991px) {
-  .brand-features-divider {
-    display: none;
+  .brand-features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .brand-features-card {
+    border-right: none !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .brand-features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -1158,4 +1155,27 @@ textarea {
   .admin-modal { max-height: calc(100svh - 16px); }
   .admin-image-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .admin-image-preview, .admin-image-preview img { min-height: 92px; height: 92px; }
+}
+
+/* About Page Editorial Grids */
+.about-editorial-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: stretch;
+}
+
+.about-editorial-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .about-editorial-grid-2,
+  .about-editorial-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
 }

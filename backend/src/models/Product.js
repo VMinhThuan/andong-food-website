@@ -56,6 +56,8 @@ const productSchema = new mongoose.Schema({
     main: { type: String, default: '/assets/product-gao.png' },
     front: { type: String, default: '' },
     back: { type: String, default: '' },
+    ecom: { type: String, default: '' },
+    chinhDien: { type: String, default: '' },
     banner: { type: String, default: '/assets/banner-gao-3.png' },
     field: { type: String, default: '/assets/banner-gao-2.png' },
     detail: { type: String, default: '/assets/banner-gao.png' }

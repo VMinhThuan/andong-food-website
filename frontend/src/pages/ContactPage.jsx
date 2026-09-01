@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ArrowRight, ExternalLink, MessageSquare } from 'lucide-react';
 import { api } from '../services/api';
 import CustomSelect from '../components/common/CustomSelect';
+import { triggerHotlineModal } from '../components/common/HotlineModal';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -200,6 +201,7 @@ export default function ContactPage() {
 
                   <a
                     href="tel:0944852464"
+                    onClick={triggerHotlineModal}
                     style={{
                       backgroundColor: 'var(--primary)',
                       color: '#ffffff',
@@ -208,7 +210,8 @@ export default function ContactPage() {
                       fontSize: '0.8rem',
                       fontWeight: '700',
                       textDecoration: 'none',
-                      whiteSpace: 'nowrap'
+                      whiteSpace: 'nowrap',
+                      cursor: 'pointer'
                     }}
                   >
                     Gọi Ngay

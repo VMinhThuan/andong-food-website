@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
+import { triggerHotlineModal } from './HotlineModal';
 
 export default function PreFooterCTA() {
   return (
@@ -75,13 +76,15 @@ export default function PreFooterCTA() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', justifyContent: 'center' }}>
             <a
               href="tel:0944852464"
+              onClick={triggerHotlineModal}
               className="btn btn-gold btn-lg"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
                 padding: '16px 36px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
+                boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+                cursor: 'pointer'
               }}
             >
               <Phone size={18} />

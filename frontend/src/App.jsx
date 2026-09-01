@@ -7,6 +7,7 @@ import ScrollProgress from './components/common/ScrollProgress';
 import BrandPreloader from './components/common/BrandPreloader';
 import PreFooterCTA from './components/common/PreFooterCTA';
 import ScrollToTop from './components/common/ScrollToTop';
+import HotlineModal from './components/common/HotlineModal';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
@@ -59,6 +60,9 @@ function PublicAppContent() {
           <PreFooterCTA />
           <Footer />
         </div>
+
+        {/* Global Hotline & Đặt hàng Popup Modal */}
+        <HotlineModal />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   QrCode,
@@ -19,32 +19,64 @@ import {
 } from 'lucide-react';
 import { api } from '../services/api';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
+import { triggerHotlineModal } from '../components/common/HotlineModal';
+
+import VoGaoStep1 from '../assets/brand/vogao-step1.png';
+import ThemNuocStep2 from '../assets/brand/themnuoc-step2.png';
+import NauComStep3 from '../assets/brand/naucom-step3.png';
+import ThuongThucStep4 from '../assets/brand/thuongthuc-step4.png';
+
+import STChinhDien from '../assets/brand/ST_CHÍNH DIỆN.svg';
+import VTChinhDien from '../assets/brand/VT_CHÍNH DIỆN.svg';
+
+const COOKING_STEP_ICONS = {
+  1: VoGaoStep1,
+  2: ThemNuocStep2,
+  3: NauComStep3,
+  4: ThuongThucStep4,
+  '01': VoGaoStep1,
+  '02': ThemNuocStep2,
+  '03': NauComStep3,
+  '04': ThuongThucStep4
+};
+
+const QRModal = lazy(() => import('../components/common/QRModal'));
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [viewBack, setViewBack] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
+  const [selectedFace, setSelectedFace] = useState('front'); // 'front' | 'chinhDien' | 'back'
   const [isPackagingLoading, setIsPackagingLoading] = useState(false);
   const packagingRequestRef = useRef(0);
 
-  const getPackagingImage = (nextViewBack) => {
+  const isSt25 = product?.slug?.includes('st25') || product?.code?.includes('ST25');
+  const defaultChinhDien = isSt25 ? STChinhDien : VTChinhDien;
+
+  const getPackagingImage = (face) => {
     const images = product?.images || {};
-    return nextViewBack ? (images.back || images.main || '') : (images.front || images.main || '');
+    if (face === 'chinhDien') {
+      return images.chinhDien || defaultChinhDien || images.front || images.main || '';
+    }
+    if (face === 'back') {
+      return images.back || images.main || '';
+    }
+    return images.front || images.main || '';
   };
 
-  const changePackagingFace = (nextViewBack) => {
-    if (nextViewBack === viewBack || isPackagingLoading) return;
+  const changePackagingFace = (nextFace) => {
+    if (nextFace === selectedFace || isPackagingLoading) return;
 
-    const imageSrc = getPackagingImage(nextViewBack);
+    const imageSrc = getPackagingImage(nextFace);
     const requestId = ++packagingRequestRef.current;
     setIsPackagingLoading(true);
 
     const image = new Image();
     const finish = () => {
       if (requestId !== packagingRequestRef.current) return;
-      setViewBack(nextViewBack);
+      setSelectedFace(nextFace);
       window.setTimeout(() => {
         if (requestId === packagingRequestRef.current) setIsPackagingLoading(false);
       }, 180);
@@ -58,6 +90,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     setProduct(null);
     setError('');
+    setSelectedFace('front');
     setLoading(true);
     api.getProductBySlug(slug)
       .then(data => {
@@ -93,8 +126,7 @@ export default function ProductDetailPage() {
     );
   }
 
-  const hasTwoPackagingFaces = Boolean(product.images?.front && product.images?.back);
-  const packagingImage = getPackagingImage(viewBack);
+  const packagingImage = getPackagingImage(selectedFace);
 
   return (
     <div className="product-detail-page" style={{ backgroundColor: 'var(--bg-main)' }}>
@@ -172,51 +204,81 @@ export default function ProductDetailPage() {
                     )}
                   </div>
 
-                  {/* Show the front/back control only when this product record has both images. */}
-                  {hasTwoPackagingFaces && <div style={{
+                  {/* Thanh chuyển đổi các góc nhìn bao bì: Mặt Trước - Chính Diện - Mặt Sau */}
+                  <div style={{
                     display: 'inline-flex', alignSelf: 'center', justifyContent: 'center', gap: '4px',
                     margin: '16px auto', padding: '4px', borderRadius: '9999px',
                     backgroundColor: '#eef5f0', border: '1px solid #d8e8dd'
                   }}>
                     <button
-                      onClick={() => changePackagingFace(false)}
+                      type="button"
+                      onClick={() => changePackagingFace('front')}
                       disabled={isPackagingLoading}
                       style={{
                         padding: '8px 18px',
                         borderRadius: '9999px',
-                        border: '1px solid transparent',
-                        backgroundColor: !viewBack ? 'var(--primary)' : '#ffffff',
-                        color: !viewBack ? '#ffffff' : 'var(--text-main)',
+                        border: 'none',
+                        backgroundColor: selectedFace === 'front' ? '#11994A' : '#ffffff',
+                        color: selectedFace === 'front' ? '#ffffff' : '#2D3748',
                         fontWeight: '700',
-                        fontSize: '0.8rem',
+                        fontSize: '0.82rem',
                         cursor: isPackagingLoading ? 'wait' : 'pointer',
                         transition: 'all 0.2s', outline: 'none',
+                        boxShadow: selectedFace === 'front' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
                         opacity: isPackagingLoading ? 0.7 : 1
                       }}
                     >
                       Mặt Trước
                     </button>
                     <button
-                      onClick={() => changePackagingFace(true)}
+                      type="button"
+                      onClick={() => changePackagingFace('chinhDien')}
                       disabled={isPackagingLoading}
                       style={{
                         padding: '8px 18px',
                         borderRadius: '9999px',
-                        border: '1px solid transparent',
-                        backgroundColor: viewBack ? 'var(--primary)' : '#ffffff',
-                        color: viewBack ? '#ffffff' : 'var(--text-main)',
+                        border: 'none',
+                        backgroundColor: selectedFace === 'chinhDien' ? '#11994A' : '#ffffff',
+                        color: selectedFace === 'chinhDien' ? '#ffffff' : '#2D3748',
                         fontWeight: '700',
-                        fontSize: '0.8rem',
+                        fontSize: '0.82rem',
                         cursor: isPackagingLoading ? 'wait' : 'pointer',
                         transition: 'all 0.2s', outline: 'none',
+                        boxShadow: selectedFace === 'chinhDien' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
+                        opacity: isPackagingLoading ? 0.7 : 1
+                      }}
+                    >
+                      Chính Diện
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => changePackagingFace('back')}
+                      disabled={isPackagingLoading}
+                      style={{
+                        padding: '8px 18px',
+                        borderRadius: '9999px',
+                        border: 'none',
+                        backgroundColor: selectedFace === 'back' ? '#11994A' : '#ffffff',
+                        color: selectedFace === 'back' ? '#ffffff' : '#2D3748',
+                        fontWeight: '700',
+                        fontSize: '0.82rem',
+                        cursor: isPackagingLoading ? 'wait' : 'pointer',
+                        transition: 'all 0.2s', outline: 'none',
+                        boxShadow: selectedFace === 'back' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
                         opacity: isPackagingLoading ? 0.7 : 1
                       }}
                     >
                       Mặt Sau
                     </button>
-                  </div>}
+                  </div>
 
                   <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '8px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
+                    <button
+                      onClick={() => setIsQRModalOpen(true)}
+                      className="btn btn-gold btn-sm"
+                    >
+                      Xem mã QR bao bì
+                    </button>
                     <a
                       href={api.getDownloadQRPNGUrl(product.slug)}
                       className="btn btn-outline btn-sm"
@@ -272,7 +334,7 @@ export default function ProductDetailPage() {
 
                 {/* Hotline & Order consultation */}
                 <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                  <a href="tel:0944852464" className="btn btn-primary btn-lg" style={{ flex: 1 }}>
+                  <a href="tel:0944852464" onClick={triggerHotlineModal} className="btn btn-primary btn-lg" style={{ flex: 1, cursor: 'pointer' }}>
                     Điện thoại đặt hàng: 0944 852 464
                   </a>
                   <Link to="/lien-he" className="btn btn-outline btn-lg">
@@ -287,6 +349,13 @@ export default function ProductDetailPage() {
 
         </div>
       </section>
+
+      {/* QR Modal */}
+      {isQRModalOpen && <Suspense fallback={null}><QRModal
+        product={product}
+        isOpen={isQRModalOpen}
+        onClose={() => setIsQRModalOpen(false)}
+      /></Suspense>}
     </div>
   );
 }
@@ -307,9 +376,86 @@ function ProductFacts({ product }) {
   ].filter(([, value]) => value);
   const nutritionRows = [['Năng lượng / Calories', product.nutrition?.energy], ['Đạm / Total Protein', product.nutrition?.protein], ['Chất béo / Total Fat', product.nutrition?.fat], ['Carbohydrate', product.nutrition?.carbohydrate]].filter(([, value]) => value);
   return <>
-    <section className="product-facts-section" style={section}><div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div><h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3><div className="product-facts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '14px', marginTop: '24px' }}>{(product.cookingSteps || []).map(step => <article key={step.step} style={{ padding: '20px', borderRadius: '18px', background: 'linear-gradient(145deg,#fffdf6,#f7f2e5)', border: '1px solid #e8ddc5' }}><div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}><span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800 }}>{step.step}</span><div style={{ color: 'var(--primary)', fontWeight: 800 }}>{step.viTitle || step.titleVi}</div></div><p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>{step.vi || step.descVi}</p><div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em' }}>{step.enTitle || step.titleEn}</div><p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.9rem', lineHeight: 1.55 }}>{step.en || step.descEn}</p></article>)}</div></section>
+    <section className="product-facts-section" style={section}>
+      <div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div>
+      <h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3>
+      <div className="product-facts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '18px', marginTop: '24px' }}>
+        {(product.cookingSteps || []).map((step, idx) => {
+          const stepNum = Number(step.step) || (idx + 1);
+          const iconSrc = COOKING_STEP_ICONS[stepNum] || COOKING_STEP_ICONS[step.step];
+          return (
+            <article
+              key={step.step}
+              style={{
+                padding: '24px 20px 20px',
+                borderRadius: '20px',
+                background: 'linear-gradient(145deg, #fffdf6, #f7f2e5)',
+                border: '1.5px solid #e8ddc5',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.03)'
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+                  <span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800, flexShrink: 0 }}>
+                    {step.step}
+                  </span>
+                  <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: '1.05rem', letterSpacing: '0.3px' }}>
+                    {step.viTitle || step.titleVi}
+                  </div>
+                </div>
+
+                <p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65, fontSize: '0.94rem' }}>
+                  {step.vi || step.descVi}
+                </p>
+
+                <div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em', textTransform: 'uppercase' }}>
+                  {step.enTitle || step.titleEn}
+                </div>
+
+                <p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.88rem', lineHeight: 1.55 }}>
+                  {step.en || step.descEn}
+                </p>
+              </div>
+
+              {/* Icon / Hình ảnh minh họa các bước nấu căn đều ở dưới cùng - Phóng to rõ nét */}
+              {iconSrc && (
+                <div
+                  style={{
+                    marginTop: '24px',
+                    paddingTop: '20px',
+                    borderTop: '1px solid rgba(216, 203, 169, 0.45)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '145px',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <img
+                    src={iconSrc}
+                    alt={step.viTitle || `Bước ${step.step}`}
+                    style={{
+                      height: '110px',
+                      maxWidth: '180px',
+                      width: 'auto',
+                      objectFit: 'contain',
+                      mixBlendMode: 'multiply',
+                      transform: 'scale(2.5)',
+                      transformOrigin: 'center center',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </section>
     <section className="product-facts-section" style={section}><div style={subtitle}>GIÁ TRỊ THAM KHẢO TRÊN 100 G</div><h3 style={heading}>THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION</h3><div className="product-nutrition-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '24px' }}>{nutritionRows.map(([label, value], index) => <div key={label} style={{ padding: '20px', background: index % 2 ? '#fffaf0' : '#f0f7f2', borderRadius: '16px', border: '1px solid #e5e2d5' }}><div style={{ color: '#68776f', fontSize: '.82rem', lineHeight: 1.4, minHeight: 36 }}>{label}</div><div style={{ color: 'var(--primary)', fontSize: '1.35rem', fontWeight: 800, marginTop: 8 }}>{value}</div></div>)}</div></section>
     <section className="product-facts-section" style={section}><div style={subtitle}>MINH BẠCH THÔNG TIN</div><h3 style={heading}>{product.name} / THÔNG TIN SẢN PHẨM</h3><div className="product-info-table" style={{ overflowX: 'auto', marginTop: '24px', border: '1px solid #e9e2d4', borderRadius: '16px' }}><table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 650 }}><thead><tr style={{ background: '#f5f0e4' }}><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>HẠNG MỤC</th><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>NỘI DUNG</th></tr></thead><tbody>{infoRows.map(([label, value], index) => <tr key={label} style={{ background: index % 2 ? '#fffdf9' : '#fff' }}><td style={{ ...row, color: '#765a2e', fontWeight: 800, fontSize: '.84rem', width: '34%' }}>{label}</td><td style={{ ...row, whiteSpace: 'pre-line', color: 'var(--text-muted)' }}>{value}</td></tr>)}</tbody></table></div></section>
-    <section className="product-facts-section product-manufacturer-section" style={{ ...section, background: 'linear-gradient(135deg,#148d48,#064523)', border: 0, color: '#fff' }}><div style={{ ...subtitle, color: '#f7bb27' }}>AN ĐÔNG FOOD</div><h3 style={{ ...heading, color: '#fff' }}>THÔNG TIN NHÀ SẢN XUẤT / MANUFACTURER</h3><div className="product-manufacturer-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px', marginTop: 24 }}><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><b style={{ fontSize: '1.1rem' }}>{product.manufacturer?.name}</b><p style={{ margin: '14px 0 5px', color: '#d6eadc' }}>{product.manufacturer?.address}</p><p style={{ margin: 0, color: '#d6eadc' }}>{product.manufacturer?.addressEn}</p></div><div style={{ padding: '20px', border: '1px solid rgba(255,255,255,.18)', borderRadius: 16, background: 'rgba(255,255,255,.08)' }}><div style={{ color: '#d6eadc', marginBottom: 10 }}>Email: <b style={{ color: '#fff' }}>{product.manufacturer?.email}</b></div><div style={{ color: '#d6eadc' }}>Điện thoại / Phone: <b style={{ color: '#f7bb27' }}>{product.manufacturer?.phone}</b></div></div></div></section>
   </>;
 }

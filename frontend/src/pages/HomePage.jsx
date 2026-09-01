@@ -20,12 +20,18 @@ import {
   Sparkles
 } from 'lucide-react';
 import { api } from '../services/api';
+import QRCode from 'qrcode';
 import QRModal from '../components/common/QRModal';
+import { triggerHotlineModal } from '../components/common/HotlineModal';
 import HeroBannerSlider from '../components/home/HeroBannerSlider';
+import BrandValueBar from '../components/home/BrandValueBar';
+import FlipProductCard from '../components/home/FlipProductCard';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 const MatTruocBaoBi = '/assets/brand-element/M%E1%BA%B6T%20TR%C6%AF%E1%BB%9AC%20BAO%20B%C3%8C.png';
 const MatSauBaoBi = '/assets/brand-element/M%E1%BA%B6T%20SAU%20BAO%20B%C3%8C.png';
 import BannerGao4 from '../assets/brand/banner-gao-4.png';
+import GuiGam1 from '../assets/brand/guigam-1.svg';
+import AnDongAnLongSvg from '../assets/brand/andong-anlong.svg';
 
 // Animation variants that trigger smoothly both when scrolling up and down
 const fadeInUp = {
@@ -235,214 +241,179 @@ export function QualityProcessSection() {
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [selectedProductQR, setSelectedProductQR] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [st25QRDataUrl, setSt25QRDataUrl] = useState('');
 
   useEffect(() => {
     api.getProducts().then(data => {
       setProducts(data);
     }).catch(err => console.error(err));
+
+    // Tạo mã QR thật cho sản phẩm ST25
+    const qrTargetUrl = `${window.location.origin}/san-pham/gao-st25`;
+    QRCode.toDataURL(qrTargetUrl, {
+      width: 320,
+      margin: 1,
+      color: {
+        dark: '#0A3B1F',
+        light: '#ffffff'
+      }
+    }).then(setSt25QRDataUrl).catch(console.error);
   }, []);
 
+  // Sắp xếp đảm bảo Gạo ST25 luôn đứng trước (bên trái), Gạo Vuông Tôm đứng sau (bên phải)
+  const sortedRaw = [...products].sort((a, b) => {
+    const isASt25 = a.slug?.includes('st25') || a.code?.includes('ST25') || a.name?.includes('ST25');
+    const isBSt25 = b.slug?.includes('st25') || b.code?.includes('ST25') || b.name?.includes('ST25');
+    if (isASt25 && !isBSt25) return -1;
+    if (!isASt25 && isBSt25) return 1;
+    return 0;
+  });
+
   // Cards are derived solely from the product documents returned by the API.
-  const featuredProducts = products.slice(0, 2).map((product) => ({
+  const featuredProducts = sortedRaw.slice(0, 2).map((product) => ({
     ...product,
     desc: product.summary,
     spec: product.code,
     tag: product.content?.number,
+    subtitle: product.slug?.includes('st25') ? 'Gạo đặc sản thuần chủng' : 'Gạo sạch luân canh lúa - tôm',
+    highlightTitle: product.slug?.includes('st25') ? 'Gạo ST25 • Thơm dẻo đậm vị' : 'Gạo Vuông Tôm • Ngọt lành tự nhiên',
     origin: product.content?.information?.find(([label]) => label === 'XUẤT XỨ / ORIGIN')?.[1],
-    image: product.images?.main,
-    imageBack: product.images?.main
+    image: product.images?.front || product.images?.main || '/assets/brand-element/MẶT TRƯỚC BAO BÌ.png',
+    imageBack: product.images?.back || '/assets/brand-element/MẶT SAU BAO BÌ.png'
   }));
 
   return (
     <div className="home-page" style={{ overflow: 'hidden' }}>
-      {/* 1. HERO BANNER SLIDER */}
+      {/* 1. HERO BANNER SLIDER (Banner SVG thuần 100% không bị che) */}
       <HeroBannerSlider />
 
-      {/* Chuyển từ hero tối sang nội dung nền sáng */}
-      <RiceHorizonDivider idSuffix="-home-1" seed={11} variant="toGreen" />
+      {/* 2. THANH 3 GIÁ TRỊ AN ĐÔNG */}
+      <BrandValueBar />
 
-      {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
+      {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY - Bố cục chuẩn Ảnh 1) */}
       <section style={{
-        padding: '95px 0',
+        padding: '65px 0 50px',
         backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-light)',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '65px',
-            alignItems: 'center'
-          }}>
-            {/* CỘT TRÁI */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.25 }}
-              variants={fadeInLeft}
-            >
-              <div className="badge badge-gold" style={{ marginBottom: '16px', border: '1px solid var(--accent)' }}>
-                CÂU CHUYỆN THƯƠNG HIỆU
-              </div>
+        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1300px', margin: '0 auto', padding: '0 20px' }}>
+          
+          {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm (Chuẩn Ảnh 1) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.25 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center', marginBottom: '36px' }}
+          >
+            <h2 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(2.1rem, 4vw, 2.9rem)',
+              fontWeight: '800',
+              color: 'var(--brand-brown)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.6px',
+              lineHeight: 1.28,
+              margin: '0 0 16px'
+            }}>
+              GỬI GẮM BÌNH AN<br />
+              TRONG TỪNG BỮA CƠM VIỆT
+            </h2>
 
-              {/* Heading kết hợp nâu + xanh tạo hierarchy chuẩn mockup 1 */}
-              <h2 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(1.6rem, 2.8vw, 2.25rem)',
-                lineHeight: 1.35,
-                marginBottom: '28px',
-                fontWeight: '800',
-                color: 'var(--brand-brown)'
-              }}>
-                An Đông – <span style={{ color: 'var(--brand-green-dark)' }}>gửi gắm bình an trong từng bữa cơm Việt.</span>
-              </h2>
+            <p style={{
+              margin: '0 auto',
+              fontSize: 'clamp(1rem, 1.5vw, 1.16rem)',
+              lineHeight: 1.65,
+              color: 'var(--brand-brown)',
+              maxWidth: '820px',
+              fontWeight: '500'
+            }}>
+              Bình an không chỉ là lời chúc dành cho người mình thương — mà còn hiện diện trong từng bữa cơm được chăm chút mỗi ngày
+            </p>
+          </motion.div>
 
-              {/* Cấu trúc dòng giải nghĩa An-Đông hàng ngang có gạch dưới - Đã loại bỏ icon và tăng nổi bật chữ */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-                {/* Dòng An */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '20px',
-                  paddingBottom: '16px',
-                  borderBottom: '1px solid var(--border-light)'
-                }}>
-                  <div style={{ minWidth: '80px' }}>
-                    <span style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: '2.5rem',
-                      fontWeight: '900',
-                      color: 'var(--brand-green-dark)',
-                      lineHeight: 1
-                    }}>
-                      An
-                    </span>
-                  </div>
-                  <div style={{ width: '1px', height: '28px', backgroundColor: 'var(--border-medium)', flexShrink: 0 }} />
-                  <div style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: '600', paddingLeft: '4px' }}>
-                    Mong muốn trao gửi <strong>an lành</strong> đến mọi người.
-                  </div>
-                </div>
+          {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An (guigam-1.svg) Full Width Chiều Dài */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={fadeInUp}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: '100%',
+              marginBottom: '38px',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+              border: '1.5px solid rgba(200, 223, 210, 0.7)',
+              backgroundColor: '#ffffff'
+            }}
+          >
+            <img
+              src={GuiGam1}
+              alt="Gửi gắm bình an trong từng bữa cơm Việt - An Đông Food"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'cover'
+              }}
+            />
+          </motion.div>
 
-                {/* Dòng Đông */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '20px',
-                  paddingBottom: '16px',
-                  borderBottom: '1px solid var(--border-light)'
-                }}>
-                  <div style={{ minWidth: '80px' }}>
-                    <span style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: '2.5rem',
-                      fontWeight: '900',
-                      color: 'var(--brand-green-dark)',
-                      lineHeight: 1
-                    }}>
-                      Đông
-                    </span>
-                  </div>
-                  <div style={{ width: '1px', height: '28px', backgroundColor: 'var(--border-medium)', flexShrink: 0 }} />
-                  <div style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: '600', paddingLeft: '4px' }}>
-                    Tinh thần <strong>bền bỉ</strong> trước thử thách, luôn hướng về những điều tươi sáng.
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '34px', fontSize: '0.96rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                <p style={{ margin: 0 }}>
-                  Trong cuộc sống, sự quan tâm dành cho gia đình không phải lúc nào cũng được thể hiện bằng những điều lớn lao. Đôi khi, đó chỉ là việc lựa chọn nguồn thực phẩm chất lượng, thơm ngon.
-                </p>
-                <p style={{ margin: 0 }}>
-                  An Đông mong muốn giúp mỗi người gửi gắm sự quan tâm đến người thân và gia đình qua từng bữa cơm — để dù gần hay xa, người ăn ngon miệng, người chọn cũng an lòng.
-                </p>
-              </div>
-
-              <div>
-                <Link to="/gioi-thieu" className="btn btn-primary btn-lg">
-                  <span>Tìm hiểu thêm về An Đông</span>
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* CỘT PHẢI: ẢNH LÚA HOÀNG HÔN + OVERLAPPING QUOTE CARD */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.25 }}
-              variants={fadeInRight}
-              style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}
-            >
-              <div style={{
-                borderRadius: '28px',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-lg)',
-                border: '4px solid #ffffff'
-              }}>
-                <motion.img
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
-                  src="/assets/rice-sunrise.jpg"
-                  alt="Cánh đồng lúa An Đông hoàng hôn"
-                  style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
-                />
-              </div>
-
-              {/* Quote card xanh đậm đè nhẹ lên ảnh tạo chiều sâu */}
-              <div style={{
-                marginTop: '-45px',
-                marginLeft: '20px',
-                marginRight: '20px',
-                backgroundColor: 'var(--brand-green-dark)',
-                borderRadius: '24px',
-                padding: '24px 28px',
+          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh 1) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center' }}
+          >
+            <Link
+              to="/gioi-thieu"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: '#119C4A',
+                backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
                 color: '#ffffff',
-                boxShadow: '0 12px 28px rgba(17, 156, 74, 0.16)',
-                position: 'relative',
-                overflow: 'hidden',
-                zIndex: 3
-              }}>
-                {/* Gold double quote icon */}
-                <div style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '3rem',
-                  color: 'var(--brand-yellow)',
-                  lineHeight: 1,
-                  position: 'absolute',
-                  top: '18px',
-                  left: '24px',
-                  opacity: 0.85
-                }}>
-                  “
-                </div>
-                <div style={{ paddingLeft: '32px', paddingTop: '10px' }}>
-                  <div className="font-accent" style={{ fontSize: '1.45rem', color: 'var(--accent)', marginBottom: '6px' }}>
-                    Bởi với An Đông,
-                  </div>
-                  <p style={{ margin: 0, fontSize: '0.94rem', lineHeight: '1.6', fontWeight: '500' }}>
-                    “Bình an không chỉ là lời chúc dành cho người mình thương — mà còn hiện diện trong từng bữa cơm được chăm chút mỗi ngày.”
-                  </p>
-                </div>
+                fontSize: '1.05rem',
+                fontWeight: '700',
+                padding: '14px 38px',
+                borderRadius: '9999px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 20px rgba(17, 156, 74, 0.32)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.42)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(17, 156, 74, 0.32)';
+              }}
+            >
+              <span>Tìm hiểu thêm</span>
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
 
-
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Dải card ngang gồm 4 giá trị thương hiệu ở chân section */}
+          {/* Dải card ngang gồm 4 giá trị thương hiệu ở chân section - Cùng 1 hàng */}
           <div style={{
-            marginTop: '70px',
+            marginTop: '36px',
             backgroundColor: '#FFFBEA',
             borderRadius: '24px',
             border: '1px solid var(--border-light)',
-            padding: '30px 40px',
+            padding: '24px 28px',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <div className="brand-features-container">
+            <div className="brand-features-grid">
               {[
                 {
                   title: 'GẠO SẠCH - AN TOÀN',
@@ -469,354 +440,154 @@ export default function HomePage() {
                   borderColor: '#F0E2C8'
                 }
               ].map((item, idx) => (
-                <React.Fragment key={idx}>
-                  <div className="brand-features-item">
-                    <div style={{
-                      width: '56px',
-                      height: '56px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--bg-card)',
-                      border: `2px solid ${item.borderColor}`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      boxShadow: '0 0 0 4px #ffffff, 0 4px 12px rgba(0,0,0,0.04)'
-                    }}>
-                      <item.icon />
-                    </div>
-                    <div>
-                      <h4 style={{
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: '0.88rem',
-                        fontWeight: '800',
-                        color: 'var(--brand-brown)',
-                        marginBottom: '6px',
-                        letterSpacing: '0.5px'
-                      }}>
-                        {item.title}
-                      </h4>
-                      <p style={{
-                        margin: 0,
-                        fontSize: '0.82rem',
-                        lineHeight: '1.5',
-                        color: 'var(--text-secondary)'
-                      }}>
-                        {item.desc}
-                      </p>
-                    </div>
+                <div
+                  key={idx}
+                  className="brand-features-card"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    paddingRight: idx < 3 ? '14px' : '0',
+                    borderRight: idx < 3 ? '1px solid var(--border-medium)' : 'none'
+                  }}
+                >
+                  <div style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--bg-card)',
+                    border: `2px solid ${item.borderColor}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    boxShadow: '0 0 0 3px #ffffff, 0 4px 10px rgba(0,0,0,0.04)'
+                  }}>
+                    <item.icon />
                   </div>
-                  {idx < 3 && <div className="brand-features-divider" />}
-                </React.Fragment>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <h4 style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.84rem',
+                      fontWeight: '800',
+                      color: 'var(--brand-brown)',
+                      marginBottom: '3px',
+                      letterSpacing: '0.2px',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {item.title}
+                    </h4>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '0.78rem',
+                      lineHeight: '1.4',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. SẢN PHẨM AN ĐÔNG - 2-COLUMN PREMIUM LAYOUT */}
+      {/* 3. SẢN PHẨM AN ĐÔNG - GẠO NGON CHUẨN GIÁ (Phong cách Vinamilk 3D Flip - Ảnh 2 & 3) */}
       <section style={{
-        padding: '90px 0 100px',
+        padding: '40px 0 60px',
         backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-light)',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '30% 1fr',
-            gap: '40px',
-            alignItems: 'stretch'
-          }}>
+        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
+          
+          {/* Heading lớn ở giữa: GẠO NGON - CHUẨN GIÁ (Có khoảng cách đẹp mắt với sản phẩm) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.25 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center', marginBottom: '40px' }}
+          >
+            <h2 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(1.9rem, 3.5vw, 2.55rem)',
+              color: 'var(--brand-brown)',
+              margin: 0,
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              letterSpacing: '0.8px'
+            }}>
+              GẠO NGON - CHUẨN GIÁ
+            </h2>
+          </motion.div>
 
-            {/* ===== CỘT TRÁI: INTRO TEXT + ẢNH CỦA ĐỒNG SỐNG ĐỘNG ===== */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.25 }}
-              variants={fadeInLeft}
-              style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', minHeight: '520px', borderRadius: '20px', overflow: 'hidden', gridRow: '1 / -1' }}
-            >
-              {/* Ảnh banner-gao-4 chiếm toàn bộ */}
-              <img
-                src={BannerGao4}
-                alt="Cánh đồng lúa An Đông"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center center',
-                  zIndex: 0
-                }}
-              />
-              {/* Gradient nhẹ phía dưới để chữ dễ đọc */}
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.0) 35%, rgba(0,40,15,0.55) 100%)',
-                zIndex: 1
-              }} />
-
-              {/* Nội dung chữ nổi trên ảnh, nằm phía trên ảnh */}
-              <div style={{ position: 'relative', zIndex: 2, padding: '36px 32px' }}>
-                <div style={{
-                  display: 'inline-block',
-                  backgroundColor: 'rgba(255,255,255,0.88)',
-                  backdropFilter: 'blur(8px)',
-                  borderRadius: '9999px',
-                  padding: '5px 14px',
-                  marginBottom: '16px',
-                  fontSize: '0.74rem',
-                  fontWeight: '800',
-                  letterSpacing: '1px',
-                  color: 'var(--primary)',
-                  textTransform: 'uppercase'
-                }}>
-                  SẢN PHẨM AN ĐÔNG
-                </div>
-
-                <h2 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(1.9rem, 3vw, 2.6rem)',
-                  color: '#ffffff',
-                  margin: '0 0 16px',
-                  fontWeight: '800',
-                  lineHeight: 1.2,
-                  textShadow: '0 2px 12px rgba(0,0,0,0.3)'
-                }}>
-                  Gạo Ngon Cho Mỗi Bữa Cơm An Lành
-                </h2>
-
-                <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.96rem', lineHeight: 1.7, marginBottom: '28px', textShadow: '0 1px 6px rgba(0,0,0,0.2)' }}>
-                  Từ những hạt gạo được chọn lựa kỹ lưỡng, An Đông mang đến hương vị thơm ngon và sự an tâm trong mỗi bữa cơm gia đình.
-                </p>
-
-                <Link
-                  to="/san-pham"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 24px',
-                    border: '1.5px solid rgba(255,255,255,0.85)',
-                    borderRadius: '9999px',
-                    color: '#ffffff',
-                    fontWeight: '700',
-                    fontSize: '0.94rem',
-                    textDecoration: 'none',
-                    backgroundColor: 'rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(6px)',
-                    transition: 'all 0.25s ease'
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.25)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.12)'; }}
-                >
-                  <span>Xem Tất Cả Sản Phẩm</span>
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </motion.div>
-
-
-            {/* ===== CỘT PHẢI: 2 PRODUCT CARDS ===== */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {/* 2 Product Cards side by side */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.15 }}
-                variants={staggerContainer}
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', flex: 1 }}
-              >
-                {featuredProducts.map((prod) => (
-                  <motion.div
-                    key={prod.id}
-                    variants={fadeInUp}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      backgroundColor: 'var(--bg-card)',
-                      borderRadius: '24px',
-                      overflow: 'hidden',
-                      border: '1px solid rgba(200, 223, 210, 0.7)',
-                      boxShadow: '0 4px 18px rgba(17, 67, 40, 0.06)',
-                      position: 'relative',
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                    }}
-                    whileHover={{ y: -6, boxShadow: '0 20px 44px rgba(17, 67, 40, 0.13)' }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Image area với hover flip sang mặt sau + icon xem */}
-                    <div
-                      className="product-image-wrapper"
-                      style={{
-                        position: 'relative',
-                        height: '390px',
-                        backgroundColor: '#F4F1E8',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '18px 24px',
-                        overflow: 'hidden'
-                      }}
-                    >
-                      {/* Mặt trước */}
-                      <img
-                        src={prod.image}
-                        alt={prod.name}
-                        className="product-img-front"
-                        style={{
-                          maxHeight: '82%',
-                          maxWidth: '78%',
-                          objectFit: 'contain',
-                          filter: 'drop-shadow(0 10px 22px rgba(0,0,0,0.13))',
-                          transition: 'opacity 0.35s ease, transform 0.35s ease',
-                          position: 'absolute'
-                        }}
-                        onError={(e) => { e.target.src = '/assets/product-gao.png'; }}
-                      />
-                      {/* Mặt sau - hiện khi hover */}
-                      <img
-                        src={prod.imageBack}
-                        alt={`${prod.name} mặt sau`}
-                        className="product-img-back"
-                        style={{
-                          maxHeight: '82%',
-                          maxWidth: '78%',
-                          objectFit: 'contain',
-                          filter: 'drop-shadow(0 10px 22px rgba(0,0,0,0.13))',
-                          transition: 'opacity 0.35s ease, transform 0.35s ease',
-                          position: 'absolute',
-                          opacity: 0
-                        }}
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
-
-                      {/* Badge category - dịch xuống dưới, không che ảnh */}
-                      <div style={{
-                        position: 'absolute',
-                        bottom: '10px',
-                        left: '12px',
-                        backgroundColor: '#FDB913',
-                        color: '#ffffff',
-                        fontSize: '0.6rem',
-                        fontWeight: '900',
-                        padding: '4px 10px',
-                        borderRadius: '6px',
-                        letterSpacing: '0.8px',
-                        textTransform: 'uppercase',
-                        zIndex: 2
-                      }}>
-                        {prod.tag}
-                      </div>
-
-                      {/* Nút xem chi tiết - vòng tròn vàng ở giữa khi hover */}
-                      <div
-                        className="product-view-btn"
-                        style={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%) scale(0.7)',
-                          opacity: 0,
-                          transition: 'opacity 0.3s ease, transform 0.3s ease',
-                          display: 'flex',
-                          alignItems: 'center',
-                          zIndex: 3,
-                          pointerEvents: 'none'
-                        }}
-                      >
-                        <Link
-                          to={`/san-pham/${prod.slug}`}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            textDecoration: 'none',
-                            pointerEvents: 'auto'
-                          }}
-                        >
-                          {/* Vòng tròn vàng + eye icon */}
-                          <div style={{
-                            width: '52px', height: '52px', borderRadius: '50%',
-                            backgroundColor: '#FDB913',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            boxShadow: '0 4px 20px rgba(253,185,19,0.5)',
-                            flexShrink: 0
-                          }}>
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round">
-                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                              <circle cx="12" cy="12" r="3" />
-                            </svg>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div style={{ padding: '20px 22px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                      <div>
-                        <h3 style={{
-                          fontSize: '1.15rem',
-                          fontFamily: 'var(--font-serif)',
-                          color: 'var(--primary)',
-                          marginBottom: '8px',
-                          fontWeight: '700'
-                        }}>
-                          <Link to={`/san-pham/${prod.slug}`} style={{ color: 'var(--primary)', textDecoration: 'none' }}>
-                            {prod.name}
-                          </Link>
-                        </h3>
-                        <p style={{
-                          color: '#526058',
-                          fontSize: '0.88rem',
-                          lineHeight: '1.65',
-                          marginBottom: '14px'
-                        }}>
-                          {prod.desc}
-                        </p>
-                        <div style={{ fontSize: '0.78rem', color: '#8aad9c', marginBottom: '4px' }}>
-                          <span style={{ fontWeight: '600' }}>Xuất xứ:</span> {prod.origin}
-                        </div>
-                      </div>
-
-                      <div style={{
-                        borderTop: '1px solid #eaf0ec',
-                        paddingTop: '14px',
-                        marginTop: '12px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between'
-                      }}>
-                        <span style={{
-                          fontSize: '0.72rem',
-                          fontWeight: '800',
-                          color: '#aac5b8',
-                          letterSpacing: '1px',
-                          textTransform: 'uppercase'
-                        }}>
-                          {prod.spec}
-                        </span>
-                        <Link
-                          to={`/san-pham/${prod.slug}`}
-                          style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '5px',
-                            color: 'var(--primary)', fontWeight: '700',
-                            fontSize: '0.84rem', textDecoration: 'none'
-                          }}
-                        >
-                          <span>Khám Phá</span>
-                          <ArrowRight size={14} />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+          {/* 2 Sản Phẩm Đứng Cạnh Nhau + Card Thông Tin Nằm Trực Tiếp Dưới Từng ẢNH (Ảnh 2 & 3) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={staggerContainer}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              gap: 'clamp(30px, 6vw, 80px)',
+              flexWrap: 'wrap'
+            }}
+          >
+            {featuredProducts.map((prod) => (
+              <motion.div key={prod.id} variants={fadeInUp}>
+                <FlipProductCard
+                  product={prod}
+                  isSelected={selectedProductId === prod.id}
+                  onSelect={(p) => setSelectedProductId(selectedProductId === p.id ? null : p.id)}
+                />
               </motion.div>
-            </div>
-          </div>
+            ))}
+          </motion.div>
+
+          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh Yêu Cầu) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center', marginTop: '35px' }}
+          >
+            <Link
+              to="/san-pham"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: '#119C4A',
+                backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
+                color: '#ffffff',
+                fontSize: '1.05rem',
+                fontWeight: '700',
+                padding: '14px 38px',
+                borderRadius: '9999px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 20px rgba(17, 156, 74, 0.32)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.42)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(17, 156, 74, 0.32)';
+              }}
+            >
+              <span>Tìm hiểu thêm</span>
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
+
         </div>
       </section>
 
@@ -1161,90 +932,280 @@ export default function HomePage() {
                 gap: '24px',
                 alignItems: 'center'
               }}>
-                {/* 1. Bao Gạo Thực Tế */}
+                {/* 1. Mã QR Thật Trên Bao Bì (Bên Trái) */}
                 <div style={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   backgroundColor: 'var(--bg-main)',
-                  padding: '20px 14px',
+                  padding: '24px 16px',
                   borderRadius: '20px',
                   border: '1px solid var(--border-color)',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  minHeight: '280px',
+                  justifyContent: 'center'
                 }}>
-                  <img
-                    src={MatTruocBaoBi}
-                    alt="Bao bì Gạo An Đông"
-                    style={{ height: '170px', objectFit: 'contain', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.12))' }}
-                  />
+                  {/* Khung chứa mã QR Thật ST25 */}
                   <div style={{
-                    marginTop: '12px',
+                    padding: '12px',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '16px',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                    border: '1.5px solid #e8f0ec',
+                    marginBottom: '14px'
+                  }}>
+                    {st25QRDataUrl ? (
+                      <img
+                        src={st25QRDataUrl}
+                        alt="Mã QR Gạo ST25"
+                        style={{ width: '135px', height: '135px', display: 'block' }}
+                      />
+                    ) : (
+                      <div style={{ width: '135px', height: '135px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <QrCode size={54} color="var(--primary)" />
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
                     backgroundColor: 'var(--bg-card)',
-                    padding: '4px 10px',
+                    padding: '6px 14px',
                     borderRadius: '9999px',
                     border: '1px solid var(--border-color)',
-                    fontSize: '0.78rem',
+                    fontSize: '0.82rem',
                     fontWeight: '700',
                     color: 'var(--primary)'
                   }}>
-                    <QrCode size={13} color="var(--earth-brown)" />
+                    <QrCode size={15} color="var(--earth-brown)" />
                     <span>Mã QR Trên Bao Bì</span>
                   </div>
                 </div>
 
-                {/* 2. Mockup Màn Hình Điện Thoại Hiển Thị Trang Web Sản Phẩm */}
+                {/* 2. Mockup Smartphone Hiển Thị Chi Tiết Sản Phẩm ST25 Sau Khi Quét (Bên Phải) */}
                 <div style={{
                   backgroundColor: 'var(--bg-dark)',
                   borderRadius: '24px',
                   padding: '10px',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
+                  boxShadow: '0 16px 36px rgba(0,0,0,0.18)',
                   border: '3px solid var(--border-color)',
                   position: 'relative'
                 }}>
-                  {/* Phone Screen — giữ trắng thật (không dùng --bg-card) vì đây
-                      là mô phỏng màn hình điện thoại, cần trắng để đúng ẩn dụ */}
                   <div style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '16px',
-                    padding: '14px 12px',
+                    padding: '16px 14px 14px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     textAlign: 'center'
                   }}>
-                    <div style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--earth-brown)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>
-                      An Đông
+                    <div style={{ fontSize: '0.68rem', fontWeight: '800', color: 'var(--earth-brown)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>
+                      AN ĐÔNG
                     </div>
-                    <div style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '6px' }}>
+                    <div style={{ fontSize: '0.92rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '8px' }}>
                       Gạo ST25 An Đông
                     </div>
-                    <img
-                      src={MatTruocBaoBi}
-                      alt="Product on phone"
-                      style={{ height: '75px', objectFit: 'contain', marginBottom: '6px' }}
-                    />
-                    <div style={{ fontSize: '0.7rem', color: '#526058', lineHeight: 1.4, marginBottom: '6px' }}>
+
+                    {/* HÌNH ẢNH BAO GẠO ST25 HIỂN THỊ TRÊN MÀN HÌNH ĐIỆN THOẠI */}
+                    <div style={{
+                      height: '135px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '8px'
+                    }}>
+                      <img
+                        src={MatTruocBaoBi}
+                        alt="Bao bì Gạo ST25 An Đông"
+                        style={{ height: '100%', maxWidth: '110px', objectFit: 'contain', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.15))' }}
+                      />
+                    </div>
+
+                    <div style={{ fontSize: '0.72rem', color: '#526058', lineHeight: 1.4, marginBottom: '10px', fontWeight: '500' }}>
                       Đặc điểm: Cơm dẻo thơm, ngọt vị
                     </div>
-                    <div style={{
-                      backgroundColor: 'var(--primary)',
-                      color: 'var(--golden-pale)',
-                      fontSize: '0.68rem',
-                      fontWeight: '700',
-                      padding: '4px 10px',
-                      borderRadius: '9999px',
-                      width: '100%'
-                    }}>
+
+                    <Link
+                      to="/san-pham/gao-st25"
+                      style={{
+                        backgroundColor: 'var(--primary)',
+                        backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
+                        color: '#ffffff',
+                        fontSize: '0.74rem',
+                        fontWeight: '700',
+                        padding: '7px 14px',
+                        borderRadius: '9999px',
+                        width: '100%',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        boxShadow: '0 4px 12px rgba(17, 156, 74, 0.25)',
+                        display: 'block',
+                        boxSizing: 'border-box'
+                      }}
+                    >
                       Xem Chi Tiết & Hướng Dẫn
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* 7. LỜI CAM KẾT CỦA CHÚNG TÔI - AN ĐÔNG GỬI TRỌN AN LÒNG (Chuẩn Ảnh 1 & 2) */}
+      <section style={{
+        padding: '95px 20px 105px',
+        backgroundColor: '#0A4D27',
+        backgroundImage: 'radial-gradient(circle at 50% 35%, #0E5C30 0%, #07381B 100%)',
+        color: '#ffffff',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Subtle Ambient Light Glow */}
+        <div style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '600px',
+          height: '380px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255, 174, 25, 0.09) 0%, transparent 70%)',
+          pointerEvents: 'none'
+        }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '880px', margin: '0 auto' }}>
+
+
+          {/* Logo / Typography Slogan Nghệ Thuật: AN ĐÔNG gửi trọn AN LÒNG (andong-anlong.svg) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '12px auto 26px',
+              userSelect: 'none',
+              maxWidth: 'clamp(320px, 48vw, 560px)',
+              width: '100%'
+            }}
+          >
+            <img
+              src={AnDongAnLongSvg}
+              alt="An Đông gửi trọn An Lòng"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.35))'
+              }}
+            />
+          </motion.div>
+
+          {/* Lời cam kết chân thành */}
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{
+              fontSize: 'clamp(1rem, 1.5vw, 1.18rem)',
+              lineHeight: 1.7,
+              color: 'rgba(255, 255, 255, 0.92)',
+              maxWidth: '720px',
+              margin: '0 auto 38px',
+              fontWeight: '500'
+            }}
+          >
+            "An Đông bền bỉ mang đến những hạt gạo thơm ngon, chất lượng đáng tin, để người ăn ngon miệng và người chọn an lòng."
+          </motion.p>
+
+          {/* 2 Nút Hành Động Màu Xanh Lá Cạnh Nhau (Chuẩn Ảnh 1 & 2) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '18px',
+              flexWrap: 'wrap'
+            }}
+          >
+            {/* Nút 1: Gọi đặt hàng - Điều hướng trực tiếp sang trang Liên hệ */}
+            <Link
+              to="/lien-he"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#119C4A',
+                backgroundImage: 'linear-gradient(135deg, #13A850 0%, #0D833D 100%)',
+                color: '#ffffff',
+                fontSize: '1.02rem',
+                fontWeight: '700',
+                padding: '13px 32px',
+                borderRadius: '9999px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.45)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.25)';
+              }}
+            >
+              <span>Gọi đặt hàng</span>
+              <ArrowRight size={18} />
+            </Link>
+
+            {/* Nút 2: Khám phá sản phẩm */}
+            <Link
+              to="/san-pham"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#119C4A',
+                backgroundImage: 'linear-gradient(135deg, #13A850 0%, #0D833D 100%)',
+                color: '#ffffff',
+                fontSize: '1.02rem',
+                fontWeight: '700',
+                padding: '13px 32px',
+                borderRadius: '9999px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.45)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.25)';
+              }}
+            >
+              <span>Khám phá sản phẩm</span>
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
