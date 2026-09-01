@@ -398,43 +398,78 @@ function ProductFacts({ product }) {
     <section className="product-facts-section" style={section}>
       <div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div>
       <h3 style={heading}>HƯỚNG DẪN NẤU / COOKING INSTRUCTIONS</h3>
-      <div className="product-facts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(245px, 1fr))', gap: '18px', marginTop: '24px' }}>
-        {(product.cookingSteps || []).map((step, idx) => {
-          const stepNum = Number(step.step) || (idx + 1);
-          const iconSrc = COOKING_STEP_ICONS[stepNum] || COOKING_STEP_ICONS[step.step];
-          return (
-            <article
-              key={step.step}
-              style={{
-                padding: '24px 20px 20px',
-                borderRadius: '20px',
-                background: 'linear-gradient(145deg, #fffdf6, #f7f2e5)',
-                border: '1.5px solid #e8ddc5',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: '0 4px 14px rgba(0,0,0,0.03)'
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                  <span style={{ width: 34, height: 34, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'var(--primary)', color: '#fff', fontWeight: 800, flexShrink: 0 }}>
+
+      {/* Khung hướng dẫn nấu dạng bảng ngang liền mạch chuẩn Ảnh 1 */}
+      <div
+        style={{
+          marginTop: '28px',
+          padding: 'clamp(24px, 3.5vw, 36px) clamp(20px, 3vw, 32px)',
+          background: '#FFFDF0',
+          border: '2px solid #E5A93C',
+          borderRadius: '28px',
+          boxShadow: '0 8px 30px rgba(229, 169, 60, 0.08)'
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 'clamp(20px, 2.5vw, 32px)',
+            alignItems: 'start'
+          }}
+        >
+          {(product.cookingSteps || []).map((step, idx) => {
+            const stepNum = Number(step.step) || (idx + 1);
+            const iconSrc = COOKING_STEP_ICONS[stepNum] || COOKING_STEP_ICONS[step.step];
+            return (
+              <div
+                key={step.step}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}
+              >
+                {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '10px', minHeight: '52px' }}>
+                  <span
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      display: 'grid',
+                      placeItems: 'center',
+                      background: '#E5A93C',
+                      color: '#ffffff',
+                      fontWeight: 800,
+                      fontSize: '1.05rem',
+                      flexShrink: 0,
+                      marginTop: '2px'
+                    }}
+                  >
                     {step.step}
                   </span>
-                  <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: '1.05rem', letterSpacing: '0.3px' }}>
-                    {step.viTitle || step.titleVi}
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ color: '#4A2E14', fontWeight: 800, fontSize: '1.15rem', lineHeight: 1.2, letterSpacing: '0.2px' }}>
+                      {step.viTitle || step.titleVi}
+                    </div>
+                    <div style={{ color: '#8C7355', fontSize: '0.82rem', fontWeight: 600, marginTop: '2px' }}>
+                      {step.enTitle || step.titleEn}
+                    </div>
                   </div>
                 </div>
 
-                {/* Icon / Hình ảnh minh họa bước nấu - nằm ngay dưới tiêu đề, phóng to rõ nét */}
+                {/* 2. Icon Minh Họa To Rõ Ở Giữa */}
                 {iconSrc && (
                   <div
                     style={{
-                      marginBottom: '18px',
+                      margin: '16px 0 14px',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      height: '200px',
+                      height: '135px',
+                      width: '100%',
                       overflow: 'hidden'
                     }}
                   >
@@ -442,12 +477,12 @@ function ProductFacts({ product }) {
                       src={iconSrc}
                       alt={step.viTitle || `Bước ${step.step}`}
                       style={{
-                        height: '150px',
-                        maxWidth: '220px',
+                        height: '110px',
+                        maxWidth: '180px',
                         width: 'auto',
                         objectFit: 'contain',
                         mixBlendMode: 'multiply',
-                        transform: 'scale(2.5)',
+                        transform: 'scale(2.3)',
                         transformOrigin: 'center center',
                         display: 'block'
                       }}
@@ -455,21 +490,18 @@ function ProductFacts({ product }) {
                   </div>
                 )}
 
-                <p style={{ margin: '0 0 14px', color: 'var(--text-muted)', lineHeight: 1.65, fontSize: '0.94rem' }}>
+                {/* 3. Nội dung mô tả Tiếng Việt & Tiếng Anh căn giữa */}
+                <p style={{ margin: '0 0 8px', color: '#4A2E14', fontWeight: 700, lineHeight: 1.5, fontSize: '0.94rem' }}>
                   {step.vi || step.descVi}
                 </p>
 
-                <div style={{ borderTop: '1px dashed #d8cba9', paddingTop: 12, color: '#8a6a37', fontWeight: 800, fontSize: '.78rem', letterSpacing: '.04em', textTransform: 'uppercase' }}>
-                  {step.enTitle || step.titleEn}
-                </div>
-
-                <p style={{ margin: '6px 0 0', color: '#6d746f', fontSize: '.88rem', lineHeight: 1.55 }}>
+                <p style={{ margin: 0, color: '#8A7563', fontSize: '0.84rem', lineHeight: 1.45, fontWeight: 500 }}>
                   {step.en || step.descEn}
                 </p>
               </div>
-            </article>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
     {/* Section "THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION" tạm đóng theo yêu cầu (2026-09) — bỏ comment để bật lại:
