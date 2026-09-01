@@ -1,15 +1,7 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "admin.andofood.vn" }],
-      "destination": "/quan-tri",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/|.*\\.[\\w]+$).*)",
       "destination": "/index.html"
     }
   ]
