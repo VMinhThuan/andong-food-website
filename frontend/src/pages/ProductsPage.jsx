@@ -137,10 +137,48 @@ export default function ProductsPage() {
                     fontSize: '0.96rem',
                     lineHeight: 1.7,
                     flexGrow: 1,
-                    margin: '0 0 24px'
+                    margin: '0 0 16px'
                   }}>
                     {product.summary || product.description}
                   </p>
+
+                  {/* Giá Niêm Yết Gạch Ngang & Giá Khuyến Mãi */}
+                  <div style={{
+                    backgroundColor: '#FFFDF2',
+                    border: '1.5px solid #F0DFB6',
+                    borderRadius: '12px',
+                    padding: '10px 14px',
+                    marginBottom: '18px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2px'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.82rem', color: '#7E6852' }}>Giá niêm yết:</span>
+                      <span style={{
+                        fontSize: '0.94rem',
+                        color: '#94A3B8',
+                        textDecoration: 'line-through',
+                        fontWeight: '600'
+                      }}>
+                        {((product.originalPrice || product.listedPrice || (product.slug === 'gao-st25' ? 259000 : 249000))).toLocaleString('vi-VN')} ₫
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                      <span style={{
+                        fontSize: '1.45rem',
+                        fontWeight: '800',
+                        color: '#11994A',
+                        lineHeight: 1.1
+                      }}>
+                        {((product.promotionalPrice || product.price || (product.slug === 'gao-st25' ? 215000 : 195000))).toLocaleString('vi-VN')} ₫
+                      </span>
+                      <span style={{ fontSize: '0.84rem', color: '#55655D', fontWeight: '500' }}>
+                        / {product.unit || 'túi 5kg'}
+                      </span>
+                    </div>
+                  </div>
 
                   <Link
                     className="btn"

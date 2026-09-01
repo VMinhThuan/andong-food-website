@@ -196,6 +196,28 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
                   }}>
                     {highlightTitle}
                   </div>
+
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    gap: '6px',
+                    marginTop: '4px'
+                  }}>
+                    <span style={{
+                      fontSize: '0.78rem',
+                      color: '#557560',
+                      textDecoration: 'line-through'
+                    }}>
+                      {((product?.originalPrice || product?.listedPrice || (isVuongTom ? 249000 : 259000))).toLocaleString('vi-VN')} ₫
+                    </span>
+                    <span style={{
+                      fontSize: '1.02rem',
+                      fontWeight: 800,
+                      color: '#07381A'
+                    }}>
+                      {((product?.promotionalPrice || product?.price || (isVuongTom ? 195000 : 215000))).toLocaleString('vi-VN')} ₫
+                    </span>
+                  </div>
                 </div>
 
                 {/* Nút Next mũi tên bên phải (Ảnh 2) */}

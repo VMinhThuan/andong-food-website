@@ -349,6 +349,56 @@ export default function ProductDetailPage() {
                   </div>}
                 </div>
 
+                {/* Giá Niêm Yết & Giá Khuyến Mãi */}
+                <div style={{
+                  backgroundColor: '#FFFDF2',
+                  border: '1.5px solid #F0DFB6',
+                  borderRadius: '16px',
+                  padding: '16px 20px',
+                  marginBottom: '24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <span style={{ fontSize: '0.88rem', color: '#7E6852', fontWeight: '600' }}>Giá niêm yết:</span>
+                    <span style={{
+                      fontSize: '1.05rem',
+                      color: '#94A3B8',
+                      textDecoration: 'line-through',
+                      fontWeight: '600'
+                    }}>
+                      {((product.originalPrice || product.listedPrice || (product.slug === 'gao-st25' ? 259000 : 249000))).toLocaleString('vi-VN')} ₫
+                    </span>
+                    <span style={{
+                      backgroundColor: '#FEE2E2',
+                      color: '#DC2626',
+                      fontSize: '0.72rem',
+                      fontWeight: '800',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
+                      letterSpacing: '0.5px'
+                    }}>
+                      TIẾT KIỆM {Math.round((1 - ((product.promotionalPrice || (product.slug === 'gao-st25' ? 215000 : 195000)) / (product.originalPrice || (product.slug === 'gao-st25' ? 259000 : 249000)))) * 100)}%
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                    <span style={{
+                      fontSize: 'clamp(1.75rem, 2.5vw, 2.1rem)',
+                      fontWeight: '800',
+                      color: '#11994A',
+                      fontFamily: 'var(--font-sans)',
+                      lineHeight: 1
+                    }}>
+                      {((product.promotionalPrice || product.price || (product.slug === 'gao-st25' ? 215000 : 195000))).toLocaleString('vi-VN')} ₫
+                    </span>
+                    <span style={{ fontSize: '0.92rem', color: '#55655D', fontWeight: '600' }}>
+                      / {product.unit || 'túi 5kg'}
+                    </span>
+                  </div>
+                </div>
+
                 {/* Hotline & Order consultation */}
                 <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                   <a href="tel:0944852464" onClick={triggerHotlineModal} className="btn btn-primary btn-lg" style={{ flex: 1, cursor: 'pointer' }}>
@@ -431,8 +481,8 @@ function ProductFacts({ product }) {
                   textAlign: 'center'
                 }}
               >
-                {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh (Căn đều hàng) */}
-                <div style={{ display: 'inline-flex', alignItems: 'flex-start', justifyContent: 'center', gap: '9px', minHeight: '56px', width: '100%', textAlign: 'left' }}>
+                {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh (Căn sát trái) */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', gap: '10px', minHeight: '56px', width: '100%', textAlign: 'left' }}>
                   <span
                     style={{
                       width: 34,

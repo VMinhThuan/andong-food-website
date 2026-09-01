@@ -57,6 +57,7 @@ function content(number, englishName, introductionVi, introductionEn, ingredient
 export const officialProducts = [
   {
     id: 'prod_st25_01', code: 'AD-ST25-01', name: 'GẠO ST25', slug: 'gao-st25',
+    originalPrice: 259000, listedPrice: 259000, promotionalPrice: 215000, price: 215000, unit: 'túi 5kg',
     ...sharedOfficialFields,
     summary: 'Gạo ST25 thuần được gieo trồng trên vùng đất màu mỡ, mang phẩm chất của giống gạo Việt từng được vinh danh “Gạo ngon nhất thế giới” năm 2023 tại Cebu, Philippines. Hạt thon dài, thơm tự nhiên, cho cơm dẻo mềm và vị ngọt thanh.',
     nameEn: 'ST25 RICE', summaryEn: 'Grown in fertile lands, pure ST25 rice carries the qualities of the Vietnamese variety recognized as “World’s Best Rice” in 2023 in Cebu, Philippines. Its long, slender grains are naturally aromatic, cooking into soft, tender rice with a delicate sweetness.',
@@ -66,6 +67,7 @@ export const officialProducts = [
   },
   {
     id: 'prod_vuong_tom_02', code: 'AD-VT-02', name: 'GẠO VUÔNG TÔM', slug: 'gao-vuong-tom',
+    originalPrice: 249000, listedPrice: 249000, promotionalPrice: 195000, price: 195000, unit: 'túi 5kg',
     ...sharedOfficialFields,
     summary: 'Gạo Vuông Tôm được gieo trồng theo mô hình luân canh lúa – tôm, thuận theo nhịp nước mặn – ngọt tự nhiên của miền Tây. Hạt gạo mang hương thơm dịu, cơm dẻo mềm và vị ngọt thanh đặc trưng – kết tinh từ sự hài hòa giữa đất, nước và mùa vụ.',
     nameEn: 'RICE-SHRIMP RICE', summaryEn: 'Rice–Shrimp Rice is grown through a traditional rice–shrimp rotation, following the natural rhythm of fresh and brackish water in the Mekong Delta. This unique ecosystem produces naturally aromatic grains with a soft, tender texture and delicate sweetness.',
