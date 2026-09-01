@@ -442,35 +442,32 @@ export default function AboutPage() {
               <ArrowRight size={18} />
             </button>
 
-            {/* Nút 2: Khám phá sản phẩm - Phong cách Glassmorphism mờ sang trọng */}
+            {/* Nút 2: Khám phá sản phẩm - Nền xanh chữ trắng */}
             <Link
               to="/san-pham"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
-                backgroundColor: 'rgba(255, 255, 255, 0.14)',
+                backgroundColor: '#1E824C',
+                backgroundImage: 'linear-gradient(135deg, #27AE60 0%, #1E824C 100%)',
                 color: '#ffffff',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
+                border: 'none',
                 textDecoration: 'none',
                 borderRadius: '999px',
                 padding: '15px 32px',
                 fontSize: '1rem',
                 fontWeight: 700,
                 transition: 'all 0.25s ease',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.25)'
+                boxShadow: '0 8px 24px rgba(30, 130, 76, 0.4)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.26)';
-                e.currentTarget.style.borderColor = '#ffffff';
                 e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 30px rgba(39, 174, 96, 0.55)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.14)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(30, 130, 76, 0.4)';
               }}
             >
               <span>Khám phá sản phẩm</span>
