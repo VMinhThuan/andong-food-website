@@ -391,7 +391,9 @@ function ProductFacts({ product }) {
     ['XUẤT XỨ / ORIGIN', [product.originCountry, product.originCountryEn].filter(Boolean).join(' / ')],
     ['MÃ VẠCH / BARCODE', product.barcode]
   ].filter(([, value]) => value);
-  const nutritionRows = [['Năng lượng / Calories', product.nutrition?.energy], ['Đạm / Total Protein', product.nutrition?.protein], ['Chất béo / Total Fat', product.nutrition?.fat], ['Carbohydrate', product.nutrition?.carbohydrate]].filter(([, value]) => value);
+  // Section "THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION" tạm đóng theo yêu cầu (2026-09).
+  // Bỏ comment dòng dưới + block <section> tương ứng bên dưới để bật lại.
+  // const nutritionRows = [['Năng lượng / Calories', product.nutrition?.energy], ['Đạm / Total Protein', product.nutrition?.protein], ['Chất béo / Total Fat', product.nutrition?.fat], ['Carbohydrate', product.nutrition?.carbohydrate]].filter(([, value]) => value);
   return <>
     <section className="product-facts-section" style={section}>
       <div style={subtitle}>CÁCH NẤU GẠO ĐÚNG VỊ</div>
@@ -472,7 +474,9 @@ function ProductFacts({ product }) {
         })}
       </div>
     </section>
+    {/* Section "THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION" tạm đóng theo yêu cầu (2026-09) — bỏ comment để bật lại:
     <section className="product-facts-section" style={section}><div style={subtitle}>GIÁ TRỊ THAM KHẢO TRÊN 100 G</div><h3 style={heading}>THÀNH PHẦN DINH DƯỠNG / NUTRITION INFORMATION</h3><div className="product-nutrition-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '24px' }}>{nutritionRows.map(([label, value], index) => <div key={label} style={{ padding: '20px', background: index % 2 ? '#fffaf0' : '#f0f7f2', borderRadius: '16px', border: '1px solid #e5e2d5' }}><div style={{ color: '#68776f', fontSize: '.82rem', lineHeight: 1.4, minHeight: 36 }}>{label}</div><div style={{ color: 'var(--primary)', fontSize: '1.35rem', fontWeight: 800, marginTop: 8 }}>{value}</div></div>)}</div></section>
+    */}
     <section className="product-facts-section" style={section}><div style={subtitle}>MINH BẠCH THÔNG TIN</div><h3 style={heading}>{product.name} / THÔNG TIN SẢN PHẨM</h3><div className="product-info-table" style={{ overflowX: 'auto', marginTop: '24px', border: '1px solid #e9e2d4', borderRadius: '16px' }}><table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 650 }}><thead><tr style={{ background: '#f5f0e4' }}><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>HẠNG MỤC</th><th style={{ ...row, color: 'var(--primary)', fontSize: '.8rem', letterSpacing: '.05em' }}>NỘI DUNG</th></tr></thead><tbody>{infoRows.map(([label, value], index) => <tr key={label} style={{ background: index % 2 ? '#fffdf9' : '#fff' }}><td style={{ ...row, color: '#765a2e', fontWeight: 800, fontSize: '.84rem', width: '34%' }}>{label}</td><td style={{ ...row, whiteSpace: 'pre-line', color: 'var(--text-muted)' }}>{value}</td></tr>)}</tbody></table></div></section>
   </>;
 }
