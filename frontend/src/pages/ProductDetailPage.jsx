@@ -431,8 +431,8 @@ function ProductFacts({ product }) {
                   textAlign: 'center'
                 }}
               >
-                {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh */}
-                <div style={{ display: 'inline-flex', alignItems: 'flex-start', justifyContent: 'center', gap: '9px', minHeight: '52px', textAlign: 'left' }}>
+                {/* 1. Header: Số thứ tự vàng + Tiêu đề Việt & Anh (Căn đều hàng) */}
+                <div style={{ display: 'inline-flex', alignItems: 'flex-start', justifyContent: 'center', gap: '9px', minHeight: '56px', width: '100%', textAlign: 'left' }}>
                   <span
                     style={{
                       width: 34,
@@ -461,7 +461,7 @@ function ProductFacts({ product }) {
                   </div>
                 </div>
 
-                {/* 2. Icon Minh Họa Cực Kỳ To Rõ Ở Giữa (Chuẩn Ảnh 2) */}
+                {/* 2. Icon Minh Họa Cực Kỳ To Rõ Ở Giữa (Căn đều hàng) */}
                 {iconSrc && (
                   <div
                     style={{
@@ -469,7 +469,7 @@ function ProductFacts({ product }) {
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      height: '190px',
+                      height: '180px',
                       width: '100%',
                       overflow: 'hidden'
                     }}
@@ -491,14 +491,19 @@ function ProductFacts({ product }) {
                   </div>
                 )}
 
-                {/* 3. Nội dung mô tả Tiếng Việt & Tiếng Anh căn giữa */}
-                <p style={{ margin: '0 0 8px', color: '#4A2E14', fontWeight: 700, lineHeight: 1.5, fontSize: 'clamp(0.96rem, 1.1vw, 1.05rem)' }}>
-                  {step.vi || step.descVi}
-                </p>
+                {/* 3. Nội dung Tiếng Việt (Cố định chiều cao minHeight để thẳng hàng tăm tắp) */}
+                <div style={{ minHeight: '75px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', width: '100%', marginBottom: '8px' }}>
+                  <p style={{ margin: 0, color: '#4A2E14', fontWeight: 700, lineHeight: 1.5, fontSize: 'clamp(0.96rem, 1.1vw, 1.05rem)' }}>
+                    {step.vi || step.descVi}
+                  </p>
+                </div>
 
-                <p style={{ margin: 0, color: '#8A7563', fontSize: 'clamp(0.84rem, 0.95vw, 0.9rem)', lineHeight: 1.45, fontWeight: 500 }}>
-                  {step.en || step.descEn}
-                </p>
+                {/* 4. Nội dung Tiếng Anh (Cố định chiều cao minHeight) */}
+                <div style={{ minHeight: '60px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', width: '100%' }}>
+                  <p style={{ margin: 0, color: '#8A7563', fontSize: 'clamp(0.84rem, 0.95vw, 0.9rem)', lineHeight: 1.45, fontWeight: 500 }}>
+                    {step.en || step.descEn}
+                  </p>
+                </div>
               </div>
             );
           })}
