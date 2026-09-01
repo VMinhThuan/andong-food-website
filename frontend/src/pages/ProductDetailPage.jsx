@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   QrCode,
@@ -20,14 +20,11 @@ import {
 import { api } from '../services/api';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
 
-const QRModal = lazy(() => import('../components/common/QRModal'));
-
 export default function ProductDetailPage() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [viewBack, setViewBack] = useState(false);
   const [isPackagingLoading, setIsPackagingLoading] = useState(false);
   const packagingRequestRef = useRef(0);
@@ -220,12 +217,6 @@ export default function ProductDetailPage() {
                   </div>}
 
                   <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '8px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
-                    <button
-                      onClick={() => setIsQRModalOpen(true)}
-                      className="btn btn-gold btn-sm"
-                    >
-                      Xem mã QR bao bì
-                    </button>
                     <a
                       href={api.getDownloadQRPNGUrl(product.slug)}
                       className="btn btn-outline btn-sm"
@@ -241,9 +232,6 @@ export default function ProductDetailPage() {
               <div className="product-overview">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                   {product.categoryName && <span className="badge badge-green">{product.categoryName}</span>}
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: '600' }}>
-                    MÃ SẢN PHẨM: <strong>{product.code}</strong>
-                  </span>
                 </div>
 
                 <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', color: 'var(--primary)', marginBottom: '12px' }}>
@@ -299,13 +287,6 @@ export default function ProductDetailPage() {
 
         </div>
       </section>
-
-      {/* QR Modal */}
-      {isQRModalOpen && <Suspense fallback={null}><QRModal
-        product={product}
-        isOpen={isQRModalOpen}
-        onClose={() => setIsQRModalOpen(false)}
-      /></Suspense>}
     </div>
   );
 }
@@ -321,7 +302,6 @@ function ProductFacts({ product }) {
     ['SỐ CB / DECLARATION NO.', product.declarationNo],
     ['BẢO QUẢN / STORAGE', [product.storageGuide, product.storageGuideEn].filter(Boolean).join('\n')],
     ['CẢNH BÁO / NOTICE', [product.notice, product.noticeEn].filter(Boolean).join('\n')],
-    ['NSX / PRODUCTION DATE', '________________________________'],
     ['XUẤT XỨ / ORIGIN', [product.originCountry, product.originCountryEn].filter(Boolean).join(' / ')],
     ['MÃ VẠCH / BARCODE', product.barcode]
   ].filter(([, value]) => value);
