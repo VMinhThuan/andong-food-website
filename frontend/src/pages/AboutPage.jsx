@@ -313,16 +313,26 @@ export default function AboutPage() {
       </section>
 
 
-      {/* 2. CAM KẾT: AN ĐÔNG GỬI TRỌN AN LÒNG (Xanh lá đậm đồng nhất CTA) */}
+      {/* 2. CAM KẾT: AN ĐÔNG GỬI TRỌN AN LÒNG (Nền Cánh Đồng rice-mekong.webp) */}
       <section style={{
-        padding: '95px 20px 105px',
-        backgroundColor: '#0A4D27',
-        backgroundImage: 'radial-gradient(circle at 50% 35%, #0E5C30 0%, #07381B 100%)',
+        position: 'relative',
+        padding: '115px 20px 125px',
+        backgroundImage: 'url(/assets/rice-mekong.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 45%',
+        backgroundColor: '#081c15',
         color: '#ffffff',
         textAlign: 'center',
-        position: 'relative',
         overflow: 'hidden'
       }}>
+        {/* Dark Emerald & Warm Gradient Overlay */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(8, 28, 21, 0.76) 0%, rgba(14, 60, 35, 0.70) 50%, rgba(20, 14, 4, 0.55) 100%)',
+          zIndex: 1
+        }} />
+
         {/* Subtle Ambient Light Glow */}
         <div style={{
           position: 'absolute',
@@ -332,8 +342,9 @@ export default function AboutPage() {
           width: '600px',
           height: '380px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255, 174, 25, 0.09) 0%, transparent 70%)',
-          pointerEvents: 'none'
+          background: 'radial-gradient(circle, rgba(255, 174, 25, 0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          zIndex: 1
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '880px', margin: '0 auto' }}>
@@ -361,7 +372,7 @@ export default function AboutPage() {
                 width: '100%',
                 height: 'auto',
                 display: 'block',
-                filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.35))'
+                filter: 'drop-shadow(0 6px 20px rgba(0,0,0,0.6))'
               }}
             />
           </m.div>
@@ -374,17 +385,18 @@ export default function AboutPage() {
             variants={fadeInUp}
             style={{
               fontSize: 'clamp(1rem, 1.5vw, 1.18rem)',
-              lineHeight: 1.7,
-              color: 'rgba(255, 255, 255, 0.92)',
+              lineHeight: 1.75,
+              color: 'rgba(255, 255, 255, 0.95)',
               maxWidth: '720px',
               margin: '0 auto 38px',
-              fontWeight: '500'
+              fontWeight: '500',
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)'
             }}
           >
             "An Đông cam kết mang đến những hạt gạo thơm ngon, chất lượng đáng tin, để người ăn ngon miệng và người chọn an lòng."
           </m.p>
 
-          {/* 2 Nút Hành Động Màu Xanh Lá Cạnh Nhau */}
+          {/* 2 Nút Hành Động */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -398,66 +410,71 @@ export default function AboutPage() {
               flexWrap: 'wrap'
             }}
           >
-            {/* Nút 1: Gọi đặt hàng */}
+            {/* Nút 1: Gọi đặt hàng - Phong cách Vàng Gold Amber nổi bật */}
             <button
               type="button"
               onClick={triggerHotlineModal}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
-                backgroundColor: '#11994A',
-                color: '#ffffff',
+                gap: '10px',
+                background: 'linear-gradient(135deg, #F5A623 0%, #D98207 100%)',
+                color: '#1a1003',
                 border: 'none',
                 borderRadius: '999px',
-                padding: '14px 30px',
+                padding: '15px 32px',
                 fontSize: '1rem',
-                fontWeight: 700,
+                fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.25s ease',
-                boxShadow: '0 8px 24px rgba(17,153,74,0.35)'
+                boxShadow: '0 10px 28px rgba(217, 130, 7, 0.4)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#0e803e';
                 e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 14px 34px rgba(217, 130, 7, 0.55)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#11994A';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(217, 130, 7, 0.4)';
               }}
             >
               <span>Gọi đặt hàng</span>
-              <ArrowRight size={17} />
+              <ArrowRight size={18} />
             </button>
 
-            {/* Nút 2: Khám phá sản phẩm */}
+            {/* Nút 2: Khám phá sản phẩm - Phong cách Glassmorphism mờ sang trọng */}
             <Link
               to="/san-pham"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
-                backgroundColor: '#11994A',
+                gap: '10px',
+                backgroundColor: 'rgba(255, 255, 255, 0.14)',
                 color: '#ffffff',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
                 textDecoration: 'none',
                 borderRadius: '999px',
-                padding: '14px 30px',
+                padding: '15px 32px',
                 fontSize: '1rem',
                 fontWeight: 700,
                 transition: 'all 0.25s ease',
-                boxShadow: '0 8px 24px rgba(17,153,74,0.35)'
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.25)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#0e803e';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.26)';
+                e.currentTarget.style.borderColor = '#ffffff';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#11994A';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.14)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               <span>Khám phá sản phẩm</span>
-              <ArrowRight size={17} />
+              <ArrowRight size={18} />
             </Link>
           </m.div>
         </div>
