@@ -295,9 +295,9 @@ export default function AboutPage() {
             </h2>
           </m.div>
 
-          {/* 2 Cột: 01 TẦM NHÌN & 02 SỨ MỆNH */}
+          {/* 2 Cột: TẦM NHÌN & SỨ MỆNH */}
           <div className="about-editorial-grid-2">
-            {/* 01 TẦM NHÌN */}
+            {/* TẦM NHÌN */}
             <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -307,7 +307,8 @@ export default function AboutPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%'
+                height: '100%',
+                textAlign: 'center'
               }}
             >
               <div>
@@ -317,13 +318,10 @@ export default function AboutPage() {
                   fontWeight: '800',
                   color: '#11994A',
                   marginBottom: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
+                  textAlign: 'center',
                   letterSpacing: '0.5px'
                 }}>
-                  <span style={{ fontSize: '1.35rem' }}>01</span>
-                  <span>TẦM NHÌN</span>
+                  TẦM NHÌN
                 </h3>
                 <p style={{
                   margin: 0,
@@ -331,7 +329,8 @@ export default function AboutPage() {
                   lineHeight: '1.8',
                   color: '#444444',
                   fontWeight: '400',
-                  minHeight: '75px'
+                  minHeight: '75px',
+                  textAlign: 'center'
                 }}>
                   Trở thành thương hiệu gạo Việt được tin chọn trong mỗi gia đình, góp phần vun đắp những bữa cơm ngon, an lành và gắn kết qua nhiều thế hệ.
                 </p>
@@ -339,7 +338,7 @@ export default function AboutPage() {
               <div style={{ width: '100%', height: '1.5px', backgroundColor: '#E6DAC8', marginTop: '24px' }} />
             </m.div>
 
-            {/* 02 SỨ MỆNH */}
+            {/* SỨ MỆNH */}
             <m.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -349,7 +348,8 @@ export default function AboutPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%'
+                height: '100%',
+                textAlign: 'center'
               }}
             >
               <div>
@@ -359,13 +359,10 @@ export default function AboutPage() {
                   fontWeight: '800',
                   color: '#11994A',
                   marginBottom: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
+                  textAlign: 'center',
                   letterSpacing: '0.5px'
                 }}>
-                  <span style={{ fontSize: '1.35rem' }}>02</span>
-                  <span>SỨ MỆNH</span>
+                  SỨ MỆNH
                 </h3>
                 <p style={{
                   margin: 0,
@@ -373,7 +370,8 @@ export default function AboutPage() {
                   lineHeight: '1.8',
                   color: '#444444',
                   fontWeight: '400',
-                  minHeight: '75px'
+                  minHeight: '75px',
+                  textAlign: 'center'
                 }}>
                   Giúp mỗi người chăm lo cho người mình thương bằng những hạt gạo ngon, chất lượng đáng tin và những bữa cơm an lành mỗi ngày.
                 </p>
@@ -424,7 +422,8 @@ export default function AboutPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%'
+                height: '100%',
+                textAlign: 'center'
               }}
             >
               <div>
@@ -434,6 +433,7 @@ export default function AboutPage() {
                   fontWeight: '800',
                   color: '#11994A',
                   marginBottom: '16px',
+                  textAlign: 'center',
                   letterSpacing: '0.5px'
                 }}>
                   CHÂN THÀNH
@@ -444,7 +444,8 @@ export default function AboutPage() {
                   lineHeight: '1.8',
                   color: '#444444',
                   fontWeight: '400',
-                  minHeight: '85px'
+                  minHeight: '85px',
+                  textAlign: 'center'
                 }}>
                   Trung thực tuyệt đối trong nguồn nguyên liệu và thông tin sản phẩm gửi đến người tiêu dùng.
                 </p>
@@ -462,7 +463,8 @@ export default function AboutPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%'
+                height: '100%',
+                textAlign: 'center'
               }}
             >
               <div>
@@ -472,6 +474,7 @@ export default function AboutPage() {
                   fontWeight: '800',
                   color: '#11994A',
                   marginBottom: '16px',
+                  textAlign: 'center',
                   letterSpacing: '0.5px'
                 }}>
                   TINH TẾ
@@ -482,7 +485,8 @@ export default function AboutPage() {
                   lineHeight: '1.8',
                   color: '#444444',
                   fontWeight: '400',
-                  minHeight: '85px'
+                  minHeight: '85px',
+                  textAlign: 'center'
                 }}>
                   Chăm chút tỉ mỉ từ quy trình đóng gói, hướng dẫn sử dụng đến hương vị trọn vẹn trong bữa cơm.
                 </p>
@@ -500,7 +504,8 @@ export default function AboutPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%'
+                height: '100%',
+                textAlign: 'center'
               }}
             >
               <div>
@@ -510,6 +515,7 @@ export default function AboutPage() {
                   fontWeight: '800',
                   color: '#11994A',
                   marginBottom: '16px',
+                  textAlign: 'center',
                   letterSpacing: '0.5px'
                 }}>
                   BỀN BỈ
@@ -520,7 +526,8 @@ export default function AboutPage() {
                   lineHeight: '1.8',
                   color: '#444444',
                   fontWeight: '400',
-                  minHeight: '85px'
+                  minHeight: '85px',
+                  textAlign: 'center'
                 }}>
                   Kiên định với chuẩn mực chất lượng và giá trị bền vững dài lâu cùng khách hàng và đối tác.
                 </p>
@@ -632,7 +639,7 @@ export default function AboutPage() {
             <button
               type="button"
               onClick={triggerHotlineModal}
-              className="btn-brand-cta"
+              className="btn-amber-cta"
             >
               <span>Gọi đặt hàng</span>
               <ArrowRight size={18} />

@@ -250,12 +250,13 @@ export default function ProductDetailPage() {
                         borderRadius: '9999px',
                         border: 'none',
                         backgroundColor: selectedFace === 'front' ? '#11994A' : '#ffffff',
+                        backgroundImage: selectedFace === 'front' ? 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)' : 'none',
                         color: selectedFace === 'front' ? '#ffffff' : '#2D3748',
                         fontWeight: '700',
                         fontSize: '0.82rem',
                         cursor: isPackagingLoading ? 'wait' : 'pointer',
                         transition: 'all 0.2s', outline: 'none',
-                        boxShadow: selectedFace === 'front' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
+                        boxShadow: selectedFace === 'front' ? '0 4px 12px rgba(17,156,74,0.35)' : 'none',
                         opacity: isPackagingLoading ? 0.7 : 1
                       }}
                     >
@@ -270,12 +271,13 @@ export default function ProductDetailPage() {
                         borderRadius: '9999px',
                         border: 'none',
                         backgroundColor: selectedFace === 'chinhDien' ? '#11994A' : '#ffffff',
+                        backgroundImage: selectedFace === 'chinhDien' ? 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)' : 'none',
                         color: selectedFace === 'chinhDien' ? '#ffffff' : '#2D3748',
                         fontWeight: '700',
                         fontSize: '0.82rem',
                         cursor: isPackagingLoading ? 'wait' : 'pointer',
                         transition: 'all 0.2s', outline: 'none',
-                        boxShadow: selectedFace === 'chinhDien' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
+                        boxShadow: selectedFace === 'chinhDien' ? '0 4px 12px rgba(17,156,74,0.35)' : 'none',
                         opacity: isPackagingLoading ? 0.7 : 1
                       }}
                     >
@@ -290,12 +292,13 @@ export default function ProductDetailPage() {
                         borderRadius: '9999px',
                         border: 'none',
                         backgroundColor: selectedFace === 'back' ? '#11994A' : '#ffffff',
+                        backgroundImage: selectedFace === 'back' ? 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)' : 'none',
                         color: selectedFace === 'back' ? '#ffffff' : '#2D3748',
                         fontWeight: '700',
                         fontSize: '0.82rem',
                         cursor: isPackagingLoading ? 'wait' : 'pointer',
                         transition: 'all 0.2s', outline: 'none',
-                        boxShadow: selectedFace === 'back' ? '0 2px 6px rgba(17,153,74,0.25)' : 'none',
+                        boxShadow: selectedFace === 'back' ? '0 4px 12px rgba(17,156,74,0.35)' : 'none',
                         opacity: isPackagingLoading ? 0.7 : 1
                       }}
                     >
@@ -398,12 +401,12 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Hotline & Order consultation */}
-                <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '16px' }}>
-                  <button type="button" onClick={triggerHotlineModal} className="btn-brand-cta" style={{ flex: 1 }}>
+                <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center', gap: '14px', marginTop: '16px' }}>
+                  <button type="button" onClick={triggerHotlineModal} className="btn-brand-cta" style={{ flex: '1 1 auto', whiteSpace: 'nowrap' }}>
                     <PhoneCall size={18} />
                     <span>Điện thoại đặt hàng: 0944 852 464</span>
                   </button>
-                  <Link to="/lien-he" className="btn-brand-cta">
+                  <Link to="/lien-he" className="btn-brand-cta" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
                     <span>Tư Vấn Đại Lý</span>
                     <ArrowRight size={18} />
                   </Link>
