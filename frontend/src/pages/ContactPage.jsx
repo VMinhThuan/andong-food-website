@@ -205,23 +205,14 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <a
-                    href="tel:0944852464"
+                  <button
+                    type="button"
                     onClick={triggerHotlineModal}
-                    style={{
-                      backgroundColor: 'var(--primary)',
-                      color: '#ffffff',
-                      padding: '7px 14px',
-                      borderRadius: '9999px',
-                      fontSize: '0.8rem',
-                      fontWeight: '700',
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap',
-                      cursor: 'pointer'
-                    }}
+                    className="btn-brand-cta"
+                    style={{ fontSize: '0.82rem', padding: '8px 18px' }}
                   >
-                    Gọi Ngay
-                  </a>
+                    <span>Gọi Ngay</span>
+                  </button>
                 </div>
 
                 {/* Item 2: Email */}
@@ -436,20 +427,22 @@ export default function ContactPage() {
                       </div>
                     )}
 
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
                       <button
+                        type="button"
                         onClick={() => setSubmitted(false)}
-                        className="btn btn-outline"
-                        style={{ padding: '10px 22px', fontSize: '0.9rem' }}
+                        className="btn-brand-cta"
+                        style={{ fontSize: '0.92rem', padding: '10px 24px' }}
                       >
-                        Gửi Yêu Cầu Khác
+                        <span>Gửi Yêu Cầu Khác</span>
                       </button>
                       <Link
                         to="/"
-                        className="btn btn-primary"
-                        style={{ padding: '10px 22px', fontSize: '0.9rem' }}
+                        className="btn-brand-cta"
+                        style={{ fontSize: '0.92rem', padding: '10px 24px' }}
                       >
-                        Trở Về Trang Chủ
+                        <span>Trở Về Trang Chủ</span>
+                        <ArrowRight size={16} />
                       </Link>
                     </div>
                   </m.div>
@@ -614,14 +607,10 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="btn btn-primary btn-lg"
+                      className="btn-brand-cta"
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
                         width: '100%',
-                        padding: '16px',
+                        padding: '14px 28px',
                         marginTop: '6px'
                       }}
                     >
@@ -662,21 +651,10 @@ export default function ContactPage() {
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <a
                 href="tel:0944852464"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: 'var(--primary)',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
+                className="btn-brand-cta"
+                style={{ fontSize: '0.88rem', padding: '10px 20px' }}
               >
-                <Phone size={15} color="var(--earth-brown)" />
+                <Phone size={15} />
                 <span>Điện thoại: 0944 852 464</span>
               </a>
 
@@ -684,42 +662,18 @@ export default function ContactPage() {
                 href="https://zalo.me/0944852464"
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: 'var(--primary)',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
+                className="btn-brand-cta"
+                style={{ fontSize: '0.88rem', padding: '10px 20px' }}
               >
                 <span>Zalo Official</span>
               </a>
 
-              {/* CẦN BỔ SUNG: đang trỏ về trang chủ Facebook, chưa có link
-                  fanpage thật của An Đông — thay bằng URL thật khi có. */}
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61594052996339"
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  padding: '10px 20px',
-                  borderRadius: '9999px',
-                  color: 'var(--primary)',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.88rem'
-                }}
+                className="btn-brand-cta"
+                style={{ fontSize: '0.88rem', padding: '10px 20px' }}
               >
                 <span>Facebook Page</span>
               </a>

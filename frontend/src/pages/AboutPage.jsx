@@ -628,65 +628,20 @@ export default function AboutPage() {
               flexWrap: 'wrap'
             }}
           >
-            {/* Nút 1: Gọi đặt hàng - Phong cách Vàng Gold Amber nổi bật */}
+            {/* Nút 1: Gọi đặt hàng */}
             <button
               type="button"
               onClick={triggerHotlineModal}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                background: 'linear-gradient(135deg, #F5A623 0%, #D98207 100%)',
-                color: '#1a1003',
-                border: 'none',
-                borderRadius: '999px',
-                padding: '15px 32px',
-                fontSize: '1rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                transition: 'all 0.25s ease',
-                boxShadow: '0 10px 28px rgba(217, 130, 7, 0.4)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 14px 34px rgba(217, 130, 7, 0.55)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 10px 28px rgba(217, 130, 7, 0.4)';
-              }}
+              className="btn-brand-cta"
             >
               <span>Gọi đặt hàng</span>
               <ArrowRight size={18} />
             </button>
 
-            {/* Nút 2: Khám phá sản phẩm - Nền xanh chữ trắng */}
+            {/* Nút 2: Khám phá sản phẩm */}
             <Link
               to="/san-pham"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                backgroundColor: '#1E824C',
-                backgroundImage: 'linear-gradient(135deg, #27AE60 0%, #1E824C 100%)',
-                color: '#ffffff',
-                border: 'none',
-                textDecoration: 'none',
-                borderRadius: '999px',
-                padding: '15px 32px',
-                fontSize: '1rem',
-                fontWeight: 700,
-                transition: 'all 0.25s ease',
-                boxShadow: '0 8px 24px rgba(30, 130, 76, 0.4)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 30px rgba(39, 174, 96, 0.55)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(30, 130, 76, 0.4)';
-              }}
+              className="btn-brand-cta"
             >
               <span>Khám phá sản phẩm</span>
               <ArrowRight size={18} />

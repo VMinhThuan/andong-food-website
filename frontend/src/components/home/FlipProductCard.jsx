@@ -61,7 +61,7 @@ export default function FlipProductCard({ product }) {
       >
         <m.div
           animate={{
-            rotateY: isFlipped ? 180 : 0,
+            rotateY: (isFlipped || isHovered) ? 180 : 0,
             scale: (isHighlighted ? 1.03 : 1.0) * baseScale,
             y: isHighlighted ? -8 : 0
           }}

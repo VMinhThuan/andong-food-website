@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { m } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { api } from '../services/api';
 import BrandPreloader from '../components/common/BrandPreloader';
 import EcomSt25 from '../assets/optimized/ecom-st25.webp';
@@ -181,30 +182,12 @@ export default function ProductsPage() {
                   </div>
 
                   <Link
-                    className="btn"
+                    className="btn-brand-cta"
                     to={`/san-pham/${product.slug}`}
-                    style={{
-                      textAlign: 'center',
-                      textDecoration: 'none',
-                      border: '1.5px solid #11994A',
-                      color: '#11994A',
-                      backgroundColor: 'transparent',
-                      borderRadius: '999px',
-                      padding: '12px 24px',
-                      fontWeight: 700,
-                      fontSize: '0.95rem',
-                      transition: 'all 0.25s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#11994A';
-                      e.currentTarget.style.color = '#ffffff';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = '#11994A';
-                    }}
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                   >
-                    Xem chi tiết
+                    <span>Xem chi tiết</span>
+                    <ArrowRight size={18} />
                   </Link>
                 </div>
               </m.article>

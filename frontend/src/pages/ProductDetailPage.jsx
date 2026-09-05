@@ -15,7 +15,8 @@ import {
   Package,
   MapPin,
   Sparkles,
-  Info
+  Info,
+  ArrowRight
 } from 'lucide-react';
 import { api } from '../services/api';
 import RiceHorizonDivider from '../components/common/RiceHorizonDivider';
@@ -120,8 +121,9 @@ export default function ProductDetailPage() {
       <div style={{ padding: '100px 20px', textAlign: 'center', backgroundColor: 'var(--bg-main)' }}>
         <h2 style={{ color: 'var(--primary)', marginBottom: '16px' }}>Không tìm thấy sản phẩm</h2>
         <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{error}</p>
-        <Link to="/san-pham" className="btn btn-primary">
-          Xem Danh Sách Gạo An Đông
+        <Link to="/san-pham" className="btn-brand-cta">
+          <span>Xem Danh Sách Gạo An Đông</span>
+          <ArrowRight size={18} />
         </Link>
       </div>
     );
@@ -396,12 +398,14 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Hotline & Order consultation */}
-                <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                  <a href="tel:0944852464" onClick={triggerHotlineModal} className="btn btn-primary btn-lg" style={{ flex: 1, cursor: 'pointer' }}>
-                    Điện thoại đặt hàng: 0944 852 464
-                  </a>
-                  <Link to="/lien-he" className="btn btn-outline btn-lg">
-                    Tư Vấn Đại Lý
+                <div className="product-order-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '16px' }}>
+                  <button type="button" onClick={triggerHotlineModal} className="btn-brand-cta" style={{ flex: 1 }}>
+                    <PhoneCall size={18} />
+                    <span>Điện thoại đặt hàng: 0944 852 464</span>
+                  </button>
+                  <Link to="/lien-he" className="btn-brand-cta">
+                    <span>Tư Vấn Đại Lý</span>
+                    <ArrowRight size={18} />
                   </Link>
                 </div>
               </div>

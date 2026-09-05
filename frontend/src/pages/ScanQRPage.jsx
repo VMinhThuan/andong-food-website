@@ -112,7 +112,7 @@ export default function ScanQRPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn btn-primary"
+                className="btn-brand-cta"
                 style={{ padding: '12px 24px' }}
               >
                 {loading ? 'Đang tìm...' : <Search size={18} />}
@@ -143,16 +143,18 @@ export default function ScanQRPage() {
                 <button
                   type="button"
                   onClick={() => navigate('/san-pham/gao-st25')}
-                  className="btn btn-outline btn-sm"
+                  className="btn-brand-cta"
+                  style={{ fontSize: '0.84rem', padding: '8px 18px' }}
                 >
-                  🌾 Gạo ST25
+                  <span>🌾 Gạo ST25</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => navigate('/san-pham/gao-vuong-tom')}
-                  className="btn btn-outline btn-sm"
+                  className="btn-brand-cta"
+                  style={{ fontSize: '0.84rem', padding: '8px 18px' }}
                 >
-                  🌾 Gạo Vuông Tôm
+                  <span>🌾 Gạo Vuông Tôm</span>
                 </button>
               </div>
             </div>

@@ -273,7 +273,7 @@ export default function HomePage() {
       {/* 1. HERO BANNER SLIDER (Banner SVG thuần 100% không bị che) */}
       <HeroBannerSlider />
 
-      {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY - Bố cục chuẩn Ảnh 1) */}
+      {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
       <section style={{
         padding: '65px 0 50px',
         backgroundColor: 'var(--bg-secondary)',
@@ -283,7 +283,7 @@ export default function HomePage() {
       }}>
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1300px', margin: '0 auto', padding: '0 20px' }}>
           
-          {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm (Chuẩn Ảnh 1) */}
+          {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -317,7 +317,7 @@ export default function HomePage() {
             </p>
           </m.div>
 
-          {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An (guigam-1.svg) Full Width Chiều Dài */}
+          {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -351,7 +351,7 @@ export default function HomePage() {
             />
           </m.div>
 
-          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh 1) */}
+          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -359,32 +359,7 @@ export default function HomePage() {
             variants={fadeInUp}
             style={{ textAlign: 'center' }}
           >
-            <Link
-              to="/gioi-thieu"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                backgroundColor: '#119C4A',
-                backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
-                color: '#ffffff',
-                fontSize: '1.05rem',
-                fontWeight: '700',
-                padding: '14px 38px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                boxShadow: '0 6px 20px rgba(17, 156, 74, 0.32)',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.42)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(17, 156, 74, 0.32)';
-              }}
-            >
+            <Link to="/gioi-thieu" className="btn-brand-cta">
               <span>Tìm hiểu thêm</span>
               <ArrowRight size={18} />
             </Link>
@@ -392,9 +367,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. SẢN PHẨM AN ĐÔNG - GẠO NGON CHUẨN GIÁ (Phong cách Vinamilk 3D Flip - Ảnh 2 & 3) */}
+      {/* 3. SẢN PHẨM AN ĐÔNG - GẠO NGON CHUẨN GIÁ */}
       <section style={{
-        padding: '40px 0 60px',
+        padding: '50px 0 60px',
         backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-light)',
         position: 'relative',
@@ -402,7 +377,7 @@ export default function HomePage() {
       }}>
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
           
-          {/* Heading lớn ở giữa: GẠO NGON - CHUẨN GIÁ (Có khoảng cách đẹp mắt với sản phẩm) */}
+          {/* Heading lớn ở giữa: GẠO NGON - CHUẨN GIÁ */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -438,7 +413,7 @@ export default function HomePage() {
             ))}
           </m.div>
 
-          {/* MOBILE VIEW: Carousel Lướt Trái / Phải Gọn Gàng (Làm Gọn Giao Diện Mobile) */}
+          {/* MOBILE VIEW: Carousel Lướt Trái / Phải */}
           <div
             className="product-showcase-mobile"
             onTouchStart={handleTouchStart}
@@ -493,7 +468,7 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh Yêu Cầu) */}
+          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -501,32 +476,7 @@ export default function HomePage() {
             variants={fadeInUp}
             style={{ textAlign: 'center', marginTop: '35px' }}
           >
-            <Link
-              to="/san-pham"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                backgroundColor: '#119C4A',
-                backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
-                color: '#ffffff',
-                fontSize: '1.05rem',
-                fontWeight: '700',
-                padding: '14px 38px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                boxShadow: '0 6px 20px rgba(17, 156, 74, 0.32)',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                e.currentTarget.style.boxShadow = '0 10px 28px rgba(17, 156, 74, 0.42)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(17, 156, 74, 0.32)';
-              }}
-            >
+            <Link to="/san-pham" className="btn-brand-cta">
               <span>Tìm hiểu thêm</span>
               <ArrowRight size={18} />
             </Link>
@@ -624,8 +574,7 @@ export default function HomePage() {
 
               <Link
                 to="/quet-ma-qr"
-                className="btn btn-primary btn-lg"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+                className="btn-brand-cta"
               >
                 <span>Trải Nghiệm Quét QR</span>
                 <ArrowRight size={18} />
@@ -645,7 +594,7 @@ export default function HomePage() {
                 borderRadius: '30px',
                 padding: '36px 30px',
                 boxShadow: '0 20px 45px rgba(17, 156, 74, 0.08)',
-                border: '1px solid var(--border-color)',
+                border: '1.5px solid var(--border-color)',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
                 gap: '24px',
@@ -751,23 +700,10 @@ export default function HomePage() {
 
                     <Link
                       to="/san-pham/gao-st25"
-                      style={{
-                        backgroundColor: 'var(--primary)',
-                        backgroundImage: 'linear-gradient(135deg, #119C4A 0%, #0A5C2C 100%)',
-                        color: '#ffffff',
-                        fontSize: '0.74rem',
-                        fontWeight: '700',
-                        padding: '7px 14px',
-                        borderRadius: '9999px',
-                        width: '100%',
-                        textAlign: 'center',
-                        textDecoration: 'none',
-                        boxShadow: '0 4px 12px rgba(17, 156, 74, 0.25)',
-                        display: 'block',
-                        boxSizing: 'border-box'
-                      }}
+                      className="btn-brand-cta"
+                      style={{ fontSize: '0.78rem', padding: '8px 16px', width: '100%' }}
                     >
-                      Xem Chi Tiết & Hướng Dẫn
+                      <span>Xem Chi Tiết & Hướng Dẫn</span>
                     </Link>
                   </div>
                 </div>
@@ -777,7 +713,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. LỜI CAM KẾT CỦA CHÚNG TÔI - AN ĐÔNG GỬI TRỌN AN LÒNG (Nền Cánh Đồng rice-mekong.webp) */}
+      {/* 7. LỜI CAM KẾT CỦA CHÚNG TÔI - AN ĐÔNG GỬI TRỌN AN LÒNG */}
       <section style={{
         position: 'relative',
         padding: '115px 20px 125px',
@@ -812,7 +748,7 @@ export default function HomePage() {
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '880px', margin: '0 auto' }}>
-          {/* Logo / Typography Slogan Nghệ Thuật: AN ĐÔNG gửi trọn AN LÒNG (andong-anlong.svg) */}
+          {/* Logo / Typography Slogan Nghệ Thuật */}
           <m.div
             initial="hidden"
             whileInView="visible"
@@ -876,65 +812,20 @@ export default function HomePage() {
               flexWrap: 'wrap'
             }}
           >
-            {/* Nút 1: Gọi đặt hàng - Phong cách Vàng Gold Amber */}
+            {/* Nút 1: Gọi đặt hàng */}
             <button
               type="button"
               onClick={triggerHotlineModal}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                background: 'linear-gradient(135deg, #F5A623 0%, #D98207 100%)',
-                color: '#1a1003',
-                border: 'none',
-                borderRadius: '999px',
-                padding: '15px 32px',
-                fontSize: '1rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                transition: 'all 0.25s ease',
-                boxShadow: '0 10px 28px rgba(217, 130, 7, 0.4)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 14px 34px rgba(217, 130, 7, 0.55)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 10px 28px rgba(217, 130, 7, 0.4)';
-              }}
+              className="btn-brand-cta"
             >
               <span>Gọi đặt hàng</span>
               <ArrowRight size={18} />
             </button>
 
-            {/* Nút 2: Khám phá sản phẩm - Nền xanh chữ trắng */}
+            {/* Nút 2: Khám phá sản phẩm */}
             <Link
               to="/san-pham"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                backgroundColor: '#1E824C',
-                backgroundImage: 'linear-gradient(135deg, #27AE60 0%, #1E824C 100%)',
-                color: '#ffffff',
-                border: 'none',
-                textDecoration: 'none',
-                borderRadius: '999px',
-                padding: '15px 32px',
-                fontSize: '1rem',
-                fontWeight: 700,
-                transition: 'all 0.25s ease',
-                boxShadow: '0 8px 24px rgba(30, 130, 76, 0.4)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 30px rgba(39, 174, 96, 0.55)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(30, 130, 76, 0.4)';
-              }}
+              className="btn-brand-cta"
             >
               <span>Khám phá sản phẩm</span>
               <ArrowRight size={18} />
