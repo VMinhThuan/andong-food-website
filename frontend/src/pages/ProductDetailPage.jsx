@@ -406,9 +406,8 @@ export default function ProductDetailPage() {
                     <PhoneCall size={18} />
                     <span>Điện thoại đặt hàng: 0944 852 464</span>
                   </button>
-                  <Link to="/lien-he" className="btn-brand-cta" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
+                  <Link to="/lien-he" className="btn-brand-outline" style={{ flexShrink: 0 }}>
                     <span>Tư Vấn Đại Lý</span>
-                    <ArrowRight size={18} />
                   </Link>
                 </div>
               </div>

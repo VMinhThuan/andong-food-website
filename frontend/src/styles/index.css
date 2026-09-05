@@ -1368,12 +1368,51 @@ textarea {
 }
 
 @media (max-width: 580px) {
-  .btn-brand-cta {
+  .btn-amber-cta {
     padding: 11px 20px;
     font-size: 0.92rem;
     gap: 8px;
   }
 }
+
+/* Outline Brand Button Style (Viền xanh, nền trong suốt như cũ) */
+.btn-brand-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #11994A !important;
+  font-size: 1.02rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  border: 1.8px solid #11994A;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-brand-outline:hover {
+  background-color: #11994A;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(17, 153, 74, 0.25);
+}
+
+.btn-brand-outline:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 580px) {
+  .btn-brand-outline {
+    padding: 10px 20px;
+    font-size: 0.92rem;
+  }
+}
+
 
 /* Orange/Amber CTA Button Style (Nút Gọi đặt hàng màu cam như cũ) */
 .btn-amber-cta {
