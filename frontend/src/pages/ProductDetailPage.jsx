@@ -59,12 +59,12 @@ export default function ProductDetailPage() {
   const getPackagingImage = (face) => {
     const images = product?.images || {};
     if (face === 'chinhDien') {
-      return images.chinhDien || defaultChinhDien || images.front || images.main || '';
+      return images.chinhDien || images.front || images.main || defaultChinhDien || '';
     }
     if (face === 'back') {
-      return images.back || images.main || '';
+      return images.back || images.main || images.front || '';
     }
-    return images.front || images.main || '';
+    return images.front || images.main || images.chinhDien || '';
   };
 
   const changePackagingFace = (nextFace) => {

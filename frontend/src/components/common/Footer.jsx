@@ -42,8 +42,9 @@ export default function Footer() {
             <div>
               <h4 style={{
                 color: '#ffffff',
-                fontSize: '0.88rem',
-                fontWeight: '800',
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1rem',
+                fontWeight: '600',
                 letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 marginBottom: '20px'
@@ -90,8 +91,9 @@ export default function Footer() {
             <div>
               <h4 style={{
                 color: '#ffffff',
-                fontSize: '0.88rem',
-                fontWeight: '800',
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1rem',
+                fontWeight: '600',
                 letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 marginBottom: '20px'
@@ -129,17 +131,18 @@ export default function Footer() {
             <div>
               <h4 style={{
                 color: '#ffffff',
-                fontSize: '0.88rem',
-                fontWeight: '800',
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1rem',
+                fontWeight: '600',
                 letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 marginBottom: '20px'
               }}>
-                Thông tin nhà sản xuất
+                THÔNG TIN NHÀ SẢN XUẤT
               </h4>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.88rem' }}>
-                <div style={{ color: '#ffffff', fontWeight: '800', lineHeight: 1.4 }}>
+                <div style={{ color: '#ffffff', fontWeight: '500', lineHeight: 1.4 }}>
                   CÔNG TY TNHH An Đông
                 </div>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
@@ -154,7 +157,7 @@ export default function Footer() {
                   <a
                     href="tel:0944852464"
                     onClick={triggerHotlineModal}
-                    style={{ color: '#ffffff', fontWeight: '700', textDecoration: 'none', fontSize: '1rem', cursor: 'pointer' }}
+                    style={{ color: '#ffffff', fontWeight: '500', textDecoration: 'none', fontSize: '0.95rem', cursor: 'pointer' }}
                   >
                     0944 852 464
                   </a>
@@ -187,9 +190,16 @@ export default function Footer() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              {/* CẦN BỔ SUNG: chưa có link fanpage Facebook thật — để chữ
-                  thường, không giả vờ là link, tới khi có URL thật. */}
-              <span style={{ color: '#d9c2a0' }}>Facebook</span>
+              <a
+                href="https://www.facebook.com/profile.php?id=61594052996339"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#d9c2a0', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#d9c2a0'; }}
+              >
+                Facebook
+              </a>
               <span style={{ color: '#8a5f3a' }}>•</span>
               <a
                 href="https://zalo.me/0944852464"

@@ -9,14 +9,16 @@ import Carousel2 from '../../assets/optimized/carousel-2.webp';
 const slides = [
   {
     id: 1,
-    image: Carousel1,
-    alt: 'An Đông Food Banner 1',
+    desktopImage: '/assets/brand-element/Desktop/desktop-1.webp',
+    mobileImage: '/assets/brand-element/Mobile/mobile-1.webp',
+    alt: 'An Đông Food Banner 1 - Chọn An Đông, Trao An Lòng',
     link: '/san-pham'
   },
   {
     id: 2,
-    image: Carousel2,
-    alt: 'An Đông Food Banner 2',
+    desktopImage: '/assets/brand-element/Desktop/desktop-2.webp',
+    mobileImage: '/assets/brand-element/Mobile/mobile-2.webp',
+    alt: 'An Đông Food Banner 2 - Gạo Ngon Chuẩn Giống',
     link: '/gioi-thieu'
   }
 ];
@@ -63,7 +65,7 @@ export default function HeroBannerSlider() {
       style={{
         position: 'relative',
         width: '100%',
-        aspectRatio: '2880 / 1605',
+        aspectRatio: '2880 / 1320',
         overflow: 'hidden',
         backgroundColor: '#FFFDF9',
         userSelect: 'none',
@@ -72,7 +74,7 @@ export default function HeroBannerSlider() {
         justifyContent: 'center'
       }}
     >
-      {/* 2 Banner Slides dạng Ảnh thuần (Hiển thị 100% toàn bộ ảnh SVG không bị che cắt) */}
+      {/* 2 Banner Slides dạng Responsive Picture (Tự động đổi ảnh cho Desktop & Mobile) */}
       <AnimatePresence initial={false} custom={direction}>
         <m.div
           key={slide.id}
@@ -92,21 +94,24 @@ export default function HeroBannerSlider() {
             to={slide.link}
             style={{ display: 'block', width: '100%', height: '100%', cursor: 'pointer' }}
           >
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              width={1920}
-              height={1070}
-              fetchPriority={current === 0 ? 'high' : 'auto'}
-              decoding="async"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'top center',
-                display: 'block'
-              }}
-            />
+            <picture style={{ display: 'block', width: '100%', height: '100%' }}>
+              <source media="(max-width: 768px)" srcSet={slide.mobileImage} />
+              <img
+                src={slide.desktopImage}
+                alt={slide.alt}
+                width={2880}
+                height={1320}
+                fetchPriority={current === 0 ? 'high' : 'auto'}
+                decoding="async"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                  display: 'block'
+                }}
+              />
+            </picture>
           </Link>
         </m.div>
       </AnimatePresence>

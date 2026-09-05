@@ -33,7 +33,6 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             inset: 0,
             zIndex: 99999,
             backgroundColor: 'var(--bg-main)',
-            backgroundImage: 'radial-gradient(circle at center 40%, rgba(255, 254, 242, 0.7) 0%, var(--bg-main) 85%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -41,21 +40,6 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             pointerEvents: 'none'
           }}
         >
-          {/* Subtle Ambient Sunlight Glow */}
-          <m.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.6, scale: 1.2 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              width: '320px',
-              height: '320px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(233, 196, 106, 0.35) 0%, rgba(250, 249, 245, 0) 70%)',
-              pointerEvents: 'none'
-            }}
-          />
-
           <div className="brand-preloader__content" style={{
             position: 'relative',
             zIndex: 2,
@@ -72,7 +56,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
               initial={{ opacity: 0, y: 15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              style={{ marginBottom: '20px' }}
+              style={{ marginBottom: '4px' }}
             >
               <img
                 src={LogoDoc}
@@ -86,7 +70,7 @@ export default function BrandPreloader({ onFinish, persistent = false }) {
             </m.div>
 
             {/* BƯỚC 3: ĐƯỜNG CHÂN TRỜI CÁNH ĐỒNG LÚA CHẠY NGANG MẢNH MAI (SVG HORIZON LINE) */}
-            <div style={{ width: '180px', height: '14px', margin: '14px 0 10px' }}>
+            <div style={{ width: '180px', height: '14px', margin: '4px 0 2px' }}>
               <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
                 {/* Lớp đường cong cánh đồng xanh */}
                 <m.path

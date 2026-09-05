@@ -460,7 +460,8 @@ textarea.form-control {
 
 #main-full-footer h4 {
   color: var(--bg-primary) !important;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
@@ -699,7 +700,8 @@ textarea {
   }
 
   .home-hero {
-    height: clamp(500px, 78svh, 600px) !important;
+    aspect-ratio: 780 / 1060 !important;
+    height: auto !important;
     max-height: none !important;
   }
 

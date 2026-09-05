@@ -69,7 +69,7 @@ export default function ProductsPage() {
           {sortedProducts.map((product) => {
             const isSt25 = product.slug?.includes('st25') || product.code?.includes('ST25');
             const defaultEcom = isSt25 ? EcomSt25 : EcomVuongTom;
-            const imgSrc = product.images?.ecom || defaultEcom || product.images?.front || product.images?.main;
+            const imgSrc = product.images?.ecom || product.images?.chinhDien || product.images?.front || product.images?.main || defaultEcom;
             const productNumber = product.content?.number || (isSt25 ? 'SẢN PHẨM 01 / PRODUCT 01' : 'SẢN PHẨM 02 / PRODUCT 02');
 
             return (

@@ -239,7 +239,7 @@ export default function HomePage() {
     subtitle: product.slug?.includes('st25') ? 'Gạo đặc sản thuần chủng' : 'Gạo sạch luân canh lúa - tôm',
     highlightTitle: product.slug?.includes('st25') ? 'Gạo ST25 • Thơm dẻo đậm vị' : 'Gạo Vuông Tôm • Ngọt lành tự nhiên',
     origin: product.content?.information?.find(([label]) => label === 'XUẤT XỨ / ORIGIN')?.[1],
-    image: product.images?.front || product.images?.main || MatTruocBaoBi,
+    image: product.images?.front || product.images?.chinhDien || product.images?.main || MatTruocBaoBi,
     imageBack: product.images?.back || MatSauBaoBi
   }));
 
@@ -469,91 +469,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. HÀNH TRÌNH TỪ CÁNH ĐỒNG ĐẾN BỮA CƠM - DARK BACKGROUND */}
-      <section style={{
-        padding: '100px 0 110px',
-        position: 'relative',
-        color: '#ffffff',
-        overflow: 'hidden'
-      }}>
-        {/* Background ảnh ruộng lúa tối */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 0
-        }}>
-          <img
-            src="/assets/rice-sunrise.webp"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
-          />
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(180deg, rgba(4,22,10,0.82) 0%, rgba(5,30,14,0.75) 50%, rgba(4,22,10,0.88) 100%)'
-          }} />
-        </div>
-
-
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <m.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.25 }}
-            variants={fadeInUp}
-            style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}
-          >
-            <div style={{ marginBottom: '12px', display: 'inline-block' }}>
-              <span style={{
-                border: '1px solid rgba(253,185,19,0.6)',
-                borderRadius: '9999px',
-                padding: '4px 16px',
-                fontSize: '0.72rem',
-                fontWeight: '800',
-                letterSpacing: '1.5px',
-                color: '#FDB913',
-                textTransform: 'uppercase'
-              }}>QUY TRÌNH CHẤT LƯỢNG</span>
-            </div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(2.2rem, 3.6vw, 3rem)',
-              color: '#ffffff',
-              marginBottom: '14px',
-              fontWeight: '800'
-            }}>
-              Từ Cánh Đồng <span style={{ color: '#FDB913' }}>Đến Bữa Cơm</span>
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.02rem', lineHeight: 1.7, margin: 0 }}>
-              Hành trình của hạt gạo An Đông, từ nguồn nguyên liệu đến khi hiện diện trong mỗi bữa cơm gia đình.
-            </p>
-          </m.div>
-
-          {/* Quy trình 5 bước */}
-          <m.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={staggerContainer}
-            className="quality-timeline-container"
-          >
-            {[
-              { step: '01', title: 'Chọn Giống', desc: 'Lựa chọn nguồn giống thuần chủng, chất lượng tốt nhất.', icon: StepSeedIcon },
-              { step: '02', title: 'Canh Tác', desc: 'Chăm sóc theo quy trình tự nhiên, an toàn sinh thái.', icon: StepCultivateIcon },
-              { step: '03', title: 'Thu Hoạch', desc: 'Thu hoạch đúng độ chín vàng óng của hạt lúa.', icon: StepHarvestIcon },
-              { step: '04', title: 'Sản Xuất', desc: 'Xay xát và làm sạch với quy trình khép kín.', icon: StepProduceIcon },
-              { step: '05', title: 'Đóng Gói', desc: 'Bảo quản cẩn thận và dán mã QR minh bạch thông tin.', icon: StepPackageIcon }
-            ].map((item) => (
-              <m.div key={item.step} variants={fadeInUp} className="quality-step-card">
-                <span className="quality-step-number">{item.step}</span>
-                <div className="quality-step-icon"><item.icon /></div>
-                <h3 className="quality-step-title">{item.title}</h3>
-                <p className="quality-step-description">{item.desc}</p>
-              </m.div>
-            ))}
-          </m.div>
-        </div>
-      </section>
-
       {/* 6. QUÉT MÃ QR – MINH BẠCH THÔNG TIN (SMARTPHONE + BAO BÌ FLOW MOCKUP) */}
       <section style={{
         padding: '105px 0',
@@ -576,11 +491,6 @@ export default function HomePage() {
               viewport={{ once: false, amount: 0.25 }}
               variants={fadeInLeft}
             >
-              <div className="badge badge-green" style={{ marginBottom: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <ScanLine size={15} color="var(--primary)" />
-                <span>MINH BẠCH TRONG TỪNG SẢN PHẨM</span>
-              </div>
-
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(2.2rem, 3.5vw, 2.9rem)',

@@ -16,11 +16,15 @@ export const uploadService = {
     }
 
     const isSvg = /^data:image\/svg\+xml;base64,/i.test(dataUrl);
+    const cleanName = fileName.replace(/[^a-zA-Z0-9_-]/g, '-').slice(0, 60);
+    const publicId = `${cleanName}-${Date.now()}`;
+
     const result = await getCloudinary().uploader.upload(dataUrl, {
       folder: 'andong-food/products',
       resource_type: 'image',
-      public_id: fileName.replace(/[^a-zA-Z0-9_-]/g, '-').slice(0, 80),
-      overwrite: false,
+      public_id: publicId,
+      overwrite: true,
+      invalidate: true,
       ...(isSvg ? {} : { transformation: [{ quality: 'auto', fetch_format: 'auto' }] })
     });
 

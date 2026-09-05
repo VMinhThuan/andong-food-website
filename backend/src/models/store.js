@@ -31,10 +31,9 @@ class DataStore {
       if (fs.existsSync(DATA_FILE)) {
         const raw = fs.readFileSync(DATA_FILE, 'utf-8');
         this.data = JSON.parse(raw);
-        // The file existed in older builds with four invented products.
-        // Offline/local fallback is allowed, but it must use the approved
-        // two-product catalogue rather than silently expose old mock data.
-        this.data.products = officialProducts;
+        if (!Array.isArray(this.data.products) || this.data.products.length === 0) {
+          this.data.products = officialProducts;
+        }
       } else {
         this.data = {
           users: initialUsers,

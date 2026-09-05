@@ -12,7 +12,7 @@ import { ArrowRight } from 'lucide-react';
 export default function FlipProductCard({ product, isSelected, onSelect }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const frontImg = product?.images?.front || product?.images?.main || product?.image || '/assets/brand-element/mat-truoc-bao-bi.webp';
+  const frontImg = product?.images?.front || product?.images?.chinhDien || product?.images?.main || product?.image || '/assets/brand-element/mat-truoc-bao-bi.webp';
   const backImg = product?.images?.back || product?.imageBack || '/assets/brand-element/mat-sau-bao-bi.webp';
 
   const isVuongTom = product?.slug === 'gao-vuong-tom' || product?.code === 'AD-VT-02';
