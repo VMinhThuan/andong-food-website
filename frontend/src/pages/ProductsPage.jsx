@@ -38,7 +38,7 @@ export default function ProductsPage() {
       />
       <div className="container" style={{ maxWidth: '1280px' }}>
         {/* Header danh mục */}
-        <div style={{ maxWidth: 720, marginBottom: 50, textAlign: 'left' }}>
+        <div style={{ maxWidth: 860, marginBottom: 50, textAlign: 'left' }}>
           <div className="badge badge-gold" style={{ marginBottom: 12 }}>
             DANH MỤC SẢN PHẨM
           </div>
@@ -124,7 +124,7 @@ export default function ProductsPage() {
                 }}>
                   <h2 style={{
                     color: '#11994A',
-                    fontFamily: 'var(--font-sans)',
+                    fontFamily: 'var(--font-serif)',
                     fontSize: '1.45rem',
                     fontWeight: 800,
                     margin: '0 0 12px'
