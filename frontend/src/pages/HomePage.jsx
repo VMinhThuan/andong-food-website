@@ -273,101 +273,7 @@ export default function HomePage() {
       {/* 1. HERO BANNER SLIDER (Banner SVG thuần 100% không bị che) */}
       <HeroBannerSlider />
 
-      {/* 2. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
-      <section style={{
-        padding: '65px 0 50px',
-        backgroundColor: 'var(--bg-secondary)',
-        borderBottom: '1px solid var(--border-light)',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1300px', margin: '0 auto', padding: '0 20px' }}>
-          
-          {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm */}
-          <m.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.25 }}
-            variants={fadeInUp}
-            style={{ textAlign: 'center', marginBottom: '36px' }}
-          >
-            <h2 style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(2.1rem, 4vw, 2.9rem)',
-              fontWeight: '800',
-              color: 'var(--brand-brown)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.6px',
-              lineHeight: 1.28,
-              margin: '0 0 16px'
-            }}>
-              GỬI GẮM BÌNH AN<br />
-              TRONG TỪNG BỮA CƠM VIỆT
-            </h2>
-
-            <p style={{
-              margin: '0 auto',
-              fontSize: 'clamp(1rem, 1.5vw, 1.16rem)',
-              lineHeight: 1.65,
-              color: 'var(--brand-brown)',
-              maxWidth: '820px',
-              fontWeight: '500'
-            }}>
-              Bình an không chỉ là lời chúc dành cho người mình thương — mà còn hiện diện trong từng bữa cơm được chăm chút mỗi ngày
-            </p>
-          </m.div>
-
-          {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An */}
-          <m.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={fadeInUp}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              width: '100%',
-              marginBottom: '38px',
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-              border: '1.5px solid rgba(200, 223, 210, 0.7)',
-              backgroundColor: '#ffffff'
-            }}
-          >
-            <img
-              src={StoryThumbnail}
-              alt="Gửi gắm bình an trong từng bữa cơm Việt - An Đông Food"
-              width={1920}
-              height={793}
-              loading="lazy"
-              decoding="async"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-                objectFit: 'cover'
-              }}
-            />
-          </m.div>
-
-          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa */}
-          <m.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={fadeInUp}
-            style={{ textAlign: 'center' }}
-          >
-            <Link to="/gioi-thieu" className="btn-brand-cta">
-              <span>Tìm hiểu thêm</span>
-              <ArrowRight size={18} />
-            </Link>
-          </m.div>
-        </div>
-      </section>
-
-      {/* 3. SẢN PHẨM AN ĐÔNG - GẠO NGON CHUẨN GIÁ */}
+      {/* 2. SẢN PHẨM AN ĐÔNG - GẠO NGON CHUẨN GIÁ */}
       <section style={{
         padding: '50px 0 60px',
         backgroundColor: 'var(--bg-secondary)',
@@ -482,6 +388,100 @@ export default function HomePage() {
             </Link>
           </m.div>
 
+        </div>
+      </section>
+
+      {/* 3. CÂU CHUYỆN THƯƠNG HIỆU AN ĐÔNG (BRAND STORY) */}
+      <section style={{
+        padding: '65px 0 50px',
+        backgroundColor: 'var(--bg-secondary)',
+        borderBottom: '1px solid var(--border-light)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1300px', margin: '0 auto', padding: '0 20px' }}>
+          
+          {/* Header Căn Giữa: Tiêu Đề & Lời Gửi Gắm */}
+          <m.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.25 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center', marginBottom: '36px' }}
+          >
+            <h2 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(2.1rem, 4vw, 2.9rem)',
+              fontWeight: '800',
+              color: 'var(--brand-brown)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.6px',
+              lineHeight: 1.28,
+              margin: '0 0 16px'
+            }}>
+              GỬI GẮM BÌNH AN<br />
+              TRONG TỪNG BỮA CƠM VIỆT
+            </h2>
+
+            <p style={{
+              margin: '0 auto',
+              fontSize: 'clamp(1rem, 1.5vw, 1.16rem)',
+              lineHeight: 1.65,
+              color: 'var(--brand-brown)',
+              maxWidth: '820px',
+              fontWeight: '500'
+            }}>
+              Bình an không chỉ là lời chúc dành cho người mình thương — mà còn hiện diện trong từng bữa cơm được chăm chút mỗi ngày
+            </p>
+          </m.div>
+
+          {/* 1 Ảnh Toàn Cảnh Gửi Gắm Bình An */}
+          <m.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={fadeInUp}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: '100%',
+              marginBottom: '38px',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+              border: '1.5px solid rgba(200, 223, 210, 0.7)',
+              backgroundColor: '#ffffff'
+            }}
+          >
+            <img
+              src={StoryThumbnail}
+              alt="Gửi gắm bình an trong từng bữa cơm Việt - An Đông Food"
+              width={1920}
+              height={793}
+              loading="lazy"
+              decoding="async"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'cover'
+              }}
+            />
+          </m.div>
+
+          {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa */}
+          <m.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={fadeInUp}
+            style={{ textAlign: 'center' }}
+          >
+            <Link to="/gioi-thieu" className="btn-brand-cta">
+              <span>Tìm hiểu thêm</span>
+              <ArrowRight size={18} />
+            </Link>
+          </m.div>
         </div>
       </section>
 
