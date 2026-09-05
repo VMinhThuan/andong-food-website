@@ -204,109 +204,64 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="about-page" style={{ overflow: 'hidden', backgroundColor: 'var(--bg-primary)' }}>
+    <div className="about-page" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <SEO
         title="Về Chúng Tôi – Câu Chuyện Hạt Gạo An Đông"
         description="Khám phá câu chuyện thương hiệu An Đông Food, tầm nhìn, sứ mệnh vì bữa cơm an lành và 3 giá trị cốt lõi Chân Thành - Tinh Tế - Bền Bỉ."
         keywords="Về An Đông, Giới thiệu An Đông Food, Câu chuyện thương hiệu, Gạo sạch An Đông, Tầm nhìn sứ mệnh"
       />
 
-      {/* 1. HERO BANNER AN ĐÔNG - CHUẨN GIAO DIỆN ẢNH 2 */}
-      <section className="about-hero-reveal" style={{ backgroundColor: '#FFFDF9', overflow: 'hidden' }}>
-        {/* Banner SVG nguyên bản 100% Full Width */}
-        <div style={{
-          width: '100%',
-          lineHeight: 0,
-          margin: 0,
-          padding: 0
-        }}>
-          <img
-            src={BannerSvg}
-            alt="An Đông - Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng"
-            width={1920}
-            height={1521}
-            fetchPriority="high"
-            decoding="async"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
-          />
+      {/* 1. HERO BANNER AN ĐÔNG - STICKY SCROLL REVEAL (MÔ PHỎNG CHUẨN ẢNH 1, 2, 3) */}
+      <section className="about-hero-reveal-section">
+        {/* Sticky Hero Background Story Image (Desktop & Mobile) */}
+        <div className="about-hero-sticky-wrap">
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/assets/brand-element/MOBILE_story.webp" />
+            <img
+              src="/assets/brand-element/DESKTOP_story.webp"
+              alt="An Đông - Gạo Ngon Chuẩn Giống, Gửi Trọn An Lòng"
+              className="about-hero-story-img"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
 
-        {/* Khối nền xanh gập ghềnh (footer-banner.svg) - Khớp chuẩn 100% theo Ảnh 2 */}
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          marginTop: '-8.6vw',
-          zIndex: 2,
-          overflow: 'hidden'
-        }}>
+        {/* Khối nền xanh gập ghềnh (footer-banner.svg) trượt đè lên trên khi scroll */}
+        <div className="about-green-scroll-overlay">
           {/* Dải sóng xanh gập ghềnh footer-banner.svg */}
-          <img
-            src={FooterBannerSvg}
-            alt="Dải sóng xanh An Đông"
-            loading="lazy"
-            decoding="async"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
-          />
+          <div className="about-green-wave-head">
+            <img
+              src={FooterBannerSvg}
+              alt="Dải sóng xanh An Đông"
+              loading="lazy"
+              decoding="async"
+              className="about-green-wave-img"
+            />
 
-          {/* Hai đoạn text cảm xúc nằm trọn vẹn và cân đối ngay giữa nền xanh */}
-          <div style={{
-            position: 'absolute',
-            top: '20%',
-            left: 0,
-            right: 0,
-            bottom: '8%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 24px',
-            textAlign: 'center'
-          }}>
-            <div className="container" style={{ maxWidth: '880px', margin: '0 auto' }}>
-              <m.p
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.55 }}
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontSize: 'clamp(0.95rem, 1.55vw, 1.25rem)',
-                  lineHeight: 1.75,
-                  color: '#ffffff',
-                  margin: '0 0 16px',
-                  textShadow: '0 2px 8px rgba(0,0,0,0.22)',
-                  fontWeight: '400'
-                }}
-              >
-                Trong cuộc sống, sự quan tâm dành cho gia đình không phải lúc nào cũng được thể hiện bằng những điều lớn lao. Đôi khi, đó chỉ là việc lựa chọn nguồn thực phẩm chất lượng, thơm ngon.
-              </m.p>
+            {/* Khối nội dung chữ nằm lồng sát bên dưới đường sóng xanh */}
+            <div className="about-green-text-overlay">
+              <div className="container" style={{ maxWidth: '880px', margin: '0 auto' }}>
+                <m.p
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.55 }}
+                  className="about-green-paragraph"
+                >
+                  Trong cuộc sống, sự quan tâm dành cho gia đình không phải lúc nào cũng được thể hiện bằng những điều lớn lao. Đôi khi, đó chỉ là việc lựa chọn nguồn thực phẩm chất lượng, thơm ngon.
+                </m.p>
 
-              <m.p
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.55, delay: 0.12 }}
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontSize: 'clamp(0.95rem, 1.55vw, 1.25rem)',
-                  lineHeight: 1.75,
-                  color: '#ffffff',
-                  margin: 0,
-                  textShadow: '0 2px 8px rgba(0,0,0,0.22)',
-                  fontWeight: '400'
-                }}
-              >
-                An Đông mong muốn giúp mỗi người gửi gắm sự quan tâm đến người thân và gia đình qua từng bữa cơm — để dù gần hay xa, người ăn ngon miệng, người chọn cũng an lòng
-              </m.p>
+                <m.p
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.55, delay: 0.12 }}
+                  className="about-green-paragraph"
+                >
+                  An Đông mong muốn giúp mỗi người gửi gắm sự quan tâm đến người thân và gia đình qua từng bữa cơm — để dù gần hay xa, người ăn ngon miệng, người chọn cũng an lòng
+                </m.p>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { m } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import {
   QrCode,
   ArrowRight,
@@ -17,7 +17,9 @@ import {
   Sprout,
   Package,
   Layers,
-  Sparkles
+  Sparkles,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { api } from '../services/api';
 import QRModal from '../components/common/QRModal';
@@ -28,7 +30,7 @@ import BrandValueBar from '../components/home/BrandValueBar';
 import FlipProductCard from '../components/home/FlipProductCard';
 const MatTruocBaoBi = '/assets/brand-element/mat-truoc-bao-bi.webp';
 const MatSauBaoBi = '/assets/brand-element/mat-sau-bao-bi.webp';
-import GuiGam1 from '../assets/optimized/guigam-1.webp';
+const StoryThumbnail = '/assets/brand-element/story-thumbnail.svg';
 import AnDongAnLongSvg from '../assets/brand/andong-anlong.svg';
 
 // Animation variants that trigger smoothly both when scrolling up and down
@@ -199,7 +201,26 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [selectedProductQR, setSelectedProductQR] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [activeMobileProduct, setActiveMobileProduct] = useState(0);
   const [st25QRDataUrl, setSt25QRDataUrl] = useState('');
+  const touchStartX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e, totalCount) => {
+    if (!totalCount) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (diff > 35) {
+      // Swipe Left -> Next product
+      setActiveMobileProduct((prev) => (prev + 1) % totalCount);
+    } else if (diff < -35) {
+      // Swipe Right -> Prev product
+      setActiveMobileProduct((prev) => (prev === 0 ? totalCount - 1 : prev - 1));
+    }
+  };
 
   useEffect(() => {
     api.getProducts().then(data => {
@@ -315,7 +336,7 @@ export default function HomePage() {
             }}
           >
             <img
-              src={GuiGam1}
+              src={StoryThumbnail}
               alt="Gửi gắm bình an trong từng bữa cơm Việt - An Đông Food"
               width={1920}
               height={793}
@@ -402,30 +423,75 @@ export default function HomePage() {
             </h2>
           </m.div>
 
-          {/* 2 Sản Phẩm Đứng Cạnh Nhau + Card Thông Tin Nằm Trực Tiếp Dưới Từng ẢNH (Ảnh 2 & 3) */}
+          {/* DESKTOP VIEW: 2 Sản Phẩm Đứng Cạnh Nhau */}
           <m.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
             variants={staggerContainer}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              gap: 'clamp(30px, 6vw, 80px)',
-              flexWrap: 'wrap'
-            }}
+            className="product-showcase-desktop"
           >
             {featuredProducts.map((prod) => (
               <m.div key={prod.id} variants={fadeInUp}>
-                <FlipProductCard
-                  product={prod}
-                  isSelected={selectedProductId === prod.id}
-                  onSelect={(p) => setSelectedProductId(selectedProductId === p.id ? null : p.id)}
-                />
+                <FlipProductCard product={prod} />
               </m.div>
             ))}
           </m.div>
+
+          {/* MOBILE VIEW: Carousel Lướt Trái / Phải Gọn Gàng (Làm Gọn Giao Diện Mobile) */}
+          <div
+            className="product-showcase-mobile"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={(e) => handleTouchEnd(e, featuredProducts.length)}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <m.div
+                key={featuredProducts[activeMobileProduct]?.id || activeMobileProduct}
+                initial={{ opacity: 0, x: 25 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -25 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+              >
+                <FlipProductCard product={featuredProducts[activeMobileProduct]} />
+              </m.div>
+            </AnimatePresence>
+
+            {/* Thanh điều hướng Carousel Mobile: Nút Trái/Phải & Dots */}
+            {featuredProducts.length > 1 && (
+              <div className="product-carousel-controls">
+                <button
+                  type="button"
+                  className="product-carousel-arrow"
+                  aria-label="Sản phẩm trước"
+                  onClick={() => setActiveMobileProduct(prev => (prev === 0 ? featuredProducts.length - 1 : prev - 1))}
+                >
+                  <ChevronLeft size={20} strokeWidth={2.4} />
+                </button>
+
+                <div className="product-carousel-dots">
+                  {featuredProducts.map((prod, idx) => (
+                    <button
+                      key={prod.id}
+                      type="button"
+                      className={`product-carousel-dot ${activeMobileProduct === idx ? 'active' : ''}`}
+                      aria-label={`Chuyển đến ${prod.name}`}
+                      onClick={() => setActiveMobileProduct(idx)}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="product-carousel-arrow"
+                  aria-label="Sản phẩm tiếp theo"
+                  onClick={() => setActiveMobileProduct(prev => (prev + 1) % featuredProducts.length)}
+                >
+                  <ChevronRight size={20} strokeWidth={2.4} />
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Nút Tìm Hiểu Thêm Màu Xanh Lá Căn Giữa (Chuẩn Ảnh Yêu Cầu) */}
           <m.div

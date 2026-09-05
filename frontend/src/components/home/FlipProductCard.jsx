@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { m, AnimatePresence } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 /**
- * Thẻ Sản Phẩm 3D Interactive Flip (Chuẩn UI Vinamilk - Ảnh 2 & 3)
- * - Tương tác chạm/hover/click chuột vào bao bì lật mặt sau 180 độ
- * - Cân chỉnh kích thước ảnh Gạo Vuông Tôm chuẩn xác ngang bằng Gạo ST25 (baseScale 1.08)
- * - Khi bấm / chạm vào sản phẩm mới hiển thị Card tên sản phẩm bên dưới
+ * Thẻ Sản Phẩm 3D Interactive Flip
+ * - Mặc định hiển thị Mặt Trước bao bì và Card thông tin tên + giá bên dưới.
+ * - Khi BẤM (Click/Tap) vào bao bì mới lật 180 độ xem Mặt Sau.
+ * - Bấm lần nữa lật lại Mặt Trước.
  */
-export default function FlipProductCard({ product, isSelected, onSelect }) {
+export default function FlipProductCard({ product }) {
+  const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const frontImg = product?.images?.front || product?.images?.chinhDien || product?.images?.main || product?.image || '/assets/brand-element/mat-truoc-bao-bi.webp';
   const backImg = product?.images?.back || product?.imageBack || '/assets/brand-element/mat-sau-bao-bi.webp';
 
   const isVuongTom = product?.slug === 'gao-vuong-tom' || product?.code === 'AD-VT-02';
-  // Tinh chỉnh baseScale Vuông Tôm về 1.03 để khớp chính xác tuyệt đối 1:1 với ST25
   const baseScale = isVuongTom ? 1.03 : 1.0;
 
   const subtitle = isVuongTom ? 'Gạo sạch luân canh lúa - tôm' : 'Gạo đặc sản thuần chủng';
   const highlightTitle = isVuongTom ? 'Gạo Vuông Tôm • Ngọt lành' : 'Gạo ST25 • Thơm dẻo';
 
-  const active = isSelected || isHovered;
+  const isHighlighted = isFlipped || isHovered;
 
-  const handleClick = () => {
-    if (onSelect) onSelect(product);
+  const handlePackagingClick = (e) => {
+    e.stopPropagation();
+    setIsFlipped((prev) => !prev);
   };
 
   return (
@@ -55,13 +56,14 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
           alignItems: 'flex-end',
           justifyContent: 'center'
         }}
-        onClick={handleClick}
+        onClick={handlePackagingClick}
+        title="Bấm vào bao bì để lật xem mặt sau"
       >
         <m.div
           animate={{
-            rotateY: active ? 180 : 0,
-            scale: (active ? 1.03 : 1.0) * baseScale,
-            y: active ? -8 : 0
+            rotateY: isFlipped ? 180 : 0,
+            scale: (isHighlighted ? 1.03 : 1.0) * baseScale,
+            y: isHighlighted ? -8 : 0
           }}
           transition={{
             duration: 0.65,
@@ -85,7 +87,7 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',
-              filter: active
+              filter: isHighlighted
                 ? 'drop-shadow(0 24px 34px rgba(0,0,0,0.22))'
                 : 'drop-shadow(0 14px 22px rgba(0,0,0,0.13))',
               transition: 'filter 0.35s ease'
@@ -109,7 +111,7 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
             />
           </div>
 
-          {/* MẶT SAU BAO BÌ (Hiện khi Hover / Bấm lật 180 độ - Chuẩn Vinamilk Ảnh 3) */}
+          {/* MẶT SAU BAO BÌ (Hiện khi BẤM LẬT 180 độ) */}
           <div
             style={{
               position: 'absolute',
@@ -143,98 +145,87 @@ export default function FlipProductCard({ product, isSelected, onSelect }) {
         </m.div>
       </div>
 
-      {/* 2. CARD THÔNG TIN NẰM TRỰC TIẾP DƯỚI TỪNG ẢNH - CHỈ HIỆN KHI BẤM / HOVER (Ảnh 2) */}
+      {/* 2. CARD THÔNG TIN NẰM TRỰC TIẾP DƯỚI TỪNG ẢNH - LUÔN HIỂN THỊ */}
       <div style={{ width: '100%', minHeight: '80px', marginTop: '22px' }}>
-        <AnimatePresence>
-          {active && (
-            <m.div
-              initial={{ opacity: 0, y: 12, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.96 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-            >
-              <Link
-                to={`/san-pham/${product?.slug || ''}`}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px',
-                  backgroundColor: '#E7F8AB',
-                  padding: '16px 20px',
-                  borderRadius: '16px',
-                  textDecoration: 'none',
-                  boxShadow: '0 10px 24px rgba(180, 210, 100, 0.42)',
-                  transition: 'all 0.25s ease',
-                  boxSizing: 'border-box',
-                  width: '100%'
-                }}
-              >
-                {/* Thông tin dòng sản phẩm & tên */}
-                <div style={{ flex: 1, overflow: 'hidden' }}>
-                  <div style={{
-                    fontSize: '0.82rem',
-                    fontWeight: '600',
-                    color: '#07381A',
-                    marginBottom: '2px',
-                    letterSpacing: '0.2px',
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden'
-                  }}>
-                    {subtitle}
-                  </div>
-                  <div style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontSize: '1.18rem',
-                    fontWeight: '800',
-                    color: '#07381A',
-                    lineHeight: '1.25',
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden'
-                  }}>
-                    {highlightTitle}
-                  </div>
+        <Link
+          to={`/san-pham/${product?.slug || ''}`}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            backgroundColor: '#E7F8AB',
+            padding: '16px 20px',
+            borderRadius: '16px',
+            textDecoration: 'none',
+            boxShadow: isHighlighted ? '0 12px 28px rgba(180, 210, 100, 0.55)' : '0 8px 20px rgba(180, 210, 100, 0.35)',
+            transition: 'all 0.25s ease',
+            boxSizing: 'border-box',
+            width: '100%'
+          }}
+        >
+          {/* Thông tin dòng sản phẩm & tên */}
+          <div style={{ flex: 1, overflow: 'hidden' }}>
+            <div style={{
+              fontSize: '0.82rem',
+              fontWeight: '600',
+              color: '#07381A',
+              marginBottom: '2px',
+              letterSpacing: '0.2px',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden'
+            }}>
+              {subtitle}
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: '1.18rem',
+              fontWeight: '800',
+              color: '#07381A',
+              lineHeight: '1.25',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden'
+            }}>
+              {highlightTitle}
+            </div>
 
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '6px',
-                    marginTop: '4px'
-                  }}>
-                    <span style={{
-                      fontSize: '0.78rem',
-                      color: '#557560',
-                      textDecoration: 'line-through'
-                    }}>
-                      {((product?.originalPrice || product?.listedPrice || (isVuongTom ? 249000 : 259000))).toLocaleString('vi-VN')} ₫
-                    </span>
-                    <span style={{
-                      fontSize: '1.02rem',
-                      fontWeight: 800,
-                      color: '#07381A'
-                    }}>
-                      {((product?.promotionalPrice || product?.price || (isVuongTom ? 195000 : 215000))).toLocaleString('vi-VN')} ₫
-                    </span>
-                  </div>
-                </div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              gap: '6px',
+              marginTop: '4px'
+            }}>
+              <span style={{
+                fontSize: '0.78rem',
+                color: '#557560',
+                textDecoration: 'line-through'
+              }}>
+                {((product?.originalPrice || product?.listedPrice || (isVuongTom ? 249000 : 259000))).toLocaleString('vi-VN')} ₫
+              </span>
+              <span style={{
+                fontSize: '1.02rem',
+                fontWeight: 800,
+                color: '#07381A'
+              }}>
+                {((product?.promotionalPrice || product?.price || (isVuongTom ? 195000 : 215000))).toLocaleString('vi-VN')} ₫
+              </span>
+            </div>
+          </div>
 
-                {/* Nút Next mũi tên bên phải (Ảnh 2) */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}
-                >
-                  <ArrowRight size={24} strokeWidth={2.4} color="#07381A" />
-                </div>
-              </Link>
-            </m.div>
-          )}
-        </AnimatePresence>
+          {/* Nút Next mũi tên bên phải */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+          >
+            <ArrowRight size={24} strokeWidth={2.4} color="#07381A" />
+          </div>
+        </Link>
       </div>
     </div>
   );
