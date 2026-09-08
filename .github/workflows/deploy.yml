@@ -1,4 +1,4 @@
-name: Deploy to cPanel
+name: Deploy to cPanel via FTP
 
 on:
   push:
@@ -6,29 +6,22 @@ on:
       - main
 
 jobs:
-  deploy:
+  web-deploy:
+    name: Deploy to cPanel
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Deploy to cPanel via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.CPANEL_HOST }}
-          username: ${{ secrets.CPANEL_USERNAME }}
-          password: ${{ secrets.CPANEL_PASSWORD }}
-          port: ${{ secrets.CPANEL_PORT || 22 }}
-          script: |
-            if [ ! -d "/home/andofoodvn/repositories/andong-food-website" ]; then
-              mkdir -p /home/andofoodvn/repositories
-              git clone https://github.com/VMinhThuan/andong-food-website.git /home/andofoodvn/repositories/andong-food-website
-            else
-              cd /home/andofoodvn/repositories/andong-food-website
-              git pull origin main
-            fi
-            cd /home/andofoodvn/repositories/andong-food-website/backend
-            npm install --production
-            mkdir -p tmp
-            touch tmp/restart.txt
-            echo "Deployment completed successfully!"
+          server: ${{ secrets.FTP_SERVER || '45.119.80.8' }}
+          username: ${{ secrets.FTP_USERNAME || 'andofoodvn' }}
+          password: ${{ secrets.FTP_PASSWORD || '7T)Vdn2TV0Sv' }}
+          port: 21
+          server-dir: repositories/andong-food-website/
+          protocol: ftp
+
+      - name: Create restart trigger for Node.js App
+        run: echo "Restarting Node.js App..."
