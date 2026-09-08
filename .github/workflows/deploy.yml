@@ -20,9 +20,14 @@ jobs:
           password: ${{ secrets.CPANEL_PASSWORD }}
           port: ${{ secrets.CPANEL_PORT || 22 }}
           script: |
-            cd /home/andofoodvn/repositories/andong-food-website
-            git pull origin main
-            cd backend
+            if [ ! -d "/home/andofoodvn/repositories/andong-food-website" ]; then
+              mkdir -p /home/andofoodvn/repositories
+              git clone https://github.com/VMinhThuan/andong-food-website.git /home/andofoodvn/repositories/andong-food-website
+            else
+              cd /home/andofoodvn/repositories/andong-food-website
+              git pull origin main
+            fi
+            cd /home/andofoodvn/repositories/andong-food-website/backend
             npm install --production
             mkdir -p tmp
             touch tmp/restart.txt
