@@ -20,15 +20,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('dev'));
 app.use('/assets', express.static(path.join(__dirname, '../../asset')));
 app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Chào mừng đến với Hệ Thống API An Đông',
-    version: '1.0.0',
-    documentation: '/api/health',
-    brand: 'An Đông - Bình An Ở Phía Đông'
-  });
-});
 
 app.use(notFoundHandler);
 app.use(errorHandler);
