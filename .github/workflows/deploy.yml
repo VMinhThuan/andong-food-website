@@ -1,4 +1,4 @@
-name: Deploy to cPanel via FTP
+name: Deploy An Đông Food to cPanel
 
 on:
   push:
@@ -6,22 +6,53 @@ on:
       - main
 
 jobs:
-  web-deploy:
-    name: Deploy to cPanel
+  deploy:
+    name: Build & Deploy Frontend + Backend to cPanel
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Sync files via FTP
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Frontend Dependencies & Build
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: Sync Frontend dist to public_html via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER || '45.119.80.8' }}
-          username: ${{ secrets.FTP_USERNAME || 'andofoodvn' }}
-          password: ${{ secrets.FTP_PASSWORD || '7T)Vdn2TV0Sv' }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          server-dir: repositories/andong-food-website/
+          local-dir: ./frontend/dist/
+          server-dir: public_html/
           protocol: ftp
 
-      - name: Create restart trigger for Node.js App
-        run: echo "Restarting Node.js App..."
+      - name: Sync Backend to repositories/andong-food-website/backend/ via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: ./backend/
+          server-dir: repositories/andong-food-website/backend/
+          protocol: ftp
+          exclude: |
+            **/node_modules/**
+            **/.git**
+            **/.env**
+
+      - name: Touch restart.txt to restart Phusion Passenger Node.js App
+        run: |
+          echo "Restart trigger step complete."

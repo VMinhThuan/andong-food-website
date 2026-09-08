@@ -1,6 +1,7 @@
-// Production calls the API through the same domain (/api). During local Vite
-// development this path is proxied to the backend below.
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+// Production calls the API at https://api.andofood.vn/api. During local Vite
+// development this path is proxied to http://localhost:5001 below.
+const defaultApiUrl = import.meta.env.DEV ? '/api' : 'https://api.andofood.vn/api';
+const API_BASE = import.meta.env.VITE_API_URL || defaultApiUrl;
 const productDetailCache = new Map();
 const PRODUCT_CACHE_TTL = 5 * 60 * 1000;
 

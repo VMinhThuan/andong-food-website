@@ -1,8 +1,10 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/andofoodvn/repositories/andong-food-website
-    - /bin/cp -R * $DEPLOYPATH
-    - cd $DEPLOYPATH/backend && npm install --production
-    - mkdir -p $DEPLOYPATH/backend/tmp
-    - touch $DEPLOYPATH/backend/tmp/restart.txt
+    - export REPOPATH=/home/andofoodvn/repositories/andong-food-website
+    - export PUBLICHTML=/home/andofoodvn/public_html
+    - /bin/cp -R * $REPOPATH
+    - /bin/cp -R $REPOPATH/frontend/dist/* $PUBLICHTML/ 2>/dev/null || true
+    - cd $REPOPATH/backend && npm install --production
+    - mkdir -p $REPOPATH/backend/tmp
+    - touch $REPOPATH/backend/tmp/restart.txt
