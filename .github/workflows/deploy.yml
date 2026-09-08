@@ -32,9 +32,9 @@ jobs:
       - name: Sync Frontend dist to public_html via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER || '45.119.80.8' }}
+          username: ${{ secrets.FTP_USERNAME || 'andofoodvn' }}
+          password: ${{ secrets.FTP_PASSWORD || '7T)Vdn2TV0Sv' }}
           port: 21
           local-dir: ./frontend/dist/
           server-dir: public_html/
@@ -43,9 +43,9 @@ jobs:
       - name: Sync Backend to repositories/andong-food-website/backend/ via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER || '45.119.80.8' }}
+          username: ${{ secrets.FTP_USERNAME || 'andofoodvn' }}
+          password: ${{ secrets.FTP_PASSWORD || '7T)Vdn2TV0Sv' }}
           port: 21
           local-dir: ./backend/
           server-dir: repositories/andong-food-website/backend/
