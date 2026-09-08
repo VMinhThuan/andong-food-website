@@ -20,7 +20,7 @@ apiRouter.use('/uploads', uploadRoutes);
 
 apiRouter.get('/health', (req, res) => {
   res.json({
-    status: 'OK',
+    status: 'ok',
     app: 'An Dong Food MVC API Service',
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
     time: new Date().toISOString()
